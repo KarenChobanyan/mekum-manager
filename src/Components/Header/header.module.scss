@@ -1,0 +1,30 @@
+@import '../../General/Styles/mixin.scss';
+@import '../../General/Styles/variables';
+
+.body {
+    width: 100%;
+    @include flexStyles(flex, row, center, space-between);
+    position: fixed;
+    top: 0;
+    padding: 15px;
+    background-color: $main_color;
+}
+
+.title {
+    @include flexStyles(flex, row, flex-end, center);
+    gap: 5px;
+    padding: 5px
+}
+
+.bigText {
+    @include textStyles("Inter", 24px, 600, normal, $white);
+    box-sizing: content-box;
+}
+
+.smallText {
+    @include textStyles("fantasy", 16px, 200, normal, $white);
+    padding-bottom: 1px;
+    letter-spacing: 0.3px;
+    //  font-family: fantasy;
+   
+}

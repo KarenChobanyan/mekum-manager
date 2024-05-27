@@ -1,0 +1,15 @@
+{
+    "Login_Form": {
+      "Title": "Բարի գալուստ",
+      "Login_label": "Էլ. հասցե",
+      "Login_Error": "Սխալ էլ. հասցե",
+      "Login_placeholder": "Մուտքագրեք ձեր էլ. հասցեն",
+      "Password_label": "Գաղտնաբառ",
+      "Password_Error": "Առնվազն 8 նիշ",
+      "Password_placeholder": "Մուտքագրեք ձեր գաղտնաբառը",
+      "Button_text": "Մուտք"
+    },
+    "Input_Errors": {
+        "Required": "Պարտադիր"
+    }
+}

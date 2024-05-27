@@ -1,0 +1,101 @@
+@import '../../General/Styles/mixin';
+@import '../../General/Styles/variables';
+
+.container {
+    width: 100%;
+  }
+  
+  .inputBox {
+    outline-color: $green;
+    background: $input_bg;
+    border: 1px solid transparent;
+    width: 100%;
+    margin-top: 8px;
+    @include flexStyles(flex, row, center, space-between);
+    padding: 16px;
+  }
+  
+  .border {
+    border: 1px solid $main-color;
+  }
+  
+  .input {
+    @include textStyles('Montserrat arm', 14px, 500, 15px, $dark-grey);
+    outline: none;
+    border: none;
+    background: $input_bg;
+    flex: 0.9;
+  }
+  
+  .label {
+    @include textStyles('Montserrat arm', 14px, 400, normal, $darkBlue);
+  }
+  
+  .labelError {
+    color: $errorColor;
+    margin-left: 5px;
+  }
+  
+  .input::placeholder {
+    @include textStyles('Montserrat arm', 14px, 400, 15px, $text-grey);
+  }
+  
+  .input[type='date'] {
+    min-height: 20px;
+    flex: 1;
+    background-image: url('../../../Assets/Icons/calendarIcon.svg') !important;
+    background-repeat: no-repeat;
+    background-position: 100%;
+    appearance: none;
+  }
+  
+  .input[type='date']::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .inputBox img {
+    width: 20px;
+    cursor: pointer;
+  }
+  
+  .selectInput {
+    @include textStyles('Montserrat arm', 14px, 500, 15px, $dark-grey);
+    width: 100%;
+    background: $input_bg;
+    border: none;
+    outline: none;
+  }
+  
+  .custom-auto-complete {
+    width: 100%;
+    border: 1px solid #576658;
+    padding: 20px;
+  }
+  
+
+  //media
+
+  @media screen and (max-width: 650px) {
+    .inputBox {
+      padding: 12px;
+    }
+  
+    .inputBox span img {
+      display: block;
+      height: 17px;
+    }
+  
+  }
+  
+  @media screen and (max-width: 400px) {
+    .inputBox {
+      padding: 12px 10px;
+    }
+  }
+  
+  @media screen and (max-width: 345px) {
+    .input::placeholder {
+      font-size: 12px;
+    }
+  }

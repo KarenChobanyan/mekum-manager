@@ -1,0 +1,14 @@
+@import '../../General/Styles/mixin';
+@import '../../General/Styles/variables';
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    @include flexStyles(flex,column,normal,normal);
+    background-color: $page_background;;
+}
+
+.page{
+    margin-top: 50px;
+    padding: 20px;
+}

@@ -1,0 +1,15 @@
+{
+    "Login_Form": {
+      "Title": "Добро пожаловать",
+      "Login_label": "Электронная почта",
+      "Login_Error": "Неверный адрес электронной почты",
+      "Login_placeholder": "Введите e-mail ",
+      "Password_label": "Пароль",
+      "Passwor_Error": "Не менее 8 символов",
+      "Password_placeholder": "Введите ваш пароль",
+      "Button_text": "Войти"
+    },
+    "Input_Errors": {
+        "Required": "Oбязательный"
+    }
+}

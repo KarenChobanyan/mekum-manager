@@ -1,0 +1,37 @@
+/* @import url(../Assets/Fonts/stylesheet.css); */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body a {
+  display: inline-block;
+}
+
+body p {
+  margin: 0;
+}
+
+/* date Picker style */
+.react-datepicker-wrapper {
+  width: 100% !important;
+}
+
+/* Otpinut style */
+.MuiInputBase-root.MuiOutlinedInput-root {
+  background-color: #EDF2F7;
+  width: 64px;
+  height: 64px;
+  color: #A3AED0;
+  font-family: 'Montserrat arm';
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 15px;
+}
+.MuiOtpInput-Box.MuiBox-root.css-tccdxk{
+  width: 100%;
+  justify-content: space-evenly;
+}

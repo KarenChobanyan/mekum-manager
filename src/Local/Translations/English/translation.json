@@ -1,0 +1,15 @@
+{
+    "Login_Form": {
+      "Title": "Welcome",
+      "Login_label": "E-mail",
+      "Login_Error": "Incorrect E-Mail Address",
+      "Login_placeholder": "Type your e-mail ",
+      "Password_label": "Password",
+      "Passwor_Error": "Min. 8 characters",
+      "Password_placeholder": "Type your password",
+      "Button_text": "Sign In"
+    },
+    "Input_Errors": {
+        "Required": "Required"
+    }
+}

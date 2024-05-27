@@ -1,0 +1,10 @@
+@import "../../General/Styles/mixin";
+@import "../../General/Styles/variables";
+
+.error {
+    color: $errorColor;
+    font-feature-settings: 'clig' off, 'liga' off;
+    @include textStyles("Inter", 11px, 400, 12px, $errorColor);
+    margin-top: 0.8vh;
+    min-height: 12px;
+}
