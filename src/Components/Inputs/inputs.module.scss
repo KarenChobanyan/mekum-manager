@@ -6,9 +6,10 @@
   }
   
   .inputBox {
-    outline-color: $green;
+    outline-color: $main-color;
     background: $input_bg;
-    border: 1px solid transparent;
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
     width: 100%;
     margin-top: 8px;
     @include flexStyles(flex, row, center, space-between);
@@ -20,7 +21,7 @@
   }
   
   .input {
-    @include textStyles('Montserrat arm', 14px, 500, 15px, $dark-grey);
+    @include textStyles('Montserrat arm', 14px, 500, 15px, grey);
     outline: none;
     border: none;
     background: $input_bg;
@@ -28,7 +29,7 @@
   }
   
   .label {
-    @include textStyles('Montserrat arm', 14px, 400, normal, $darkBlue);
+    @include textStyles('Montserrat arm', 14px, 400, normal, $text_dark);
   }
   
   .labelError {
@@ -37,13 +38,13 @@
   }
   
   .input::placeholder {
-    @include textStyles('Montserrat arm', 14px, 400, 15px, $text-grey);
+    @include textStyles('Montserrat arm', 14px, 400, 15px, grey);
   }
   
   .input[type='date'] {
     min-height: 20px;
     flex: 1;
-    background-image: url('../../../Assets/Icons/calendarIcon.svg') !important;
+    // background-image: url('../../../Assets/Icons/calendarIcon.svg') !important;
     background-repeat: no-repeat;
     background-position: 100%;
     appearance: none;
@@ -60,7 +61,7 @@
   }
   
   .selectInput {
-    @include textStyles('Montserrat arm', 14px, 500, 15px, $dark-grey);
+    @include textStyles('Montserrat arm', 14px, 500, 15px, grey);
     width: 100%;
     background: $input_bg;
     border: none;

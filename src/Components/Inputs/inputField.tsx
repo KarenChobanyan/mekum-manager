@@ -9,8 +9,8 @@ import {
 import moment from 'moment';
 import { useBorder } from './input-hooks';
 import { t } from 'i18next';
-import { InputRegisterTypes, LoginFormValues } from '../../Interfaces/interfaces';
-import styles from './authInputs.module.scss';
+import { InputRegisterTypes, ILoginFormValues } from '../../Interfaces/interfaces';
+import styles from './inputs.module.scss';
 import AuthError from '../AuthError/authError';
 
 export interface IInputProps {
@@ -32,8 +32,8 @@ export interface IInputProps {
   children?: ReactNode;
   required?: boolean;
   validation?:
-    | Validate<any, FieldValues | LoginFormValues>
-    | Record<string, Validate<any, FieldValues | LoginFormValues>>
+    | Validate<any, FieldValues | ILoginFormValues>
+    | Record<string, Validate<any, FieldValues | ILoginFormValues>>
     | undefined;
   style?: React.CSSProperties;
 }

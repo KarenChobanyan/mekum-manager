@@ -11,4 +11,6 @@
 .page{
     margin-top: 50px;
     padding: 20px;
+    flex: 1;
+    @include flexStyles(flex,column,normal,normal)
 }

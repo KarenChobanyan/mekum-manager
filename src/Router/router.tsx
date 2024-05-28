@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { LoginPage } from '../Pages';
+import { HomePage, LoginPage } from '../Pages';
 import Layout from '../Pages/Layout/layout';
+import MainPage from '../Pages/Main/mainPage';
 
 const Router: React.FC = () => {
     return (
@@ -9,7 +10,19 @@ const Router: React.FC = () => {
             <Route
                 path='/'
                 element={
+                    <MainPage />
+                }
+            />
+            <Route
+                path='/login'
+                element={
                     <Layout children={<LoginPage />} />
+                }
+            />
+            <Route
+                path='/home'
+                element={
+                    <Layout children={<HomePage/>} />
                 }
             />
         </Routes>
