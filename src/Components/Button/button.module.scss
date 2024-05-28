@@ -1,0 +1,57 @@
+@import '../../General/Styles/mixin';
+@import '../../General/Styles/variables';
+
+.button {
+  border: none;
+  border-radius: 90px;
+  transition: 0.2s;
+}
+
+.primeryButton {
+  background-color: $primary_button;
+  width: 100%;
+  padding: 16px 24px;
+}
+
+.btn-content-container {
+  @include flexStyles(flex, row, center, center);
+}
+
+.disabledButton {
+  background-color: $disable-button;
+  width: 100%;
+  padding: 16px 24px;
+}
+
+.iconButton {
+  @include flexStyles(flex, row, center, center);
+  background-color: $main-color;
+  padding: 12px 16px;
+}
+
+.iconButtonTitle {
+  @include textStyles('DM Sans', 14px, 400, normal, $input_bg);
+  margin-right: 10px;
+}
+
+.button:hover:not(:disabled) {
+  // transform: scale(1.02);
+  cursor: pointer;
+}
+
+.bigTitle {
+  @include textStyles('DM Sans', 16px, 700, 16px, $white);
+}
+.alignCenter {
+  display: flex;
+  align-items: center;
+}
+.withoutBgButton {
+  background-color: transparent;
+  border: 2px solid $dark_grey;
+  width: 100%;
+  padding: 16px 24px;
+}
+.withoutBgTitle {
+  @include textStyles('Montserrat arm', 16px, 700, 16px, $dark-grey);
+}
