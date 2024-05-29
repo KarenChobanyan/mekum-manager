@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { getMe } from '../../Store/Slices/authSlice';
 import { useGeneralHooks } from '../../General/Hooks/hooks';
-import Loading from '../../Components/Loading/loading';
+import { Loading } from '../../Components';
 import styles from './mainPage.module.scss';
 
 const MainPage: React.FC = () => {

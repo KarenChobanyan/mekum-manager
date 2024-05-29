@@ -1,0 +1,19 @@
+@import '../../General/Styles/mixin';
+@import '../../General/Styles/variables';
+
+
+.language {
+    padding: 0px 5px
+}
+
+.popup {
+    @include flexStyles(flex, column, normal, normal);
+    gap: 8px;
+    padding: 5px;
+    background-color: $main_color;
+    border-radius: 10px;
+}
+
+.languageItem {
+    cursor: pointer;
+}

@@ -1,11 +1,10 @@
 import React from 'react';
 import { t } from 'i18next';
-import styles from './loginForm.module.scss';
 import { FieldErrors, FieldValues, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 import { ILoginFormValues } from '../../../../Interfaces/interfaces';
-import InputField from '../../../../Components/Inputs/inputField';
-import Button from '../../../../Components/Button/button';
 import { ButtonTypes } from '../../../../Interfaces/componentTypes';
+import { Button, InputField } from '../../../../Components';
+import styles from './loginForm.module.scss';
 
 interface IProps {
     register: UseFormRegister<ILoginFormValues>,
@@ -14,7 +13,7 @@ interface IProps {
     handleSubmit: UseFormHandleSubmit<ILoginFormValues, undefined>
 }
 const LoginForm: React.FC<IProps> = (props) => {
-    const { register, onSubmit,handleSubmit, errors } = props;
+    const { register, onSubmit, handleSubmit, errors } = props;
     return (
         <div className={styles.container}>
             <div className={styles.title}>

@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect } from 'react';
-import styles from './layout.module.scss';
-import Header from '../../Components/Header/header';
 import { useGeneralHooks } from '../../General/Hooks/hooks';
+import { Header } from '../../Components';
+import styles from './layout.module.scss';
 
 interface IProps {
     children: ReactNode
@@ -9,12 +9,12 @@ interface IProps {
 
 const Layout: React.FC<IProps> = (props) => {
     const { children } = props;
-    const {accessToken,navigate,location} = useGeneralHooks();
-    useEffect(()=>{
-        if(!accessToken && location.pathname !== '/login'){
+    const { accessToken, navigate, location } = useGeneralHooks();
+    useEffect(() => {
+        if (!accessToken && location.pathname !== '/login') {
             navigate('/login')
         }
-    },[]);
+    }, []);
 
     return (
         <div className={styles.container}>

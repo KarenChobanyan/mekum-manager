@@ -1,26 +1,27 @@
 @import '../../../../General/Styles/mixin';
 @import '../../../../General/Styles/variables';
 
-.container{
-    @include flexStyles(flex,column,normal,normal);
+.container {
+    @include flexStyles(flex, column, normal, normal);
     width: 450px;
     background-color: $white;
     padding: 20px;
-    border-radius: 21px
+    border-radius: 21px;
+    margin-top: 150px
 }
 
-.title{
-    @include textStyles("Inter",40px,700,54px,$text_dark);
+.title {
+    @include textStyles("Inter", 40px, 700, 54px, $text_dark);
     letter-spacing: .01em;
 }
 
-.form{
+.form {
     margin-top: 30px;
-    @include flexStyles(flex,column,normal,normal);
+    @include flexStyles(flex, column, normal, normal);
     gap: 30px;
 }
 
-.formInputs{
-    @include flexStyles(flex,column,normal,normal);
+.formInputs {
+    @include flexStyles(flex, column, normal, normal);
     gap: 15px;
 }

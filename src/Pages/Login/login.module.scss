@@ -1,6 +1,6 @@
 @import '../../General/Styles/mixin';
 
 .container {
-    @include flexStyles(flex, column, center, center);
+    @include flexStyles(flex, column, center, normal);
     flex-grow: 1;
 }
