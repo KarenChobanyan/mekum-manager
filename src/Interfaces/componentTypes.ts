@@ -4,3 +4,9 @@ export enum ButtonTypes {
     Disabled = "disabled_button",
     WithoutBg = "Without_background",
   }
+
+  export interface ILanguages {
+    id: number;
+    icon: string;
+    code: string;
+  }

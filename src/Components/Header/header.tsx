@@ -1,4 +1,5 @@
 import React from 'react';
+import Languages from '../Languages/languages';
 import styles from './header.module.scss';
 
 const Header: React.FC = () => {
@@ -12,6 +13,9 @@ const Header: React.FC = () => {
           <span>manager</span>
         </div>
       </div>
+        <div className={styles.infoBox}>
+         <Languages/>
+        </div>
     </div>
   )
 }
