@@ -11,5 +11,31 @@
     },
     "Input_Errors": {
         "Required": "Պարտադիր"
+    },
+    "Actions":{
+      "To_Storage":{
+        "Title":"Մուտք պահեստ"
+      },
+      "From_Storage":{
+        "Title":"Ելք պահեստից"
+      },
+      "Between_Storages":{
+        "Title":"Տեղափոխություն պահեստների միջև"
+      },
+      "Cash_Income":{
+        "Title":"Մուտք դրամարկղին"
+      },
+      "CashOut":{
+        "Title":"Ելք դրամարկղից"
+      },
+      "Cash_Changes":{
+        "Title":"Տեղափոխություն դրամարկղերի միջև"
+      },
+      "Sales":{
+        "Title":"Վաճառք"
+      },
+      "Users":{
+        "Title":"Օգտատերեր"
+      }
     }
 }

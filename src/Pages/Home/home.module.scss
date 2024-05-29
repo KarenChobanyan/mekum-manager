@@ -1,0 +1,9 @@
+@import '../../General/Styles/mixin';
+@import '../../General/Styles/variables';
+
+.container{
+    @include flexStyles (flex,row,center,center);
+    gap: 50px;
+    flex-wrap: wrap;
+    padding: 30px 20px;
+}

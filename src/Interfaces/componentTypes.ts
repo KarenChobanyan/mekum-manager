@@ -10,3 +10,9 @@ export enum ButtonTypes {
     icon: string;
     code: string;
   }
+
+  export interface IActionCard {
+    src:string,
+    title:string,
+    onClick:()=>void
+    }

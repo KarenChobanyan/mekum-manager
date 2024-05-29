@@ -1,0 +1,39 @@
+@import '../../General/Styles/mixin';
+@import '../../General//Styles/variables';
+
+.container{
+    @include flexStyles(flex,column,normal,center);
+    gap: 25px;
+    max-width: 250px;
+    width: 250px;
+    height: 270px;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: $white;
+    transition: 0.3s;
+    cursor: pointer;
+    z-index: 0;
+    box-shadow: -1px 0px 17px 1px $main_color;
+}
+
+.container:hover{
+    background-color: rgb(24, 55, 79,0.5);
+}
+
+.image{
+  max-width:200px;
+  max-height: 170px;
+  border-radius: 10px;
+}
+
+.title{
+    max-width: 100%;
+    text-align: center;
+    @include textStyles("Inter",20px,600, 25px,$dark_grey);
+    letter-spacing: 0.2px;
+    transition: 0.3s;
+}
+.container:hover .title{
+    color: $white;
+}
+
