@@ -11,5 +11,31 @@
     },
     "Input_Errors": {
         "Required": "Required"
+    },
+    "Actions":{
+      "To_Storage":{
+        "Title":"Incoming to the storage"
+      },
+      "From_Storage":{
+        "Title":"Outgoing from the storage"
+      },
+      "Between_Storages":{
+        "Title":"Transfer between storages"
+      },
+      "Cash_Income":{
+        "Title":"Incoming to the cash box"
+      },
+      "CashOut":{
+        "Title":"Outgoing from the cash box"
+      },
+      "Cash_Changes":{
+        "Title":"Transfer between cash boxes"
+      },
+      "Sales":{
+        "Title":"Sale"
+      },
+      "Users":{
+        "Title":"Users"
+      }
     }
 }

@@ -11,5 +11,31 @@
     },
     "Input_Errors": {
         "Required": "Oбязательный"
+    },
+    "Actions":{
+      "To_Storage":{
+        "Title":"Поступление на склад"
+      },
+      "From_Storage":{
+        "Title":"Исходящие из хранилища"
+      },
+      "Between_Storages":{
+        "Title":"Перенос между хранилищами"
+      },
+      "Cash_Income":{
+        "Title":"Поступление в кассу"
+      },
+      "CashOut":{
+        "Title":"Исходящие из кассы"
+      },
+      "Cash_Changes":{
+        "Title":"Передача между кассaми"
+      },
+      "Sales":{
+        "Title":"Продажи"
+      },
+      "Users":{
+        "Title":"Пользователи"
+      }
     }
 }
