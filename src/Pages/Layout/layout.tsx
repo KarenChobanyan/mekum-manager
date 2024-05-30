@@ -10,11 +10,11 @@ interface IProps {
 const Layout: React.FC<IProps> = (props) => {
     const { children } = props;
     const { accessToken, navigate, location } = useGeneralHooks();
-    // useEffect(() => {
-    //     if (!accessToken && location.pathname !== '/login') {
-    //         navigate('/login')
-    //     }
-    // }, []);
+    useEffect(() => {
+        if (!accessToken && location.pathname !== '/login') {
+            navigate('/login')
+        }
+    }, []);
 
     return (
         <div className={styles.container}>

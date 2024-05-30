@@ -4,7 +4,7 @@ import LoginForm from './Components/LoginForm/loginForm';
 import styles from './login.module.scss';
 
 const LoginPage:React.FC = () => {
-  const {register,onSubmit,handleSubmit,errors} = useLoginHooks();
+  const {register,onSubmit,handleSubmit,errors,isLoading} = useLoginHooks();
   return (
     <div className={styles.container}>
       <LoginForm
@@ -12,6 +12,7 @@ const LoginPage:React.FC = () => {
       onSubmit={onSubmit}
       handleSubmit={handleSubmit}
       errors={errors}
+      loginLoading={isLoading}
       />
     </div>
   )

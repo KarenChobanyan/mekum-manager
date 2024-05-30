@@ -5,15 +5,20 @@ import { ILoginFormValues } from '../../../../Interfaces/interfaces';
 import { ButtonTypes } from '../../../../Interfaces/componentTypes';
 import { Button, InputField } from '../../../../Components';
 import styles from './loginForm.module.scss';
+import { usePassword } from '../../../../Components/Inputs/input-hooks';
+import { HidePasswordIcon, ShowPasswordIcon } from '../../../../Assets/Icons';
 
 interface IProps {
     register: UseFormRegister<ILoginFormValues>,
-    errors: FieldErrors<ILoginFormValues>,
     onSubmit: SubmitHandler<ILoginFormValues | FieldValues>,
-    handleSubmit: UseFormHandleSubmit<ILoginFormValues, undefined>
+    handleSubmit: UseFormHandleSubmit<ILoginFormValues, undefined>,
+    errors: FieldErrors<ILoginFormValues>,
+    loginLoading: boolean
 }
 const LoginForm: React.FC<IProps> = (props) => {
-    const { register, onSubmit, handleSubmit, errors } = props;
+    const { register, onSubmit, handleSubmit, errors, loginLoading } = props;
+    const { password, changeType } = usePassword();
+
     return (
         <div className={styles.container}>
             <div className={styles.title}>
@@ -38,12 +43,22 @@ const LoginForm: React.FC<IProps> = (props) => {
                         label={t('Login_Form.Password_label')}
                         placeholder={t('Login_Form.Password_placeholder')}
                         required
+                        type={password ? 'password' : 'text'}
+                        children={
+                            <img
+                                className={styles.inputIcon}
+                                src={password ? HidePasswordIcon : ShowPasswordIcon}
+                                alt="eyeIcon"
+                                onClick={changeType}
+                            />
+                        }
                     />
                 </div>
                 <Button
                     type='submit'
                     buttonType={ButtonTypes.Primery}
                     title={t('Login_Form.Button_text')}
+                    isLoading={loginLoading}
                 />
 
             </form>
