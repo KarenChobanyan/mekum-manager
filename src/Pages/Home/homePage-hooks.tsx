@@ -1,8 +1,9 @@
 import { IActionCard } from "../../Interfaces/componentTypes";
-import {t} from 'i18next';
-import { BetweenStorages, Sales, OutFromStorage, IntoStorage,CashIncome,CashOut,CashChange,Users } from '../../Assets/Images';
+import { BetweenStorages, Sales, OutFromStorage, IntoStorage, CashIncome, CashOut, CashChange, Users } from '../../Assets/Images';
+import { useGeneralHooks } from "../../General/Hooks/hooks";
 
-const useHomePageHooks = (roleId:number) => {
+const useHomePageHooks = (roleId: number) => {
+    const { t, navigate } = useGeneralHooks();
     const getOPpionList = (id: number): IActionCard[] | [] => {
         switch (id) {
             case 1:
@@ -10,49 +11,49 @@ const useHomePageHooks = (roleId:number) => {
                     {
                         src: `${IntoStorage}`,
                         title: t('Actions.To_Storage.Title'),
-                        onClick: () => { }
+                        onClick: () => { navigate('/storage_incomings') }
                     },
                     {
                         src: `${OutFromStorage}`,
                         title: t('Actions.From_Storage.Title'),
-                        onClick: () => { }
+                        onClick: () => { navigate('/storage_outgoings') }
                     },
                     {
                         src: `${BetweenStorages}`,
                         title: t('Actions.Between_Storages.Title'),
-                        onClick: () => { }
+                        onClick: () => { navigate('/storage_transfers') }
                     },
                     {
                         src: `${Sales}`,
                         title: t('Actions.Sales.Title'),
-                        onClick: () => { }
+                        onClick: () => { navigate('/sales') }
                     },
                     {
                         src: `${CashIncome}`,
                         title: t('Actions.Cash_Income.Title'),
-                        onClick: () => { }
+                        onClick: () => { navigate('/cash_incomings') }
                     },
                     {
                         src: `${CashOut}`,
                         title: t('Actions.CashOut.Title'),
-                        onClick: () => { }
+                        onClick: () => { navigate('/cashouts') }
                     },
                     {
                         src: `${CashChange}`,
                         title: t('Actions.Cash_Changes.Title'),
-                        onClick: () => { }
+                        onClick: () => { navigate('/cash_transfers') }
                     },
                 ]
-                case 2:
-                    return [
-                        {
-                            src: `${Users}`,
-                            title: t('Actions.Users.Title'),
-                            onClick: () => { }
-                        },
-                    ]
+            case 2:
+                return [
+                    {
+                        src: `${Users}`,
+                        title: t('Actions.Users.Title'),
+                        onClick: () => { navigate('/users') }
+                    },
+                ]
             default:
-              return  [];
+                return [];
         }
     };
 

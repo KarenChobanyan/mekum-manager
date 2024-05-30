@@ -62,8 +62,8 @@ const axiosBaseQuery =
           createLoaderElement();
         }
         const token =
-          localStorage.getItem('access-token') &&
-          localStorage.getItem('access-token');
+          localStorage.getItem('mm_access_token') &&
+          localStorage.getItem('mm_access_token');
         if (config.url !== '/login' && !!config?.headers && token) {
           config.headers.Authorization = `Bearer ${token}`;
         }

@@ -9,7 +9,7 @@ export const useGeneralHooks = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const params = useParams();
-  const accessToken = localStorage.getItem("access-token");
+  const accessToken = localStorage.getItem("mm_access_token");
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector(
     (state: RootState) => state?.auth?.currentUser
