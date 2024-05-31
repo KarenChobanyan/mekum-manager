@@ -6,11 +6,18 @@
       "Login_placeholder": "Մուտքագրեք ձեր էլ. հասցեն",
       "Password_label": "Գաղտնաբառ",
       "Password_Error": "Առնվազն 8 նիշ",
-      "Password_placeholder": "Մուտքագրեք ձեր գաղտնաբառը",
-      "Button_text": "Մուտք"
+      "Password_placeholder": "Մուտքագրեք ձեր գաղտնաբառը"
     },
     "Input_Errors": {
-        "Required": "Պարտադիր"
+        "Required": "Պարտադիր",
+        "Login":"Սխալ մուտքանուն կամ գաղտնաբար"
+    },
+    "NoData":{
+      "NoData":"Ցանկը դատարկ է"
+    },
+    "Button":{
+      "Login": "Մուտք",
+      "Add":"Ավելացնել"
     },
     "Actions":{
       "To_Storage":{

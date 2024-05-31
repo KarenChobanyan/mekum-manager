@@ -1,7 +1,7 @@
 import { FieldValues, UseFormRegister } from "react-hook-form";
 
 export interface ILoginFormValues {
-    email: string;
+    username: string;
     password: string;
   }
   

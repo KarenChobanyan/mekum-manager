@@ -1,0 +1,90 @@
+@import '../../../../General/Styles/mixin';
+@import '../../../../General/Styles/variables';
+
+.container {
+    @include flexStyles(flex, column, center, center);
+    padding: 0.5vw;
+    max-height: 86vh;
+    min-height: 86vh;
+}
+
+.body {
+    flex: 1;
+    width: 100%;
+    max-height: 100%;
+    min-height: 100%;
+    padding: 5px 5px 15px;
+    @include flexStyles(flex, column, normal, normal);
+    background-color: $light_bg;
+    border-radius: 15px;
+    border-bottom-left-radius: 0;
+    box-shadow: -1px 0px 5px -1px $main_color;
+    overflow: scroll;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.formContainer {
+    flex: 1;
+    width: 100%;
+    @include flexStyles(flex, column, normal, normal);
+    gap: 20px;
+    padding: 10px;
+}
+
+.form {
+    min-width: 30%;
+    width: fit-content;
+    @include flexStyles(flex, column, normal, normal);
+    gap: 15px;
+}
+
+.inputBox {
+    @include flexStyles(flex, row, center, space-between);
+    gap: 30px;
+    flex: 1;
+}
+
+.input {
+    width: 300px;
+    background-color: $formInput;
+    font-size: 16px;
+    line-height: 18px;
+    padding: 5px;
+}
+
+.formInputLabel {
+    font-size: 18px;
+    font-weight: 600;
+    color: $main_color;
+}
+
+.itemsBox {
+    flex: 1;
+    @include flexStyles(flex, column, normal, normal);
+    gap: 15px;
+    padding: 10px;
+    min-width: 100%;
+    max-width: 100%;
+    overflow: auto;
+    overflow-y: hidden;
+}
+
+.buttonRow {
+    width: 97vw;
+    border-top: 1px solid $dark_grey;
+    background-color: $light_bg;
+    position: fixed;
+    bottom: 0;
+    left: 1.5vw;
+    right: 1.5vw;
+    box-shadow: -5px 0 5px -5px $main_color;
+    ;
+}
+
+.buttons {
+    width: 400px;
+    @include flexStyles(flex, row, center, normal);
+    gap: 20px;
+    padding: 10px;
+}

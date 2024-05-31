@@ -1,15 +1,19 @@
 import Loading from "./Loading/loading";
 import Header from "./Header/header";
 import Button from "./Button/button";
-import InputField from "./Inputs/inputField";
+import AuthInput from "./Inputs/AuthInput/authinput";
 import Languages from "./Languages/languages";
 import ActionCard from "./ActionCard/actionCard";
+import NoData from "./NoData/noData";
+import AutoComplete from "./Inputs/AutoComplete/autoComplete";
 
 export {
     Loading,
     Header,
     Button,
-    InputField,
+    AuthInput,
     Languages,
-    ActionCard
+    ActionCard,
+    NoData,
+    AutoComplete
 }

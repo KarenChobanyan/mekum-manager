@@ -1,0 +1,55 @@
+@import '../../General/Styles/mixin';
+@import '../../General/Styles/variables';
+
+.container {
+    @include flexStyles(flex, row, center, center);
+    width: 100%;
+
+    & .section {
+        @include flexStyles(flex, column, center, center);
+        max-width: 400px;
+
+        & .title {
+            text-align: center;
+            @include textStyles('Montserrat arm', 26px, 800, normal, $no-data-title);
+            margin-bottom: 21px;
+            transform: translateX(10px);
+        }
+
+        & .description {
+            text-align: center;
+            @include textStyles('Montserrat arm', 20px, 500, normal, $no-data-description);
+            margin-bottom: 34px;
+        }
+
+        & .button{
+            transform: translateX(10px);
+        }
+    }
+}
+
+@media screen and (max-width: 578px) {
+    .container {
+        padding-top: 50px;
+
+        & section {
+            width: 90% !important;
+
+            & .image {
+                margin-bottom: 30px !important;
+                width: 80%;
+            }
+
+            & .title {
+                text-align: center;
+                font-size: 20px;
+                margin-bottom: 16px;
+            }
+
+            & .description {
+                text-align: center;
+                font-size: 18px;
+            }
+        }
+    }
+}

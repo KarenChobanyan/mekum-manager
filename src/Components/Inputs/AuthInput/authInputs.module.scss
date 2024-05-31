@@ -1,5 +1,5 @@
-@import '../../General/Styles/mixin';
-@import '../../General/Styles/variables';
+@import '../../../General/Styles/mixin';
+@import '../../../General/Styles/variables';
 
 .container {
     width: 100%;
@@ -21,10 +21,10 @@
   }
   
   .input {
-    @include textStyles('Inter', 14px, 500, 15px, $text_dark);
+    @include textStyles('', 14px, 500, 15px, $text_dark);
     outline: none;
     border: none;
-    background: $input_bg;
+    background: $input_bg ;
     flex: 0.9;
   }
   
@@ -44,7 +44,7 @@
   .input[type='date'] {
     min-height: 20px;
     flex: 1;
-    // background-image: url('../../../Assets/Icons/calendarIcon.svg') !important;
+    background-image: url('../../../Assets/Icons/claendarIcon.svg') !important;
     background-repeat: no-repeat;
     background-position: 100%;
     appearance: none;

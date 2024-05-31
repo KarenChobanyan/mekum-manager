@@ -6,11 +6,18 @@
       "Login_placeholder": "Type your e-mail ",
       "Password_label": "Password",
       "Passwor_Error": "Min. 8 characters",
-      "Password_placeholder": "Type your password",
-      "Button_text": "Sign In"
+      "Password_placeholder": "Type your password"
     },
     "Input_Errors": {
-        "Required": "Required"
+        "Required": "Required",
+        "Login":"Incorrect username or password"
+    },
+    "NoData":{
+      "NoData":"The list is empty"
+    },
+    "Button":{
+      "Login": "Login",
+      "Add":"Add"
     },
     "Actions":{
       "To_Storage":{

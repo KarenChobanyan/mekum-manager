@@ -12,7 +12,7 @@ export const authApi = createApi({
   endpoints: (builder) => ({
     login: builder.mutation<ILoginResponse, ILoginFormValues>({
       query: (credentialsLogin) => ({
-        url: '/users/login',
+        url: '/auth/login',
         method: 'POST',
         data: credentialsLogin,
       })

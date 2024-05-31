@@ -7,11 +7,11 @@ import {
   Validate,
 } from 'react-hook-form';
 import moment from 'moment';
-import { useBorder } from './input-hooks';
+import { useBorder } from '../input-hooks';
 import { t } from 'i18next';
-import { InputRegisterTypes, ILoginFormValues } from '../../Interfaces/interfaces';
-import styles from './inputs.module.scss';
-import AuthError from '../AuthError/authError';
+import { InputRegisterTypes, ILoginFormValues } from '../../../Interfaces/interfaces';
+import AuthError from '../../AuthError/authError';
+import styles from './authInputs.module.scss';
 
 export interface IInputProps {
   placeholder?: string;
@@ -35,10 +35,12 @@ export interface IInputProps {
     | Validate<any, FieldValues | ILoginFormValues>
     | Record<string, Validate<any, FieldValues | ILoginFormValues>>
     | undefined;
-  style?: React.CSSProperties;
+  style?: string;
+  showTextError?:boolean;
+  labelStyle?:string
 }
 
-const InputField: React.FC<IInputProps> = (props) => {
+const AuthInput: React.FC<IInputProps> = (props) => {
   const { border, removeBorder, renderBorder } = useBorder();
   const {
     minDate,
@@ -60,6 +62,8 @@ const InputField: React.FC<IInputProps> = (props) => {
     validation,
     required,
     style,
+    labelStyle,
+    showTextError=true
   } = props;
   const [inputValue, setInputValue] = useState<string | undefined>(
     defaultValue
@@ -70,8 +74,8 @@ const InputField: React.FC<IInputProps> = (props) => {
   }, [defaultValue]);
 
   return (
-    <div className={styles.container} style={style}>
-      <label htmlFor={id} className={styles.label}>
+    <div className={`${styles.container} ${style}`} >
+      <label htmlFor={id} className={`${styles.label} ${labelStyle}`}>
         {label!}
         {error && <span className={styles.labelError}>*</span>}
       </label>
@@ -125,9 +129,9 @@ const InputField: React.FC<IInputProps> = (props) => {
           </div>
         )}
       </div>
-      {<AuthError text={error && error.message} />}
+      {showTextError && <AuthError text={error && error.message} />}
     </div>
   );
 };
 
-export default InputField;
+export default AuthInput;

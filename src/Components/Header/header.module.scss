@@ -8,9 +8,10 @@
     top: 0;
     padding: 15px;
     background-color: $main_color;
+    z-index: 1;
 }
 
-.title {
+.logo {
     @include flexStyles(flex, row, flex-end, center);
     gap: 5px;
     padding: 5px
@@ -25,8 +26,12 @@
     @include textStyles("fantasy", 16px, 200, normal, $white);
     padding-bottom: 1px;
     letter-spacing: 0.3px;
-    //  font-family: fantasy;
-   
+}
+
+.title{
+    flex: 1;
+    @include textStyles("", 26px, 200, normal, $white);
+    text-align: center;
 }
 
 .infoBox{

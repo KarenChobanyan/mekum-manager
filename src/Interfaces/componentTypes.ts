@@ -16,3 +16,11 @@ export enum ButtonTypes {
     title:string,
     onClick:()=>void
     }
+
+    export interface IAutocompleteItem {
+      id:string,
+      title:string
+    }
+
+    export type IAutocompleteData = IAutocompleteItem[]
+     

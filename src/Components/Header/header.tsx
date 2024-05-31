@@ -2,10 +2,16 @@ import React from 'react';
 import Languages from '../Languages/languages';
 import styles from './header.module.scss';
 
-const Header: React.FC = () => {
+interface IProps {
+  title?: string
+}
+
+const Header: React.FC<IProps> = (props) => {
+  const { title } = props;
+
   return (
     <div className={styles.body}>
-      <div className={styles.title}>
+      <div className={styles.logo}>
         <div className={styles.bigText}>
           <span>Mekum</span>
         </div>
@@ -13,9 +19,13 @@ const Header: React.FC = () => {
           <span>manager</span>
         </div>
       </div>
-        <div className={styles.infoBox}>
-         <Languages/>
-        </div>
+      <div className={styles.title}>
+        {title!}
+      </div>
+
+      <div className={styles.infoBox}>
+        <Languages />
+      </div>
     </div>
   )
 }

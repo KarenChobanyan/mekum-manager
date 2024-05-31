@@ -6,11 +6,18 @@
       "Login_placeholder": "Введите e-mail ",
       "Password_label": "Пароль",
       "Passwor_Error": "Не менее 8 символов",
-      "Password_placeholder": "Введите ваш пароль",
-      "Button_text": "Войти"
+      "Password_placeholder": "Введите ваш пароль"
     },
     "Input_Errors": {
-        "Required": "Oбязательный"
+        "Required": "Oбязательный",
+        "Login":"Неверное имя пользователя или пароль"
+    },
+    "NoData":{
+      "NoData":"Список пуст"
+    },
+    "Button":{
+      "Login": "Войти",
+      "Add":"Добавить"
     },
     "Actions":{
       "To_Storage":{

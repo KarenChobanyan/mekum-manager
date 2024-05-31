@@ -6,10 +6,12 @@ import CashIncome from './cashIncome.png';
 import CashOut from './cashOut.png';
 import CashChange from './cashChange.png';
 import Users from './users.png';
+import NoDataImg from './noData.png'
 
 export {
     Sales,
     Users,
+    NoDataImg,
     CashOut,
     CashIncome,
     CashChange,

@@ -3,7 +3,7 @@ import { t } from 'i18next';
 import { FieldErrors, FieldValues, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 import { ILoginFormValues } from '../../../../Interfaces/interfaces';
 import { ButtonTypes } from '../../../../Interfaces/componentTypes';
-import { Button, InputField } from '../../../../Components';
+import { Button, AuthInput } from '../../../../Components';
 import styles from './loginForm.module.scss';
 import { usePassword } from '../../../../Components/Inputs/input-hooks';
 import { HidePasswordIcon, ShowPasswordIcon } from '../../../../Assets/Icons';
@@ -26,17 +26,17 @@ const LoginForm: React.FC<IProps> = (props) => {
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
                 <div className={styles.formInputs}>
-                    <InputField
+                    <AuthInput
                         register={register}
-                        registerName='email'
-                        error={errors.email}
+                        registerName='username'
+                        error={errors.username}
                         required
                         label={t('Login_Form.Login_label')}
                         placeholder={t('Login_Form.Login_placeholder')}
                         message={t("Login_Form.Login_Error")}
                         patternValue={/^\s*[A-ZA-z0-9._%+-]+@[A-Za-z0-9.-]+[A-Za-z]{2,}\s*$/i}
                     />
-                    <InputField
+                    <AuthInput
                         register={register}
                         registerName='password'
                         error={errors.password}
@@ -57,7 +57,7 @@ const LoginForm: React.FC<IProps> = (props) => {
                 <Button
                     type='submit'
                     buttonType={ButtonTypes.Primery}
-                    title={t('Login_Form.Button_text')}
+                    title={t('Button.Login')}
                     isLoading={loginLoading}
                 />
 
