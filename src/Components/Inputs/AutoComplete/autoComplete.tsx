@@ -44,6 +44,8 @@ const AutoComplete: React.FC<IAutoCompleteProps> = (props) => {
                         onChange={(_, selected) => {
                             onChange(selected);
                         }}
+                        
+                        multiple={false}
                         renderOption={(props, option) => {
                             return (
                                 <li {...props} key={option.id}>

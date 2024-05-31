@@ -78,3 +78,100 @@
   max-width: 100% !important;
   border: 2px solid $errorColor !important;
 }
+
+.tableAutocomplete .MuiInputBase-root.MuiOutlinedInput-root {
+  width: 240px !important;
+  background-color: $formInput;
+  padding: 5px !important;
+  font-size: 16px !important;
+  line-height: 18px !important;
+  height: inherit !important;
+  border-radius: 10px !important;
+  border: 1px solid #d0d5dd;
+  z-index: 0;
+}
+
+
+.Mui-disabled {
+  background: $white !important;
+}
+
+.tableAutocomplete .MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-input {
+  color: $text_dark !important;
+}
+
+.tableAutocomplete .MuiAutocomplete-root .MuiFormControl-root .MuiInputBase-root .MuiOutlinedInput-notchedOutline {
+  border: none !important;
+}
+
+.tableAutocomplete .MuiAutocomplete-clearIndicator {
+  display: none !important;
+}
+
+.tableAutocomplete .MuiAutocomplete-popupIndicator {
+  color: $main_color !important;
+}
+
+.tableAutocomplete .MuiAutocomplete-root {
+  width: 100% !important;
+  border-radius: 50px !important;
+  margin-top: 8px !important;
+  border: 1px solid transparent !important;
+}
+
+.tableAutocomplete .MuiFormControl-root .MuiInputBase-root {
+  padding: 5px !important;
+}
+
+.tableAutocomplete .MuiFormLabel-root {
+  font-family: "Montserrat arm";
+  font-size: 14px !important;
+  font-weight: 400;
+  line-height: 15px !important;
+  color: $text_dark !important;
+}
+
+#referenceForm .tableAutocomplete .MuiFormControl-root .MuiInputBase-root,
+#vacationForm .tableAutocomplete .MuiFormControl-root .MuiInputBase-root,
+#dismissalForm .tableAutocomplete .MuiFormControl-root .MuiInputBase-root,
+#absenceForm .tableAutocomplete .MuiFormControl-root .MuiInputBase-root {
+  background-color: $white !important;
+}
+
+.tableAutocomplete .Mui-focused {
+  border: 1px solid $main-color !important;
+}
+
+.tableAutocomplete .Mui-focused.MuiAutocomplete-root {
+  border: none !important;
+}
+
+.tableAutocomplete .Mui-focused.MuiFormLabel-root {
+  display: none !important;
+}
+
+.tableAutocomplete .MuiInputLabel-shrink {
+  display: none !important;
+  max-width: 100% !important;
+  border: 2px solid $errorColor !important;
+}
+
+
+.customTable {
+  flex: 1;
+}
+
+.customTable .MuiTableContainer-root {
+  flex: 1 !important;
+  overflow: visible !important;
+  border: 1px solid gray !important;
+  width: max-content !important;
+  min-width: 100% !important;
+  border-radius: 10px !important;
+}
+
+.customTable .MuiTableRow-root {
+  @include flexStyles(flex !important, row !important,normal !important, center !important);
+  border-bottom: 1px solid gray !important;
+  padding: 0 !important;
+}

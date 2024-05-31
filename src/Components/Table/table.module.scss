@@ -1,0 +1,45 @@
+@import '../../General/Styles/mixin';
+@import '../../General/Styles/variables';
+
+.container {
+    border: 1px solid green;
+    width: inherit !important;
+    overflow: auto !important;
+    flex: 1 !important;
+}
+
+.cellHeader {
+    width: 250px;
+    @include flexStyles(flex, row, center, center);
+    text-wrap: nowrap;
+    padding: 10px 15px;
+    background-color: $table_header;
+    border-right: 1px solid $dark_grey;
+    background-color: $table_header;
+}
+
+.cellItem {
+    width: 250px;
+    @include flexStyles(flex, row, center, center);
+    text-wrap: nowrap;
+    padding: 5px 5px 10px;
+    border-right: 1px solid $dark_grey;
+    background-color: $table_item;
+}
+
+.cellDelete{
+    width: 50px;
+    @include flexStyles(flex, row, center, center);
+    text-wrap: nowrap;
+    padding: 5px;
+    border-right: 1px solid $dark_grey;
+}
+
+.plusFooter{
+    @include flexStyles(flex, row,center, normal);
+    gap: 15px;
+    color: $buttun_darkBlue;
+    width: fit-content;
+    font-size: 18px;
+    cursor: pointer;
+}

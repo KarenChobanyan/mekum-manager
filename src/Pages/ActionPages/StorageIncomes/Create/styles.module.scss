@@ -65,9 +65,34 @@
     gap: 15px;
     padding: 10px;
     min-width: 100%;
-    max-width: 100%;
-    overflow: auto;
+    max-width: max-content;
+    overflow-x: scroll;
     overflow-y: hidden;
+    width: initial;
+}
+
+.formItemInput {
+    background-color: $formInput;
+}
+
+.formItemTextBox {
+    width: 250px;
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+    width: 100%;
+    margin-top: 8px;
+    @include flexStyles(flex, row, center, space-between);
+    padding: 16px;
+    background-color: $formInput;
+}
+
+.formItemText {
+    @include textStyles('', 14px, 500, 15px, $text_dark);
+    outline: none;
+    height: 15px;
+    border: none;
+    background: $formInput ;
+    flex: 0.9;
 }
 
 .buttonRow {
@@ -87,4 +112,13 @@
     @include flexStyles(flex, row, center, normal);
     gap: 20px;
     padding: 10px;
+}
+
+.deleteIcon {
+    width: 40px;
+    height: 25px;
+}
+
+.button{
+    border-radius: 10px !important;
 }

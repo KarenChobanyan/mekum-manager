@@ -6,6 +6,7 @@ import Languages from "./Languages/languages";
 import ActionCard from "./ActionCard/actionCard";
 import NoData from "./NoData/noData";
 import AutoComplete from "./Inputs/AutoComplete/autoComplete";
+import CustomTable from "./Table/customTable";
 
 export {
     Loading,
@@ -15,5 +16,6 @@ export {
     Languages,
     ActionCard,
     NoData,
-    AutoComplete
+    AutoComplete,
+    CustomTable
 }

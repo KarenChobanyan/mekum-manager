@@ -1,13 +1,16 @@
 import React from 'react';
 import styles from './styles.module.scss';
 import useCreateStorageIncomeHooks from './createSrorageIncome-hooks';
-import { AuthInput, AutoComplete, Button } from '../../../../Components';
+import { AuthInput, AutoComplete, Button, CustomTable } from '../../../../Components';
 import { Controller } from 'react-hook-form';
 import { t } from 'i18next';
 import { ButtonTypes } from '../../../../Interfaces/componentTypes';
+import FormItems from './formItem';
 
 const CreateStorageIncome: React.FC = () => {
-  const { register, control, errors, handleSubmit, onSubmit } = useCreateStorageIncomeHooks()
+  const { register, control, errors, fields, storageName,unitData,onAddItem, handleSubmit, onSubmit, remove,onCencele,warehousesData,suppliersData } = useCreateStorageIncomeHooks();
+
+
   return (
     <div className={styles.container} >
       <div className={styles.body}>
@@ -38,7 +41,7 @@ const CreateStorageIncome: React.FC = () => {
                       name={name}
                       onChange={onChange}
                       id='storageId'
-                      data={[{ id: "1", title: "Pahest 1" }]}
+                      data={warehousesData}
                       label='Պահեստ'
                       placeholder="Ընտրեք պահեստը"
                       showErrorText={false}
@@ -64,7 +67,7 @@ const CreateStorageIncome: React.FC = () => {
                       name={name}
                       onChange={onChange}
                       id='supplierId'
-                      data={[{ id: "1", title: "Mataka8a8 1" }]}
+                      data={suppliersData}
                       label='Մատակարար'
                       placeholder="Ընտրեք մատակարարին"
                       showErrorText={false}
@@ -78,45 +81,31 @@ const CreateStorageIncome: React.FC = () => {
             />
           </div>
           <div className={styles.itemsBox}>
-           {/* <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div>
-           <div>some content</div> */}
+            <FormItems
+              register={register}
+              control={control}
+              fields={fields}
+              remove={remove}
+              storageName={storageName}
+              unitData={unitData}
+              errors={errors}
+              onAddItem={onAddItem}
+            />
           </div>
           <div className={styles.buttonRow}>
             <div className={styles.buttons}>
               <Button
                 type='button'
+                onClick={onCencele}
                 buttonType={ButtonTypes.Primery}
                 title='Չեղարկել'
+                buttonStyle={styles.button}
               />
               <Button
                 type='submit'
                 buttonType={ButtonTypes.Primery}
                 title='Հաստատել'
+                buttonStyle={styles.button}
               />
             </div>
           </div>

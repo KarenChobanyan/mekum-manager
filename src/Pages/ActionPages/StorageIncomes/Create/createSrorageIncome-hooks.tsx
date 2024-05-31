@@ -1,5 +1,7 @@
-import { FieldPathValues, FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { ReactNode, useEffect, useState } from "react";
+import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
+import { useDirectoriesHooks, useGeneralHooks } from "../../../../General/Hooks/hooks";
 
 export interface IStorageIncomeFormValues {
     date: string,
@@ -9,15 +11,56 @@ export interface IStorageIncomeFormValues {
 }
 
 export interface IStorageIncomeItem {
+    storage?: string,
     title: string,
-    unitId: string,
+    unitId: IAutocompleteItem | null,
     price: string,
     count: string,
-    cost: string
-}
+    discount: string
+    cost: string,
+    total: string
+};
+
+export interface IFormItemData {
+    component: ReactNode
+};
+
 
 const useCreateStorageIncomeHooks = () => {
-    const { register, handleSubmit, control, formState: { errors } } = useForm<IStorageIncomeFormValues>();
+    const {unitData,warehousesData,suppliersData} = useDirectoriesHooks();
+    const { navigate } = useGeneralHooks();
+
+    const [storageName, setStorageName] = useState<string>("");
+    const { register, handleSubmit, watch, control, reset, formState: { errors } } = useForm<IStorageIncomeFormValues>({
+        defaultValues: {
+            items: [{ storage: storageName, title: '', unitId: null, price: '', count: '', discount: "", cost: '', total: "" }]
+        }
+    });
+    const { fields, append, remove } = useFieldArray({
+        control,
+        name: 'items'
+    });
+
+    useEffect(() => {
+        const storageName = watch('storageId')?.title!;
+        console.log("storageName")
+        if (storageName) {
+            const item = watch('items')
+            setStorageName(storageName)
+            console.log(item, "item")
+        }
+    }, [watch("storageId")]);
+
+
+    const onAddItem = () => {
+        append({ storage: storageName, title: '', unitId: null, price: '', count: '', discount: "", cost: '', total: "" })
+    };
+
+    const onCencele = () => {
+        navigate('/storage_incomings')
+        reset()
+    };
+
     const onSubmit: SubmitHandler<IStorageIncomeFormValues | FieldValues> = (values) => {
         console.log(values)
     };
@@ -26,8 +69,17 @@ const useCreateStorageIncomeHooks = () => {
         register,
         handleSubmit,
         onSubmit,
+        remove,
+        append,
+        unitData,
         control,
-        errors
+        errors,
+        fields,
+        storageName,
+        warehousesData,
+        suppliersData,
+        onAddItem,
+        onCencele
     }
 };
 

@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import moment from "moment";
 // import Cookies from 'js-cookie';
 import { RootState, useAppDispatch, useAppSelector } from "../../Store/store";
+import { IAutocompleteItem } from "../../Interfaces/componentTypes";
 
 export const useGeneralHooks = () => {
   const { t, i18n } = useTranslation();
@@ -37,3 +38,29 @@ export const useGeneralHooks = () => {
     formatDate,
   };
 };
+
+export const useDirectoriesHooks = () => {
+  const unitData: IAutocompleteItem[] = [
+    {
+      id: "1",
+      title: "Տուփ"
+    },
+    {
+      id: "2",
+      title: "կգ"
+    }
+  ];
+  const warehousesData: IAutocompleteItem[] = [
+    { id: "1", title: "Պահեստ 1" },
+    { id: "2", title: "Պահեստ 2" }
+  ];
+  const suppliersData: IAutocompleteItem[] = [
+    { id: "1", title: "Մատակարար 1" },
+    { id: "2", title: "Մատակարար 2" }
+  ];
+  return {
+    unitData,
+    warehousesData,
+    suppliersData
+  }
+}
