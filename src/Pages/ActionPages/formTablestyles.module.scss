@@ -1,5 +1,5 @@
-@import '../../../../General/Styles/mixin';
-@import '../../../../General/Styles/variables';
+@import '../../General/Styles/mixin';
+@import '../../General/Styles/variables';
 
 .container {
     @include flexStyles(flex, column, center, center);
@@ -73,6 +73,11 @@
 
 .formItemInput {
     background-color: $formInput;
+}
+
+.formItemBox {
+    background-color: $formInput;
+    border-radius: 10px;
 }
 
 .formItemTextBox {

@@ -1,15 +1,15 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
-import { t } from 'i18next';
-import useCreateStorageIncomeHooks from './createSrorageIncome-hooks';
+import { useGeneralHooks } from '../../../../General/Hooks/hooks';
+import useCreateSalesHooks from './createSales-hooks';
 import { ButtonTypes } from '../../../../Interfaces/componentTypes';
+import FormItems from './formTable';
 import { AuthInput, AutoComplete, Button } from '../../../../Components';
-import FormTable from './formTable';
 import styles from '../../formTablestyles.module.scss';
 
-const CreateStorageIncome: React.FC = () => {
-  const { register, control, errors, fields, storageName,unitData,onAddItem, handleSubmit, onSubmit, remove,onCencele,setValue,watch,warehousesData,suppliersData } = useCreateStorageIncomeHooks();
-
+const CreateSales: React.FC = () => {
+  const { register, control, errors, fields, storageName, buyerName, buyersData, warehousesData, unitData, onAddItem, handleSubmit, onSubmit, remove, onCencele, setValue, watch, } = useCreateSalesHooks();
+  const { t } = useGeneralHooks();
 
   return (
     <div className={styles.container} >
@@ -55,7 +55,7 @@ const CreateStorageIncome: React.FC = () => {
             />
             <Controller
               control={control}
-              name='supplierId'
+              name='buyerId'
               rules={{
                 required: t('Input_Errors.Required'),
               }}
@@ -67,13 +67,13 @@ const CreateStorageIncome: React.FC = () => {
                       name={name}
                       onChange={onChange}
                       id='supplierId'
-                      data={suppliersData}
-                      label='Մատակարար'
-                      placeholder="Ընտրեք մատակարարին"
+                      data={buyersData}
+                      label='Գնորդ'
+                      placeholder="Ընտրեք գնորդ"
                       showErrorText={false}
                       style={styles.inputBox}
                       labelStyle={styles.formInputLabel}
-                      error={errors.supplierId}
+                      error={errors.buyerId}
                     />
                   </div>
                 );
@@ -81,12 +81,13 @@ const CreateStorageIncome: React.FC = () => {
             />
           </div>
           <div className={styles.itemsBox}>
-            <FormTable
+            <FormItems
               register={register}
               control={control}
               fields={fields}
               remove={remove}
               storageName={storageName}
+              buyerName={buyerName}
               unitData={unitData}
               errors={errors}
               onAddItem={onAddItem}
@@ -117,4 +118,4 @@ const CreateStorageIncome: React.FC = () => {
   )
 }
 
-export default CreateStorageIncome
+export default CreateSales

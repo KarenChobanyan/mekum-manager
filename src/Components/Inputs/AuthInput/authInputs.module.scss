@@ -19,6 +19,10 @@
   .border {
     border: 1px solid $main-color;
   }
+
+  .errorBorder{
+    border: 1px solid $errorColor !important;
+  }
   
   .input {
     @include textStyles('', 14px, 500, 15px, $text_dark);

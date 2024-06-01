@@ -1,11 +1,12 @@
 import React from 'react';
 import { useGeneralHooks } from '../../../General/Hooks/hooks';
 import { NoData } from '../../../Components';
-import styles from './styles.module.scss';
+import styles from '../styles.module.scss';
 
 const StorageIncomes: React.FC = () => {
   const {t,navigate} = useGeneralHooks();
-  const data = []
+  const data = [];
+  
   return (
     <div className={styles.container}>
       <div className={styles.body}>

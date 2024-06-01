@@ -3,14 +3,14 @@ import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-f
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
 import { useDirectoriesHooks, useGeneralHooks } from "../../../../General/Hooks/hooks";
 
-export interface IStorageIncomeFormValues {
+export interface IStorageOutgoingFormValues {
     date: string,
     storageId: IAutocompleteItem,
-    supplierId: IAutocompleteItem,
-    items: IStorageIncomeItem[]
+    recipientId: IAutocompleteItem,
+    items: IStorageOutgoingItem[]
 }
 
-export interface IStorageIncomeItem {
+export interface IStorageOutgoingItem {
     storage?: string,
     title: string,
     unitId: IAutocompleteItem | null,
@@ -26,12 +26,12 @@ export interface IFormItemData {
 };
 
 
-const useCreateStorageIncomeHooks = () => {
-    const {unitData,warehousesData,suppliersData} = useDirectoriesHooks();
+const useCreateStorageOutgoingHooks = () => {
+    const {unitData,recipientData,warehousesData} = useDirectoriesHooks();
     const { navigate } = useGeneralHooks();
 
     const [storageName, setStorageName] = useState<string>("");
-    const { register, handleSubmit, watch, control, reset,setValue, formState: { errors } } = useForm<IStorageIncomeFormValues>({
+    const { register, handleSubmit, watch, control, reset,setValue, formState: { errors } } = useForm<IStorageOutgoingFormValues>({
         defaultValues: {
             items: [{ storage: storageName, title: '', unitId: null, price: '', count: '', discount: "", cost: '', total: "" }]
         },
@@ -61,7 +61,7 @@ const useCreateStorageIncomeHooks = () => {
         reset()
     };
 
-    const onSubmit: SubmitHandler<IStorageIncomeFormValues | FieldValues> = (values) => {
+    const onSubmit: SubmitHandler<IStorageOutgoingFormValues | FieldValues> = (values) => {
         console.log(values)
     };
 
@@ -78,11 +78,11 @@ const useCreateStorageIncomeHooks = () => {
         errors,
         fields,
         storageName,
+        recipientData,
         warehousesData,
-        suppliersData,
         onAddItem,
         onCencele
     }
 };
 
-export default useCreateStorageIncomeHooks
+export default useCreateStorageOutgoingHooks

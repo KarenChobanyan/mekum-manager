@@ -3,15 +3,16 @@ import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-f
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
 import { useDirectoriesHooks, useGeneralHooks } from "../../../../General/Hooks/hooks";
 
-export interface IStorageIncomeFormValues {
+export interface ISalesferFormValues {
     date: string,
     storageId: IAutocompleteItem,
-    supplierId: IAutocompleteItem,
-    items: IStorageIncomeItem[]
+    buyerId: IAutocompleteItem,
+    items: ISaleItem[]
 }
 
-export interface IStorageIncomeItem {
+export interface ISaleItem {
     storage?: string,
+    buyer?: string,
     title: string,
     unitId: IAutocompleteItem | null,
     price: string,
@@ -26,16 +27,17 @@ export interface IFormItemData {
 };
 
 
-const useCreateStorageIncomeHooks = () => {
-    const {unitData,warehousesData,suppliersData} = useDirectoriesHooks();
+const useCreateSalesHooks = () => {
+    const { unitData, warehousesData,buyersData } = useDirectoriesHooks();
     const { navigate } = useGeneralHooks();
 
     const [storageName, setStorageName] = useState<string>("");
-    const { register, handleSubmit, watch, control, reset,setValue, formState: { errors } } = useForm<IStorageIncomeFormValues>({
+    const [buyerName, setBuyerName] = useState<string>("");
+    const { register, handleSubmit, watch, control, reset, setValue, formState: { errors } } = useForm<ISalesferFormValues>({
         defaultValues: {
-            items: [{ storage: storageName, title: '', unitId: null, price: '', count: '', discount: "", cost: '', total: "" }]
+            items: [{ storage: storageName, buyer: buyerName, title: '', unitId: null, price: '', count: '', discount: "", cost: '', total: "" }]
         },
-        mode:'all'
+        mode: 'all'
     });
     const { fields, append, remove } = useFieldArray({
         control,
@@ -44,16 +46,16 @@ const useCreateStorageIncomeHooks = () => {
 
     useEffect(() => {
         const storageName = watch('storageId')?.title!;
-        if (storageName) {
-            const item = watch('items')
+        const buyerName = watch('buyerId')?.title!;
+        if (storageName || buyerName) {
             setStorageName(storageName)
-            console.log(item, "item")
+            setBuyerName(buyerName)
         }
-    }, [watch("storageId")]);
+    }, [watch("storageId"), watch("buyerId")]);
 
 
     const onAddItem = () => {
-        append({ storage: storageName, title: '', unitId: null, price: '', count: '', discount: "", cost: '', total: "" })
+        append({ storage: storageName, buyer: buyerName, title: '', unitId: null, price: '', count: '', discount: "", cost: '', total: "" })
     };
 
     const onCencele = () => {
@@ -61,7 +63,7 @@ const useCreateStorageIncomeHooks = () => {
         reset()
     };
 
-    const onSubmit: SubmitHandler<IStorageIncomeFormValues | FieldValues> = (values) => {
+    const onSubmit: SubmitHandler<ISalesferFormValues | FieldValues> = (values) => {
         console.log(values)
     };
 
@@ -73,16 +75,17 @@ const useCreateStorageIncomeHooks = () => {
         append,
         setValue,
         unitData,
+        buyersData,
         watch,
         control,
         errors,
         fields,
         storageName,
+        buyerName,
         warehousesData,
-        suppliersData,
         onAddItem,
         onCencele
     }
 };
 
-export default useCreateStorageIncomeHooks
+export default useCreateSalesHooks

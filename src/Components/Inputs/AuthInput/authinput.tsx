@@ -32,12 +32,12 @@ export interface IInputProps {
   children?: ReactNode;
   required?: boolean;
   validation?:
-    | Validate<any, FieldValues | ILoginFormValues>
-    | Record<string, Validate<any, FieldValues | ILoginFormValues>>
-    | undefined;
+  | Validate<any, FieldValues | ILoginFormValues>
+  | Record<string, Validate<any, FieldValues | ILoginFormValues>>
+  | undefined;
   style?: string;
-  showTextError?:boolean;
-  labelStyle?:string
+  showTextError?: boolean;
+  labelStyle?: string
 }
 
 const AuthInput: React.FC<IInputProps> = (props) => {
@@ -63,7 +63,7 @@ const AuthInput: React.FC<IInputProps> = (props) => {
     required,
     style,
     labelStyle,
-    showTextError=true
+    showTextError = true
   } = props;
   const [inputValue, setInputValue] = useState<string | undefined>(
     defaultValue
@@ -75,16 +75,15 @@ const AuthInput: React.FC<IInputProps> = (props) => {
 
   return (
     <div className={`${styles.container} ${style}`} >
-      <label htmlFor={id} className={`${styles.label} ${labelStyle}`}>
-        {label!}
-        {error && <span className={styles.labelError}>*</span>}
-      </label>
+      {label
+        &&
+        <label htmlFor={id} className={`${styles.label} ${labelStyle}`}>
+          {label!}
+          {error && <span className={styles.labelError}>*</span>}
+        </label>
+      }
       <div
-        className={
-          border
-            ? `${styles.inputBox} ${styles.border} ${inputStyle}`
-            : `${styles.inputBox} ${inputStyle}`
-        }
+        className={`${styles.inputBox} ${border && styles.border} ${inputStyle} ${error && styles.errorBorder}`}
         onFocus={renderBorder}
         onBlur={removeBorder}
       >
