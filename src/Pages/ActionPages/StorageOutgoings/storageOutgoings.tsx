@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from '../styles.module.scss';
-import { NoData } from '../../../Components';
 import { useGeneralHooks } from '../../../General/Hooks/hooks';
+import { NoData } from '../../../Components';
+import styles from '../styles.module.scss';
 
 const StorageOutgoings:React.FC = () => {
   const {t,navigate} = useGeneralHooks();

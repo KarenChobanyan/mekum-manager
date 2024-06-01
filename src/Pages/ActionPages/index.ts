@@ -9,16 +9,18 @@ import UsersPage from './Users/users';
 import CreateStorageIncomePage from './StorageIncomes/Create/createStorageIncome';
 import CreateStorageOutgoingsPage from './StorageOutgoings/Create/createStorageOutgoings';
 import CreateTorageTransfersPage from './StorageTransfers/Create/createTorageTransfers';
+import CreateSalesPage from './Sales/Create/createSales';
 
 export {
     CreateStorageIncomePage,
     CreateStorageOutgoingsPage,
     CreateTorageTransfersPage,
-    StorageOutgoingsPage,
     StorageTransfersPage,
+    StorageOutgoingsPage,
     StorageIncomesPage,
     CashTransfersPage,
     CashIncomingPage,
+    CreateSalesPage,
     CashOutPage,
     SalesPage,
     UsersPage,
