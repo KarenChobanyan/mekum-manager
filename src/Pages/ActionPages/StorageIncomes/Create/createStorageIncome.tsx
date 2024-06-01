@@ -8,7 +8,7 @@ import FormItems from './formItem';
 import styles from './styles.module.scss';
 
 const CreateStorageIncome: React.FC = () => {
-  const { register, control, errors, fields, storageName,unitData,onAddItem, handleSubmit, onSubmit, remove,onCencele,warehousesData,suppliersData } = useCreateStorageIncomeHooks();
+  const { register, control, errors, fields, storageName,unitData,onAddItem, handleSubmit, onSubmit, remove,onCencele,setValue,watch,warehousesData,suppliersData } = useCreateStorageIncomeHooks();
 
 
   return (
@@ -90,6 +90,8 @@ const CreateStorageIncome: React.FC = () => {
               unitData={unitData}
               errors={errors}
               onAddItem={onAddItem}
+              setValue={setValue}
+              watch={watch}
             />
           </div>
           <div className={styles.buttonRow}>

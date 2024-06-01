@@ -75,6 +75,11 @@
     background-color: $formInput;
 }
 
+.formItemBox {
+    background-color: $formInput;
+    border-radius: 10px;
+}
+
 .formItemTextBox {
     width: 250px;
     border: 1px solid #d0d5dd;

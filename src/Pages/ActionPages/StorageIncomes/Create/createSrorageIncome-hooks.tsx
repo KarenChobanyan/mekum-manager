@@ -31,10 +31,11 @@ const useCreateStorageIncomeHooks = () => {
     const { navigate } = useGeneralHooks();
 
     const [storageName, setStorageName] = useState<string>("");
-    const { register, handleSubmit, watch, control, reset, formState: { errors } } = useForm<IStorageIncomeFormValues>({
+    const { register, handleSubmit, watch, control, reset,setValue, formState: { errors } } = useForm<IStorageIncomeFormValues>({
         defaultValues: {
             items: [{ storage: storageName, title: '', unitId: null, price: '', count: '', discount: "", cost: '', total: "" }]
-        }
+        },
+        mode:'all'
     });
     const { fields, append, remove } = useFieldArray({
         control,
@@ -71,7 +72,9 @@ const useCreateStorageIncomeHooks = () => {
         onSubmit,
         remove,
         append,
+        setValue,
         unitData,
+        watch,
         control,
         errors,
         fields,
