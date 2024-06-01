@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from './styles.module.scss';
 import { Control, Controller, FieldArrayWithId, FieldErrors, UseFieldArrayRemove, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { IFormItemData, IStorageIncomeFormValues } from './createSrorageIncome-hooks';
-import { RedTrashIcon } from '../../../../Assets/Icons';
-import { AuthInput, AutoComplete, CustomTable } from '../../../../Components';
 import { IAutocompleteItem } from '../../../../Interfaces/componentTypes';
+import { AuthInput, AutoComplete, CustomTable } from '../../../../Components';
+import { RedTrashIcon } from '../../../../Assets/Icons';
+import styles from '../../formTablestyles.module.scss';
 
 interface IProps {
     fields: FieldArrayWithId<IStorageIncomeFormValues, "items", "id">[],

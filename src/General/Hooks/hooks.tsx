@@ -41,14 +41,8 @@ export const useGeneralHooks = () => {
 
 export const useDirectoriesHooks = () => {
   const unitData: IAutocompleteItem[] = [
-    {
-      id: "1",
-      title: "Տուփ"
-    },
-    {
-      id: "2",
-      title: "կգ"
-    }
+    { id: "1", title: "Տուփ" },
+    { id: "2", title: "կգ" }
   ];
   const warehousesData: IAutocompleteItem[] = [
     { id: "1", title: "Պահեստ 1" },
@@ -58,9 +52,16 @@ export const useDirectoriesHooks = () => {
     { id: "1", title: "Մատակարար 1" },
     { id: "2", title: "Մատակարար 2" }
   ];
+
+  const recipientData: IAutocompleteItem[] = [
+    { id: "1", title: "Ստացող 1" },
+    { id: "2", title: "Ստացող 2" }
+  ];
+
   return {
     unitData,
     warehousesData,
-    suppliersData
+    suppliersData,
+    recipientData
   }
 }

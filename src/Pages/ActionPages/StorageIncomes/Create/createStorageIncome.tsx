@@ -4,8 +4,8 @@ import { t } from 'i18next';
 import useCreateStorageIncomeHooks from './createSrorageIncome-hooks';
 import { ButtonTypes } from '../../../../Interfaces/componentTypes';
 import { AuthInput, AutoComplete, Button } from '../../../../Components';
-import FormItems from './formItem';
-import styles from './styles.module.scss';
+import FormTable from './formTable';
+import styles from '../../formTablestyles.module.scss';
 
 const CreateStorageIncome: React.FC = () => {
   const { register, control, errors, fields, storageName,unitData,onAddItem, handleSubmit, onSubmit, remove,onCencele,setValue,watch,warehousesData,suppliersData } = useCreateStorageIncomeHooks();
@@ -81,7 +81,7 @@ const CreateStorageIncome: React.FC = () => {
             />
           </div>
           <div className={styles.itemsBox}>
-            <FormItems
+            <FormTable
               register={register}
               control={control}
               fields={fields}

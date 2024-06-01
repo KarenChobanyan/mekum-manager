@@ -5,7 +5,7 @@ import { CashIncomingPage, CashOutPage, CashTransfersPage, HomePage, LoginPage, 
 import Layout from '../Pages/Layout/layout';
 import MainPage from '../Pages/Main/mainPage';
 import StorageTransfers from '../Pages/ActionPages/StorageTransfers/storageTransfers';
-import { CreateStorageIncomePage } from '../Pages/ActionPages';
+import { CreateStorageIncomePage,CreateStorageOutgoings } from '../Pages/ActionPages';
 
 const Router: React.FC = () => {
     return (
@@ -56,6 +56,12 @@ const Router: React.FC = () => {
                 path='/storage_outgoings'
                 element={
                     <Layout title={t('Actions.From_Storage.Title')}  children={<StorageOutgoingsPage/>} />
+                }
+            />
+            <Route
+                path='/storage_outgoings/create'
+                element={
+                    <Layout title={t('Actions.From_Storage.Title')} children={<CreateStorageOutgoings/>} />
                 }
             />
             <Route
