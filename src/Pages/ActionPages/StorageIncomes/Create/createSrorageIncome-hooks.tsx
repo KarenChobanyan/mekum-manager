@@ -57,7 +57,7 @@ const useCreateStorageIncomeHooks = () => {
     };
 
     const onCencele = () => {
-        navigate('/storage_outgoings')
+        navigate(-1)
         reset()
     };
 

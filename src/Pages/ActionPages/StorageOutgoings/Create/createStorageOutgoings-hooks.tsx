@@ -57,7 +57,7 @@ const useCreateStorageOutgoingHooks = () => {
     };
 
     const onCencele = () => {
-        navigate('/storage_incomings')
+        navigate(-1)
         reset()
     };
 
