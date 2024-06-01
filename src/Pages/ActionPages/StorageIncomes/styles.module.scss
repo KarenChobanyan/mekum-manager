@@ -1,0 +1,17 @@
+@import '../../../General/Styles/mixin';
+@import '../../../General/Styles/variables';
+
+.container {
+    flex: 1;
+    @include flexStyles(flex,column,center,center);
+    padding: 15px 10px;
+}
+
+.body{
+    flex:1;
+    width: 100%;
+    @include flexStyles(flex,column,center,center);
+    background-color: $light_bg;
+    border-radius: 15px;
+    box-shadow: -1px 0px 5px -1px $main_color;
+}

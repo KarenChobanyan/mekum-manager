@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import './App.css';
 import Router from '../Router/router';
-import Header from '../Components/Header/header';
 import { useTranslation } from 'react-i18next';
+import './App.scss';
 
 function App() {
   const { i18n } = useTranslation();

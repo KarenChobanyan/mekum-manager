@@ -5,27 +5,31 @@ import { useEffect } from "react";
 import { useGeneralHooks } from "../../General/Hooks/hooks";
 
 const useLoginHooks = () => {
-    const {accessToken,navigate} = useGeneralHooks();
-    const { register, handleSubmit, formState: { errors } } = useForm<ILoginFormValues>();
-    const [login, { data: loginResponse, isLoading, isSuccess }] = useLoginMutation();
+    const { accessToken, navigate,t } = useGeneralHooks();
+    const { register, handleSubmit, setError, formState: { errors } } = useForm<ILoginFormValues>();
+    const [login, { data: loginResponse, isLoading, isSuccess, isError }] = useLoginMutation();
+    console.log(loginResponse, 'loginResponse')
     const onSubmit: SubmitHandler<ILoginFormValues | FieldValues> = (values) => {
         const payload = {
-            email: values.email.trim(),
+            username: values.username.trim(),
             password: values.password.trim(),
         };
         login(payload);
     };
 
     useEffect(() => {
-       if (isSuccess || accessToken) {
+        if (isSuccess || accessToken) {
             navigate('/home');
             if (loginResponse?.result?.token) {
                 localStorage.setItem('mm_access_token', loginResponse?.result?.token);
                 window.location.reload();
                 navigate('/home');
+            }
+        } else if (isError) {
+            console.log(isError, "error")
+            setError("password", { message: t('Input_Errors.Login') })
         }
-    }
-    }, [isSuccess, accessToken]);
+    }, [isSuccess, accessToken, isError, isLoading]);
 
 
 
