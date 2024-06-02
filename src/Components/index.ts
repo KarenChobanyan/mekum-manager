@@ -7,6 +7,8 @@ import ActionCard from "./ActionCard/actionCard";
 import NoData from "./NoData/noData";
 import AutoComplete from "./Inputs/AutoComplete/autoComplete";
 import CustomTable from "./Table/customTable";
+import CustomModal from "./CustomModal/customModal";
+import TextArea from "./Inputs/TextArea/textArea";
 
 export {
     Loading,
@@ -17,5 +19,7 @@ export {
     ActionCard,
     NoData,
     AutoComplete,
-    CustomTable
+    CustomTable,
+    CustomModal,
+    TextArea
 }

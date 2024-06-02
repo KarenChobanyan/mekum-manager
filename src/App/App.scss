@@ -173,3 +173,28 @@
   border-bottom: 1px solid gray !important;
   padding: 0 !important;
 }
+
+.customized-dialog .MuiPaper-root{
+  width: 20vw !important;
+  border-radius: 15px;
+}
+
+.customized-dialog .MuiDialogTitle-root {
+  font-size: 20px;
+  color:$main_color !important
+}
+
+
+//media
+
+@media screen and (max-width:1600px){
+  .customized-dialog .MuiPaper-root{
+    width: 25vw !important;
+  }
+}
+
+@media screen and (max-width:1430px){
+  .customized-dialog .MuiPaper-root{
+    width: 30vw !important;
+  }
+}

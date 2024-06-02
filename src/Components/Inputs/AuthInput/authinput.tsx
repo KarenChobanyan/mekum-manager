@@ -23,7 +23,6 @@ export interface IInputProps {
   message?: string;
   error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
   id?: string;
-  inputStyle?: string;
   disabled?: boolean;
   defaultValue?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -35,6 +34,7 @@ export interface IInputProps {
   | Validate<any, FieldValues | ILoginFormValues>
   | Record<string, Validate<any, FieldValues | ILoginFormValues>>
   | undefined;
+  inputStyle?: string;
   style?: string;
   showTextError?: boolean;
   labelStyle?: string

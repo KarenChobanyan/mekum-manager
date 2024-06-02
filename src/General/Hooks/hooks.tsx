@@ -63,11 +63,23 @@ export const useDirectoriesHooks = () => {
     { id: "2", title: "Գնորդ 2" }
   ];
 
+  const cashBoxesData: IAutocompleteItem[] = [
+    { id: "1", title: "Դրամարկղ 1" },
+    { id: "2", title: "Դրամարկղ 2" }
+  ];
+
+  const payersData: IAutocompleteItem[] = [
+    { id: "1", title: "Վճարող 1" },
+    { id: "2", title: "Վճարող 2" }
+  ];
+
   return {
     unitData,
     warehousesData,
     suppliersData,
     recipientData,
-    buyersData
+    buyersData,
+    cashBoxesData,
+    payersData
   }
 }
