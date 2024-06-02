@@ -42,7 +42,8 @@
         "Title":"Sale"
       },
       "Users":{
-        "Title":"Users"
+        "Title":"Users",
+        "Create":"Register a new user"
       }
     }
 }

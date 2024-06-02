@@ -5,7 +5,7 @@ import { CashIncomingPage, CashOutPage, CashTransfersPage, HomePage, LoginPage, 
 import Layout from '../Pages/Layout/layout';
 import MainPage from '../Pages/Main/mainPage';
 import StorageTransfers from '../Pages/ActionPages/StorageTransfers/storageTransfers';
-import { CreateStorageIncomePage,CreateStorageOutgoingsPage,CreateTorageTransfersPage,CreateSalesPage } from '../Pages/ActionPages';
+import { CreateStorageIncomePage,CreateStorageOutgoingsPage,CreateTorageTransfersPage,CreateSalesPage, CreateCashIncomePage, CreateCashoutPage,CreateCashTransferPage,CreateUserPage } from '../Pages/ActionPages';
 
 const Router: React.FC = () => {
     return (
@@ -44,6 +44,12 @@ const Router: React.FC = () => {
                 path='/users'
                 element={
                     <Layout title={t('Actions.Users.Title')} children={<UsersPage/>} />
+                }
+            />
+             <Route
+                path='/users/create'
+                element={
+                    <Layout title={t('Actions.Users.Create')} children={<CreateUserPage/>} />
                 }
             />
             <Route
@@ -88,6 +94,12 @@ const Router: React.FC = () => {
                     <Layout title={t('Actions.Cash_Income.Title')} children={<CashIncomingPage/>} />
                 }
             />
+             <Route
+                path='/cash_incomings/create'
+                element={
+                    <Layout title={t('Actions.Cash_Income.Title')} children={<CreateCashIncomePage/>} />
+                }
+            />
             <Route
                 path='/cashouts'
                 element={
@@ -95,9 +107,21 @@ const Router: React.FC = () => {
                 }
             />
              <Route
+                path='/cashouts/create'
+                element={
+                    <Layout title={t('Actions.CashOut.Title')} children={<CreateCashoutPage/>} />
+                }
+            />
+             <Route
                 path='/cash_transfers'
                 element={
                     <Layout title={t('Actions.Cash_Changes.Title')} children={<CashTransfersPage/>} />
+                }
+            />
+             <Route
+                path='/cash_transfers/create'
+                element={
+                    <Layout title={t('Actions.Cash_Changes.Title')} children={<CreateCashTransferPage/>} />
                 }
             />
         </Routes>
