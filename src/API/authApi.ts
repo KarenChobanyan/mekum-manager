@@ -1,8 +1,8 @@
-import { FieldValues } from 'react-hook-form';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from './API';
 import { ILoginFormValues } from '../Interfaces/interfaces';
 import { ILoginResponse } from '../Interfaces/responseTypes';
+import { IRegisterFormValues } from '../Pages/ActionPages/Users/Create/createUser-hooks';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
@@ -17,9 +17,17 @@ export const authApi = createApi({
         data: credentialsLogin,
       })
     }),
+    register: builder.mutation<ILoginResponse, IRegisterFormValues>({
+      query: (credentialsLogin) => ({
+        url: '/auth/register',
+        method: 'POST',
+        data: credentialsLogin,
+      })
+    }),
   }),
 });
 
 export const  {
-  useLoginMutation
+  useLoginMutation,
+  useRegisterMutation
 } = authApi;

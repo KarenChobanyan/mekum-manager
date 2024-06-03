@@ -15,9 +15,10 @@ const initialState: IinitialState = {
 export const getMe = createAsyncThunk('currentUser', async () => {
   const response: IGetMeResponse = await API.get('/users/get-me', {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem('access-token')}`,
+      Authorization: `Bearer ${localStorage.getItem('mm_access_token')}`,
     },
   });
+  console.log(response,'getMe response')
   return response.data;
 });
 

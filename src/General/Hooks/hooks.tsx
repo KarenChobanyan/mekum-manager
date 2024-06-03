@@ -1,5 +1,6 @@
 import { useLocation, useNavigate, useParams } from "react-router";
 import { useTranslation } from "react-i18next";
+import {t} from 'i18next'
 import moment from "moment";
 // import Cookies from 'js-cookie';
 import { RootState, useAppDispatch, useAppSelector } from "../../Store/store";
@@ -15,7 +16,7 @@ export const useGeneralHooks = () => {
   const currentUser = useAppSelector(
     (state: RootState) => state?.auth?.currentUser
   );
-
+  console.log(currentUser,"currentUser")
   const formatDate = (date: Date) => {
     return moment(date).format("DD.MM.YYYY");
   };
@@ -73,6 +74,11 @@ export const useDirectoriesHooks = () => {
     { id: "2", title: "Վճարող 2" }
   ];
 
+  const roles: IAutocompleteItem[] = [
+    { id: "1", title: t('Roles.Admin') },
+    { id: "2", title: t('Roles.User') }
+  ];
+
   return {
     unitData,
     warehousesData,
@@ -80,6 +86,7 @@ export const useDirectoriesHooks = () => {
     recipientData,
     buyersData,
     cashBoxesData,
-    payersData
+    payersData,
+    roles
   }
 }
