@@ -10,13 +10,12 @@ export interface ILoginResponse{
   }
 
   export interface IGetMeResponseData {
-    id: number;
-    email: string;
-    name: string;
-    surname: string;
-    avatar: string | null;
-    number: string | null;
-    socialSecurityCard: string | null;
-    gender: string | null;
-    birthDate: string | null;
+    id?: number;
+    role_id?:number;
+    mekum_id?:string | null;
+    username?: string;
+    name?: string;
+    surname?: string;
+    created_at?:string,
+    updated_at?:string
   }

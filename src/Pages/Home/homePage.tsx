@@ -4,7 +4,7 @@ import { ActionCard } from '../../Components';
 import useHomePageHooks from './homePage-hooks';
 
 const HomePage:React.FC = () => {
-  const {optionList} = useHomePageHooks(2)
+  const {optionList} = useHomePageHooks()
 
   return (
     <div className={styles.container}>

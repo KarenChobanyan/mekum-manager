@@ -5,6 +5,8 @@ import ShowPasswordIcon from './showPassword.svg';
 import HidePasswordIcon from './hidePassword.svg'
 import RedTrashIcon from './redTrash.svg';
 import PlusIcon from './plusIcon.svg';
+import LogOutIcon from './logOut.svg';
+import AvatarIcon from './avatar.svg';
 
 export {
     ArmenianFlag,
@@ -13,5 +15,7 @@ export {
     UnitedStatesFlag,
     ShowPasswordIcon,
     HidePasswordIcon,
-    PlusIcon
+    LogOutIcon,
+    PlusIcon,
+    AvatarIcon
 }

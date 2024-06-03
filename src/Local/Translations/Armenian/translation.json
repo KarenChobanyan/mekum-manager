@@ -8,6 +8,10 @@
     "Password_Error": "Առնվազն 8 նիշ",
     "Password_placeholder": "Մուտքագրեք ձեր գաղտնաբառը"
   },
+  "Header":{
+    "My_Page":"Իմ էջը",
+    "Log_Out":"Դուրս գալ"
+  },
   "Input_Errors": {
     "Required": "Պարտադիր",
     "Login": "Սխալ մուտքանուն կամ գաղտնաբար",

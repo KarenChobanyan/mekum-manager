@@ -16,6 +16,10 @@
     "FirstName": "Invalid Name",
     "Surname": "Invalid Surname"
   },
+  "Header":{
+    "My_Page":"My page",
+    "Log_Out":"Log out"
+  },
   "Roles": {
     "Admin": "Administrator",
     "User": "User",

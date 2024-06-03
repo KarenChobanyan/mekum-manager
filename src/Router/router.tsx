@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import {t} from 'i18next';
-import { CashIncomingPage, CashOutPage, CashTransfersPage, HomePage, LoginPage, SalesPage, StorageIncomesPage, StorageOutgoingsPage, UsersPage } from '../Pages';
+import { CashIncomingPage, CashOutPage, CashTransfersPage, HomePage, LoginPage, MyPage, SalesPage, StorageIncomesPage, StorageOutgoingsPage, UsersPage } from '../Pages';
 import Layout from '../Pages/Layout/layout';
 import MainPage from '../Pages/Main/mainPage';
 import StorageTransfers from '../Pages/ActionPages/StorageTransfers/storageTransfers';
@@ -26,6 +26,12 @@ const Router: React.FC = () => {
                 path='/home'
                 element={
                     <Layout children={<HomePage/>} />
+                }
+            />
+             <Route
+                path='/my_page'
+                element={
+                    <Layout children={<MyPage/>} />
                 }
             />
              <Route

@@ -1,19 +1,19 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { API } from '../../API/API';
-import { IGetMeResponse } from '../../Interfaces/responseTypes';
+import { IGetMeResponse, IGetMeResponseData } from '../../Interfaces/responseTypes';
 
 interface IinitialState {
-  currentUser: any;
+  currentUser: IGetMeResponseData;
   isLoading: boolean;
 }
 
 const initialState: IinitialState = {
-  currentUser: [],
+  currentUser: {},
   isLoading: false,
 };
 
 export const getMe = createAsyncThunk('currentUser', async () => {
-  const response: IGetMeResponse = await API.get('/users/get-me', {
+  const response: IGetMeResponse = await API.get('/users/me', {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('mm_access_token')}`,
     },
