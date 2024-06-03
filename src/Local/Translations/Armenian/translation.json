@@ -1,49 +1,53 @@
 {
-    "Login_Form": {
-      "Title": "Բարի գալուստ",
-      "Login_label": "Էլ. հասցե",
-      "Login_Error": "Սխալ էլ. հասցե",
-      "Login_placeholder": "Մուտքագրեք ձեր էլ. հասցեն",
-      "Password_label": "Գաղտնաբառ",
-      "Password_Error": "Առնվազն 8 նիշ",
-      "Password_placeholder": "Մուտքագրեք ձեր գաղտնաբառը"
+  "Login_Form": {
+    "Title": "Բարի գալուստ",
+    "Login_label": "Էլ. հասցե",
+    "Login_Error": "Սխալ էլ. հասցե",
+    "Login_placeholder": "Մուտքագրեք ձեր էլ. հասցեն",
+    "Password_label": "Գաղտնաբառ",
+    "Password_Error": "Առնվազն 8 նիշ",
+    "Password_placeholder": "Մուտքագրեք ձեր գաղտնաբառը"
+  },
+  "Input_Errors": {
+    "Required": "Պարտադիր",
+    "Login": "Սխալ մուտքանուն կամ գաղտնաբար",
+    "Email": "Սխալ էլ. հասցե",
+    "Password": "Առնվազն 6 նիշ",
+    "FirstName": "Անվավեր անուն",
+    "Surname": "Անվավեր ազգանուն"
+  },
+  "NoData": {
+    "NoData": "Ցանկը դատարկ է"
+  },
+  "Button": {
+    "Login": "Մուտք",
+    "Add": "Ավելացնել"
+  },
+  "Actions": {
+    "To_Storage": {
+      "Title": "Մուտք պահեստ"
     },
-    "Input_Errors": {
-        "Required": "Պարտադիր",
-        "Login":"Սխալ մուտքանուն կամ գաղտնաբար"
+    "From_Storage": {
+      "Title": "Ելք պահեստից"
     },
-    "NoData":{
-      "NoData":"Ցանկը դատարկ է"
+    "Between_Storages": {
+      "Title": "Տեղափոխություն պահեստների միջև"
     },
-    "Button":{
-      "Login": "Մուտք",
-      "Add":"Ավելացնել"
+    "Cash_Income": {
+      "Title": "Մուտք դրամարկղին"
     },
-    "Actions":{
-      "To_Storage":{
-        "Title":"Մուտք պահեստ"
-      },
-      "From_Storage":{
-        "Title":"Ելք պահեստից"
-      },
-      "Between_Storages":{
-        "Title":"Տեղափոխություն պահեստների միջև"
-      },
-      "Cash_Income":{
-        "Title":"Մուտք դրամարկղին"
-      },
-      "CashOut":{
-        "Title":"Ելք դրամարկղից"
-      },
-      "Cash_Changes":{
-        "Title":"Տեղափոխություն դրամարկղերի միջև"
-      },
-      "Sales":{
-        "Title":"Վաճառք"
-      },
-      "Users":{
-        "Title":"Օգտատերեր",
-        "Create":"Գրանցել նոր օգտատեր"
-      }
+    "CashOut": {
+      "Title": "Ելք դրամարկղից"
+    },
+    "Cash_Changes": {
+      "Title": "Տեղափոխություն դրամարկղերի միջև"
+    },
+    "Sales": {
+      "Title": "Վաճառք"
+    },
+    "Users": {
+      "Title": "Օգտատերեր",
+      "Create": "Գրանցել նոր օգտատեր"
     }
+  }
 }

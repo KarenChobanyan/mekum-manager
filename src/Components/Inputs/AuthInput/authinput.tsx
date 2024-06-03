@@ -82,6 +82,7 @@ const AuthInput: React.FC<IInputProps> = (props) => {
           {error && <span className={styles.labelError}>*</span>}
         </label>
       }
+      <div className={styles.inputContainer}>
       <div
         className={`${styles.inputBox} ${border && styles.border} ${inputStyle} ${error && styles.errorBorder}`}
         onFocus={renderBorder}
@@ -129,6 +130,7 @@ const AuthInput: React.FC<IInputProps> = (props) => {
         )}
       </div>
       {showTextError && <AuthError text={error && error.message} />}
+      </div>
     </div>
   );
 };

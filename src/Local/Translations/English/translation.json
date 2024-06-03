@@ -10,7 +10,11 @@
     },
     "Input_Errors": {
         "Required": "Required",
-        "Login":"Incorrect username or password"
+        "Login":"Incorrect username or password",
+        "Email": "Incorrect E-mail Address",
+        "Password": "At least 6 characters",
+        "FirstName": "Invalid Name",
+        "Surname": "Invalid Surname"
     },
     "NoData":{
       "NoData":"The list is empty"
