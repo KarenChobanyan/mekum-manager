@@ -37,5 +37,5 @@
 .infoBox{
     margin-right: 50px;
     @include flexStyles(flex,row,center,center);
-    gap: 15px;
+    gap: 40px;
 }

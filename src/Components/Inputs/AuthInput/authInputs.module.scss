@@ -4,6 +4,10 @@
 .container {
     width: 100%;
   }
+
+  .inputContainer{
+    @include flexStyles(flex,column,normal,normal)
+  }
   
   .inputBox {
     outline-color: $main-color;

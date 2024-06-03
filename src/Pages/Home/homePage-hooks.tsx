@@ -1,12 +1,21 @@
 import { IActionCard } from "../../Interfaces/componentTypes";
 import { BetweenStorages, Sales, OutFromStorage, IntoStorage, CashIncome, CashOut, CashChange, Users } from '../../Assets/Images';
 import { useGeneralHooks } from "../../General/Hooks/hooks";
+import { IGetMeResponseData } from "../../Interfaces/responseTypes";
 
-const useHomePageHooks = (roleId: number) => {
-    const { t, navigate } = useGeneralHooks();
+const useHomePageHooks = () => {
+    const { t, navigate,currentUser } = useGeneralHooks();
     const getOPpionList = (id: number): IActionCard[] | [] => {
         switch (id) {
             case 1:
+                return [
+                    {
+                        src: `${Users}`,
+                        title: t('Actions.Users.Title'),
+                        onClick: () => { navigate('/users') }
+                    },
+                ]
+            case 2:
                 return [
                     {
                         src: `${IntoStorage}`,
@@ -44,20 +53,12 @@ const useHomePageHooks = (roleId: number) => {
                         onClick: () => { navigate('/cash_transfers') }
                     },
                 ]
-            case 2:
-                return [
-                    {
-                        src: `${Users}`,
-                        title: t('Actions.Users.Title'),
-                        onClick: () => { navigate('/users') }
-                    },
-                ]
             default:
                 return [];
         }
     };
 
-    const optionList = getOPpionList(roleId);
+    const optionList = getOPpionList(currentUser.role_id!);
 
     return {
         optionList

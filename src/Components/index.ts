@@ -9,17 +9,21 @@ import AutoComplete from "./Inputs/AutoComplete/autoComplete";
 import CustomTable from "./Table/customTable";
 import CustomModal from "./CustomModal/customModal";
 import TextArea from "./Inputs/TextArea/textArea";
+import Avatar from "./Avatar/avatar";
+import CurrentUserInfo from "./CurrentUserInfo/currentUserInfo";
 
 export {
-    Loading,
+    NoData,
+    Avatar,
     Header,
     Button,
+    Loading,
+    TextArea,
     AuthInput,
     Languages,
     ActionCard,
-    NoData,
-    AutoComplete,
-    CustomTable,
     CustomModal,
-    TextArea
+    CustomTable,
+    AutoComplete,
+    CurrentUserInfo,
 }

@@ -95,6 +95,7 @@ const CreateCashout: React.FC = () => {
                             style={styles.inputBox}
                             inputStyle={styles.input}
                             labelStyle={styles.formInputLabel}
+                            error={errors.description}
                         />
                     </div>
                     <div className={styles.buttonRow}>

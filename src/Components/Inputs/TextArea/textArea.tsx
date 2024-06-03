@@ -12,6 +12,7 @@ export interface ITextAreaProps {
     registerName: string,
     patternValue?: RegExp,
     message?: string,
+    required?: boolean,
     error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined,
     id?: string,
     rows?: number,
@@ -25,7 +26,7 @@ export interface ITextAreaProps {
 const TextArea: React.FC<ITextAreaProps> = (props) => {
     const { t } = useTranslation()
     const { border, removeBorder, renderBorder } = useBorder();
-    const { label, placeholder, register, registerName, message, error, id, patternValue, style, inputStyle, labelStyle, rows } = props;
+    const { label, placeholder, register, registerName, message, error, id, patternValue, style, inputStyle, labelStyle, rows, required = false, showTextError } = props;
     return (
         <div className={`${styles.container} ${style}`}>
             <label htmlFor={id} className={`${styles.label} ${labelStyle}`}>
@@ -45,7 +46,7 @@ const TextArea: React.FC<ITextAreaProps> = (props) => {
                     rows={rows}
                     placeholder={placeholder}
                     {...register(registerName, {
-                        required: t("Input_Errors.Required"),
+                        required: required !== false && t('Input_Errors.Required'),
                         pattern: {
                             value: patternValue || /.*/,
                             message: message || ''
@@ -54,6 +55,8 @@ const TextArea: React.FC<ITextAreaProps> = (props) => {
                 />
             </div>
             {
+                showTextError
+                &&
                 <AuthError text={error && error.message} />
             }
         </div>

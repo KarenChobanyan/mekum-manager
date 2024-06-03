@@ -1,0 +1,18 @@
+@import '../../General/Styles/mixin';
+@import '../../General/Styles/variables';
+
+.imageBox{
+    width: 48px;
+    height: 48px;
+    border-radius: 100%;
+}
+
+.nameBox{
+    width: 48px;
+    height: 48px;
+    border-radius: 100%;
+    text-align: center;
+    @include textStyles (monospace,25px,800,initial,$white);
+    @include flexStyles(flex,column,center,center);
+    background-color: $avatar;
+}

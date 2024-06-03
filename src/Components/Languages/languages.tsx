@@ -33,19 +33,20 @@ const Languages: React.FC = () => {
       />
       <BasePopup
         open={show}
-        placement='bottom-end'
+        placement='bottom'
         anchor={anchor}
+        className={styles.popup}
       >
-        <div className={styles.popup} ref={containerRef}>
+        <div className={styles.popup} >
           {checkableLanguages.map((item: ILanguages) => {
             return (
               <img
                 src={item.icon}
                 key={item.id}
                 onClick={() => {
-                  setShow(false);
                   setActiveLangSrc(item.icon);
                   changeActiveLanguage(item.code);
+                  setShow(false);
                 }}
                 alt='langIcon'
                 className={styles.languageItem}

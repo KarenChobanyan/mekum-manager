@@ -1,0 +1,52 @@
+@import '../../General/Styles/mixin';
+@import '../../General/Styles/variables';
+
+.container {
+    @include flexStyles(flex, row, center, center);
+    gap: 5px;
+    cursor: pointer;
+}
+
+.userData {
+    @include flexStyles(flex, row, center, center);
+    @include textStyles (sans-serif, 18px, 600, initial, $white);
+    gap: 7px;
+}
+
+.popupConatiner {
+    @include flexStyles(flex, column, center, center);
+    padding: 25px 15px 5px;
+    border-radius: 10px;
+    gap: 10px;
+    background-color: $main_color;
+    width: inherit;
+}
+
+.popupRowNav{
+    width: 90%;
+    @include flexStyles(flex, row, center, center);
+    @include textStyles (sans-serif, 16px, 600, normal, $light_gray);
+    padding: 2px 0 10px;
+    cursor: pointer;
+    gap:5px;
+    border-bottom: 1px solid $light_gray;
+    transition: 0.2s;
+}
+
+.popupRowNav :hover{
+   color: $white;
+}
+
+.logOutNav{
+    width: 90%;
+    @include flexStyles(flex, row, center, center);
+    cursor: pointer;
+    gap:5px;
+    @include textStyles (sans-serif, 16px, 600, 30px, $light_gray);
+    transition: 0.2s;
+}
+
+.logOutNav :hover{
+    color: $white;
+}
+
