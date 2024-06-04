@@ -8,7 +8,7 @@ const HomePage:React.FC = () => {
 
   return (
     <div className={styles.container}>
-      {optionList.map((option)=>{
+      {optionList && optionList.map((option)=>{
         return (
           <ActionCard
           key={option.title}

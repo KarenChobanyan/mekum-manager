@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
-import { useDirectoriesHooks, useGeneralHooks } from "../../../../General/Hooks/hooks";
+import { useAutocompleteData, useDirectoriesHooks, useGeneralHooks } from "../../../../General/Hooks/hooks";
 
 export interface ISalesferFormValues {
     date: string,
@@ -28,8 +28,9 @@ export interface IFormItemData {
 
 
 const useCreateSalesHooks = () => {
-    const { unitData, warehousesData,buyersData } = useDirectoriesHooks();
+    const { unitData,buyersData } = useDirectoriesHooks();
     const { navigate } = useGeneralHooks();
+    const {myWarehousesData} = useAutocompleteData();
 
     const [storageName, setStorageName] = useState<string>("");
     const [buyerName, setBuyerName] = useState<string>("");
@@ -82,7 +83,7 @@ const useCreateSalesHooks = () => {
         fields,
         storageName,
         buyerName,
-        warehousesData,
+        myWarehousesData,
         onAddItem,
         onCencele
     }

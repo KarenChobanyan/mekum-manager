@@ -1,15 +1,16 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
 import useCreateStorageTransfersHooks from './createStorageTransfers-hooks';
-import { useGeneralHooks } from '../../../../General/Hooks/hooks';
+import { useAutocompleteData, useGeneralHooks } from '../../../../General/Hooks/hooks';
 import { ButtonTypes } from '../../../../Interfaces/componentTypes';
 import FormItems from './formTable';
 import { AuthInput, AutoComplete, Button } from '../../../../Components';
 import styles from '../../formTablestyles.module.scss';
 
 const CreateTorageTransfers:React.FC = () => {
-    const { register, control, errors, fields, storageOutputName,storageInputName,unitData,onAddItem, handleSubmit, onSubmit, remove,onCencele,setValue,watch,warehousesData } = useCreateStorageTransfersHooks();
+    const { register, control, errors, fields, storageOutputName,storageInputName,onAddItem, handleSubmit, onSubmit, remove,onCencele,setValue,watch} = useCreateStorageTransfersHooks();
     const {t} = useGeneralHooks();
+    const {myWarehousesData,allWarehousesData} = useAutocompleteData();
   
       return (
         <div className={styles.container} >
@@ -41,7 +42,7 @@ const CreateTorageTransfers:React.FC = () => {
                           name={name}
                           onChange={onChange}
                           id='storageId'
-                          data={warehousesData}
+                          data={myWarehousesData}
                           label='Ելք․ Պահեստ'
                           placeholder="Ընտրեք ելքագրող պահեստը"
                           showErrorText={false}
@@ -67,7 +68,7 @@ const CreateTorageTransfers:React.FC = () => {
                           name={name}
                           onChange={onChange}
                           id='supplierId'
-                          data={warehousesData}
+                          data={allWarehousesData}
                           label='Մուտք․ Պահեստ'
                           placeholder="Ընտրեք ստացող պահեստը"
                           showErrorText={false}
@@ -88,7 +89,6 @@ const CreateTorageTransfers:React.FC = () => {
                   remove={remove}
                   storageOutputName={storageOutputName}
                   storageInputName={storageInputName}
-                  unitData={unitData}
                   errors={errors}
                   onAddItem={onAddItem}
                   setValue={setValue}

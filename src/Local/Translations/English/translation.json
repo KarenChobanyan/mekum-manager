@@ -26,6 +26,10 @@
     "Role": "Role",
     "Placeholder": "Select the position"
   },
+  "Employee":{
+    "Title":"Employee",
+    "Placeholder":"Select the employee"
+  },
   "NoData": {
     "NoData": "The list is empty"
   },
