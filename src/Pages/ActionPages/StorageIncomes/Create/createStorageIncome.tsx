@@ -2,14 +2,15 @@ import React from 'react';
 import { Controller } from 'react-hook-form';
 import { t } from 'i18next';
 import useCreateStorageIncomeHooks from './createSrorageIncome-hooks';
+import { useAutocompleteData } from '../../../../General/Hooks/hooks';
 import { ButtonTypes } from '../../../../Interfaces/componentTypes';
 import { AuthInput, AutoComplete, Button } from '../../../../Components';
 import FormTable from './formTable';
 import styles from '../../formTablestyles.module.scss';
 
 const CreateStorageIncome: React.FC = () => {
-  const { register, control, errors, fields, storageName,unitData,onAddItem, handleSubmit, onSubmit, remove,onCencele,setValue,watch,warehousesData,suppliersData } = useCreateStorageIncomeHooks();
-
+  const { register, control, errors, fields, storageName,onAddItem, handleSubmit, onSubmit, remove,onCencele,setValue,watch,suppliersData } = useCreateStorageIncomeHooks();
+ const {myWarehousesData} = useAutocompleteData();
 
   return (
     <div className={styles.container} >
@@ -41,7 +42,7 @@ const CreateStorageIncome: React.FC = () => {
                       name={name}
                       onChange={onChange}
                       id='storageId'
-                      data={warehousesData}
+                      data={myWarehousesData}
                       label='Պահեստ'
                       placeholder="Ընտրեք պահեստը"
                       showErrorText={false}
@@ -87,7 +88,6 @@ const CreateStorageIncome: React.FC = () => {
               fields={fields}
               remove={remove}
               storageName={storageName}
-              unitData={unitData}
               errors={errors}
               onAddItem={onAddItem}
               setValue={setValue}

@@ -1,6 +1,6 @@
 import React from 'react';
 import useCreateUsersHooks from './createUser-hooks';
-import { useGeneralHooks } from '../../../../General/Hooks/hooks';
+import { useAutocompleteData, useGeneralHooks } from '../../../../General/Hooks/hooks';
 import { ButtonTypes } from '../../../../Interfaces/componentTypes';
 import { AuthInput, AutoComplete, Button, Loading } from '../../../../Components';
 import styles from '../../formTablestyles.module.scss';
@@ -9,6 +9,7 @@ import { Controller } from 'react-hook-form';
 const CreateUser: React.FC = () => {
     const { register, handleSubmit, onSubmit, onCencele, control, errors, roles, isLoading } = useCreateUsersHooks();
     const { t } = useGeneralHooks();
+    const {employeesData} = useAutocompleteData();
 
     return (
         <div className={styles.container} >
@@ -40,6 +41,32 @@ const CreateUser: React.FC = () => {
                                                 style={styles.inputBox}
                                                 labelStyle={styles.formInputLabel}
                                                 error={errors.role}
+                                            />
+                                        </div>
+                                    );
+                                }}
+                            />
+                            <Controller
+                                control={control}
+                                name='employee'
+                                rules={{
+                                    required: t('Input_Errors.Required'),
+                                }}
+                                render={({ field: { onChange, name, value } }) => {
+                                    return (
+                                        <div className='formAutocomplete'>
+                                            <AutoComplete
+                                                value={value}
+                                                name={name}
+                                                onChange={onChange}
+                                                id='employee'
+                                                data={employeesData}
+                                                label={t('Employee.Title')}
+                                                placeholder={t('Employee.Placeholder')}
+                                                showErrorText={false}
+                                                style={styles.inputBox}
+                                                labelStyle={styles.formInputLabel}
+                                                error={errors.employee}
                                             />
                                         </div>
                                     );
@@ -93,13 +120,14 @@ const CreateUser: React.FC = () => {
                             />
                             <AuthInput
                                 register={register}
-                                registerName='mekumId'
+                                registerName='mekum_id'
                                 label='Mekum ID'
+                                disabled
                                 style={styles.inputBox}
                                 inputStyle={styles.input}
                                 showTextError={false}
                                 labelStyle={styles.formInputLabel}
-                                error={errors.mekumId}
+                                error={errors.mekum_id}
                             />
                         </div>
                         <div className={styles.buttonRow}>

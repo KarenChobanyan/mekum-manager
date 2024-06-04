@@ -18,7 +18,6 @@ export const getMe = createAsyncThunk('currentUser', async () => {
       Authorization: `Bearer ${localStorage.getItem('mm_access_token')}`,
     },
   });
-  console.log(response,'getMe response')
   return response.data;
 });
 

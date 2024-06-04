@@ -8,7 +8,7 @@ import { AuthInput, AutoComplete, Button } from '../../../../Components';
 import styles from '../../formTablestyles.module.scss';
 
 const CreateSales: React.FC = () => {
-  const { register, control, errors, fields, storageName, buyerName, buyersData, warehousesData, unitData, onAddItem, handleSubmit, onSubmit, remove, onCencele, setValue, watch, } = useCreateSalesHooks();
+  const { register, control, errors, fields, storageName, buyerName, buyersData, myWarehousesData, unitData, onAddItem, handleSubmit, onSubmit, remove, onCencele, setValue, watch, } = useCreateSalesHooks();
   const { t } = useGeneralHooks();
 
   return (
@@ -41,7 +41,7 @@ const CreateSales: React.FC = () => {
                       name={name}
                       onChange={onChange}
                       id='storageId'
-                      data={warehousesData}
+                      data={myWarehousesData}
                       label='Պահեստ'
                       placeholder="Ընտրեք պահեստը"
                       showErrorText={false}

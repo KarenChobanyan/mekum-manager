@@ -26,6 +26,10 @@
     "Role": "Պաշտոն",
     "Placeholder": "Ընտրեք պաշտոնը"
   },
+  "Employee":{
+    "Title":"Աշխատակից",
+    "Placeholder":"Ընտրեք աշխատակցին"
+  },
   "Toast": {
     "Success": {
       "Register": "Հաջող գրանցում"

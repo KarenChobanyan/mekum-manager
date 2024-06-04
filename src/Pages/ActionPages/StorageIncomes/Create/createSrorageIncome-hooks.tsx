@@ -12,8 +12,8 @@ export interface IStorageIncomeFormValues {
 
 export interface IStorageIncomeItem {
     storage?: string,
-    title: string,
-    unitId: IAutocompleteItem | null,
+    title: IAutocompleteItem | null,
+    unitId: string,
     price: string,
     count: string,
     discount: string
@@ -27,13 +27,12 @@ export interface IFormItemData {
 
 
 const useCreateStorageIncomeHooks = () => {
-    const {unitData,warehousesData,suppliersData} = useDirectoriesHooks();
+    const {suppliersData} = useDirectoriesHooks();
     const { navigate } = useGeneralHooks();
-
     const [storageName, setStorageName] = useState<string>("");
     const { register, handleSubmit, watch, control, reset,setValue, formState: { errors } } = useForm<IStorageIncomeFormValues>({
         defaultValues: {
-            items: [{ storage: storageName, title: '', unitId: null, price: '', count: '', discount: "", cost: '', total: "" }]
+            items: [{ storage: storageName, title: null, unitId: '', price: '', count: '', discount: "", cost: '', total: "" }]
         },
         mode:'all'
     });
@@ -53,7 +52,7 @@ const useCreateStorageIncomeHooks = () => {
 
 
     const onAddItem = () => {
-        append({ storage: storageName, title: '', unitId: null, price: '', count: '', discount: "", cost: '', total: "" })
+        append({ storage: storageName, title: null, unitId: '', price: '', count: '', discount: "", cost: '', total: "" })
     };
 
     const onCencele = () => {
@@ -72,13 +71,11 @@ const useCreateStorageIncomeHooks = () => {
         remove,
         append,
         setValue,
-        unitData,
         watch,
         control,
         errors,
         fields,
         storageName,
-        warehousesData,
         suppliersData,
         onAddItem,
         onCencele

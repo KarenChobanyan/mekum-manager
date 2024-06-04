@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { useGeneralHooks } from "../../../../General/Hooks/hooks";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
-import { useDirectoriesHooks, useGeneralHooks } from "../../../../General/Hooks/hooks";
 
 export interface IStorageTransferFormValues {
     date: string,
@@ -13,8 +13,8 @@ export interface IStorageTransferFormValues {
 export interface IStorageTransferItem {
     storageOutput?: string,
     storageInput?: string,
-    title: string,
-    unitId: IAutocompleteItem | null,
+    title: IAutocompleteItem | null,
+    unitId: string,
     price: string,
     count: string,
     discount: string
@@ -28,14 +28,12 @@ export interface IFormItemData {
 
 
 const useCreateStorageTransfersHooks = () => {
-    const { unitData, warehousesData } = useDirectoriesHooks();
     const { navigate } = useGeneralHooks();
-
     const [storageOutputName, setStorageOutputName] = useState<string>("");
     const [storageInputName, setStorageInputName] = useState<string>("");
     const { register, handleSubmit, watch, control, reset, setValue, formState: { errors } } = useForm<IStorageTransferFormValues>({
         defaultValues: {
-            items: [{ storageOutput: storageOutputName, storageInput: storageInputName, title: '', unitId: null, price: '', count: '', discount: "", cost: '', total: "" }]
+            items: [{ storageOutput: storageOutputName, storageInput: storageInputName, title: null, unitId: "", price: '', count: '', discount: "", cost: '', total: "" }]
         },
         mode: 'all'
     });
@@ -43,6 +41,8 @@ const useCreateStorageTransfersHooks = () => {
         control,
         name: 'items'
     });
+
+    
 
     useEffect(() => {
         const storageOutputName = watch('outputStorageId')?.title!;
@@ -55,7 +55,7 @@ const useCreateStorageTransfersHooks = () => {
 
 
     const onAddItem = () => {
-        append({ storageOutput: storageOutputName, storageInput: storageInputName, title: '', unitId: null, price: '', count: '', discount: "", cost: '', total: "" })
+        append({ storageOutput: storageOutputName, storageInput: storageInputName, title: null, unitId: '', price: '', count: '', discount: "", cost: '', total: "" })
     };
 
     const onCencele = () => {
@@ -74,14 +74,12 @@ const useCreateStorageTransfersHooks = () => {
         remove,
         append,
         setValue,
-        unitData,
         watch,
         control,
         errors,
         fields,
         storageOutputName,
         storageInputName,
-        warehousesData,
         onAddItem,
         onCencele
     }
