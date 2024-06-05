@@ -23,8 +23,9 @@ const CreateCashout: React.FC = () => {
               type='date'
               style={styles.inputBox}
               inputStyle={styles.input}
-              showTextError={false}
+              inputBoxStyles={styles.input}
               labelStyle={styles.formInputLabel}
+              showTextError={false}
               error={errors.date}
             />
             <Controller
@@ -87,6 +88,7 @@ const CreateCashout: React.FC = () => {
               type='number'
               style={styles.inputBox}
               inputStyle={styles.input}
+              inputBoxStyles={styles.input}
               labelStyle={styles.formInputLabel}
               error={errors.amount}
             />

@@ -35,6 +35,7 @@ export interface IInputProps {
   | Record<string, Validate<any, FieldValues | ILoginFormValues>>
   | undefined;
   inputStyle?: string;
+  inputBoxStyles?:string,
   style?: string;
   showTextError?: boolean;
   labelStyle?: string
@@ -43,25 +44,26 @@ export interface IInputProps {
 const AuthInput: React.FC<IInputProps> = (props) => {
   const { border, removeBorder, renderBorder } = useBorder();
   const {
-    minDate,
-    maxDate,
-    inputStyle,
+    register,
+    onChange,
+    validation,
+    id,
+    type,
     label,
     placeholder,
-    type,
-    defaultValue,
-    register,
     registerName,
-    onChange,
-    message,
-    error,
-    id,
+    defaultValue,
+    patternValue,
+    required,
     disabled,
     children,
-    patternValue,
-    validation,
-    required,
+    maxDate,
+    minDate,
+    message,
+    error,
     style,
+    inputStyle,
+    inputBoxStyles,
     labelStyle,
     showTextError = true
   } = props;
@@ -84,7 +86,7 @@ const AuthInput: React.FC<IInputProps> = (props) => {
       }
       <div className={styles.inputContainer}>
       <div
-        className={`${styles.inputBox} ${border && styles.border} ${inputStyle} ${error && styles.errorBorder}`}
+        className={`${styles.inputBox} ${border && styles.border} ${inputBoxStyles} ${error && styles.errorBorder}`}
         onFocus={renderBorder}
         onBlur={removeBorder}
       >

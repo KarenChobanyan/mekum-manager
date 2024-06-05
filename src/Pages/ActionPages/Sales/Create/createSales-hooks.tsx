@@ -22,10 +22,6 @@ export interface ISaleItem {
     total: string
 };
 
-export interface IFormItemData {
-    component: ReactNode
-};
-
 
 const useCreateSalesHooks = () => {
     const { navigate } = useGeneralHooks();

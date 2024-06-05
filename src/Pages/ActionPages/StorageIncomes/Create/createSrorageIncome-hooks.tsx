@@ -1,7 +1,7 @@
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
-import { useDirectoriesHooks, useGeneralHooks } from "../../../../General/Hooks/hooks";
+import { useGeneralHooks } from "../../../../General/Hooks/hooks";
 
 export interface IStorageIncomeFormValues {
     date: string,
@@ -21,19 +21,17 @@ export interface IStorageIncomeItem {
     total: string
 };
 
-export interface IFormItemData {
-    component: ReactNode
-};
+
 
 
 const useCreateStorageIncomeHooks = () => {
     const { navigate } = useGeneralHooks();
     const [storageName, setStorageName] = useState<string>("");
-    const { register, handleSubmit, watch, control, reset,setValue, formState: { errors } } = useForm<IStorageIncomeFormValues>({
+    const { register, handleSubmit, watch, control, reset, setValue, formState: { errors } } = useForm<IStorageIncomeFormValues>({
         defaultValues: {
             items: [{ storage: storageName, title: null, unitId: '', price: '', count: '', discount: "", cost: '', total: "" }]
         },
-        mode:'all'
+        mode: 'all'
     });
     const { fields, append, remove } = useFieldArray({
         control,

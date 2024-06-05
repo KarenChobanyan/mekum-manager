@@ -9,7 +9,7 @@ import { Controller } from 'react-hook-form';
 const CreateUser: React.FC = () => {
     const { register, handleSubmit, onSubmit, onCencele, control, errors, roles, isLoading } = useCreateUsersHooks();
     const { t } = useGeneralHooks();
-    const {employeesData} = useAutocompleteData();
+    const { employeesData } = useAutocompleteData();
 
     return (
         <div className={styles.container} >
@@ -77,45 +77,49 @@ const CreateUser: React.FC = () => {
                                 registerName='name'
                                 label='Անուն'
                                 style={styles.inputBox}
-                                inputStyle={styles.input}
-                                labelStyle={styles.formInputLabel}
                                 message={t('Input_Errors.FirstName')}
                                 patternValue={/^\s*[\p{L}-]{3,}\s*$/u}
+                                inputStyle={styles.input}
+                                inputBoxStyles={styles.input}
+                                labelStyle={styles.formInputLabel}
                                 error={errors.name}
                             />
                             <AuthInput
                                 register={register}
                                 registerName='surename'
                                 label='Ազգանուն'
-                                style={styles.inputBox}
-                                inputStyle={styles.input}
-                                labelStyle={styles.formInputLabel}
                                 message={t('Input_Errors.Surname')}
                                 patternValue={/^\s*[\p{L}-]{3,}\s*$/u}
+                                style={styles.inputBox}
+                                inputStyle={styles.input}
+                                inputBoxStyles={styles.input}
+                                labelStyle={styles.formInputLabel}
                                 error={errors.surename}
                             />
                             <AuthInput
                                 register={register}
                                 registerName='username'
                                 label='էլ․ հասցե'
-                                style={styles.inputBox}
-                                inputStyle={styles.input}
-                                labelStyle={styles.formInputLabel}
                                 message={t('Input_Errors.Email')}
                                 patternValue={/^\s*[A-ZA-z0-9._%+-]+@[A-Za-z0-9.-]+[A-Za-z]{2,}\s*$/gim}
+                                style={styles.inputBox}
+                                inputStyle={styles.input}
+                                inputBoxStyles={styles.input}
+                                labelStyle={styles.formInputLabel}
                                 error={errors.username}
                             />
                             <AuthInput
                                 register={register}
                                 registerName='password'
                                 label='Գաղտնաբառ'
-                                style={styles.inputBox}
-                                inputStyle={styles.input}
-                                labelStyle={styles.formInputLabel}
                                 message={t('Input_Errors.Password')}
                                 patternValue={
                                     /^.{6,}$/gm
                                 }
+                                style={styles.inputBox}
+                                inputStyle={styles.input}
+                                inputBoxStyles={styles.input}
+                                labelStyle={styles.formInputLabel}
                                 error={errors.password}
                             />
                             <AuthInput
@@ -125,8 +129,9 @@ const CreateUser: React.FC = () => {
                                 disabled
                                 style={styles.inputBox}
                                 inputStyle={styles.input}
-                                showTextError={false}
+                                inputBoxStyles={styles.input}
                                 labelStyle={styles.formInputLabel}
+                                showTextError={false}
                                 error={errors.mekum_id}
                             />
                         </div>

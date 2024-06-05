@@ -161,7 +161,6 @@ export const useAutocompleteData = () => {
   const employeesData = createEmployeeData(employees!);
   const goodsData = createGoodsData(goods!);
   const partnersData = createPartnersData(partners!);
-console.log(partnersData,'partnersData')
 
   return {
     myWarehousesData,

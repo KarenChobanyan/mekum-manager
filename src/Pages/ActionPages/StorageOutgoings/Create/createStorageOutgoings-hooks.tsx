@@ -21,10 +21,6 @@ export interface IStorageOutgoingItem {
     total: string
 };
 
-export interface IFormItemData {
-    component: ReactNode
-};
-
 
 const useCreateStorageOutgoingHooks = () => {
     const { navigate } = useGeneralHooks();

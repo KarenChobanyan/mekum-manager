@@ -58,10 +58,10 @@
   color: $text_dark !important;
 }
 
-#referenceForm .formAutocomplete .MuiFormControl-root .MuiInputBase-root,
-#vacationForm .formAutocomplete .MuiFormControl-root .MuiInputBase-root,
-#dismissalForm .formAutocomplete .MuiFormControl-root .MuiInputBase-root,
-#absenceForm .formAutocomplete .MuiFormControl-root .MuiInputBase-root {
+.formAutocomplete .MuiFormControl-root .MuiInputBase-root,
+.formAutocomplete .MuiFormControl-root .MuiInputBase-root,
+.formAutocomplete .MuiFormControl-root .MuiInputBase-root,
+.formAutocomplete .MuiFormControl-root .MuiInputBase-root {
   background-color: $white !important;
 }
 
@@ -84,7 +84,7 @@
 }
 
 .tableAutocomplete .MuiInputBase-root.MuiOutlinedInput-root {
-  width: 300px !important;
+  min-width: 20vw !important;
   background-color: $formInput;
   padding: 5px !important;
   font-size: 16px !important;
@@ -92,6 +92,7 @@
   height: inherit !important;
   border-radius: 10px !important;
   border: 1px solid #d0d5dd;
+  flex: 1;
   z-index: 0;
 }
 
@@ -135,16 +136,22 @@
   color: $text_dark !important;
 }
 
-#referenceForm .tableAutocomplete .MuiFormControl-root .MuiInputBase-root,
-#vacationForm .tableAutocomplete .MuiFormControl-root .MuiInputBase-root,
-#dismissalForm .tableAutocomplete .MuiFormControl-root .MuiInputBase-root,
-#absenceForm .tableAutocomplete .MuiFormControl-root .MuiInputBase-root {
+.tableAutocomplete .MuiFormControl-root .MuiInputBase-root,
+.tableAutocomplete .MuiFormControl-root .MuiInputBase-root,
+.tableAutocomplete .MuiFormControl-root .MuiInputBase-root,
+.tableAutocomplete .MuiFormControl-root .MuiInputBase-root {
   background-color: $white !important;
 }
 
 .tableAutocomplete .Mui-focused {
   border: 1px solid $main-color !important;
 }
+
+.tableAutocomplete .MuiAutocomplete-listbox {
+  width: 100% !important;
+  text-wrap: wrap !important;
+}
+
 
 .tableAutocomplete .Mui-focused.MuiAutocomplete-root {
   border: none !important;
@@ -171,36 +178,43 @@
   border: 1px solid gray !important;
   width: max-content !important;
   min-width: 100% !important;
-  border-radius: 10px !important;
 }
 
 .customTable .MuiTableRow-root {
-  @include flexStyles(flex !important, row !important,normal !important, center !important);
+  @include flexStyles(flex !important, row !important, normal !important, center !important);
   border-bottom: 1px solid gray !important;
   padding: 0 !important;
 }
 
-.customized-dialog .MuiPaper-root{
+.customized-dialog .MuiPaper-root {
   width: 20vw !important;
   border-radius: 15px;
 }
 
 .customized-dialog .MuiDialogTitle-root {
   font-size: 20px;
-  color:$main_color !important
+  color: $main_color !important
 }
 
 
 //media
 
-@media screen and (max-width:1600px){
-  .customized-dialog .MuiPaper-root{
+@media screen and (max-width:1600px) {
+  .customized-dialog .MuiPaper-root {
     width: 25vw !important;
   }
 }
 
-@media screen and (max-width:1430px){
-  .customized-dialog .MuiPaper-root{
+@media screen and (max-width:1430px) {
+  .customized-dialog .MuiPaper-root {
     width: 30vw !important;
   }
 }
+
+@media screen and (max-width:1100px) {
+  .tableAutocomplete .MuiInputBase-root.MuiOutlinedInput-root {
+    min-width: 300px !important;
+  }
+}
+
+

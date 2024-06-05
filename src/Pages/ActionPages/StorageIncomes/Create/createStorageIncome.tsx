@@ -24,8 +24,9 @@ const CreateStorageIncome: React.FC = () => {
               type='date'
               style={styles.inputBox}
               inputStyle={styles.input}
-              showTextError={false}
+              inputBoxStyles={styles.input}
               labelStyle={styles.formInputLabel}
+              showTextError={false}
               error={errors.date}
             />
             <Controller

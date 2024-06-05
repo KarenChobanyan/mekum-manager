@@ -1,6 +1,7 @@
 import React from 'react';
 import { Control, Controller, FieldArrayWithId, FieldErrors, UseFieldArrayRemove, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
-import { IFormItemData, IStorageIncomeFormValues } from './createSrorageIncome-hooks';
+import { IStorageIncomeFormValues } from './createSrorageIncome-hooks';
+import { ITableFormItemData, ITableHeader, TableCellContentTypes } from '../../../../Interfaces/componentTypes';
 import { useAutocompleteData } from '../../../../General/Hooks/hooks';
 import { AuthInput, AutoComplete, CustomTable } from '../../../../Components';
 import { RedTrashIcon } from '../../../../Assets/Icons';
@@ -18,33 +19,62 @@ interface IProps {
     watch: UseFormWatch<IStorageIncomeFormValues>
 };
 
-const headerData: string[] = [
-    "",
-    "Պահեստ",
-    "Անվանում",
-    "Միավոր",
-    "Քանակ",
-    "Գին",
-    "Զեղչի տոկոս",
-    "Արժեք",
-    "Գումար",
+const headerData: ITableHeader[] = [
+    {
+        title: "",
+        contentType: TableCellContentTypes.ICON
+    },
+    {
+        title: "Պահեստ",
+        contentType: TableCellContentTypes.TEXT
+    },
+    {
+        title: "Անվանում",
+        contentType: TableCellContentTypes.SELECT
+    },
+    {
+        title: "Միավոր",
+        contentType: TableCellContentTypes.NUMBER
+    },
+    {
+        title: "Քանակ",
+        contentType: TableCellContentTypes.NUMBER
+    },
+    {
+        title: "Գին",
+        contentType: TableCellContentTypes.NUMBER
+    },
+    {
+        title: "Զեղչ",
+        contentType: TableCellContentTypes.NUMBER
+    },
+    {
+        title: "Արժեք",
+        contentType: TableCellContentTypes.NUMBER
+    },
+    {
+        title: "Գումար",
+        contentType: TableCellContentTypes.NUMBER
+    }
 ];
 
 const FormItems: React.FC<IProps> = (props) => {
     const { fields, remove, storageName, register, control, errors, onAddItem, setValue, watch } = props;
     const { getUnitType, goodsData } = useAutocompleteData();
 
-    const createItemForm = (): Array<IFormItemData[]> => {
-        return fields.map((item, index): IFormItemData[] => {
+    const createItemForm = (): Array<ITableFormItemData[]> => {
+        return fields.map((item, index): ITableFormItemData[] => {
             return [
                 {
-                    component: <img src={RedTrashIcon} alt="redTrash" onClick={() => remove(index)} className={styles.deleteIcon} />
+                    component: <img src={RedTrashIcon} alt="redTrash" onClick={() => remove(index)} className={styles.deleteIcon} />,
+                    contentType: TableCellContentTypes.ICON
                 },
                 {
                     component:
                         <div className={styles.formItemTextBox}>
                             <div className={styles.formItemText}>{storageName}</div>
-                        </div>
+                        </div>,
+                    contentType: TableCellContentTypes.TEXT
                 },
                 {
                     component:
@@ -74,7 +104,8 @@ const FormItems: React.FC<IProps> = (props) => {
                                     </div>
                                 );
                             }}
-                        />
+                        />,
+                    contentType: TableCellContentTypes.SELECT
                 },
                 {
                     component:
@@ -83,10 +114,12 @@ const FormItems: React.FC<IProps> = (props) => {
                             registerName={`items.${index}.unitId`}
                             showTextError={false}
                             inputStyle={styles.formItemInput}
+                            inputBoxStyles={styles.formItemInputNumBox}
                             required={false}
                             disabled
                             error={errors.items?.[index]?.unitId}
-                        />
+                        />,
+                    contentType: TableCellContentTypes.NUMBER
                 },
                 {
                     component:
@@ -104,9 +137,11 @@ const FormItems: React.FC<IProps> = (props) => {
                                 }
                             }
                             }
-                            error={errors.items?.[index]?.count}
                             inputStyle={styles.formItemInput}
-                        />
+                            inputBoxStyles={styles.formItemInputNumBox}
+                            error={errors.items?.[index]?.count}
+                        />,
+                    contentType: TableCellContentTypes.NUMBER
                 },
                 {
                     component:
@@ -130,9 +165,11 @@ const FormItems: React.FC<IProps> = (props) => {
                                     setValue(`items.${index}.cost`, "");
                                 }
                             }}
-                            error={errors.items?.[index]?.price}
                             inputStyle={styles.formItemInput}
-                        />
+                            inputBoxStyles={styles.formItemInputNumBox}
+                            error={errors.items?.[index]?.price}
+                        />,
+                    contentType: TableCellContentTypes.NUMBER
                 },
                 {
                     component:
@@ -156,10 +193,12 @@ const FormItems: React.FC<IProps> = (props) => {
                                 }
                             }
                             }
-                            error={errors.items?.[index]?.discount}
                             inputStyle={styles.formItemInput}
+                            inputBoxStyles={styles.formItemInputNumBox}
                             required={false}
-                        />
+                            error={errors.items?.[index]?.discount}
+                        />,
+                    contentType: TableCellContentTypes.NUMBER
                 },
                 {
                     component:
@@ -169,9 +208,11 @@ const FormItems: React.FC<IProps> = (props) => {
                             showTextError={false}
                             disabled
                             type='number'
-                            inputStyle={styles.formItemInput}
                             required={false}
-                        />
+                            inputStyle={styles.formItemInput}
+                            inputBoxStyles={styles.formItemInputNumBox}
+                        />,
+                    contentType: TableCellContentTypes.NUMBER
                 },
                 {
                     component:
@@ -181,9 +222,11 @@ const FormItems: React.FC<IProps> = (props) => {
                             showTextError={false}
                             disabled
                             type='number'
-                            inputStyle={styles.formItemInput}
                             required={false}
-                        />
+                            inputStyle={styles.formItemInput}
+                            inputBoxStyles={styles.formItemInputNumBox}
+                        />,
+                    contentType: TableCellContentTypes.NUMBER
                 },
             ]
         })

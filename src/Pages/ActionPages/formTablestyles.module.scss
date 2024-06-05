@@ -71,13 +71,28 @@
     width: initial;
 }
 
-.formItemInput {
+.formItemInputBox {
+    width: 100%;
     background-color: $formInput;
+}
+
+.formItemInputNumBox {
+    width: 100%;
+    background-color: $formInput;
+    padding: 16px 5px;
+}
+
+
+.formItemInput {
+    width: 100%;
+    background-color: $formInput;
+
 }
 
 .formItemBox {
     background-color: $formInput;
     border-radius: 10px;
+
 }
 
 .formItemTextBox {
@@ -125,6 +140,14 @@
     height: 25px;
 }
 
-.button{
+.button {
     border-radius: 10px !important;
+}
+
+//media
+
+@media screen and (max-width:1500px) {
+    .body {
+        margin-top: 20px;
+    }
 }

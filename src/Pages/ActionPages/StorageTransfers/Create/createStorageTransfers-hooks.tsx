@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { useGeneralHooks } from "../../../../General/Hooks/hooks";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
@@ -22,11 +22,6 @@ export interface IStorageTransferItem {
     total: string
 };
 
-export interface IFormItemData {
-    component: ReactNode
-};
-
-
 const useCreateStorageTransfersHooks = () => {
     const { navigate } = useGeneralHooks();
     const [storageOutputName, setStorageOutputName] = useState<string>("");
@@ -42,7 +37,7 @@ const useCreateStorageTransfersHooks = () => {
         name: 'items'
     });
 
-    
+
 
     useEffect(() => {
         const storageOutputName = watch('outputStorageId')?.title!;
