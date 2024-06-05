@@ -1,23 +1,19 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styles from './table.module.scss';
-import { TableCellTypes } from '../../Interfaces/componentTypes';
+import { ITableFormItemData, ITableHeader, TableCellContentTypes, TableCellTypes } from '../../Interfaces/componentTypes';
 
 interface IProps {
-    data:any,
+    data:string | ReactNode,
     type:TableCellTypes,
-    index:number
+    contentType:TableCellContentTypes,
 };
 
 const CustomTableCell:React.FC<IProps> = (props) => {
-    const {data,type,index} = props;
+    const {data,type,contentType} = props;
+    console.log(contentType,'contentType');
+
   return (
-    <div className={
-        index === 0
-        ?
-        styles.cellDelete
-        :
-        type === TableCellTypes.HEADER ? styles.cellHeader : styles.cellItem}
-        >
+    <div className={`${styles[`cell${type}`]} ${styles[`item${contentType}`]}`}>
       {data}
     </div>
   )

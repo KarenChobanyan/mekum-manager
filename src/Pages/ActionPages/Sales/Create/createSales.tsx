@@ -1,6 +1,6 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
-import { useGeneralHooks } from '../../../../General/Hooks/hooks';
+import { useAutocompleteData, useGeneralHooks } from '../../../../General/Hooks/hooks';
 import useCreateSalesHooks from './createSales-hooks';
 import { ButtonTypes } from '../../../../Interfaces/componentTypes';
 import FormItems from './formTable';
@@ -8,8 +8,10 @@ import { AuthInput, AutoComplete, Button } from '../../../../Components';
 import styles from '../../formTablestyles.module.scss';
 
 const CreateSales: React.FC = () => {
-  const { register, control, errors, fields, storageName, buyerName, buyersData, myWarehousesData, unitData, onAddItem, handleSubmit, onSubmit, remove, onCencele, setValue, watch, } = useCreateSalesHooks();
+  const { register, control, errors, fields, storageName, buyerName, onAddItem, handleSubmit, onSubmit, remove, onCencele, setValue, watch, } = useCreateSalesHooks();
   const { t } = useGeneralHooks();
+  const {myWarehousesData,partnersData} = useAutocompleteData();
+
 
   return (
     <div className={styles.container} >
@@ -23,8 +25,9 @@ const CreateSales: React.FC = () => {
               type='date'
               style={styles.inputBox}
               inputStyle={styles.input}
-              showTextError={false}
+              inputBoxStyles={styles.input}
               labelStyle={styles.formInputLabel}
+              showTextError={false}
               error={errors.date}
             />
             <Controller
@@ -67,7 +70,7 @@ const CreateSales: React.FC = () => {
                       name={name}
                       onChange={onChange}
                       id='supplierId'
-                      data={buyersData}
+                      data={partnersData}
                       label='Գնորդ'
                       placeholder="Ընտրեք գնորդ"
                       showErrorText={false}
@@ -88,7 +91,6 @@ const CreateSales: React.FC = () => {
               remove={remove}
               storageName={storageName}
               buyerName={buyerName}
-              unitData={unitData}
               errors={errors}
               onAddItem={onAddItem}
               setValue={setValue}

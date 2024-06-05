@@ -10,11 +10,11 @@ interface IProps {
 
 const Header: React.FC<IProps> = (props) => {
   const { title } = props;
-  const { currentUser } = useGeneralHooks();
+  const { currentUser,onLogoClick } = useGeneralHooks();
 
   return (
     <div className={styles.body}>
-      <div className={styles.logo}>
+      <div className={styles.logo} onClick={onLogoClick}>
         <div className={styles.bigText}>
           <span>Mekum</span>
         </div>

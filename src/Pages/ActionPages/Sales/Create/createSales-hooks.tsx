@@ -13,8 +13,8 @@ export interface ISalesferFormValues {
 export interface ISaleItem {
     storage?: string,
     buyer?: string,
-    title: string,
-    unitId: IAutocompleteItem | null,
+    title: IAutocompleteItem | null,
+    unitId: string,
     price: string,
     count: string,
     discount: string
@@ -22,21 +22,14 @@ export interface ISaleItem {
     total: string
 };
 
-export interface IFormItemData {
-    component: ReactNode
-};
-
 
 const useCreateSalesHooks = () => {
-    const { unitData,buyersData } = useDirectoriesHooks();
     const { navigate } = useGeneralHooks();
-    const {myWarehousesData} = useAutocompleteData();
-
     const [storageName, setStorageName] = useState<string>("");
     const [buyerName, setBuyerName] = useState<string>("");
     const { register, handleSubmit, watch, control, reset, setValue, formState: { errors } } = useForm<ISalesferFormValues>({
         defaultValues: {
-            items: [{ storage: storageName, buyer: buyerName, title: '', unitId: null, price: '', count: '', discount: "", cost: '', total: "" }]
+            items: [{ storage: storageName, buyer: buyerName, title: null, unitId: '', price: '', count: '', discount: "", cost: '', total: "" }]
         },
         mode: 'all'
     });
@@ -56,7 +49,7 @@ const useCreateSalesHooks = () => {
 
 
     const onAddItem = () => {
-        append({ storage: storageName, buyer: buyerName, title: '', unitId: null, price: '', count: '', discount: "", cost: '', total: "" })
+        append({ storage: storageName, buyer: buyerName, title: null, unitId: '', price: '', count: '', discount: "", cost: '', total: "" })
     };
 
     const onCencele = () => {
@@ -75,15 +68,12 @@ const useCreateSalesHooks = () => {
         remove,
         append,
         setValue,
-        unitData,
-        buyersData,
         watch,
         control,
         errors,
         fields,
         storageName,
         buyerName,
-        myWarehousesData,
         onAddItem,
         onCencele
     }

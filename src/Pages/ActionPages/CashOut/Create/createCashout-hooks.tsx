@@ -11,7 +11,7 @@ export interface ICashoutFormValues {
 };
 
 const useCreateCashoutHooks = () => {
-    const {cashBoxesData,recipientData} = useDirectoriesHooks();
+    const {cashBoxesData} = useDirectoriesHooks();
     const { navigate } = useGeneralHooks();
     const { register, handleSubmit,  control, reset, formState: { errors } } = useForm<ICashoutFormValues>({mode:"all"});
 
@@ -30,7 +30,6 @@ const useCreateCashoutHooks = () => {
         onSubmit,
         onCencele,
         cashBoxesData,
-        recipientData,
         control,
         errors,
     }

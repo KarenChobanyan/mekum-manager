@@ -21,8 +21,9 @@ const CreateCashout: React.FC = () => {
                             type='date'
                             style={styles.inputBox}
                             inputStyle={styles.input}
-                            showTextError={false}
+                            inputBoxStyles={styles.input}
                             labelStyle={styles.formInputLabel}
+                            showTextError={false}
                             error={errors.date}
                         />
                         <Controller
@@ -66,8 +67,8 @@ const CreateCashout: React.FC = () => {
                                             onChange={onChange}
                                             id='payer'
                                             data={payersData}
-                                            label='Ստացող'
-                                            placeholder="Ընտրեք ստացողին"
+                                            label='Վճարող'
+                                            placeholder="Ընտրեք Վճարողին"
                                             showErrorText={false}
                                             style={styles.inputBox}
                                             labelStyle={styles.formInputLabel}
@@ -85,6 +86,7 @@ const CreateCashout: React.FC = () => {
                             type='number'
                             style={styles.inputBox}
                             inputStyle={styles.input}
+                            inputBoxStyles={styles.input}
                             labelStyle={styles.formInputLabel}
                             error={errors.amount}
                         />

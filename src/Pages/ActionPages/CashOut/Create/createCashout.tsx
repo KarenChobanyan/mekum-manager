@@ -2,12 +2,14 @@ import React from 'react';
 import { Controller } from 'react-hook-form';
 import { t } from 'i18next';
 import useCreateCashoutHooks from './createCashout-hooks';
+import { useAutocompleteData } from '../../../../General/Hooks/hooks';
 import { ButtonTypes } from '../../../../Interfaces/componentTypes';
 import { AuthInput, AutoComplete, Button, TextArea } from '../../../../Components';
 import styles from '../../formTablestyles.module.scss'
 
 const CreateCashout: React.FC = () => {
-  const { register, control, onSubmit, onCencele, handleSubmit, cashBoxesData, recipientData, errors } = useCreateCashoutHooks();
+  const { register, control, onSubmit, onCencele, handleSubmit, cashBoxesData, errors } = useCreateCashoutHooks();
+  const {partnersData} = useAutocompleteData()
 
   return (
     <div className={styles.container} >
@@ -21,8 +23,9 @@ const CreateCashout: React.FC = () => {
               type='date'
               style={styles.inputBox}
               inputStyle={styles.input}
-              showTextError={false}
+              inputBoxStyles={styles.input}
               labelStyle={styles.formInputLabel}
+              showTextError={false}
               error={errors.date}
             />
             <Controller
@@ -65,7 +68,7 @@ const CreateCashout: React.FC = () => {
                       name={name}
                       onChange={onChange}
                       id='recipientId'
-                      data={recipientData}
+                      data={partnersData}
                       label='Ստացող'
                       placeholder="Ընտրեք ստացողին"
                       showErrorText={false}
@@ -85,6 +88,7 @@ const CreateCashout: React.FC = () => {
               type='number'
               style={styles.inputBox}
               inputStyle={styles.input}
+              inputBoxStyles={styles.input}
               labelStyle={styles.formInputLabel}
               error={errors.amount}
             />

@@ -1,14 +1,13 @@
 import React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from '@mui/material';
 import CustomTableCell from './customTableCell';
-import { TableCellTypes } from '../../Interfaces/componentTypes';
-import { IFormItemData } from '../../Pages/ActionPages/StorageIncomes/Create/createSrorageIncome-hooks';
+import { ITableFormItemData, TableCellTypes, TableHeaderData } from '../../Interfaces/componentTypes';
 import { PlusIcon } from '../../Assets/Icons';
 import styles from './table.module.scss';
 
 interface IProps {
-  bodyData: Array<IFormItemData[]>,
-  headerData: any[],
+  bodyData: Array<ITableFormItemData[]>,
+  headerData: TableHeaderData,
   addAction?: () => void
 }
 
@@ -23,7 +22,7 @@ const CustomTable: React.FC<IProps> = (props) => {
             <TableRow >
               {headerData.map((item, index) => {
                 return (
-                  <CustomTableCell type={TableCellTypes.HEADER} data={item} index={index} key={item} />
+                  <CustomTableCell type={TableCellTypes.HEADER} data={item.title} key={item.title} contentType={item.contentType} />
                 )
               })}
             </TableRow>
@@ -33,7 +32,7 @@ const CustomTable: React.FC<IProps> = (props) => {
               <TableRow key={index} >
                 {data.map((item, index) => {
                   return (
-                    <CustomTableCell type={TableCellTypes.ITEM} data={item.component} index={index} key={index} />
+                    <CustomTableCell type={TableCellTypes.BODY} data={item.component} key={index} contentType={item.contentType} />
                   )
                 })}
               </TableRow>

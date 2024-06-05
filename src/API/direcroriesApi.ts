@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from './API';
-import { GetEmployeesResponseData, GetWarehousesResponseData, GoodsResponseData } from '../Interfaces/responseTypes';
+import { GetEmployeesResponseData, GetWarehousesResponseData, GoodsResponseData, IGetPartnersResponse } from '../Interfaces/responseTypes';
 
 export const directoriesApi = createApi({
     reducerPath: 'directoriesApi',
@@ -32,6 +32,12 @@ export const directoriesApi = createApi({
                 method: 'GET',
             }),
         }),
+        getPartners: builder.query<IGetPartnersResponse, void>({
+            query: () => ({
+                url: '/mekum/partners',
+                method: 'GET',
+            }),
+        }),
     }),
 });
 
@@ -40,4 +46,5 @@ export const {
     useGetAllWarehousesQuery,
     useGetEmployeesQuery,
     useGetGoodsQuery,
+    useGetPartnersQuery,
 } = directoriesApi;
