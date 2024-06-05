@@ -27,7 +27,6 @@ export interface IFormItemData {
 
 
 const useCreateStorageIncomeHooks = () => {
-    const {suppliersData} = useDirectoriesHooks();
     const { navigate } = useGeneralHooks();
     const [storageName, setStorageName] = useState<string>("");
     const { register, handleSubmit, watch, control, reset,setValue, formState: { errors } } = useForm<IStorageIncomeFormValues>({
@@ -76,7 +75,6 @@ const useCreateStorageIncomeHooks = () => {
         errors,
         fields,
         storageName,
-        suppliersData,
         onAddItem,
         onCencele
     }

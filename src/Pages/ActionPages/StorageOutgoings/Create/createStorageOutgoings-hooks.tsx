@@ -27,7 +27,6 @@ export interface IFormItemData {
 
 
 const useCreateStorageOutgoingHooks = () => {
-    const {recipientData} = useDirectoriesHooks();
     const { navigate } = useGeneralHooks();
 
     const [storageName, setStorageName] = useState<string>("");
@@ -78,7 +77,6 @@ const useCreateStorageOutgoingHooks = () => {
         errors,
         fields,
         storageName,
-        recipientData,
         onAddItem,
         onCencele
     }

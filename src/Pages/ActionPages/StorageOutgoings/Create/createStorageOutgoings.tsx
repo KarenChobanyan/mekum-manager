@@ -9,9 +9,9 @@ import styles from '../../formTablestyles.module.scss';
 
 
 const CreateStorageOutgoings: React.FC = () => {
-  const { register, control, errors, fields, storageName, onAddItem, handleSubmit, onSubmit, remove, onCencele, setValue, watch, recipientData } = useCreateStorageOutgoingHooks();
+  const { register, control, errors, fields, storageName, onAddItem, handleSubmit, onSubmit, remove, onCencele, setValue, watch } = useCreateStorageOutgoingHooks();
   const { t } = useGeneralHooks();
-  const { myWarehousesData } = useAutocompleteData()
+  const { myWarehousesData,partnersData } = useAutocompleteData()
 
   return (
     <div className={styles.container} >
@@ -69,7 +69,7 @@ const CreateStorageOutgoings: React.FC = () => {
                       name={name}
                       onChange={onChange}
                       id='supplierId'
-                      data={recipientData}
+                      data={partnersData}
                       label='Ստացող'
                       placeholder="Ընտրեք ստացողին"
                       showErrorText={false}

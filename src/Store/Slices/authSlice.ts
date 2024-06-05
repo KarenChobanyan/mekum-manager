@@ -24,7 +24,11 @@ export const getMe = createAsyncThunk('currentUser', async () => {
 const authSlice = createSlice({
   name: 'calculate',
   initialState,
-  reducers: {},
+  reducers: {
+    removeCurrentUser(state) {
+      state.currentUser = {};
+    },
+  },
   extraReducers(builder: any) {
     builder.addCase(
       getMe.fulfilled,
@@ -38,5 +42,7 @@ const authSlice = createSlice({
     });
   },
 });
+
+export const { removeCurrentUser } = authSlice.actions;
 
 export default authSlice.reducer;

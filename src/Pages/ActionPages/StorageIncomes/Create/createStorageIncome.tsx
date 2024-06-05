@@ -9,8 +9,8 @@ import FormTable from './formTable';
 import styles from '../../formTablestyles.module.scss';
 
 const CreateStorageIncome: React.FC = () => {
-  const { register, control, errors, fields, storageName,onAddItem, handleSubmit, onSubmit, remove,onCencele,setValue,watch,suppliersData } = useCreateStorageIncomeHooks();
- const {myWarehousesData} = useAutocompleteData();
+  const { register, control, errors, fields, storageName,onAddItem, handleSubmit, onSubmit, remove,onCencele,setValue,watch } = useCreateStorageIncomeHooks();
+ const {myWarehousesData,partnersData} = useAutocompleteData();
 
   return (
     <div className={styles.container} >
@@ -68,7 +68,7 @@ const CreateStorageIncome: React.FC = () => {
                       name={name}
                       onChange={onChange}
                       id='supplierId'
-                      data={suppliersData}
+                      data={partnersData}
                       label='Մատակարար'
                       placeholder="Ընտրեք մատակարարին"
                       showErrorText={false}

@@ -5,6 +5,7 @@ import { IAutocompleteItem } from '../../../../Interfaces/componentTypes';
 import { AuthInput, AutoComplete, CustomTable } from '../../../../Components';
 import { RedTrashIcon } from '../../../../Assets/Icons';
 import styles from '../../formTablestyles.module.scss';
+import { useAutocompleteData } from '../../../../General/Hooks/hooks';
 
 interface IProps {
     fields: FieldArrayWithId<ISalesferFormValues, "items", "id">[],
@@ -14,7 +15,6 @@ interface IProps {
     register: UseFormRegister<ISalesferFormValues>,
     control: Control<ISalesferFormValues, any>,
     errors: FieldErrors<ISalesferFormValues>,
-    unitData: IAutocompleteItem[],
     onAddItem: () => void,
     setValue: UseFormSetValue<ISalesferFormValues>,
     watch: UseFormWatch<ISalesferFormValues>
@@ -34,7 +34,9 @@ const headerData: string[] = [
 ];
 
 const FormItems: React.FC<IProps> = (props) => {
-    const { fields, remove, storageName,buyerName, register, control, errors, unitData, onAddItem, setValue, watch } = props;
+    const { fields, remove, storageName, buyerName, register, control, errors, onAddItem, setValue, watch } = props;
+    const { getUnitType, goodsData } = useAutocompleteData();
+
     const createItemForm = (): Array<IFormItemData[]> => {
         return fields.map((item, index): IFormItemData[] => {
             return [
@@ -55,38 +57,44 @@ const FormItems: React.FC<IProps> = (props) => {
                 },
                 {
                     component:
-                        <AuthInput
-                            register={register}
-                            registerName={`items.${index}.title`}
-                            showTextError={false}
-                            error={errors.items?.[index]?.title}
-                            inputStyle={styles.formItemInput}
-                            required={false}
-                        />
-                },
-                {
-                    component:
                         <Controller
                             control={control}
-                            name={`items.${index}.unitId`}
-                            rules={{required:true}}
+                            name={`items.${index}.title`}
+                            rules={{ required: true }}
                             render={({ field: { onChange, name, value } }) => {
                                 return (
                                     <div className='tableAutocomplete'>
                                         <AutoComplete
                                             value={value}
                                             name={name}
-                                            onChange={onChange}
+                                            onChange={(value) => {
+                                                const unit = getUnitType(value?.id!)
+                                                setValue(`items.${index}.unitId`, unit!)
+                                                return onChange(value)
+                                            }
+                                            }
                                             id={name}
-                                            data={unitData}
-                                            placeholder="Ընտրեք միավորը"
+                                            data={goodsData}
+                                            placeholder="Ընտրեք ապրանքը"
                                             showErrorText={false}
-                                            error={errors.items?.[index]?.unitId}
+                                            error={errors.items?.[index]?.title}
                                             style={styles.formItemBox}
                                         />
                                     </div>
                                 );
                             }}
+                        />
+                },
+                {
+                    component:
+                        <AuthInput
+                            register={register}
+                            registerName={`items.${index}.unitId`}
+                            showTextError={false}
+                            inputStyle={styles.formItemInput}
+                            required={false}
+                            disabled
+                            error={errors.items?.[index]?.unitId}
                         />
                 },
                 {
@@ -119,7 +127,7 @@ const FormItems: React.FC<IProps> = (props) => {
                             onChange={(event) => {
                                 const count = +watch(`items.${index}.count`);
                                 const price = +event.currentTarget.value;
-                                const discount =  +watch(`items.${index}.discount`);
+                                const discount = +watch(`items.${index}.discount`);
                                 if (price !== 0) {
                                     const cost = String(price - ((price * discount) / 100));
                                     setValue(`items.${index}.cost`, cost);
@@ -131,7 +139,7 @@ const FormItems: React.FC<IProps> = (props) => {
                                     setValue(`items.${index}.cost`, "");
                                 }
                             }}
-                             error={errors.items?.[index]?.price}
+                            error={errors.items?.[index]?.price}
                             inputStyle={styles.formItemInput}
                         />
                 },

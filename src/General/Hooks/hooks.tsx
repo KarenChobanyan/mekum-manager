@@ -5,8 +5,9 @@ import { t } from 'i18next'
 import moment from "moment";
 import { RootState, useAppDispatch, useAppSelector } from "../../Store/store";
 import { IAutocompleteData, IAutocompleteItem } from "../../Interfaces/componentTypes";
-import { useGetAllWarehousesQuery, useGetEmployeesQuery, useGetGoodsQuery, useGetWarehousesQuery } from "../../API/direcroriesApi";
-import { GetEmployeesResponseData, GetWarehousesResponseData, GoodsResponseData } from "../../Interfaces/responseTypes";
+import { useGetAllWarehousesQuery, useGetEmployeesQuery, useGetGoodsQuery, useGetPartnersQuery, useGetWarehousesQuery } from "../../API/direcroriesApi";
+import { GetEmployeesResponseData, GetWarehousesResponseData, GoodsResponseData, IGetPartnersRespData } from "../../Interfaces/responseTypes";
+import { removeCurrentUser } from "../../Store/Slices/authSlice";
 
 export const useGeneralHooks = () => {
   const { t, i18n } = useTranslation();
@@ -27,7 +28,16 @@ export const useGeneralHooks = () => {
 
   const onLogout = () => {
     localStorage.removeItem("mm_access_token");
+    dispatch(removeCurrentUser())
     navigate('/')
+  };
+
+  const onLogoClick = () => {
+    accessToken
+      ?
+      navigate('/home')
+      :
+      navigate('/login')
   };
 
   return {
@@ -40,6 +50,7 @@ export const useGeneralHooks = () => {
     mobileScreen,
     mediumScreen,
     currentUser,
+    onLogoClick,
     onLogout,
     dispatch,
     navigate,
@@ -52,27 +63,8 @@ export const useDirectoriesHooks = () => {
   const { data: employees } = useGetEmployeesQuery();
   const { data: allWarehouses } = useGetAllWarehousesQuery();
   const { data: goods } = useGetGoodsQuery();
-  console.log(myWarehouses, "warehouses")
-  console.log(employees, "employees")
-  const unitData: IAutocompleteItem[] = [
-    { id: "1", title: "Տուփ" },
-    { id: "2", title: "կգ" }
-  ];
-
-  const suppliersData: IAutocompleteItem[] = [
-    { id: "1", title: "Մատակարար 1" },
-    { id: "2", title: "Մատակարար 2" }
-  ];
-
-  const recipientData: IAutocompleteItem[] = [
-    { id: "1", title: "Ստացող 1" },
-    { id: "2", title: "Ստացող 2" }
-  ];
-
-  const buyersData: IAutocompleteItem[] = [
-    { id: "1", title: "Գնորդ 1" },
-    { id: "2", title: "Գնորդ 2" }
-  ];
+  const {data:partnersResponse}  = useGetPartnersQuery();
+  const partners = partnersResponse?.data!;
 
   const cashBoxesData: IAutocompleteItem[] = [
     { id: "1", title: "Դրամարկղ 1" },
@@ -90,12 +82,9 @@ export const useDirectoriesHooks = () => {
   ];
 
   return {
-    unitData,
     myWarehouses,
     allWarehouses,
-    suppliersData,
-    recipientData,
-    buyersData,
+    partners,
     cashBoxesData,
     payersData,
     roles,
@@ -105,7 +94,7 @@ export const useDirectoriesHooks = () => {
 };
 
 export const useAutocompleteData = () => {
-  const { employees, myWarehouses, allWarehouses, goods } = useDirectoriesHooks();
+  const { employees, myWarehouses, allWarehouses, goods,partners } = useDirectoriesHooks();
   const myWarehousesIds = myWarehouses?.map((item) => item.id);
   const filteredWarehouses = allWarehouses?.filter((item) => !myWarehousesIds?.includes(item.id))
   const createWarehouseData = (data: GetWarehousesResponseData): IAutocompleteData | undefined => {
@@ -145,6 +134,19 @@ export const useAutocompleteData = () => {
     }
   };
 
+  const createPartnersData = (data: IGetPartnersRespData[]): IAutocompleteData | undefined => {
+    if (data) {
+      return data!.map((item) => {
+        return {
+          id: String(item.id),
+          title: item.name
+        }
+      })
+    } else {
+      return undefined
+    }
+  };
+
   const getUnitType = useCallback((id: string) => {
     if (goods?.length) {
       const unit = goods?.filter((item) => +id === item.code)[0].point;
@@ -158,13 +160,15 @@ export const useAutocompleteData = () => {
   const allWarehousesData = createWarehouseData(filteredWarehouses!);
   const employeesData = createEmployeeData(employees!);
   const goodsData = createGoodsData(goods!);
-
+  const partnersData = createPartnersData(partners!);
+console.log(partnersData,'partnersData')
 
   return {
     myWarehousesData,
     allWarehousesData,
     employeesData,
     goodsData,
+    partnersData,
     getUnitType
   }
 }

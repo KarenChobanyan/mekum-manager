@@ -57,6 +57,43 @@ export interface ILoginResponse{
   export interface ExitSpecification {
   };
 
-  export type GoodsResponseData = IGoods[]
+  export type GoodsResponseData = IGoods[];
+
+  export interface IGetPartnersResponse {
+    code: number;
+    data?: IGetPartnersRespData[] | null;
+    message: string;
+  };
+
+  export interface IGetPartnersRespData {
+    id: number;
+    hvhh: string;
+    publicServiceNumber?: null;
+    name: string;
+    accountantPositionId?: null;
+    anotherAdditionalInformation?: null;
+    anotherCredentialsNumber?: null;
+    anotherCredentialsDate?: null;
+    anotherDeliveryTime?: null;
+    anotherFullname?: null;
+    contract?: null;
+    certificateNumber?: null;
+    dateContract?: null;
+    email?: null;
+    fullName?: null;
+    headPositionId?: null;
+    phone?: null;
+    legalAddress?: null;
+    mainPurposeOfPayment?: null;
+    passportNumber?: null;
+    percentageOfSalesDiscount?: null;
+    practicalAddress?: null;
+    code: number;
+    additionalAddressePartners?: (null)[] | null;
+    billingAccounts?: (null)[] | null;
+    partnersEmails?: (null)[] | null;
+    documentTypeId?: null;
+  };
+  
   
   

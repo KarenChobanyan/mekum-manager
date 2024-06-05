@@ -66,8 +66,8 @@ const CreateCashout: React.FC = () => {
                                             onChange={onChange}
                                             id='payer'
                                             data={payersData}
-                                            label='Ստացող'
-                                            placeholder="Ընտրեք ստացողին"
+                                            label='Վճարող'
+                                            placeholder="Ընտրեք Վճարողին"
                                             showErrorText={false}
                                             style={styles.inputBox}
                                             labelStyle={styles.formInputLabel}

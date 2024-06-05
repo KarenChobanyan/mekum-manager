@@ -14,7 +14,8 @@
 .logo {
     @include flexStyles(flex, row, flex-end, center);
     gap: 5px;
-    padding: 5px
+    padding: 5px;
+    cursor: pointer;
 }
 
 .bigText {
