@@ -3,18 +3,21 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { authApi } from "../API/authApi";
 import authSlice from "./Slices/authSlice";
 import { directoriesApi } from "../API/direcroriesApi";
+import { actionsApi } from "../API/actionsApi";
 
 
 export const store = configureStore({
   reducer: {
     [authApi.reducerPath]: authApi.reducer,
     [directoriesApi.reducerPath]:directoriesApi.reducer,
+    [actionsApi.reducerPath]:actionsApi.reducer,
     auth: authSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([
       authApi.middleware,
       directoriesApi.middleware,
+      actionsApi.middleware
     ]),
 });
 

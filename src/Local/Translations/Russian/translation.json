@@ -26,6 +26,22 @@
     "Role": "Роль",
     "Placeholder": "Выберите позицию"
   },
+  "Forms": {
+    "Date": "Дата",
+    "Warehouse": "Склад",
+    "Select_Warehouse":"Выберите склад",
+    "PartnerIn": "Поставщик",
+    "Select_PartnerIn": "Выберите поставщика",
+    "Material": "Продукт",
+    "Select_Material": "Выберите продукт",
+    "Point": "Единица",
+    "Count": "Cчет",
+    "Price": "Цена",
+    "Discount": "Скидка",
+    "Cost": "Cтоимость",
+    "Money": "Общий",
+    "Document_Number":"Номер документа"
+  },
   "Employee":{
     "Title":"Сотрудник",
     "Placeholder":"Выберите сотрудника"
@@ -43,7 +59,9 @@
   },
   "Button": {
     "Login": "Войти",
-    "Add": "Добавить"
+    "Add": "Добавить",
+    "Submit": "Отправить",
+    "Cancel": "Отмена"
   },
   "Actions": {
     "To_Storage": {

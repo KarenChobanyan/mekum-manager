@@ -26,6 +26,22 @@
     "Role": "Role",
     "Placeholder": "Select the position"
   },
+  "Forms": {
+    "Date": "Date",
+    "Warehouse": "Warehouse",
+    "Select_Warehouse":"Select the warehouse",
+    "PartnerIn": "Supplier",
+    "Select_PartnerIn": "Select a supplier",
+    "Material": "Product",
+    "Select_Material": "Select the product",
+    "Point": "Point",
+    "Count": "Count",
+    "Price": "Price",
+    "Discount": "Discount",
+    "Cost": "Cost",
+    "Money": "Money",
+    "Document_Number":"Document number"
+  },
   "Employee":{
     "Title":"Employee",
     "Placeholder":"Select the employee"
@@ -43,7 +59,9 @@
   },
   "Button": {
     "Login": "Login",
-    "Add": "Add"
+    "Add": "Add",
+    "Submit": "Submit",
+    "Cancel": "Cancel"
   },
   "Actions": {
     "To_Storage": {

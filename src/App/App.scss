@@ -83,6 +83,10 @@
   border: 2px solid $errorColor !important;
 }
 
+.formAutocomplete .Mui-disabled {
+  -webkit-text-fill-color :$text_dark !important
+}
+
 .tableAutocomplete .MuiInputBase-root.MuiOutlinedInput-root {
   min-width: 20vw !important;
   background-color: $formInput;

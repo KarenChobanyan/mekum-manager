@@ -10,7 +10,6 @@ interface IProps {
 
 const CustomTableCell:React.FC<IProps> = (props) => {
     const {data,type,contentType} = props;
-    console.log(contentType,'contentType');
 
   return (
     <div className={`${styles[`cell${type}`]} ${styles[`item${contentType}`]}`}>

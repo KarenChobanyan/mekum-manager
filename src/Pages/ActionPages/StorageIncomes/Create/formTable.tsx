@@ -1,5 +1,6 @@
 import React from 'react';
 import { Control, Controller, FieldArrayWithId, FieldErrors, UseFieldArrayRemove, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import { t } from 'i18next';
 import { IStorageIncomeFormValues } from './createSrorageIncome-hooks';
 import { ITableFormItemData, ITableHeader, TableCellContentTypes } from '../../../../Interfaces/componentTypes';
 import { useAutocompleteData } from '../../../../General/Hooks/hooks';
@@ -8,58 +9,62 @@ import { RedTrashIcon } from '../../../../Assets/Icons';
 import styles from '../../formTablestyles.module.scss';
 
 interface IProps {
-    fields: FieldArrayWithId<IStorageIncomeFormValues, "items", "id">[],
+    fields: FieldArrayWithId<IStorageIncomeFormValues, "goods", "id">[],
     remove: UseFieldArrayRemove,
     storageName: string,
     register: UseFormRegister<IStorageIncomeFormValues>,
     control: Control<IStorageIncomeFormValues, any>,
     errors: FieldErrors<IStorageIncomeFormValues>,
+    partnerName: string,
     onAddItem: () => void,
     setValue: UseFormSetValue<IStorageIncomeFormValues>,
     watch: UseFormWatch<IStorageIncomeFormValues>
 };
 
-const headerData: ITableHeader[] = [
-    {
-        title: "",
-        contentType: TableCellContentTypes.ICON
-    },
-    {
-        title: "Պահեստ",
-        contentType: TableCellContentTypes.TEXT
-    },
-    {
-        title: "Անվանում",
-        contentType: TableCellContentTypes.SELECT
-    },
-    {
-        title: "Միավոր",
-        contentType: TableCellContentTypes.NUMBER
-    },
-    {
-        title: "Քանակ",
-        contentType: TableCellContentTypes.NUMBER
-    },
-    {
-        title: "Գին",
-        contentType: TableCellContentTypes.NUMBER
-    },
-    {
-        title: "Զեղչ",
-        contentType: TableCellContentTypes.NUMBER
-    },
-    {
-        title: "Արժեք",
-        contentType: TableCellContentTypes.NUMBER
-    },
-    {
-        title: "Գումար",
-        contentType: TableCellContentTypes.NUMBER
-    }
-];
-
 const FormItems: React.FC<IProps> = (props) => {
-    const { fields, remove, storageName, register, control, errors, onAddItem, setValue, watch } = props;
+    const headerData: ITableHeader[] = [
+        {
+            title: "",
+            contentType: TableCellContentTypes.ICON
+        },
+        {
+            title: `${t('Forms.Warehouse')}`,
+            contentType: TableCellContentTypes.TEXT
+        },
+        {
+            title: `${t('Forms.PartnerIn')}`,
+            contentType: TableCellContentTypes.TEXT
+        },
+        {
+            title: `${t('Forms.Material')}`,
+            contentType: TableCellContentTypes.SELECT
+        },
+        {
+            title: `${t('Forms.Point')}`,
+            contentType: TableCellContentTypes.NUMBER
+        },
+        {
+            title: `${t('Forms.Count')}`,
+            contentType: TableCellContentTypes.NUMBER
+        },
+        {
+            title: `${t('Forms.Price')}`,
+            contentType: TableCellContentTypes.NUMBER
+        },
+        {
+            title: `${t('Forms.Discount')}`,
+            contentType: TableCellContentTypes.NUMBER
+        },
+        {
+            title: `${t('Forms.Cost')}`,
+            contentType: TableCellContentTypes.NUMBER
+        },
+        {
+            title: `${t('Forms.Money')}`,
+            contentType: TableCellContentTypes.NUMBER
+        }
+    ];
+    const { fields, remove, storageName, register, control, errors, partnerName, onAddItem, setValue, watch } = props;
     const { getUnitType, goodsData } = useAutocompleteData();
 
     const createItemForm = (): Array<ITableFormItemData[]> => {
@@ -78,9 +83,16 @@ const FormItems: React.FC<IProps> = (props) => {
                 },
                 {
                     component:
+                        <div className={styles.formItemTextBox}>
+                            <div className={styles.formItemText}>{partnerName}</div>
+                        </div>,
+                    contentType: TableCellContentTypes.TEXT
+                },
+                {
+                    component:
                         <Controller
                             control={control}
-                            name={`items.${index}.title`}
+                            name={`goods.${index}.materialValueId`}
                             rules={{ required: true }}
                             render={({ field: { onChange, name, value } }) => {
                                 return (
@@ -90,7 +102,7 @@ const FormItems: React.FC<IProps> = (props) => {
                                             name={name}
                                             onChange={(value) => {
                                                 const unit = getUnitType(value?.id!)
-                                                setValue(`items.${index}.unitId`, unit!)
+                                                setValue(`goods.${index}.point`, unit!)
                                                 return onChange(value)
                                             }
                                             }
@@ -98,7 +110,7 @@ const FormItems: React.FC<IProps> = (props) => {
                                             data={goodsData}
                                             placeholder="Ընտրեք ապրանքը"
                                             showErrorText={false}
-                                            error={errors.items?.[index]?.title}
+                                            error={errors.goods?.[index]?.materialValueId}
                                             style={styles.formItemBox}
                                         />
                                     </div>
@@ -111,13 +123,13 @@ const FormItems: React.FC<IProps> = (props) => {
                     component:
                         <AuthInput
                             register={register}
-                            registerName={`items.${index}.unitId`}
+                            registerName={`goods.${index}.point`}
                             showTextError={false}
                             inputStyle={styles.formItemInput}
                             inputBoxStyles={styles.formItemInputNumBox}
                             required={false}
                             disabled
-                            error={errors.items?.[index]?.unitId}
+                            error={errors.goods?.[index]?.point}
                         />,
                     contentType: TableCellContentTypes.NUMBER
                 },
@@ -125,21 +137,21 @@ const FormItems: React.FC<IProps> = (props) => {
                     component:
                         <AuthInput
                             register={register}
-                            registerName={`items.${index}.count`}
+                            registerName={`goods.${index}.count`}
                             showTextError={false}
                             type='number'
                             onChange={(event) => {
                                 const count = +event.currentTarget.value;
-                                const cost = +watch(`items.${index}.cost`);
+                                const cost = +watch(`goods.${index}.cost`);
                                 if (cost !== 0) {
                                     const total = String((cost * count));
-                                    setValue(`items.${index}.total`, total);
+                                    setValue(`goods.${index}.money`, total);
                                 }
                             }
                             }
                             inputStyle={styles.formItemInput}
                             inputBoxStyles={styles.formItemInputNumBox}
-                            error={errors.items?.[index]?.count}
+                            error={errors.goods?.[index]?.count}
                         />,
                     contentType: TableCellContentTypes.NUMBER
                 },
@@ -147,27 +159,27 @@ const FormItems: React.FC<IProps> = (props) => {
                     component:
                         <AuthInput
                             register={register}
-                            registerName={`items.${index}.price`}
+                            registerName={`goods.${index}.price`}
                             showTextError={false}
                             type='number'
                             onChange={(event) => {
-                                const count = +watch(`items.${index}.count`);
+                                const count = +watch(`goods.${index}.count`);
                                 const price = +event.currentTarget.value;
-                                const discount = +watch(`items.${index}.discount`);
+                                const discount = +watch(`goods.${index}.discount`);
                                 if (price !== 0) {
                                     const cost = String(price - ((price * discount) / 100));
-                                    setValue(`items.${index}.cost`, cost);
+                                    setValue(`goods.${index}.cost`, cost);
                                     if (count !== 0) {
                                         const total = +cost * count
-                                        setValue(`items.${index}.total`, String(total))
+                                        setValue(`goods.${index}.money`, String(total))
                                     }
                                 } else {
-                                    setValue(`items.${index}.cost`, "");
+                                    setValue(`goods.${index}.cost`, "");
                                 }
                             }}
                             inputStyle={styles.formItemInput}
                             inputBoxStyles={styles.formItemInputNumBox}
-                            error={errors.items?.[index]?.price}
+                            error={errors.goods?.[index]?.price}
                         />,
                     contentType: TableCellContentTypes.NUMBER
                 },
@@ -175,20 +187,20 @@ const FormItems: React.FC<IProps> = (props) => {
                     component:
                         <AuthInput
                             register={register}
-                            registerName={`items.${index}.discount`}
+                            registerName={`goods.${index}.discount`}
                             showTextError={false}
                             type='number'
                             maxDate="100"
                             onChange={(event) => {
                                 const discount = +event.currentTarget.value;
-                                const price = +watch(`items.${index}.price`);
-                                const count = +watch(`items.${index}.count`);
+                                const price = +watch(`goods.${index}.price`);
+                                const count = +watch(`goods.${index}.count`);
                                 if (price !== 0) {
                                     const cost = String(price - ((price * discount) / 100));
-                                    setValue(`items.${index}.cost`, cost);
+                                    setValue(`goods.${index}.cost`, cost);
                                     if (count !== 0) {
                                         const total = +cost * count;
-                                        setValue(`items.${index}.total`, String(total));
+                                        setValue(`goods.${index}.money`, String(total));
                                     }
                                 }
                             }
@@ -196,7 +208,7 @@ const FormItems: React.FC<IProps> = (props) => {
                             inputStyle={styles.formItemInput}
                             inputBoxStyles={styles.formItemInputNumBox}
                             required={false}
-                            error={errors.items?.[index]?.discount}
+                            error={errors.goods?.[index]?.discount}
                         />,
                     contentType: TableCellContentTypes.NUMBER
                 },
@@ -204,7 +216,7 @@ const FormItems: React.FC<IProps> = (props) => {
                     component:
                         <AuthInput
                             register={register}
-                            registerName={`items.${index}.cost`}
+                            registerName={`goods.${index}.cost`}
                             showTextError={false}
                             disabled
                             type='number'
@@ -218,7 +230,7 @@ const FormItems: React.FC<IProps> = (props) => {
                     component:
                         <AuthInput
                             register={register}
-                            registerName={`items.${index}.total`}
+                            registerName={`goods.${index}.money`}
                             showTextError={false}
                             disabled
                             type='number'
@@ -232,13 +244,13 @@ const FormItems: React.FC<IProps> = (props) => {
         })
     };
 
-    const items = createItemForm();
+    const goods = createItemForm();
 
     return (
         <>
             <CustomTable
                 headerData={headerData}
-                bodyData={items}
+                bodyData={goods}
                 addAction={onAddItem}
             />
         </>

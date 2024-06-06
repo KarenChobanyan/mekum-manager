@@ -11,6 +11,7 @@ import CustomModal from "./CustomModal/customModal";
 import TextArea from "./Inputs/TextArea/textArea";
 import Avatar from "./Avatar/avatar";
 import CurrentUserInfo from "./CurrentUserInfo/currentUserInfo";
+import CustomPagination from "./Pagination/customPagination";
 
 export {
     NoData,
@@ -26,4 +27,5 @@ export {
     CustomTable,
     AutoComplete,
     CurrentUserInfo,
+    CustomPagination
 }
