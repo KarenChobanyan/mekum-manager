@@ -125,7 +125,7 @@ export const useAutocompleteData = () => {
     if (data) {
       return data!.map((item) => {
         return {
-          id: String(item.code),
+          id: String(item.materialValueId),
           title: item.materialValue
         }
       })
@@ -149,7 +149,7 @@ export const useAutocompleteData = () => {
 
   const getUnitType = useCallback((id: string) => {
     if (goods?.length) {
-      const unit = goods?.filter((item) => +id === item.code)[0].point;
+      const unit = goods?.filter((item) => +id === item.materialValueId)[0].point;
       return unit
     } else {
       return ""

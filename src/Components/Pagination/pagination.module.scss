@@ -1,0 +1,12 @@
+@import "../../General/Styles/mixin";
+
+.pagination-container {
+  width: 100%;
+  padding: 20px 0;
+}
+
+@media screen and (max-width: 920px) {
+  .pagination-container {
+    @include flexStyles(flex, row, center, center)
+  }
+}

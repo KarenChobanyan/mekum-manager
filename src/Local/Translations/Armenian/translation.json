@@ -8,9 +8,9 @@
     "Password_Error": "Առնվազն 8 նիշ",
     "Password_placeholder": "Մուտքագրեք ձեր գաղտնաբառը"
   },
-  "Header":{
-    "My_Page":"Իմ էջը",
-    "Log_Out":"Դուրս գալ"
+  "Header": {
+    "My_Page": "Իմ էջը",
+    "Log_Out": "Դուրս գալ"
   },
   "Input_Errors": {
     "Required": "Պարտադիր",
@@ -20,15 +20,30 @@
     "FirstName": "Անվավեր անուն",
     "Surname": "Անվավեր ազգանուն"
   },
+  "Forms": {
+    "Date": "Ամսաթիվ",
+    "Warehouse": "Պահեստ",
+    "Select_Warehouse": "Ընտրեք պահեստը",
+    "PartnerIn": "Մատակարար",
+    "Select_PartnerIn": "Ընտրեք մատակարարին",
+    "Material": "Ապրանք",
+    "Select_Material": "Ընտրեք ապրանքը",
+    "Point": "Միավոր",
+    "Count": "Քանակ",
+    "Price": "Գին",
+    "Discount": "Զեղչ",
+    "Cost": "Արժեք",
+    "Money": "Գումար"
+  },
   "Roles": {
     "Admin": "Ադմինիստրատոր",
     "User": "Օգտատեր",
     "Role": "Պաշտոն",
     "Placeholder": "Ընտրեք պաշտոնը"
   },
-  "Employee":{
-    "Title":"Աշխատակից",
-    "Placeholder":"Ընտրեք աշխատակցին"
+  "Employee": {
+    "Title": "Աշխատակից",
+    "Placeholder": "Ընտրեք աշխատակցին"
   },
   "Toast": {
     "Success": {
@@ -43,7 +58,9 @@
   },
   "Button": {
     "Login": "Մուտք",
-    "Add": "Ավելացնել"
+    "Add": "Ավելացնել",
+    "Submit": "Հաստատել",
+    "Cancel": "Չեղարկել"
   },
   "Actions": {
     "To_Storage": {
