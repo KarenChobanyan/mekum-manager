@@ -1,4 +1,4 @@
-export interface IStorageIncomeRequestData {
+export interface IPostStorageIncomeRequestData {
     documentDate: string,
     warehouseId: number,
     partnersId: number,
@@ -21,5 +21,11 @@ export interface IGoodsData {
     offset: number;
     limit: number;
   };
+
+  export interface IGetStorageEntriesRequestData {
+    id:string,
+    offset:number,
+    limit:number
+  }
 
  

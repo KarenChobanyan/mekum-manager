@@ -4,8 +4,8 @@ import { toast } from "react-toastify";
 import moment from "moment";
 import { usePostWarehoseEntryMutation } from "../../../../API/actionsApi";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
-import { useGeneralHooks } from "../../../../General/Hooks/hooks";
-import { IGoodsData, IStorageIncomeRequestData } from "../../../../Interfaces/requestTypes";
+import { useAutocompleteData, useGeneralHooks } from "../../../../General/Hooks/hooks";
+import { IGoodsData, IPostStorageIncomeRequestData } from "../../../../Interfaces/requestTypes";
 
 export interface IStorageIncomeFormValues {
     documentDate: string,
@@ -15,7 +15,7 @@ export interface IStorageIncomeFormValues {
 }
 
 export interface IStorageIncomeItem {
-    storage?: string,
+    warehouse?: string,
     supplier: string,
     materialValueId: IAutocompleteItem | null,
     point: string,
@@ -29,14 +29,16 @@ export interface IStorageIncomeItem {
 
 
 
-const useCreateStorageIncomeHooks = () => {
+const useCreateStorageIncomeHooks = (id:string) => {
+    const { myWarehousesData } = useAutocompleteData();
+    const warehouse = myWarehousesData?.filter((item)=>item.id === id)[0];
     const { navigate,t } = useGeneralHooks();
     const [add, { isLoading, isSuccess, isError }] = usePostWarehoseEntryMutation();
-    const [storageName, setStorageName] = useState<string>("");
-    const [supplierName, setSupplierName] = useState<string>("");
+    const [warehouseName, setWarehouseName] = useState<string>("");
+    const [partnerName, setPartnerName] = useState<string>("");
     const { register, handleSubmit, watch, control, reset, setValue, formState: { errors } } = useForm<IStorageIncomeFormValues>({
         defaultValues: {
-            goods: [{ storage: storageName, supplier: supplierName, materialValueId: null, point: '', price: '', count: '', discount: "", cost: '', money: "" }]
+            goods: [{ warehouse: warehouseName, supplier: partnerName, materialValueId: null, point: '', price: '', count: '', discount: "", cost: '', money: "" }]
         },
         mode: 'all'
     });
@@ -46,11 +48,9 @@ const useCreateStorageIncomeHooks = () => {
     });
 
     useEffect(() => {
-        const storageName = watch('warehouseId')?.title!;
-        if (storageName) {
-            setStorageName(storageName)
-        }
-    }, [watch("warehouseId")]);
+        setValue('warehouseId',warehouse!)
+        setWarehouseName(warehouse?.title!)
+    }, [warehouse]);
 
     useEffect(() => {
         if (isSuccess) {
@@ -63,7 +63,7 @@ const useCreateStorageIncomeHooks = () => {
     }, [isSuccess, isError]);
 
     const onAddItem = () => {
-        append({ storage: storageName, supplier: supplierName, materialValueId: null, point: '', price: '', count: '', discount: "", cost: '', money: "" })
+        append({ warehouse: warehouseName, supplier: partnerName, materialValueId: null, point: '', price: '', count: '', discount: "", cost: '', money: "" })
     };
 
     const onCencele = () => {
@@ -85,14 +85,14 @@ const useCreateStorageIncomeHooks = () => {
                 measurementUnitValue: 10
             }
         });
-        const payload: IStorageIncomeRequestData = {
+        const payload: IPostStorageIncomeRequestData = {
             documentDate: moment(new Date()).format("YYYY-MM-DD"),
             warehouseId: +(values.warehouseId as IAutocompleteItem).id,
             partnersId: +(values.partnersId as IAutocompleteItem).id,
             goods: goodsList
         };
         console.log(payload)
-       add(payload)
+     add(payload)
     };
 
     return {
@@ -106,10 +106,10 @@ const useCreateStorageIncomeHooks = () => {
         control,
         errors,
         fields,
-        storageName,
-        supplierName,
+        warehouseName,
+        partnerName,
         isLoading,
-        setSupplierName,
+        setPartnerName,
         onAddItem,
         onCencele
     }

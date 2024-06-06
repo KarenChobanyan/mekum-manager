@@ -12,8 +12,8 @@ interface IProps {
 }
 
 const CustomTable: React.FC<IProps> = (props) => {
-
   const { headerData, bodyData, addAction = false } = props;
+
   return (
     <div className='customTable'>
       <TableContainer   >
@@ -22,7 +22,7 @@ const CustomTable: React.FC<IProps> = (props) => {
             <TableRow >
               {headerData.map((item, index) => {
                 return (
-                  <CustomTableCell type={TableCellTypes.HEADER} data={item.title} key={item.title} contentType={item.contentType} />
+                  <CustomTableCell type={TableCellTypes.HEADER} data={item.title} key={item.title + index} contentType={item.contentType} />
                 )
               })}
             </TableRow>

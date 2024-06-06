@@ -33,7 +33,8 @@
     "Price": "Գին",
     "Discount": "Զեղչ",
     "Cost": "Արժեք",
-    "Money": "Գումար"
+    "Money": "Գումար",
+    "Document_Number":"Փասթաթղթի համար"
   },
   "Roles": {
     "Admin": "Ադմինիստրատոր",

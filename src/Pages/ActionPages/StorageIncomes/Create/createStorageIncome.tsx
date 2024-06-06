@@ -8,9 +8,11 @@ import { ButtonTypes } from '../../../../Interfaces/componentTypes';
 import { AuthInput, AutoComplete, Button, Loading } from '../../../../Components';
 import FormTable from './formTable';
 import styles from '../../formTablestyles.module.scss';
+import { useParams } from 'react-router';
 
 const CreateStorageIncome: React.FC = () => {
-  const { register, control, errors, fields, storageName, supplierName, isLoading, setSupplierName, onAddItem, handleSubmit, onSubmit, remove, onCencele, setValue, watch } = useCreateStorageIncomeHooks();
+  const {id} = useParams();
+  const { register, control, errors, fields, warehouseName, partnerName, isLoading, setPartnerName, onAddItem, handleSubmit, onSubmit, remove, onCencele, setValue, watch } = useCreateStorageIncomeHooks(id!);
   const { myWarehousesData, partnersData } = useAutocompleteData();
 
   return (
@@ -51,6 +53,7 @@ const CreateStorageIncome: React.FC = () => {
                           value={value}
                           name={name}
                           onChange={onChange}
+                          disable
                           id='storageId'
                           data={myWarehousesData}
                           label={t('Forms.Warehouse')}
@@ -77,7 +80,7 @@ const CreateStorageIncome: React.FC = () => {
                           value={value}
                           name={name}
                           onChange={(value) => {
-                            setSupplierName(value?.title!)
+                            setPartnerName(value?.title!)
                             onChange(value)
                           }}
                           id='supplierId'
@@ -100,8 +103,8 @@ const CreateStorageIncome: React.FC = () => {
                   control={control}
                   fields={fields}
                   remove={remove}
-                  storageName={storageName}
-                  supplierName={supplierName}
+                  storageName={warehouseName}
+                  partnerName={partnerName}
                   errors={errors}
                   onAddItem={onAddItem}
                   setValue={setValue}

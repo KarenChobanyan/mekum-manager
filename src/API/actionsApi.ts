@@ -1,31 +1,34 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from './API';
-import { GetEmployeesResponseData, GetWarehousesResponseData, GoodsResponseData, IGetPartnersResponse } from '../Interfaces/responseTypes';
-import { IStorageIncomeRequestData } from '../Interfaces/requestTypes';
+import { IGetStorageEntriesRequestData, IPostStorageIncomeRequestData } from '../Interfaces/requestTypes';
+import { IWarehouseEntryResponse } from '../Interfaces/responseTypes';
 
 export const actionsApi = createApi({
     reducerPath: 'actionsApi',
+    tagTypes: ['WarehouseEntries'],
     baseQuery: axiosBaseQuery({
         baseUrl: process.env.REACT_APP_API_KEY,
     }),
     endpoints: (builder) => ({
-        postWarehoseEntry: builder.mutation<any, IStorageIncomeRequestData>({
+        postWarehoseEntry: builder.mutation<any, IPostStorageIncomeRequestData>({
             query: (credentialsLogin) => ({
                 url: '/mekum/warehouse-entry-order',
                 method: 'POST',
                 data: credentialsLogin,
-            })
+            }),
+            invalidatesTags: ['WarehouseEntries']
         }),
-        getAllWarehouses: builder.query<GetWarehousesResponseData, void>({
-            query: () => ({
-                url: '/mekum/all-warehouses',
+        getWarehouseEntries: builder.query<IWarehouseEntryResponse, IGetStorageEntriesRequestData>({
+            query: ({ id, limit, offset }) => ({
+                url: `/mekum/entry-orders?id=${id}&limit=${limit}&offset=${offset}`,
                 method: 'GET',
             }),
+            providesTags: ['WarehouseEntries']
         }),
     }),
 });
 
 export const {
     usePostWarehoseEntryMutation,
-    useGetAllWarehousesQuery,
+    useGetWarehouseEntriesQuery,
 } = actionsApi;

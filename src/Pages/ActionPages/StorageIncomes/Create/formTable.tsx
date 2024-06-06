@@ -1,6 +1,6 @@
 import React from 'react';
 import { Control, Controller, FieldArrayWithId, FieldErrors, UseFieldArrayRemove, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
-import {t} from 'i18next';
+import { t } from 'i18next';
 import { IStorageIncomeFormValues } from './createSrorageIncome-hooks';
 import { ITableFormItemData, ITableHeader, TableCellContentTypes } from '../../../../Interfaces/componentTypes';
 import { useAutocompleteData } from '../../../../General/Hooks/hooks';
@@ -15,57 +15,56 @@ interface IProps {
     register: UseFormRegister<IStorageIncomeFormValues>,
     control: Control<IStorageIncomeFormValues, any>,
     errors: FieldErrors<IStorageIncomeFormValues>,
-    supplierName: string,
+    partnerName: string,
     onAddItem: () => void,
     setValue: UseFormSetValue<IStorageIncomeFormValues>,
     watch: UseFormWatch<IStorageIncomeFormValues>
 };
 
-const headerData: ITableHeader[] = [
-    {
-        title: "",
-        contentType: TableCellContentTypes.ICON
-    },
-    {
-        title: `${t('Forms.Warehouse')}`,
-        contentType: TableCellContentTypes.TEXT
-    },
-    {
-        title: `${t('Forms.PartnerIn')}`,
-        contentType: TableCellContentTypes.TEXT
-    },
-    {
-        title: `${t('Forms.Material')}`,
-        contentType: TableCellContentTypes.SELECT
-    },
-    {
-        title: `${t('Forms.Point')}`,
-        contentType: TableCellContentTypes.NUMBER
-    },
-    {
-        title: `${t('Forms.Count')}`,
-        contentType: TableCellContentTypes.NUMBER
-    },
-    {
-        title: `${t('Forms.Price')}`,
-        contentType: TableCellContentTypes.NUMBER
-    },
-    {
-        title: `${t('Forms.Discount')}`,
-        contentType: TableCellContentTypes.NUMBER
-    },
-    {
-        title: `${t('Forms.Cost')}`,
-        contentType: TableCellContentTypes.NUMBER
-    },
-    {
-        title: `${t('Forms.Money')}`,
-        contentType: TableCellContentTypes.NUMBER
-    }
-];
-
 const FormItems: React.FC<IProps> = (props) => {
-    const { fields, remove, storageName, register, control, errors,supplierName, onAddItem, setValue, watch } = props;
+    const headerData: ITableHeader[] = [
+        {
+            title: "",
+            contentType: TableCellContentTypes.ICON
+        },
+        {
+            title: `${t('Forms.Warehouse')}`,
+            contentType: TableCellContentTypes.TEXT
+        },
+        {
+            title: `${t('Forms.PartnerIn')}`,
+            contentType: TableCellContentTypes.TEXT
+        },
+        {
+            title: `${t('Forms.Material')}`,
+            contentType: TableCellContentTypes.SELECT
+        },
+        {
+            title: `${t('Forms.Point')}`,
+            contentType: TableCellContentTypes.NUMBER
+        },
+        {
+            title: `${t('Forms.Count')}`,
+            contentType: TableCellContentTypes.NUMBER
+        },
+        {
+            title: `${t('Forms.Price')}`,
+            contentType: TableCellContentTypes.NUMBER
+        },
+        {
+            title: `${t('Forms.Discount')}`,
+            contentType: TableCellContentTypes.NUMBER
+        },
+        {
+            title: `${t('Forms.Cost')}`,
+            contentType: TableCellContentTypes.NUMBER
+        },
+        {
+            title: `${t('Forms.Money')}`,
+            contentType: TableCellContentTypes.NUMBER
+        }
+    ];
+    const { fields, remove, storageName, register, control, errors, partnerName, onAddItem, setValue, watch } = props;
     const { getUnitType, goodsData } = useAutocompleteData();
 
     const createItemForm = (): Array<ITableFormItemData[]> => {
@@ -85,7 +84,7 @@ const FormItems: React.FC<IProps> = (props) => {
                 {
                     component:
                         <div className={styles.formItemTextBox}>
-                            <div className={styles.formItemText}>{supplierName}</div>
+                            <div className={styles.formItemText}>{partnerName}</div>
                         </div>,
                     contentType: TableCellContentTypes.TEXT
                 },

@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router";
 import { useTranslation } from "react-i18next";
 import { t } from 'i18next'
@@ -8,6 +8,7 @@ import { IAutocompleteData, IAutocompleteItem } from "../../Interfaces/component
 import { useGetAllWarehousesQuery, useGetEmployeesQuery, useGetGoodsQuery, useGetPartnersQuery, useGetWarehousesQuery } from "../../API/direcroriesApi";
 import { GetEmployeesResponseData, GetWarehousesResponseData, GoodsResponseData, IGetPartnersRespData } from "../../Interfaces/responseTypes";
 import { removeCurrentUser } from "../../Store/Slices/authSlice";
+import { useForm } from "react-hook-form";
 
 export const useGeneralHooks = () => {
   const { t, i18n } = useTranslation();
@@ -63,7 +64,7 @@ export const useDirectoriesHooks = () => {
   const { data: employees } = useGetEmployeesQuery();
   const { data: allWarehouses } = useGetAllWarehousesQuery();
   const { data: goods } = useGetGoodsQuery();
-  const {data:partnersResponse}  = useGetPartnersQuery();
+  const { data: partnersResponse } = useGetPartnersQuery();
   const partners = partnersResponse?.data!;
 
   const cashBoxesData: IAutocompleteItem[] = [
@@ -94,7 +95,7 @@ export const useDirectoriesHooks = () => {
 };
 
 export const useAutocompleteData = () => {
-  const { employees, myWarehouses, allWarehouses, goods,partners } = useDirectoriesHooks();
+  const { employees, myWarehouses, allWarehouses, goods, partners } = useDirectoriesHooks();
   const myWarehousesIds = myWarehouses?.map((item) => item.id);
   const filteredWarehouses = allWarehouses?.filter((item) => !myWarehousesIds?.includes(item.id))
   const createWarehouseData = (data: GetWarehousesResponseData): IAutocompleteData | undefined => {
@@ -169,5 +170,12 @@ export const useAutocompleteData = () => {
     goodsData,
     partnersData,
     getUnitType
+  }
+};
+
+export const useWarehouseHooks = () => {
+  const { control } = useForm<{ warehouse: IAutocompleteItem }>();
+  return {
+    control,
   }
 }

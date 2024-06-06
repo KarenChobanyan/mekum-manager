@@ -39,7 +39,8 @@
     "Price": "Price",
     "Discount": "Discount",
     "Cost": "Cost",
-    "Money": "Money"
+    "Money": "Money",
+    "Document_Number":"Document number"
   },
   "Employee":{
     "Title":"Employee",

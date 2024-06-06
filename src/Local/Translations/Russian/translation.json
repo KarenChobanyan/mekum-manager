@@ -39,7 +39,8 @@
     "Price": "Цена",
     "Discount": "Скидка",
     "Cost": "Cтоимость",
-    "Money": "Общий"
+    "Money": "Общий",
+    "Document_Number":"Номер документа"
   },
   "Employee":{
     "Title":"Сотрудник",

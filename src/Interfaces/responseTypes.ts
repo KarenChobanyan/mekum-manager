@@ -94,6 +94,21 @@ export interface ILoginResponse{
     partnersEmails?: (null)[] | null;
     documentTypeId?: null;
   };
+
+  export interface IWarehouseEntryResponseData {
+    id:number,
+    documentDate:string,
+    partners:IGetPartnersRespData,
+    documentNumber:number
+    warehouseEntryOrderProduct: IWarehouseEntryOrderProduct[]
+  };
+
+  export interface IWarehouseEntryOrderProduct {
+    money:number
+  };
+
+  export type IWarehouseEntryResponse = IWarehouseEntryResponseData[] | [];
+
   
   
   

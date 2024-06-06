@@ -7,11 +7,39 @@
     padding: 15px 10px;
 }
 
-.body{
+.emptyBody{
     flex:1;
     width: 100%;
     @include flexStyles(flex,column,center,center);
     background-color: $light_bg;
     border-radius: 15px;
     box-shadow: -1px 0px 5px -1px $main_color;
+}
+
+.fullBody {
+    flex: 1;
+    width: 100%;
+    max-height: 100%;
+    min-height: 100%;
+    padding: 10px;
+    @include flexStyles(flex, column, normal, normal);
+    background-color: $light_bg;
+    border-radius: 15px;
+    border-bottom-left-radius: 0;
+    box-shadow: -1px 0px 5px -1px $main_color;
+    overflow: scroll;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.top {
+    width: 100%;
+    padding-bottom: 15px;
+    @include flexStyles(flex, row, flex-end, space-between);
+}
+
+.button {
+    border-radius: 10px;
+    width: 200px;
+    height: 50px;
 }
