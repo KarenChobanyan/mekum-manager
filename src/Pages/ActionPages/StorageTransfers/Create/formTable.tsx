@@ -65,7 +65,7 @@ const headerData: ITableHeader[] = [
 
 const FormItems: React.FC<IProps> = (props) => {
     const { fields, remove, storageOutputName, storageInputName, register, control, errors, onAddItem, setValue, watch } = props;
-    const { getUnitType, goodsData } = useAutocompleteData();
+    const { getAllGoodsUnitType,allGoodsData} = useAutocompleteData();
 
     const createItemForm = (): Array<ITableFormItemData[]> => {
         return fields.map((item, index): ITableFormItemData[] => {
@@ -101,13 +101,13 @@ const FormItems: React.FC<IProps> = (props) => {
                                             value={value}
                                             name={name}
                                             onChange={(value) => {
-                                                const unit = getUnitType(value?.id!)
+                                                const unit = getAllGoodsUnitType(value?.id!)
                                                 setValue(`items.${index}.unitId`, unit!)
                                                 return onChange(value)
                                             }
                                             }
                                             id={name}
-                                            data={goodsData}
+                                            data={allGoodsData}
                                             placeholder="Ընտրեք ապրանքը"
                                             showErrorText={false}
                                             error={errors.items?.[index]?.title}

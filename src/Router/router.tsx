@@ -77,7 +77,7 @@ const Router: React.FC = () => {
                 }
             />
             <Route
-                path='/storage_outgoings/create'
+                path='/storage_outgoings/create/:id'
                 element={
                     <Layout title={t('Actions.From_Storage.Title')} children={<CreateStorageOutgoingsPage/>} />
                 }

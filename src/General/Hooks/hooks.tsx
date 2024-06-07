@@ -1,14 +1,14 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
+import { useForm } from "react-hook-form";
 import { useLocation, useNavigate, useParams } from "react-router";
 import { useTranslation } from "react-i18next";
 import { t } from 'i18next'
 import moment from "moment";
 import { RootState, useAppDispatch, useAppSelector } from "../../Store/store";
 import { IAutocompleteData, IAutocompleteItem } from "../../Interfaces/componentTypes";
-import { useGetAllWarehousesQuery, useGetEmployeesQuery, useGetGoodsQuery, useGetPartnersQuery, useGetWarehousesQuery } from "../../API/direcroriesApi";
-import { GetEmployeesResponseData, GetWarehousesResponseData, GoodsResponseData, IGetPartnersRespData } from "../../Interfaces/responseTypes";
+import { useGetAllGoodsQuery, useGetAllWarehousesQuery, useGetEmployeesQuery, useGetGoodBatchesQuery, useGetGoodsQuery, useGetPartnersQuery, useGetWarehouseGoodsQuery, useGetWarehousesQuery } from "../../API/direcroriesApi";
+import { AllGoodsResponse, GetEmployeesResponseData, GetGoodBatchesResponse, GetWarehousesResponseData, GoodsResponseData, IAllGoodsResponseData, IGetPartnersRespData } from "../../Interfaces/responseTypes";
 import { removeCurrentUser } from "../../Store/Slices/authSlice";
-import { useForm } from "react-hook-form";
 
 export const useGeneralHooks = () => {
   const { t, i18n } = useTranslation();
@@ -64,6 +64,7 @@ export const useDirectoriesHooks = () => {
   const { data: employees } = useGetEmployeesQuery();
   const { data: allWarehouses } = useGetAllWarehousesQuery();
   const { data: goods } = useGetGoodsQuery();
+  const { data: allGoods } = useGetAllGoodsQuery();
   const { data: partnersResponse } = useGetPartnersQuery();
   const partners = partnersResponse?.data!;
 
@@ -90,14 +91,17 @@ export const useDirectoriesHooks = () => {
     payersData,
     roles,
     goods,
+    allGoods,
     employees
   }
 };
 
-export const useAutocompleteData = () => {
-  const { employees, myWarehouses, allWarehouses, goods, partners } = useDirectoriesHooks();
+export const useAutocompleteData = (warehouseId?: string) => {
+  const { employees, myWarehouses, allWarehouses, goods, allGoods, partners } = useDirectoriesHooks();
+  const { data: myGoods } = useGetWarehouseGoodsQuery(warehouseId!);
   const myWarehousesIds = myWarehouses?.map((item) => item.id);
-  const filteredWarehouses = allWarehouses?.filter((item) => !myWarehousesIds?.includes(item.id))
+  const filteredWarehouses = allWarehouses?.filter((item) => !myWarehousesIds?.includes(item.id));
+
   const createWarehouseData = (data: GetWarehousesResponseData): IAutocompleteData | undefined => {
     if (data) {
       return data!.map((item) => {
@@ -135,6 +139,19 @@ export const useAutocompleteData = () => {
     }
   };
 
+  const createAllGoodsData = (data: AllGoodsResponse): IAutocompleteData | undefined => {
+    if (data) {
+      return data!.map((item) => {
+        return {
+          id: String(item.id!),
+          title: item.name!
+        }
+      })
+    } else {
+      return undefined
+    }
+  };
+
   const createPartnersData = (data: IGetPartnersRespData[]): IAutocompleteData | undefined => {
     if (data) {
       return data!.map((item) => {
@@ -148,7 +165,7 @@ export const useAutocompleteData = () => {
     }
   };
 
-  const getUnitType = useCallback((id: string) => {
+  const getGoodsUnitType = useCallback((id: string) => {
     if (goods?.length) {
       const unit = goods?.filter((item) => +id === item.materialValueId)[0].point;
       return unit
@@ -157,10 +174,33 @@ export const useAutocompleteData = () => {
     }
   }, [goods]);
 
+  const getAllGoodsUnitType = useCallback((id: string) => {
+    if (allGoods?.length) {
+      const unit = allGoods?.filter((item) => +id === item.id)[0].measurementUnit.unit;
+      return unit
+    } else {
+      return ''
+    }
+  }, [allGoods]);
+
+  const getRemainder = (id: string) => {
+    if (myGoods?.length) {
+      const good = myGoods.filter((item) => item.materialValueId === +id)
+      const remainder = good?.[0]?.totalCount!;
+      return remainder
+    } else {
+      return undefined
+    }
+
+  };
+
+
   const myWarehousesData = createWarehouseData(myWarehouses!);
   const allWarehousesData = createWarehouseData(filteredWarehouses!);
   const employeesData = createEmployeeData(employees!);
   const goodsData = createGoodsData(goods!);
+  const myGoodsdata = createGoodsData(myGoods!);
+  const allGoodsData = createAllGoodsData(allGoods!);
   const partnersData = createPartnersData(partners!);
 
   return {
@@ -168,8 +208,12 @@ export const useAutocompleteData = () => {
     allWarehousesData,
     employeesData,
     goodsData,
+    allGoodsData,
     partnersData,
-    getUnitType
+    myGoodsdata,
+    getRemainder,
+    getGoodsUnitType,
+    getAllGoodsUnitType
   }
 };
 
@@ -178,4 +222,9 @@ export const useWarehouseHooks = () => {
   return {
     control,
   }
+};
+
+
+export const useGoodExitsHooks = ()=>{
+
 }

@@ -1,55 +1,50 @@
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
-import { useDirectoriesHooks, useGeneralHooks } from "../../../../General/Hooks/hooks";
+import { useAutocompleteData, useGeneralHooks } from "../../../../General/Hooks/hooks";
+import { IGoodBatch } from "../../../../Interfaces/responseTypes";
 
 export interface IStorageOutgoingFormValues {
-    date: string,
-    storageId: IAutocompleteItem,
-    recipientId: IAutocompleteItem,
-    items: IStorageOutgoingItem[]
+    documentDate: string,
+    warehouseId: IAutocompleteItem,
+    partnersId: IAutocompleteItem,
+    goods: IStorageOutgoingItem[]
 }
 
 export interface IStorageOutgoingItem {
-    storage?: string,
-    title: IAutocompleteItem | null,
-    unitId: string,
-    price: string,
+    materialValueId: IAutocompleteItem | null,
+    point: string,
+    quantity: string,
     count: string,
-    discount: string
-    cost: string,
-    total: string
+    money: string,
+    exits:IGoodBatch[] | []
 };
 
 
-const useCreateStorageOutgoingHooks = () => {
+const useCreateStorageOutgoingHooks = (id: string) => {
+    const { myWarehousesData } = useAutocompleteData();
+    const warehouse = myWarehousesData?.filter((item) => item.id === id)[0];
     const { navigate } = useGeneralHooks();
 
-    const [storageName, setStorageName] = useState<string>("");
-    const { register, handleSubmit, watch, control, reset,setValue, formState: { errors } } = useForm<IStorageOutgoingFormValues>({
+    const { register, handleSubmit, watch, control, reset, setValue, formState: { errors } } = useForm<IStorageOutgoingFormValues>({
         defaultValues: {
-            items: [{ storage: storageName, title: null, unitId: '', price: '', count: '', discount: "", cost: '', total: "" }]
+            goods: [{ materialValueId: null, quantity: '', point: '', count: '',  money: "",exits:[] }]
         },
-        mode:'all'
+        mode: 'all'
     });
     const { fields, append, remove } = useFieldArray({
         control,
-        name: 'items'
+        name: 'goods'
     });
-    
+
 
     useEffect(() => {
-        const storageName = watch('storageId')?.title!;
-        if (storageName) {
-            const item = watch('items')
-            setStorageName(storageName)
-            console.log(item, "item")
-        }
-    }, [watch("storageId")]);
+        setValue('warehouseId', warehouse!)
+    }, [warehouse]);
 
 
     const onAddItem = () => {
-        append({ storage: storageName, title: null, unitId: '', price: '', count: '', discount: "", cost: '', total: "" })
+        append({ materialValueId: null, quantity: '', point: '',  count: '', money: "",exits:[] })
     };
 
     const onCencele = () => {
@@ -72,9 +67,8 @@ const useCreateStorageOutgoingHooks = () => {
         control,
         errors,
         fields,
-        storageName,
         onAddItem,
-        onCencele
+        onCencele,
     }
 };
 

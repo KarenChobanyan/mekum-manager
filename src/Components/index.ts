@@ -12,6 +12,7 @@ import TextArea from "./Inputs/TextArea/textArea";
 import Avatar from "./Avatar/avatar";
 import CurrentUserInfo from "./CurrentUserInfo/currentUserInfo";
 import CustomPagination from "./Pagination/customPagination";
+import TotalExitsCounter from "./TotalCounter/totalExitsCounter";
 
 export {
     NoData,
@@ -27,5 +28,6 @@ export {
     CustomTable,
     AutoComplete,
     CurrentUserInfo,
-    CustomPagination
+    CustomPagination,
+    TotalExitsCounter
 }

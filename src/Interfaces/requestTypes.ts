@@ -28,4 +28,9 @@ export interface IGoodsData {
     limit:number
   }
 
+  export interface IGetGoodBatchRequest {
+    warehouseId:string,
+    materialValueId:string
+  }
+
  

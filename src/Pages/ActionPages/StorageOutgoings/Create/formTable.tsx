@@ -1,32 +1,28 @@
-import React from 'react';
-import { Control, Controller, FieldArrayWithId, FieldErrors, UseFieldArrayRemove, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import React, { useState } from 'react';
+import { Control, Controller, FieldArrayWithId, FieldErrors, UseFieldArrayRemove, UseFormRegister, UseFormSetError, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { IStorageOutgoingFormValues } from './createStorageOutgoings-hooks';
 import { useAutocompleteData } from '../../../../General/Hooks/hooks';
 import { ITableFormItemData, ITableHeader, TableCellContentTypes } from '../../../../Interfaces/componentTypes';
-import { AuthInput, AutoComplete, CustomTable } from '../../../../Components';
+import { AuthInput, AutoComplete, CustomTable, TotalExitsCounter } from '../../../../Components';
 import { RedTrashIcon } from '../../../../Assets/Icons';
 import styles from '../../formTablestyles.module.scss';
 
 interface IProps {
-    fields: FieldArrayWithId<IStorageOutgoingFormValues, "items", "id">[],
+    fields: FieldArrayWithId<IStorageOutgoingFormValues, "goods", "id">[],
     remove: UseFieldArrayRemove,
-    storageName: string,
     register: UseFormRegister<IStorageOutgoingFormValues>,
     control: Control<IStorageOutgoingFormValues, any>,
     errors: FieldErrors<IStorageOutgoingFormValues>,
+    id: string,
     onAddItem: () => void,
     setValue: UseFormSetValue<IStorageOutgoingFormValues>,
-    watch: UseFormWatch<IStorageOutgoingFormValues>
+    watch: UseFormWatch<IStorageOutgoingFormValues>,
 };
 
 const headerData: ITableHeader[] = [
     {
         title: "",
         contentType: TableCellContentTypes.ICON
-    },
-    {
-        title: "Պահեստ",
-        contentType: TableCellContentTypes.TEXT
     },
     {
         title: "Անվանում",
@@ -37,19 +33,11 @@ const headerData: ITableHeader[] = [
         contentType: TableCellContentTypes.NUMBER
     },
     {
+        title: "Մնացորդ",
+        contentType: TableCellContentTypes.NUMBER
+    },
+    {
         title: "Քանակ",
-        contentType: TableCellContentTypes.NUMBER
-    },
-    {
-        title: "Գին",
-        contentType: TableCellContentTypes.NUMBER
-    },
-    {
-        title: "Զեղչ",
-        contentType: TableCellContentTypes.NUMBER
-    },
-    {
-        title: "Արժեք",
         contentType: TableCellContentTypes.NUMBER
     },
     {
@@ -59,8 +47,9 @@ const headerData: ITableHeader[] = [
 ];
 
 const FormItems: React.FC<IProps> = (props) => {
-    const { fields, remove, storageName, register, control, errors, onAddItem, setValue, watch } = props;
-    const { getUnitType, goodsData } = useAutocompleteData();
+    const { fields, remove, register, control, errors, id, onAddItem, setValue, watch } = props;
+    const { getGoodsUnitType, myGoodsdata, getRemainder } = useAutocompleteData(id!);
+
     const createItemForm = (): Array<ITableFormItemData[]> => {
         return fields.map((item, index): ITableFormItemData[] => {
             return [
@@ -70,16 +59,9 @@ const FormItems: React.FC<IProps> = (props) => {
                 },
                 {
                     component:
-                        <div className={styles.formItemTextBox}>
-                            <div className={styles.formItemText}>{storageName}</div>
-                        </div>,
-                    contentType: TableCellContentTypes.TEXT
-                },
-                {
-                    component:
                         <Controller
                             control={control}
-                            name={`items.${index}.title`}
+                            name={`goods.${index}.materialValueId`}
                             rules={{ required: true }}
                             render={({ field: { onChange, name, value } }) => {
                                 return (
@@ -88,17 +70,21 @@ const FormItems: React.FC<IProps> = (props) => {
                                             value={value}
                                             name={name}
                                             onChange={(value) => {
-                                                const unit = getUnitType(value?.id!)
-                                                setValue(`items.${index}.unitId`, unit!)
+                                                const unit = getGoodsUnitType(value?.id!)
+                                                const materialValueId = value?.id!
+                                                if (materialValueId) {
+                                                    setValue(`goods.${index}.quantity`, String(getRemainder(materialValueId!)))
+                                                }
+                                                setValue(`goods.${index}.point`, unit!)
                                                 return onChange(value)
                                             }
                                             }
                                             id={name}
-                                            data={goodsData}
+                                            data={myGoodsdata}
                                             placeholder="Ընտրեք ապրանքը"
                                             showErrorText={false}
                                             style={styles.formItemBox}
-                                            error={errors.items?.[index]?.title}
+                                            error={errors.goods?.[index]?.materialValueId}
                                         />
                                     </div>
                                 );
@@ -110,13 +96,13 @@ const FormItems: React.FC<IProps> = (props) => {
                     component:
                         <AuthInput
                             register={register}
-                            registerName={`items.${index}.unitId`}
+                            registerName={`goods.${index}.point`}
                             showTextError={false}
                             inputStyle={styles.formItemInput}
                             inputBoxStyles={styles.formItemInputNumBox}
                             required={false}
                             disabled
-                            error={errors.items?.[index]?.unitId}
+                            error={errors.goods?.[index]?.point}
                         />,
                     contentType: TableCellContentTypes.NUMBER
                 },
@@ -124,120 +110,65 @@ const FormItems: React.FC<IProps> = (props) => {
                     component:
                         <AuthInput
                             register={register}
-                            registerName={`items.${index}.count`}
+                            registerName={`goods.${index}.quantity`}
                             showTextError={false}
-                            type='number'
-                            onChange={(event) => {
-                                const count = +event.currentTarget.value;
-                                const cost = +watch(`items.${index}.cost`);
-                                if (cost !== 0) {
-                                    const total = String((cost * count));
-                                    setValue(`items.${index}.total`, total);
-                                }
-                            }
-                            }
-                            inputStyle={styles.formItemInput}
-                            inputBoxStyles={styles.formItemInputNumBox}
-                            error={errors.items?.[index]?.count}
-                        />,
-                    contentType: TableCellContentTypes.NUMBER
-                },
-                {
-                    component:
-                        <AuthInput
-                            register={register}
-                            registerName={`items.${index}.price`}
-                            showTextError={false}
-                            type='number'
-                            onChange={(event) => {
-                                const count = +watch(`items.${index}.count`);
-                                const price = +event.currentTarget.value;
-                                const discount = +watch(`items.${index}.discount`);
-                                if (price !== 0) {
-                                    const cost = String(price - ((price * discount) / 100));
-                                    setValue(`items.${index}.cost`, cost);
-                                    if (count !== 0) {
-                                        const total = +cost * count
-                                        setValue(`items.${index}.total`, String(total))
-                                    }
-                                } else {
-                                    setValue(`items.${index}.cost`, "");
-                                }
-                            }}
-                            inputStyle={styles.formItemInput}
-                            inputBoxStyles={styles.formItemInputNumBox}
-                            error={errors.items?.[index]?.price}
-                        />,
-                    contentType: TableCellContentTypes.NUMBER
-                },
-                {
-                    component:
-                        <AuthInput
-                            register={register}
-                            registerName={`items.${index}.discount`}
-                            showTextError={false}
-                            type='number'
-                            maxDate="100"
-                            onChange={(event) => {
-                                const discount = +event.currentTarget.value;
-                                const price = +watch(`items.${index}.price`);
-                                const count = +watch(`items.${index}.count`);
-                                if (price !== 0) {
-                                    const cost = String(price - ((price * discount) / 100));
-                                    setValue(`items.${index}.cost`, cost);
-                                    if (count !== 0) {
-                                        const total = +cost * count;
-                                        setValue(`items.${index}.total`, String(total));
-                                    }
-                                }
-                            }
-                            }
                             inputStyle={styles.formItemInput}
                             inputBoxStyles={styles.formItemInputNumBox}
                             required={false}
-                            error={errors.items?.[index]?.discount}
-                        />,
-                    contentType: TableCellContentTypes.NUMBER
-                },
-                {
-                    component:
-                        <AuthInput
-                            register={register}
-                            registerName={`items.${index}.cost`}
-                            showTextError={false}
                             disabled
-                            type='number'
-                            required={false}
-                            inputStyle={styles.formItemInput}
-                            inputBoxStyles={styles.formItemInputNumBox}
+                            error={errors.goods?.[index]?.quantity}
                         />,
                     contentType: TableCellContentTypes.NUMBER
                 },
                 {
                     component:
-                        <AuthInput
-                            register={register}
-                            registerName={`items.${index}.total`}
-                            showTextError={false}
-                            disabled
-                            type='number'
-                            required={false}
-                            inputStyle={styles.formItemInput}
-                            inputBoxStyles={styles.formItemInputNumBox}
+                        <Controller
+                            control={control}
+                            name={`goods.${index}.count`}
+                            rules={{ max: getRemainder(watch(`goods.${index}.materialValueId`)?.id!) }}
+                            render={({ field: { onChange, name, value } }) => {
+                                return (
+                                    <AuthInput
+                                        register={register}
+                                        registerName={`goods.${index}.count`}
+                                        showTextError={false}
+                                        type='number'
+                                        inputStyle={styles.formItemInput}
+                                        inputBoxStyles={styles.formItemInputNumBox}
+                                        error={errors.goods?.[index]?.count}
+                                    />
+                                )
+                            }
+                            }
                         />,
+                    contentType: TableCellContentTypes.NUMBER
+                },
+                {
+                    component:
+                        <div className={styles.formItemTextBox}>
+                            <div className={styles.formItemText}>
+                            <TotalExitsCounter
+                            warehouseId={id!}
+                            materialValueId={watch(`goods.${index}.materialValueId`)?.id!}
+                            count={watch(`goods.${index}.count`)}
+                            setValue={setValue}
+                            index={index}
+                            />
+                            </div>
+                        </div>,
                     contentType: TableCellContentTypes.NUMBER
                 },
             ]
         })
     };
 
-    const items = createItemForm();
+    const bodyData = createItemForm();
 
     return (
         <>
             <CustomTable
                 headerData={headerData}
-                bodyData={items}
+                bodyData={bodyData}
                 addAction={onAddItem}
             />
         </>

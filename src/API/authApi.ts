@@ -18,10 +18,10 @@ export const authApi = createApi({
       })
     }),
     register: builder.mutation<ILoginResponse, IRegisterFormValues>({
-      query: (credentialsLogin) => ({
+      query: (credentials) => ({
         url: '/auth/register',
         method: 'POST',
-        data: credentialsLogin,
+        data: credentials,
       })
     }),
   }),
