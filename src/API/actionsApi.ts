@@ -25,10 +25,18 @@ export const actionsApi = createApi({
             }),
             providesTags: ['WarehouseEntries']
         }),
+        getWarehouseExits: builder.query<any, IGetStorageEntriesRequestData>({
+            query: ({ id, limit, offset }) => ({
+                url: `/mekum/exit-orders?id=${id}&limit=${limit}&offset=${offset}`,
+                method: 'GET',
+            }),
+            providesTags: ['WarehouseEntries']
+        }),
     }),
 });
 
 export const {
     usePostWarehoseEntryMutation,
     useGetWarehouseEntriesQuery,
+    useGetWarehouseExitsQuery,
 } = actionsApi;

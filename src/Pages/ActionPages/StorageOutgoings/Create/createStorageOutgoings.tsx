@@ -6,10 +6,13 @@ import { ButtonTypes } from '../../../../Interfaces/componentTypes';
 import FormItems from './formTable';
 import { AuthInput, AutoComplete, Button } from '../../../../Components';
 import styles from '../../formTablestyles.module.scss';
+import moment from 'moment';
+import { useParams } from 'react-router';
 
 
 const CreateStorageOutgoings: React.FC = () => {
-  const { register, control, errors, fields, storageName, onAddItem, handleSubmit, onSubmit, remove, onCencele, setValue, watch } = useCreateStorageOutgoingHooks();
+  const {id} = useParams();
+  const { register, control, errors, fields, onAddItem, handleSubmit, onSubmit, remove, onCencele, setValue, watch } = useCreateStorageOutgoingHooks(id!);
   const { t } = useGeneralHooks();
   const { myWarehousesData,partnersData } = useAutocompleteData()
 
@@ -20,19 +23,22 @@ const CreateStorageOutgoings: React.FC = () => {
           <div className={styles.form}>
             <AuthInput
               register={register}
-              registerName='date'
+              registerName='documentDate'
               label='Ամսաթիվ'
               type='date'
               style={styles.inputBox}
               inputStyle={styles.input}
               inputBoxStyles={styles.input}
+              disabled
+              required={false}
+              defaultValue={moment(new Date()).format("DD/MM/YYYY")}
               labelStyle={styles.formInputLabel}
               showTextError={false}
-              error={errors.date}
+              error={errors.documentDate}
             />
             <Controller
               control={control}
-              name='storageId'
+              name='warehouseId'
               rules={{
                 required: t('Input_Errors.Required'),
               }}
@@ -44,13 +50,14 @@ const CreateStorageOutgoings: React.FC = () => {
                       name={name}
                       onChange={onChange}
                       id='storageId'
+                      disable
                       data={myWarehousesData}
                       label='Պահեստ'
                       placeholder="Ընտրեք պահեստը"
                       showErrorText={false}
                       style={styles.inputBox}
                       labelStyle={styles.formInputLabel}
-                      error={errors.storageId}
+                      error={errors.warehouseId}
                     />
                   </div>
                 );
@@ -58,7 +65,7 @@ const CreateStorageOutgoings: React.FC = () => {
             />
             <Controller
               control={control}
-              name='recipientId'
+              name='partnersId'
               rules={{
                 required: t('Input_Errors.Required'),
               }}
@@ -69,14 +76,14 @@ const CreateStorageOutgoings: React.FC = () => {
                       value={value}
                       name={name}
                       onChange={onChange}
-                      id='supplierId'
+                      id='partnersId'
                       data={partnersData}
                       label='Ստացող'
                       placeholder="Ընտրեք ստացողին"
                       showErrorText={false}
                       style={styles.inputBox}
                       labelStyle={styles.formInputLabel}
-                      error={errors.recipientId}
+                      error={errors.partnersId}
                     />
                   </div>
                 );
@@ -87,9 +94,9 @@ const CreateStorageOutgoings: React.FC = () => {
             <FormItems
               register={register}
               control={control}
+              id={id!}
               fields={fields}
               remove={remove}
-              storageName={storageName}
               errors={errors}
               onAddItem={onAddItem}
               setValue={setValue}

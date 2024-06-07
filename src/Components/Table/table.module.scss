@@ -11,7 +11,7 @@
 .cellHeader {
     @include flexStyles(flex, row, center, center);
     text-wrap: nowrap;
-    padding: 10px 15px;
+    padding: 10px 21px;
     background-color: $table_header;
     border-right: 1px solid $dark_grey;
     background-color: $table_header;
@@ -20,16 +20,16 @@
 .cellBody {
     @include flexStyles(flex, row, center, center);
     text-wrap: nowrap;
-    padding: 5px 5px 10px;
+     padding: 5px 5px 10px;
     border-right: 1px solid $dark_grey;
     background-color: $table_item;
 }
 
 .itemIcon {
-    width: 50px;
+    width: 150px;
     @include flexStyles(flex, row, center, center);
     text-wrap: nowrap;
-    padding: 5px;
+    //  padding: 5px;
     border-right: 1px solid $dark_grey;
 }
 
@@ -39,7 +39,7 @@
 }
 
 .itemNumber {
-    width: 100px;
+    width: 200px;
 }
 
 .itemSelect {

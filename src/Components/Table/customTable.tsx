@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from '@mui/material';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from '@mui/material';
 import CustomTableCell from './customTableCell';
 import { ITableFormItemData, TableCellTypes, TableHeaderData } from '../../Interfaces/componentTypes';
 import { PlusIcon } from '../../Assets/Icons';
@@ -16,7 +16,7 @@ const CustomTable: React.FC<IProps> = (props) => {
 
   return (
     <div className='customTable'>
-      <TableContainer   >
+      <TableContainer  component={Paper} >
         <Table sx={{ minWidth: '100%' }} aria-label="customized table">
           <TableHead >
             <TableRow >
