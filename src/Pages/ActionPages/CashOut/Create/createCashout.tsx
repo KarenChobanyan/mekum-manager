@@ -4,121 +4,123 @@ import { t } from 'i18next';
 import useCreateCashoutHooks from './createCashout-hooks';
 import { useAutocompleteData } from '../../../../General/Hooks/hooks';
 import { ButtonTypes } from '../../../../Interfaces/componentTypes';
-import { AuthInput, AutoComplete, Button, TextArea } from '../../../../Components';
+import { AuthInput, AutoComplete, Button, Loading, TextArea } from '../../../../Components';
 import styles from '../../formTablestyles.module.scss'
+import moment from 'moment';
+import { useParams } from 'react-router';
 
 const CreateCashout: React.FC = () => {
-  const { register, control, onSubmit, onCencele, handleSubmit, cashBoxesData, errors } = useCreateCashoutHooks();
-  const {partnersData} = useAutocompleteData()
+  const {id} =useParams();
+  const { register, control, onSubmit, onCencele, handleSubmit, cashRegistersData, errors,isLoading } = useCreateCashoutHooks(id!);
 
   return (
     <div className={styles.container} >
       <div className={styles.body}>
+      {
+        isLoading
+        ?
+        <Loading/>
+        :
         <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
-          <div className={styles.form}>
-            <AuthInput
-              register={register}
-              registerName='date'
-              label='Ամսաթիվ'
-              type='date'
-              style={styles.inputBox}
-              inputStyle={styles.input}
-              inputBoxStyles={styles.input}
-              labelStyle={styles.formInputLabel}
-              showTextError={false}
-              error={errors.date}
+        <div className={styles.form}>
+          <AuthInput
+            register={register}
+            registerName='date'
+            label='Ամսաթիվ'
+            type='date'
+            style={styles.inputBox}
+            inputStyle={styles.input}
+            inputBoxStyles={styles.input}
+            defaultValue={moment(new Date()).format("DD/MM/YYYY")}
+            labelStyle={styles.formInputLabel}
+            showTextError={false}
+            error={errors.date}
+          />
+          <Controller
+            control={control}
+            name='cashRegisterId'
+            rules={{
+              required: t('Input_Errors.Required'),
+            }}
+            render={({ field: { onChange, name, value } }) => {
+              return (
+                <div className='formAutocomplete'>
+                  <AutoComplete
+                    value={value}
+                    name={name}
+                    onChange={onChange}
+                    id='cashBoxId'
+                    data={cashRegistersData}
+                    disable
+                    label={t('Forms.CassRegister')}
+                    placeholder="Ընտրեք դրամարկղը"
+                    showErrorText={false}
+                    style={styles.inputBox}
+                    labelStyle={styles.formInputLabel}
+                    error={errors.cashRegisterId}
+                  />
+                </div>
+              );
+            }}
+          />
+          {/* <Controller
+            control={control}
+            name='recipientId'
+            rules={{
+              required: t('Input_Errors.Required'),
+            }}
+            render={({ field: { onChange, name, value } }) => {
+              return (
+                <div className='formAutocomplete'>
+                  <AutoComplete
+                    value={value}
+                    name={name}
+                    onChange={onChange}
+                    id='recipientId'
+                    data={partnersData}
+                    label='Ստացող'
+                    placeholder="Ընտրեք ստացողին"
+                    showErrorText={false}
+                    style={styles.inputBox}
+                    labelStyle={styles.formInputLabel}
+                    error={errors.recipientId}
+                  />
+                </div>
+              );
+            }}
+          /> */}
+          <AuthInput
+            register={register}
+            registerName='money'
+            label={t('Forms.Money')}
+            showTextError={false}
+            type='number'
+            style={styles.inputBox}
+            inputStyle={styles.input}
+            inputBoxStyles={styles.input}
+            labelStyle={styles.formInputLabel}
+            error={errors.money}
+          />
+        </div>
+        <div className={styles.buttonRow}>
+          <div className={styles.buttons}>
+            <Button
+              type='button'
+              onClick={onCencele}
+              buttonType={ButtonTypes.Primery}
+              title={t('Button.Cancel')}
+              buttonStyle={styles.button}
             />
-            <Controller
-              control={control}
-              name='cashBoxId'
-              rules={{
-                required: t('Input_Errors.Required'),
-              }}
-              render={({ field: { onChange, name, value } }) => {
-                return (
-                  <div className='formAutocomplete'>
-                    <AutoComplete
-                      value={value}
-                      name={name}
-                      onChange={onChange}
-                      id='cashBoxId'
-                      data={cashBoxesData}
-                      label='Դրամարկղ'
-                      placeholder="Ընտրեք դրամարկղը"
-                      showErrorText={false}
-                      style={styles.inputBox}
-                      labelStyle={styles.formInputLabel}
-                      error={errors.cashBoxId}
-                    />
-                  </div>
-                );
-              }}
-            />
-            <Controller
-              control={control}
-              name='recipientId'
-              rules={{
-                required: t('Input_Errors.Required'),
-              }}
-              render={({ field: { onChange, name, value } }) => {
-                return (
-                  <div className='formAutocomplete'>
-                    <AutoComplete
-                      value={value}
-                      name={name}
-                      onChange={onChange}
-                      id='recipientId'
-                      data={partnersData}
-                      label='Ստացող'
-                      placeholder="Ընտրեք ստացողին"
-                      showErrorText={false}
-                      style={styles.inputBox}
-                      labelStyle={styles.formInputLabel}
-                      error={errors.recipientId}
-                    />
-                  </div>
-                );
-              }}
-            />
-            <AuthInput
-              register={register}
-              registerName='amount'
-              label='Գումար'
-              showTextError={false}
-              type='number'
-              style={styles.inputBox}
-              inputStyle={styles.input}
-              inputBoxStyles={styles.input}
-              labelStyle={styles.formInputLabel}
-              error={errors.amount}
-            />
-            <TextArea
-              register={register}
-              registerName='description'
-              label='Նկարագրություն'
-              style={styles.inputBox}
-              inputStyle={styles.input}
-              labelStyle={styles.formInputLabel}
+            <Button
+              type='submit'
+              buttonType={ButtonTypes.Primery}
+              title={t('Button.Submit')}
+              buttonStyle={styles.button}
             />
           </div>
-          <div className={styles.buttonRow}>
-            <div className={styles.buttons}>
-              <Button
-                type='button'
-                onClick={onCencele}
-                buttonType={ButtonTypes.Primery}
-                title='Չեղարկել'
-                buttonStyle={styles.button}
-              />
-              <Button
-                type='submit'
-                buttonType={ButtonTypes.Primery}
-                title='Հաստատել'
-                buttonStyle={styles.button}
-              />
-            </div>
-          </div>
-        </form>
+        </div>
+      </form>
+      }
       </div>
     </div>
   )

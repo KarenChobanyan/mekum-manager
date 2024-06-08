@@ -45,7 +45,8 @@
     "Cost": "Cтоимость",
     "Money": "Общий",
     "Remainder":"Остаток",
-    "Document_Number":"Номер документа"
+    "Document_Number":"Номер документа",
+    "CassRegister":"Касса"
   },
   "Employee":{
     "Title":"Сотрудник",

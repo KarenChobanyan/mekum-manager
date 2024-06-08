@@ -114,13 +114,13 @@ const CreateSales: React.FC = () => {
                     type='button'
                     onClick={onCencele}
                     buttonType={ButtonTypes.Primery}
-                    title='Չեղարկել'
+                    title={t('Button.Cancel')}
                     buttonStyle={styles.button}
                   />
                   <Button
                     type='submit'
                     buttonType={ButtonTypes.Primery}
-                    title='Հաստատել'
+                    title={t('Button.Submit')}
                     buttonStyle={styles.button}
                   />
                 </div>

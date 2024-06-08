@@ -39,7 +39,8 @@
     "Cost": "Արժեք",
     "Money": "Գումար",
     "Remainder":"Մնացորդ",
-    "Document_Number":"Փասթաթղթի համար"
+    "Document_Number":"Փասթաթղթի համար",
+    "CassRegister":"Դրամարկղ"
   },
   "Roles": {
     "Admin": "Ադմինիստրատոր",
