@@ -7,7 +7,6 @@ import { IWarehouseEntryResponse } from "../../../Interfaces/responseTypes";
 
 const useStorageIncome = (id: string) => {
     const { data: entryData } = useGetWarehouseEntriesQuery({ id: id!, limit: 10, offset: 0 });
-    console.log(entryData)
     const headerData: ITableHeader[] = [
         {
             title: `${t('Forms.Date')}`,

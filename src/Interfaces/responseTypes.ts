@@ -156,5 +156,57 @@ export interface IGoodBatch {
 
 export type GetGoodBatchesResponse = IGoodBatch[];
 
+export interface IWarehouseExitResponseData {
+  id: number;
+  documentNumber: number;
+  expenseAccountId: number;
+  expenseAccount: IExpenseAccount;
+  hasRequested?: null;
+  accountant?: null;
+  allow?: null;
+  comment?: null;
+  container?: null;
+  date: string;
+  mediator?: null;
+  powerOfAttorney?: null;
+  warehouseId: number;
+  warehouse: IWarehouse;
+  exitSpecification?: (IExitSpecificationEntity)[] | null;
+  warehouseSignificanceId?: null;
+  warehouseExitOrderOperation?: (null)[] | null;
+  draft: number;
+};
+
+export interface IExpenseAccount {
+  id: number;
+  name: string;
+  account: string;
+  isAccumulatedAccount: number;
+  acumulatedAccountId: string;
+  offBalanceSheet: number;
+  accountingByPartners: number;
+  analyticalGroup1?: number;
+  analyticalGroup2?: number;
+  calculationsTypeId: string;
+  disregard: number;
+};
+
+export interface IExitSpecificationEntity {
+  id: number;
+  warehouseExitOrderId: number;
+  warehouseEntryOrderId: number;
+  wareEntryOPrId: number;
+  warehouseExitOrderProductId: number;
+  accInvProdId?: null;
+  quantity: number;
+  materialValueId: number;
+  createdAt: string;
+  updatedAt: string;
+  money?: null;
+};
+
+
+export type WarehouseExitResponse = IWarehouseExitResponseData[]
+
 
 
