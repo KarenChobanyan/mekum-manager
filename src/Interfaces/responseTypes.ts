@@ -151,7 +151,8 @@ export interface IGoodBatch {
   warehouseEntryOrderId: number,
   materialValueId: number,
   quantity: number,
-  price: number
+  price?: number,
+  money?:number
 };
 
 export type GetGoodBatchesResponse = IGoodBatch[];
@@ -206,7 +207,94 @@ export interface IExitSpecificationEntity {
 };
 
 
-export type WarehouseExitResponse = IWarehouseExitResponseData[]
+export type WarehouseExitResponse = IWarehouseExitResponseData[];
+
+export interface IAccountInvoiceResponseData {
+  id: number;
+  date: string;
+  documentNumber: number;
+  partnerId: number;
+  partner: IGetPartnersRespData;
+  lineCode?: null;
+  contract?: null;
+  contractDate?: null;
+  subsectionId?: null;
+  seria?: null;
+  number?: null;
+  dateOfDischarge?: null;
+  comment?: null;
+  warehouseId: number;
+  warehouseSignificanceId?: null;
+  accountInvoiceProduct?: (IAccountInvoiceProductEntity)[] | null;
+  accountInvoiceFunction?: (null)[] | null;
+  accountInvoiceSpecification?: (AccountInvoiceSpecificationEntity)[] | null;
+  aahType: number;
+  draft: number;
+  returned: number;
+  placeOfDelivery: string;
+  destination?: null;
+  currencyId: number;
+  currencyExchangeRate: number;
+  buyerAccountId: number;
+  vatAccountId?: null;
+  previousDayCurrencyExchangeRate?: null;
+  fromDate?: null;
+  receiptPrepaymentAccountId?: null;
+  invoiceId?: null;
+  autlandingType?: null;
+  retailSales: number;
+  cashRegisterReceipt?: null;
+  paymentType?: null;
+  cashRegisterId?: null;
+  billingAccountInBanksId?: null;
+  accountId?: null;
+  membershipId?: null;
+  isPaid?: null;
+  serviceProvider?: null;
+  productProvider: number;
+  accDocSubmittedAccountInvoice?: (null)[] | null;
+  deliveryDate?: null;
+  emailHistory?: (null)[] | null;
+};
+
+export interface IAccountInvoiceProductEntity {
+  id: number;
+  accInvId: number;
+  warehouseSignificanceId: number;
+  warehouseId: number;
+  materialValueId: number;
+  point: string;
+  count: number;
+  money: number;
+  moneyAmd: number;
+  isAah: number;
+  expenseAccountId?: number;
+  revenueAccountId?: number;
+  availability: number;
+  parentId?: number;
+  date: string;
+  measurementUnitValue: number;
+  measurementUnitId: number;
+  moneyWithoutDiscount?: number;
+  discount?: number;
+  exciseTax: number;
+  exciseTaxTotal: number;
+};
+export interface AccountInvoiceSpecificationEntity {
+  id: number;
+  accInvId: number;
+  warehouseEntryOrderId: number;
+  wareEntryOPrId: number;
+  quantity: number;
+  materialValueId: number;
+  createdAt: string;
+  updatedAt: string;
+  money: number;
+  accInvProdId: number;
+};
+
+export type AccounInvoiceResponce = IAccountInvoiceResponseData[];
+
 
 
 

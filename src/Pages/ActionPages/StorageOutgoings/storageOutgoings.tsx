@@ -86,22 +86,6 @@ const StorageOutgoings: React.FC = () => {
           :
           <Loading />
       }
-      {/* <div className={styles.body}>
-        {data.length > 0
-          &&
-          <div className={styles.header}></div>
-        }
-          {data.length > 0
-            ?                                                              #################################################### Delete
-           <div>StorageIncomes</div> 
-            :
-            <NoData
-            withButton
-            btnText={t('Button.Add')}
-            btnOnclick={()=>navigate('/storage_outgoings/create')}
-            />
-          }
-      </div> */}
     </div>
   )
 }

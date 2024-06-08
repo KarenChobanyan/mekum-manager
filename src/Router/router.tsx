@@ -41,7 +41,7 @@ const Router: React.FC = () => {
                 }
             />
              <Route
-                path='/sales/create'
+                path='/sales/create/:id'
                 element={
                     <Layout title={t('Actions.Sales.Title')} children={<CreateSalesPage/>} />
                 }

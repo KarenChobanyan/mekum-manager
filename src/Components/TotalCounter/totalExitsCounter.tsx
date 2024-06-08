@@ -3,12 +3,13 @@ import { useGetGoodBatchesQuery } from '../../API/direcroriesApi';
 import { GetGoodBatchesResponse, IGoodBatch } from '../../Interfaces/responseTypes';
 import { UseFormSetValue } from 'react-hook-form';
 import { IStorageOutgoingFormValues } from '../../Pages/ActionPages/StorageOutgoings/Create/createStorageOutgoings-hooks';
+import { ISalesFormValues } from '../../Pages/ActionPages/Sales/Create/createSales-hooks';
 
 interface IProps {
     warehouseId?: string,
     materialValueId?: string,
     count?: string
-    setValue: UseFormSetValue<IStorageOutgoingFormValues>,
+    setValue: UseFormSetValue<IStorageOutgoingFormValues | ISalesFormValues>,
     index: number
 }
 
@@ -22,33 +23,31 @@ const TotalExitsCounter: React.FC<IProps> = (props) => {
             let initCount = +count
             let exits:IGoodBatch[] | [] = [];
               data.forEach((item) => {
-                if (initCount > item.quantity) {
-                    initCount -= item.quantity
-                    total = total + (item.quantity * item.price)
-                    const exitItem:IGoodBatch = {
-                        materialValueId:item.materialValueId,
-                        price:item.price,
-                        wareEntryOPrId:item.wareEntryOPrId,
-                        warehouseEntryOrderId:item.warehouseEntryOrderId,
-                        quantity:item.quantity
+                if(item.quantity > 0){
+                    if (initCount > item.quantity) {
+                        initCount -= item.quantity
+                        total = total + (item.quantity * item.price!)
+                        const exitItem:IGoodBatch = {
+                            materialValueId:item.materialValueId,
+                            money:item.price,
+                            wareEntryOPrId:item.wareEntryOPrId,
+                            warehouseEntryOrderId:item.warehouseEntryOrderId,
+                            quantity:item.quantity
+                        }
+                        exits = [...exits,exitItem]
+                    } else if ((initCount < item.quantity || initCount === item.quantity) && initCount !== 0) {
+                        const lastCount = initCount;
+                        initCount = 0
+                        total = total + (lastCount * item.price!)
+                        const exitItem:IGoodBatch = {
+                            materialValueId:item.materialValueId,
+                            money:item.price,
+                            wareEntryOPrId:item.wareEntryOPrId,
+                            warehouseEntryOrderId:item.warehouseEntryOrderId,
+                            quantity:lastCount
+                        }
+                        exits = [...exits,exitItem]
                     }
-                    exits = [...exits,exitItem]
-                    return
-                } else if ((initCount < item.quantity || initCount === item.quantity) && initCount !== 0) {
-                    const lastCount = initCount;
-                    initCount = 0
-                    total = total + (lastCount * item.price)
-                    const exitItem:IGoodBatch = {
-                        materialValueId:item.materialValueId,
-                        price:item.price,
-                        wareEntryOPrId:item.wareEntryOPrId,
-                        warehouseEntryOrderId:item.warehouseEntryOrderId,
-                        quantity:lastCount
-                    }
-                    exits = [...exits,exitItem]
-                    return
-                } else {
-                    return
                 }
             });
             setValue(`goods.${index}.exits`,exits)
@@ -56,6 +55,7 @@ const TotalExitsCounter: React.FC<IProps> = (props) => {
 
         };
         const totalMoney = totalMoneyCounter(count!, goodBatchesData!)
+        setValue(`goods.${index}.money`,String(totalMoney!))
         return (
             <div>
                 {totalMoney!}
