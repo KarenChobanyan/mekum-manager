@@ -26,10 +26,9 @@
 }
 
 .itemIcon {
-    width: 150px;
+    width: 70px;
     @include flexStyles(flex, row, center, center);
     text-wrap: nowrap;
-    //  padding: 5px;
     border-right: 1px solid $dark_grey;
 }
 

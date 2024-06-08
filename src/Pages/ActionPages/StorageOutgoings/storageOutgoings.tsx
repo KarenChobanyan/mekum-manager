@@ -3,7 +3,7 @@ import { Controller } from 'react-hook-form';
 import { useAutocompleteData, useGeneralHooks, useWarehouseHooks } from '../../../General/Hooks/hooks';
 import useStorageExits from './storageExits-hooks';
 import { ButtonTypes } from '../../../Interfaces/componentTypes';
-import { AutoComplete, Button, Loading, NoData } from '../../../Components';
+import { AutoComplete, Button, CustomTable, Loading, NoData } from '../../../Components';
 import styles from '../styles.module.scss';
 
 const StorageOutgoings: React.FC = () => {
@@ -11,7 +11,7 @@ const StorageOutgoings: React.FC = () => {
   const { myWarehousesData } = useAutocompleteData();
   const [warehouseId, setWarehouseId] = useState<string | undefined>(myWarehousesData?.[0].id!)
   const { control } = useWarehouseHooks();
-  const { exitsData } = useStorageExits(warehouseId! ?? myWarehousesData?.[0].id!);
+  const { exitsData,headerData,bodyData } = useStorageExits(warehouseId! ?? myWarehousesData?.[0].id!);
 
   return (
     <div className={styles.container}>
@@ -62,17 +62,16 @@ const StorageOutgoings: React.FC = () => {
             {exitsData?.length! > 0
               ?
               (
-                <div>body</div>
-                // bodyData
-                //   ?
-                //   <div className={styles.fullBody}>
-                //     <CustomTable
-                //       headerData={headerData}
-                //       bodyData={bodyData}
-                //     />
-                //   </div>
-                //   :
-                //   <Loading />
+                bodyData
+                  ?
+                  <div className={styles.fullBody}>
+                    <CustomTable
+                      headerData={headerData}
+                      bodyData={bodyData}
+                    />
+                  </div>
+                  :
+                  <Loading />
               )
               :
               <div className={styles.emptyBody}>

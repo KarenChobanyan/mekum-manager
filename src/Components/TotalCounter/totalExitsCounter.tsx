@@ -16,7 +16,6 @@ const TotalExitsCounter: React.FC<IProps> = (props) => {
     const { warehouseId, materialValueId, count, index, setValue } = props;
     const { data: goodBatchesData } = useGetGoodBatchesQuery({ warehouseId: warehouseId!, materialValueId: materialValueId! }, { skip: materialValueId === undefined && count === undefined });
 
-
     if (count && materialValueId) {
         const totalMoneyCounter = (count: string, data: GetGoodBatchesResponse) => {
             let total: number = 0
@@ -57,7 +56,6 @@ const TotalExitsCounter: React.FC<IProps> = (props) => {
 
         };
         const totalMoney = totalMoneyCounter(count!, goodBatchesData!)
-        console.log(goodBatchesData, 'goodBatchesData')
         return (
             <div>
                 {totalMoney!}

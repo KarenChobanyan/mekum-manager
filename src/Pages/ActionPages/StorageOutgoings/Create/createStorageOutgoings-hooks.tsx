@@ -1,15 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import {t} from 'i18next';
+import moment from "moment";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
 import { useAutocompleteData, useGeneralHooks } from "../../../../General/Hooks/hooks";
 import { IGoodBatch } from "../../../../Interfaces/responseTypes";
+import { usePostWarehoseExitMutation } from "../../../../API/actionsApi";
+import { IExitGoods, IPostWarehouseExitRequest } from "../../../../Interfaces/requestTypes";
+import { toast } from "react-toastify";
 
 export interface IStorageOutgoingFormValues {
     documentDate: string,
     warehouseId: IAutocompleteItem,
     partnersId: IAutocompleteItem,
     goods: IStorageOutgoingItem[]
-}
+};
 
 export interface IStorageOutgoingItem {
     materialValueId: IAutocompleteItem | null,
@@ -22,6 +27,7 @@ export interface IStorageOutgoingItem {
 
 
 const useCreateStorageOutgoingHooks = (id: string) => {
+    const [add, { isLoading, isSuccess, isError }] = usePostWarehoseExitMutation();
     const { myWarehousesData } = useAutocompleteData();
     const warehouse = myWarehousesData?.filter((item) => item.id === id)[0];
     const { navigate } = useGeneralHooks();
@@ -42,6 +48,16 @@ const useCreateStorageOutgoingHooks = (id: string) => {
         setValue('warehouseId', warehouse!)
     }, [warehouse]);
 
+    useEffect(() => {
+        if (isSuccess) {
+            toast.success(t('Toast.Success.Register'))
+            navigate(-1)
+            reset();
+        } else if (isError) {
+            toast.error(t('Toast.Error.Register'))
+        }
+    }, [isSuccess, isError]);
+
 
     const onAddItem = () => {
         append({ materialValueId: null, quantity: '', point: '',  count: '', money: "",exits:[] })
@@ -53,7 +69,23 @@ const useCreateStorageOutgoingHooks = (id: string) => {
     };
 
     const onSubmit: SubmitHandler<IStorageOutgoingFormValues | FieldValues> = (values) => {
-        console.log(values)
+        const goodsList: IExitGoods[] = values.goods?.map((item:IStorageOutgoingItem): IExitGoods => {
+            return {
+                warehouseId: +(values.warehouseId as IAutocompleteItem).id,
+                point: item.point,
+                count: +item.count,
+                materialValueId: +(item.materialValueId as IAutocompleteItem).id,
+                money: +item.money,
+                exits:item.exits
+            }
+        });
+        const payload:IPostWarehouseExitRequest = {
+            documentDate: moment(new Date()).format("YYYY-MM-DD"),
+            warehouseId: +(values.warehouseId as IAutocompleteItem).id,
+            partnersId: +(values.partnersId as IAutocompleteItem).id,
+            goods: goodsList
+        };
+        add(payload)
     };
 
     return {
@@ -67,6 +99,7 @@ const useCreateStorageOutgoingHooks = (id: string) => {
         control,
         errors,
         fields,
+        isLoading,
         onAddItem,
         onCencele,
     }

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Control, Controller, FieldArrayWithId, FieldErrors, UseFieldArrayRemove, UseFormRegister, UseFormSetError, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import React from 'react';
+import { Control, Controller, FieldArrayWithId, FieldErrors, UseFieldArrayRemove, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import {t} from 'i18next';
 import { IStorageOutgoingFormValues } from './createStorageOutgoings-hooks';
 import { useAutocompleteData } from '../../../../General/Hooks/hooks';
 import { ITableFormItemData, ITableHeader, TableCellContentTypes } from '../../../../Interfaces/componentTypes';
@@ -19,36 +20,38 @@ interface IProps {
     watch: UseFormWatch<IStorageOutgoingFormValues>,
 };
 
-const headerData: ITableHeader[] = [
-    {
-        title: "",
-        contentType: TableCellContentTypes.ICON
-    },
-    {
-        title: "Անվանում",
-        contentType: TableCellContentTypes.SELECT
-    },
-    {
-        title: "Միավոր",
-        contentType: TableCellContentTypes.NUMBER
-    },
-    {
-        title: "Մնացորդ",
-        contentType: TableCellContentTypes.NUMBER
-    },
-    {
-        title: "Քանակ",
-        contentType: TableCellContentTypes.NUMBER
-    },
-    {
-        title: "Գումար",
-        contentType: TableCellContentTypes.NUMBER
-    }
-];
+
 
 const FormItems: React.FC<IProps> = (props) => {
     const { fields, remove, register, control, errors, id, onAddItem, setValue, watch } = props;
     const { getGoodsUnitType, myGoodsdata, getRemainder } = useAutocompleteData(id!);
+
+    const headerData: ITableHeader[] = [
+        {
+            title: "",
+            contentType: TableCellContentTypes.ICON
+        },
+        {
+            title: `${t('Forms.Material')}`,
+            contentType: TableCellContentTypes.SELECT
+        },
+        {
+            title: `${t('Forms.Point')}`,
+            contentType: TableCellContentTypes.NUMBER
+        },
+        {
+            title: `${t('Forms.Remainder')}`,
+            contentType: TableCellContentTypes.NUMBER
+        },
+        {
+            title: `${t('Forms.Count')}`,
+            contentType: TableCellContentTypes.NUMBER
+        },
+        {
+            title: `${t('Forms.Money')}`,
+            contentType: TableCellContentTypes.NUMBER
+        }
+    ];
 
     const createItemForm = (): Array<ITableFormItemData[]> => {
         return fields.map((item, index): ITableFormItemData[] => {

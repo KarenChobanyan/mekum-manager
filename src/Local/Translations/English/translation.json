@@ -40,6 +40,7 @@
     "Discount": "Discount",
     "Cost": "Cost",
     "Money": "Money",
+    "Remainder":"Remainder",
     "Document_Number":"Document number"
   },
   "Employee":{
