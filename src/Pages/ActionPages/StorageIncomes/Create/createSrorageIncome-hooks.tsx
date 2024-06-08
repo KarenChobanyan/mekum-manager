@@ -91,7 +91,6 @@ const useCreateStorageIncomeHooks = (id:string) => {
             partnersId: +(values.partnersId as IAutocompleteItem).id,
             goods: goodsList
         };
-        console.log(payload)
      add(payload)
     };
 

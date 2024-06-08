@@ -1,55 +1,62 @@
-import { ReactNode, useEffect, useState } from "react";
+import {useEffect } from "react";
 import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
-import { useAutocompleteData, useDirectoriesHooks, useGeneralHooks } from "../../../../General/Hooks/hooks";
+import { useAutocompleteData, useGeneralHooks } from "../../../../General/Hooks/hooks";
+import { IGoodBatch } from "../../../../Interfaces/responseTypes";
+import { usePostSaleMutation } from "../../../../API/actionsApi";
+import { toast } from "react-toastify";
+import { IExitGoods, IPostWarehouseExitRequest } from "../../../../Interfaces/requestTypes";
+import moment from "moment";
 
-export interface ISalesferFormValues {
-    date: string,
-    storageId: IAutocompleteItem,
-    buyerId: IAutocompleteItem,
-    items: ISaleItem[]
+export interface ISalesFormValues {
+    documentDate: string,
+    warehouseId: IAutocompleteItem,
+    partnerId: IAutocompleteItem,
+    goods: ISaleGoods[]
 }
 
-export interface ISaleItem {
-    storage?: string,
-    buyer?: string,
-    title: IAutocompleteItem | null,
-    unitId: string,
-    price: string,
+export interface ISaleGoods {
+    materialValueId: IAutocompleteItem | null,
+    point: string,
+    quantity: string,
     count: string,
-    discount: string
-    cost: string,
-    total: string
+    money: string,
+    exits:IGoodBatch[] | []
 };
 
 
-const useCreateSalesHooks = () => {
-    const { navigate } = useGeneralHooks();
-    const [storageName, setStorageName] = useState<string>("");
-    const [buyerName, setBuyerName] = useState<string>("");
-    const { register, handleSubmit, watch, control, reset, setValue, formState: { errors } } = useForm<ISalesferFormValues>({
+const useCreateSalesHooks = (id: string) => {
+    const { navigate,t } = useGeneralHooks();
+    const [add, { isLoading, isSuccess, isError }] = usePostSaleMutation();
+    const { myWarehousesData } = useAutocompleteData();
+    const warehouse = myWarehousesData?.filter((item) => item.id === id)[0];
+    const { register, handleSubmit, watch, control, reset, setValue, formState: { errors } } = useForm<ISalesFormValues>({
         defaultValues: {
-            items: [{ storage: storageName, buyer: buyerName, title: null, unitId: '', price: '', count: '', discount: "", cost: '', total: "" }]
+            goods: [{ materialValueId: null, quantity: '', point: '', count: '',  money: "",exits:[] }]
         },
         mode: 'all'
     });
     const { fields, append, remove } = useFieldArray({
         control,
-        name: 'items'
+        name: 'goods'
     });
 
     useEffect(() => {
-        const storageName = watch('storageId')?.title!;
-        const buyerName = watch('buyerId')?.title!;
-        if (storageName || buyerName) {
-            setStorageName(storageName)
-            setBuyerName(buyerName)
-        }
-    }, [watch("storageId"), watch("buyerId")]);
+        setValue('warehouseId', warehouse!)
+    }, [warehouse]);
 
+    useEffect(() => {
+        if (isSuccess) {
+            toast.success(t('Toast.Success.Register'))
+            navigate(-1)
+            reset();
+        } else if (isError) {
+            toast.error(t('Toast.Error.Register'))
+        }
+    }, [isSuccess, isError]);
 
     const onAddItem = () => {
-        append({ storage: storageName, buyer: buyerName, title: null, unitId: '', price: '', count: '', discount: "", cost: '', total: "" })
+        append({ materialValueId: null, quantity: '', point: '',  count: '', money: "",exits:[] })
     };
 
     const onCencele = () => {
@@ -57,8 +64,24 @@ const useCreateSalesHooks = () => {
         reset()
     };
 
-    const onSubmit: SubmitHandler<ISalesferFormValues | FieldValues> = (values) => {
-        console.log(values)
+    const onSubmit: SubmitHandler<ISalesFormValues | FieldValues> = (values) => {
+        const goodsList: IExitGoods[] = values.goods?.map((item: ISaleGoods): IExitGoods => {
+            return {
+                warehouseId: +(values.warehouseId as IAutocompleteItem).id,
+                point: item.point,
+                count: +item.count,
+                materialValueId: +(item.materialValueId as IAutocompleteItem).id,
+                money: +item.money,
+                exits: item.exits
+            }
+        });
+        const payload: IPostWarehouseExitRequest = {
+            documentDate: moment(new Date()).format("YYYY-MM-DD"),
+            warehouseId: +(values.warehouseId as IAutocompleteItem).id,
+            partnerId: +(values.partnerId as IAutocompleteItem).id,
+            goods: goodsList
+        };
+         add(payload)
     };
 
     return {
@@ -72,8 +95,7 @@ const useCreateSalesHooks = () => {
         control,
         errors,
         fields,
-        storageName,
-        buyerName,
+        isLoading,
         onAddItem,
         onCencele
     }

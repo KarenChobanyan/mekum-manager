@@ -29,7 +29,7 @@ const CreateStorageOutgoings: React.FC = () => {
                 <AuthInput
                   register={register}
                   registerName='documentDate'
-                  label='Ամսաթիվ'
+                  label={t('Forms.Date')}
                   type='date'
                   style={styles.inputBox}
                   inputStyle={styles.input}
@@ -57,8 +57,8 @@ const CreateStorageOutgoings: React.FC = () => {
                           id='storageId'
                           disable
                           data={myWarehousesData}
-                          label='Պահեստ'
-                          placeholder="Ընտրեք պահեստը"
+                          label={t('Forms.Warehouse')}
+                          placeholder={t('Forms.Select_Warehouse')}
                           showErrorText={false}
                           style={styles.inputBox}
                           labelStyle={styles.formInputLabel}
@@ -70,7 +70,7 @@ const CreateStorageOutgoings: React.FC = () => {
                 />
                 <Controller
                   control={control}
-                  name='partnersId'
+                  name='partnerId'
                   rules={{
                     required: t('Input_Errors.Required'),
                   }}
@@ -83,12 +83,12 @@ const CreateStorageOutgoings: React.FC = () => {
                           onChange={onChange}
                           id='partnersId'
                           data={partnersData}
-                          label='Ստացող'
-                          placeholder="Ընտրեք ստացողին"
+                          label={t('Forms.Recipient')}
+                          placeholder={t('Forms.Select_Recipient')}
                           showErrorText={false}
                           style={styles.inputBox}
                           labelStyle={styles.formInputLabel}
-                          error={errors.partnersId}
+                          error={errors.partnerId}
                         />
                       </div>
                     );

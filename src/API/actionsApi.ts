@@ -1,11 +1,11 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from './API';
 import { IGetStorageEntriesRequestData, IPostStorageIncomeRequestData, IPostWarehouseExitRequest } from '../Interfaces/requestTypes';
-import { IWarehouseEntryResponse, WarehouseExitResponse } from '../Interfaces/responseTypes';
+import { AccounInvoiceResponce, IWarehouseEntryResponse, WarehouseExitResponse } from '../Interfaces/responseTypes';
 
 export const actionsApi = createApi({
     reducerPath: 'actionsApi',
-    tagTypes: ['WarehouseEntries','WarehouseExits'],
+    tagTypes: ['WarehouseEntries','WarehouseExits','Sales'],
     baseQuery: axiosBaseQuery({
         baseUrl: process.env.REACT_APP_API_KEY,
     }),
@@ -40,6 +40,21 @@ export const actionsApi = createApi({
             }),
             invalidatesTags: ['WarehouseExits']
         }),
+        getSales: builder.query<AccounInvoiceResponce, IGetStorageEntriesRequestData>({
+            query: ({ id, limit, offset }) => ({
+                url: `/mekum/account-invoices?id=${id}&limit=${limit}&offset=${offset}`,
+                method: 'GET',
+            }),
+            providesTags: ['Sales']
+        }),
+        postSale: builder.mutation<any, IPostWarehouseExitRequest>({
+            query: (credentials) => ({
+                url: '/mekum/sell',
+                method: 'POST',
+                data: credentials,
+            }),
+            invalidatesTags: ['Sales']
+        }),
     }),
 });
 
@@ -48,4 +63,6 @@ export const {
     useGetWarehouseEntriesQuery,
     useGetWarehouseExitsQuery,
     usePostWarehoseExitMutation,
+    useGetSalesQuery,
+    usePostSaleMutation
 } = actionsApi;

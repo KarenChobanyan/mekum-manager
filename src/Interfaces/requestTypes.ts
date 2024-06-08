@@ -38,7 +38,7 @@ export interface IGetGoodBatchRequest {
 export interface IPostWarehouseExitRequest {
   documentDate: string,
   warehouseId: number,
-  partnersId: number,
+  partnerId: number,
   goods: IExitGoods[]
 }
 
