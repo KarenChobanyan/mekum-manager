@@ -45,7 +45,8 @@
     "Cost": "Cost",
     "Money": "Money",
     "Remainder":"Remainder",
-    "Document_Number":"Document number"
+    "Document_Number":"Document number",
+    "CassRegister":"Cash box"
   },
   "Employee":{
     "Title":"Employee",

@@ -51,3 +51,9 @@ export interface IExitGoods {
   exits: IGoodBatch[]
 }
 
+export interface ICashoutRequest {
+  date: string,
+  cashRegisterId: number,
+  money: number,
+}
+

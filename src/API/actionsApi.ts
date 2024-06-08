@@ -1,11 +1,12 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from './API';
-import { IGetStorageEntriesRequestData, IPostStorageIncomeRequestData, IPostWarehouseExitRequest } from '../Interfaces/requestTypes';
-import { AccounInvoiceResponce, IWarehouseEntryResponse, WarehouseExitResponse } from '../Interfaces/responseTypes';
+import { ICashoutRequest, IGetStorageEntriesRequestData, IPostStorageIncomeRequestData, IPostWarehouseExitRequest } from '../Interfaces/requestTypes';
+import { AccounInvoiceResponce, CashOutResponse, IWarehouseEntryResponse, WarehouseExitResponse } from '../Interfaces/responseTypes';
+import { ICashoutFormValues } from '../Pages/ActionPages/CashOut/Create/createCashout-hooks';
 
 export const actionsApi = createApi({
     reducerPath: 'actionsApi',
-    tagTypes: ['WarehouseEntries','WarehouseExits','Sales'],
+    tagTypes: ['WarehouseEntries','WarehouseExits','Sales','CashOut'],
     baseQuery: axiosBaseQuery({
         baseUrl: process.env.REACT_APP_API_KEY,
     }),
@@ -55,6 +56,21 @@ export const actionsApi = createApi({
             }),
             invalidatesTags: ['Sales']
         }),
+        getCashOuts: builder.query<CashOutResponse, IGetStorageEntriesRequestData>({
+            query: ({ id, limit, offset }) => ({
+                url: `/mekum/cash-register-exits?id=${id}&limit=${limit}&offset=${offset}`,
+                method: 'GET',
+            }),
+            providesTags: ['CashOut']
+        }),
+        postCashout: builder.mutation<any, ICashoutRequest>({
+            query: (credentials) => ({
+                url: '/mekum/cash-register-exit',
+                method: 'POST',
+                data: credentials,
+            }),
+            invalidatesTags: ['CashOut']
+        }),
     }),
 });
 
@@ -64,5 +80,7 @@ export const {
     useGetWarehouseExitsQuery,
     usePostWarehoseExitMutation,
     useGetSalesQuery,
-    usePostSaleMutation
+    usePostSaleMutation,
+    useGetCashOutsQuery,
+    usePostCashoutMutation
 } = actionsApi;

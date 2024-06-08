@@ -1,19 +1,37 @@
+import { useEffect } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
-import { useDirectoriesHooks, useGeneralHooks } from "../../../../General/Hooks/hooks";
+import { useAutocompleteData, useGeneralHooks } from "../../../../General/Hooks/hooks";
+import { usePostCashoutMutation } from "../../../../API/actionsApi";
+import { ICashoutRequest } from "../../../../Interfaces/requestTypes";
 
 export interface ICashoutFormValues {
     date: string,
-    cashBoxId: IAutocompleteItem,
-    recipientId: IAutocompleteItem,
-    amount: string,
-    description:string
+    cashRegisterId: IAutocompleteItem,
+    money: string,
 };
 
-const useCreateCashoutHooks = () => {
-    const {cashBoxesData} = useDirectoriesHooks();
-    const { navigate } = useGeneralHooks();
-    const { register, handleSubmit,  control, reset, formState: { errors } } = useForm<ICashoutFormValues>({mode:"all"});
+const useCreateCashoutHooks = (id: string) => {
+    const [add, { isLoading, isSuccess, isError }] = usePostCashoutMutation();
+    const { navigate, t } = useGeneralHooks();
+    const { cashRegistersData } = useAutocompleteData();
+    const cashRegister = cashRegistersData?.filter((item) => item.id === id)[0];
+    const { register, handleSubmit, control, reset, setValue, formState: { errors } } = useForm<ICashoutFormValues>({ mode: "all" });
+
+    useEffect(() => {
+        setValue('cashRegisterId', cashRegister!)
+    }, [cashRegister]);
+
+    useEffect(() => {
+        if (isSuccess) {
+            toast.success(t('Toast.Success.Register'))
+            navigate(-1)
+            reset();
+        } else if (isError) {
+            toast.error(t('Toast.Error.Register'))
+        }
+    }, [isSuccess, isError]);
 
     const onCencele = () => {
         navigate(-1)
@@ -21,7 +39,12 @@ const useCreateCashoutHooks = () => {
     };
 
     const onSubmit: SubmitHandler<ICashoutFormValues | FieldValues> = (values) => {
-        console.log(values)
+        const payload: ICashoutRequest = {
+            date: values.date!,
+            cashRegisterId: +(values.cashRegisterId as IAutocompleteItem).id,
+            money: +values.money
+        }
+        add(payload)
     };
 
     return {
@@ -29,9 +52,10 @@ const useCreateCashoutHooks = () => {
         handleSubmit,
         onSubmit,
         onCencele,
-        cashBoxesData,
+        cashRegistersData,
         control,
         errors,
+        isLoading,
     }
 };
 

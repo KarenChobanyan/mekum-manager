@@ -113,7 +113,7 @@ const Router: React.FC = () => {
                 }
             />
              <Route
-                path='/cashouts/create'
+                path='/cashouts/create/:id'
                 element={
                     <Layout title={t('Actions.CashOut.Title')} children={<CreateCashoutPage/>} />
                 }

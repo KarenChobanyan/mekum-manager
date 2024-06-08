@@ -295,6 +295,101 @@ export interface AccountInvoiceSpecificationEntity {
 
 export type AccounInvoiceResponce = IAccountInvoiceResponseData[];
 
+export interface ICashRegisterResponseData {
+  account: Account;
+  accountId: number;
+  code: number;
+  deoN?: null;
+  dmoN?: null;
+  hdmNonTaxable?: null;
+  hdmPrintType?: null;
+  hdmRegisN?: null;
+  hdmTaxable?: null;
+  currencyId: number;
+  ip?: null;
+  isMain: number;
+  name: string;
+  password?: null;
+  port?: null;
+  id: number;
+};
+export interface Account {
+  id: number;
+  name: string;
+  account: string;
+  isAccumulatedAccount: number;
+  acumulatedAccountId: string;
+  offBalanceSheet: number;
+  accountingByPartners: number;
+  analyticalGroup1?: null;
+  analyticalGroup2?: null;
+  calculationsTypeId: string;
+  disregard: number;
+};
+
+export type CashRegistersResponse = ICashRegisterResponseData[];
+
+export interface ICashoutResponseData {
+  id: number;
+  cashRegisterId: number;
+  date: string;
+  documentNumber: number;
+  correspondentAccountId: number;
+  exitAccountId?: null;
+  currencyId: number;
+  amountCurrency1: number;
+  amountCurrency2: number;
+  accumulatedAmount?: null;
+  partnersId?: null;
+  received?: null;
+  npNshPassword?: null;
+  basis?: null;
+  appendix?: null;
+  otherInformation?: null;
+  optiona?: null;
+  typicalOperation?: null;
+  cashRegister: CashRegister;
+  currencies: Currencies;
+  provide?: null;
+  warehouseSignificanceId: number;
+  hmGoalId?: null;
+  transactionId: number;
+  currencyRate: number;
+  paymentGoal?: null;
+  draft: number;
+  cashRegisterExitFunctions?: (null)[] | null;
+  accountInvoiceId?: null;
+}
+export interface CashRegister {
+  id: number;
+  code: number;
+  name: string;
+  accountId: number;
+  isMain: number;
+  dmoN?: null;
+  deoN?: null;
+  hdmRegisN?: null;
+  ip?: null;
+  port?: null;
+  password?: null;
+  hdmNonTaxable?: null;
+  hdmTaxable?: null;
+  hdmPrintType?: null;
+  currencyId: number;
+};
+export interface Currencies {
+  id: number;
+  name: string;
+  currency: string;
+  isDefault: number;
+};
+
+export type CashOutResponse = ICashoutResponseData[]
+
+
+
+
+
 
 
 

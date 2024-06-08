@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from './API';
-import { AllGoodsResponse, GetEmployeesResponseData, GetGoodBatchesResponse, GetWarehousesResponseData, GoodsResponseData, IGetPartnersResponse } from '../Interfaces/responseTypes';
+import { AllGoodsResponse, CashRegistersResponse, GetEmployeesResponseData, GetGoodBatchesResponse, GetWarehousesResponseData, GoodsResponseData, IGetPartnersResponse } from '../Interfaces/responseTypes';
 import { IGetGoodBatchRequest } from '../Interfaces/requestTypes';
 
 export const directoriesApi = createApi({
@@ -51,9 +51,15 @@ export const directoriesApi = createApi({
                 method: 'GET',
             }),
         }),
-        getGoodBatches: builder.query<GetGoodBatchesResponse, IGetGoodBatchRequest >({
+        getGoodBatches: builder.query<GetGoodBatchesResponse, IGetGoodBatchRequest>({
             query: (credentials) => ({
                 url: `/mekum/good-batches?warehouseId=${credentials.warehouseId}&materialValueId=${credentials.materialValueId}`,
+                method: 'GET',
+            }),
+        }),
+        getCashRegisters: builder.query<CashRegistersResponse, void>({
+            query: () => ({
+                url: '/mekum/cash-registers',
                 method: 'GET',
             }),
         }),
@@ -69,4 +75,5 @@ export const {
     useGetPartnersQuery,
     useGetWarehouseGoodsQuery,
     useGetGoodBatchesQuery,
+    useGetCashRegistersQuery
 } = directoriesApi;
