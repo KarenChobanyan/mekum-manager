@@ -46,7 +46,9 @@
     "Money": "Общий",
     "Remainder":"Остаток",
     "Document_Number":"Номер документа",
-    "CassRegister":"Касса"
+    "CassRegister":"Касса",
+     "Name":"Имя",
+    "Surname":"Фамилияe"
   },
   "Employee":{
     "Title":"Сотрудник",

@@ -40,7 +40,9 @@
     "Money": "Գումար",
     "Remainder":"Մնացորդ",
     "Document_Number":"Փասթաթղթի համար",
-    "CassRegister":"Դրամարկղ"
+    "CassRegister":"Դրամարկղ",
+    "Name":"Անուն",
+    "Surname":"Ազգանուն"
   },
   "Roles": {
     "Admin": "Ադմինիստրատոր",
