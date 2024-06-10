@@ -46,7 +46,9 @@
     "Money": "Money",
     "Remainder":"Remainder",
     "Document_Number":"Document number",
-    "CassRegister":"Cash box"
+    "CassRegister":"Cash box",
+    "Name":"Name",
+    "Surname":"Surname"
   },
   "Employee":{
     "Title":"Employee",

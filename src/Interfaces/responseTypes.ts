@@ -26,6 +26,7 @@ export interface IEmployee {
 };
 
 export type GetEmployeesResponseData = IEmployee[];
+export type GetUsersResponse = IGetMeResponseData[];
 
 export interface IWarehouse {
   id: number,
