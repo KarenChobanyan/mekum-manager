@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { useAutocompleteData, useGeneralHooks, useWarehouseHooks } from '../../../General/Hooks/hooks';
-import useStorageIncome from './storageIncome-hooks';
-import { AutoComplete, Button, CustomTable, Loading, NoData } from '../../../Components';
-import styles from '../styles.module.scss';
 import { ButtonTypes } from '../../../Interfaces/componentTypes';
+import useStorageIncome from './storageIncome-hooks';
+import { AutoComplete, Button, CustomPagination, CustomTable, Loading, NoData } from '../../../Components';
+import styles from '../styles.module.scss';
 
 const StorageIncomes: React.FC = () => {
   const { t, navigate } = useGeneralHooks();
   const { myWarehousesData } = useAutocompleteData();
   const [warehouseId, setWarehouseId] = useState<string | undefined>(myWarehousesData?.[0].id!)
   const { control } = useWarehouseHooks();
-  const { headerData, bodyData, entryData } = useStorageIncome(warehouseId! ?? myWarehousesData?.[0].id!);
+  const { headerData, bodyData, entryData,activePage,setActivePage } = useStorageIncome(warehouseId! ?? myWarehousesData?.[0].id!);
 
   return (
     <div className={styles.container}>
@@ -68,6 +68,14 @@ const StorageIncomes: React.FC = () => {
                     <CustomTable
                       headerData={headerData}
                       bodyData={bodyData}
+                    />
+                    <CustomPagination
+                      limit={100}
+                      offset={activePage}
+                      onChange={(_, page) => {
+                        setActivePage(page - 1);
+                        window.scrollTo(0, 0);
+                      }}
                     />
                   </div>
                   :

@@ -1,12 +1,14 @@
+import { useState } from "react";
+import { t } from 'i18next';
+import moment from "moment";
 import { useGetWarehouseExitsQuery } from "../../../API/actionsApi"
 import { ITableFormItemData, ITableHeader, TableCellContentTypes } from "../../../Interfaces/componentTypes";
-import { t } from 'i18next';
-import styles from '../formTablestyles.module.scss'
-import moment from "moment";
 import { WarehouseExitResponse } from "../../../Interfaces/responseTypes";
+import styles from '../formTablestyles.module.scss';
 
-const useStorageExits = (id:string)=>{
-    const {data:exitsData} = useGetWarehouseExitsQuery({id:id,limit:10,offset:0});
+const useStorageExits = (id: string) => {
+    const [activePage, setActivePage] = useState<number>(0);
+    const { data: exitsData } = useGetWarehouseExitsQuery({ id: id, limit: 7, offset: activePage });
     const headerData: ITableHeader[] = [
         {
             title: `${t('Forms.Date')}`,
@@ -55,7 +57,9 @@ const useStorageExits = (id:string)=>{
     return {
         exitsData,
         headerData,
-        bodyData
+        bodyData,
+        activePage,
+        setActivePage
     }
 };
 

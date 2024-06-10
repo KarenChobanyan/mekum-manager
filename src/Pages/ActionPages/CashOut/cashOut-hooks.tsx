@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {t} from 'i18next';
 import moment from "moment";
 import { useGetCashOutsQuery } from "../../../API/actionsApi";
@@ -6,7 +7,8 @@ import { CashOutResponse } from "../../../Interfaces/responseTypes";
 import styles from '../formTablestyles.module.scss';
 
 const useCashOutHooks = (id: string) => {
-    const { data: cashoutsData } = useGetCashOutsQuery({ id: id, limit: 10, offset: 0 });
+    const [activePage,setActivePage] = useState<number>(0)
+    const { data: cashoutsData } = useGetCashOutsQuery({ id: id, limit: 7, offset: activePage });
     const headerData: ITableHeader[] = [
         {
             title: `${t('Forms.Date')}`,
@@ -54,7 +56,9 @@ const useCashOutHooks = (id: string) => {
     return {
         cashoutsData,
         bodyData,
-        headerData
+        headerData,
+        activePage,
+        setActivePage
     }
 };
 

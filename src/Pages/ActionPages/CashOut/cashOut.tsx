@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { AutoComplete, Button, CustomTable, Loading, NoData } from '../../../Components';
-import styles from '../styles.module.scss'
+import { Controller } from 'react-hook-form';
+import { AutoComplete, Button, CustomPagination, CustomTable, Loading, NoData } from '../../../Components';
 import { useAutocompleteData, useCashRegisterHooks, useGeneralHooks } from '../../../General/Hooks/hooks';
 import useCashOutHooks from './cashOut-hooks';
-import { Controller } from 'react-hook-form';
 import { ButtonTypes } from '../../../Interfaces/componentTypes';
+import styles from '../styles.module.scss';
 
 const CashOut:React.FC = () => {
   const {t,navigate} = useGeneralHooks();
   const { cashRegistersData } = useAutocompleteData();
   const [cashRegisterId, setCashRegisterIdId] = useState<string | undefined>(cashRegistersData?.[0].id!)
   const { control } = useCashRegisterHooks();
-  const {cashoutsData,bodyData,headerData} = useCashOutHooks(cashRegisterId! ?? cashRegistersData?.[0].id!)
+  const {cashoutsData,bodyData,headerData,activePage,setActivePage} = useCashOutHooks(cashRegisterId! ?? cashRegistersData?.[0].id!)
 
   return (
     <div className={styles.container}>
@@ -69,6 +69,14 @@ const CashOut:React.FC = () => {
                   headerData={headerData}
                   bodyData={bodyData}
                 />
+                 <CustomPagination
+                      limit={100}
+                      offset={activePage}
+                      onChange={(_, page) => {
+                        setActivePage(page-1);
+                        window.scrollTo(0, 0);
+                      }}
+                    />
               </div>
               :
               <Loading />

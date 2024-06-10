@@ -6,7 +6,7 @@ import { ICashoutFormValues } from '../Pages/ActionPages/CashOut/Create/createCa
 
 export const actionsApi = createApi({
     reducerPath: 'actionsApi',
-    tagTypes: ['WarehouseEntries','WarehouseExits','Sales','CashOut'],
+    tagTypes: ['WarehouseEntries','WarehouseExits','Sales','CashOut','CashEntry'],
     baseQuery: axiosBaseQuery({
         baseUrl: process.env.REACT_APP_API_KEY,
     }),
@@ -71,6 +71,21 @@ export const actionsApi = createApi({
             }),
             invalidatesTags: ['CashOut']
         }),
+        getCashEntry: builder.query<CashOutResponse, IGetStorageEntriesRequestData>({
+            query: ({ id, limit, offset }) => ({
+                url: `/mekum/cash-register-entries?id=${id}&limit=${limit}&offset=${offset}`,
+                method: 'GET',
+            }),
+            providesTags: ['CashEntry']
+        }),
+        postCashEntry: builder.mutation<any, ICashoutRequest>({
+            query: (credentials) => ({
+                url: '/mekum/cash-register-entry',
+                method: 'POST',
+                data: credentials,
+            }),
+            invalidatesTags: ['CashEntry']
+        }),
     }),
 });
 
@@ -82,5 +97,7 @@ export const {
     useGetSalesQuery,
     usePostSaleMutation,
     useGetCashOutsQuery,
-    usePostCashoutMutation
+    usePostCashoutMutation,
+    useGetCashEntryQuery,
+    usePostCashEntryMutation,
 } = actionsApi;
