@@ -9,7 +9,6 @@ import styles from '../formTablestyles.module.scss';
 const useCashEntryHooks = (id: string) => {
     const [activePage,setActivePage] = useState<number>(0);
     const { data: cashEntryData } = useGetCashEntryQuery({ id: id, limit: 7, offset: activePage });
-    console.log(cashEntryData,"cashEntryData")
     const headerData: ITableHeader[] = [
         {
             title: `${t('Forms.Date')}`,

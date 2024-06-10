@@ -73,7 +73,7 @@ const Sales:React.FC = () => {
                       limit={100}
                       offset={activePage}
                       onChange={(_, page) => {
-                        setActivePage(page-1);
+                        setActivePage(page);
                         window.scrollTo(0, 0);
                       }}
                     />

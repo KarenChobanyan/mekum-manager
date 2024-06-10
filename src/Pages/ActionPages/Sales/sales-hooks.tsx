@@ -7,8 +7,8 @@ import { AccounInvoiceResponce } from "../../../Interfaces/responseTypes";
 import styles from '../formTablestyles.module.scss'
 
 const useSalesHooks = (id: string) => {
-    const [activePage,setActivePage] = useState<number>(0);
-    const { data: salesData } = useGetSalesQuery({ id: id, limit: 7, offset: activePage });
+    const [activePage,setActivePage] = useState<number>(1);
+    const { data: salesData } = useGetSalesQuery({ id: id, limit: 7, offset: activePage - 1});
     const headerData: ITableHeader[] = [
         {
             title: `${t('Forms.Date')}`,

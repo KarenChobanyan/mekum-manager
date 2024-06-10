@@ -11,15 +11,15 @@ const useStorageExits = (id: string) => {
     const { data: exitsData } = useGetWarehouseExitsQuery({ id: id, limit: 7, offset: activePage });
     const headerData: ITableHeader[] = [
         {
+            title: `${t('Forms.Warehouse')}`,
+            contentType: TableCellContentTypes.TEXT
+        },
+        {
             title: `${t('Forms.Date')}`,
             contentType: TableCellContentTypes.TEXT
         },
         {
-            title: `${t('Forms.Document_Number')}`,
-            contentType: TableCellContentTypes.TEXT
-        },
-        {
-            title: `${t('Forms.Money')}`,
+            title:`${t('Forms.Document_Number')}`,
             contentType: TableCellContentTypes.TEXT
         }
     ];
@@ -27,6 +27,13 @@ const useStorageExits = (id: string) => {
     const createBodyData = (data: WarehouseExitResponse): Array<ITableFormItemData[]> => {
         return data?.map((item) => {
             return [
+                {
+                    component:
+                        <div className={styles.formItemTextBox}>
+                            <div className={styles.formItemText}>{item.warehouse?.name!}</div>
+                        </div>,
+                    contentType: TableCellContentTypes.TEXT
+                },
                 {
                     component:
                         <div className={styles.formItemTextBox}>
@@ -38,13 +45,6 @@ const useStorageExits = (id: string) => {
                     component:
                         <div className={styles.formItemTextBox}>
                             <div className={styles.formItemText}>{item.documentNumber!}</div>
-                        </div>,
-                    contentType: TableCellContentTypes.TEXT
-                },
-                {
-                    component:
-                        <div className={styles.formItemTextBox}>
-                            <div className={styles.formItemText}>{0}</div>
                         </div>,
                     contentType: TableCellContentTypes.TEXT
                 },

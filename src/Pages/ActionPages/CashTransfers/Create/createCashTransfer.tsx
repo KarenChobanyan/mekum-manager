@@ -7,7 +7,7 @@ import { AuthInput, AutoComplete, Button, TextArea } from '../../../../Component
 import styles from '../../formTablestyles.module.scss';
 
 const CreateCashTransfer: React.FC = () => {
-  const { register, control, onSubmit, onCencele, handleSubmit, cashBoxesData, errors } = useCreateCashTransferHooks();
+  const { register, control, onSubmit, onCencele, handleSubmit, cashRegistersData, errors } = useCreateCashTransferHooks();
 
   return (
     <div className={styles.container} >
@@ -40,7 +40,7 @@ const CreateCashTransfer: React.FC = () => {
                       name={name}
                       onChange={onChange}
                       id='cashBoxFromId'
-                      data={cashBoxesData}
+                      data={cashRegistersData}
                       label='Ելք․ դրամարկղ'
                       placeholder="Ընտրեք ելք․ դրամարկղը"
                       showErrorText={false}
@@ -66,7 +66,7 @@ const CreateCashTransfer: React.FC = () => {
                       name={name}
                       onChange={onChange}
                       id='cashBoxInId'
-                      data={cashBoxesData}
+                      data={cashRegistersData}
                       label='Մուտք դարամարկղ'
                       placeholder="Ընտրեք դրամարկղը"
                       showErrorText={false}
