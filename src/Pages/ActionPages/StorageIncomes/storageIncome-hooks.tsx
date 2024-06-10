@@ -4,9 +4,11 @@ import { t } from 'i18next';
 import styles from '../formTablestyles.module.scss'
 import moment from "moment";
 import { IWarehouseEntryResponse } from "../../../Interfaces/responseTypes";
+import { useState } from "react";
 
 const useStorageIncome = (id: string) => {
-    const { data: entryData } = useGetWarehouseEntriesQuery({ id: id!, limit: 10, offset: 0 });
+    const [activePage,setActivePage] = useState<number>(0);
+    const { data: entryData } = useGetWarehouseEntriesQuery({ id: id!, limit: 7, offset: activePage });
     const headerData: ITableHeader[] = [
         {
             title: `${t('Forms.Date')}`,
@@ -66,7 +68,9 @@ const useStorageIncome = (id: string) => {
     return {
         headerData,
         entryData,
-        bodyData
+        bodyData,
+        activePage,
+        setActivePage
     }
 };
 

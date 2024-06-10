@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { useAutocompleteData, useGeneralHooks, useWarehouseHooks } from '../../../General/Hooks/hooks';
-import { AutoComplete, Button, CustomTable, Loading, NoData } from '../../../Components';
-import styles from '../styles.module.scss'
-import useSalesHooks from './sales-hooks';
 import { Controller } from 'react-hook-form';
+import { useAutocompleteData, useGeneralHooks, useWarehouseHooks } from '../../../General/Hooks/hooks';
+import useSalesHooks from './sales-hooks';
 import { ButtonTypes } from '../../../Interfaces/componentTypes';
+import { AutoComplete, Button, CustomPagination, CustomTable, Loading, NoData } from '../../../Components';
+import styles from '../styles.module.scss';
 
 const Sales:React.FC = () => {
   const { t, navigate } = useGeneralHooks();
   const { myWarehousesData } = useAutocompleteData();
   const [warehouseId, setWarehouseId] = useState<string | undefined>(myWarehousesData?.[0].id!)
   const { control } = useWarehouseHooks();
-  const { salesData,headerData,bodyData} = useSalesHooks(warehouseId! ?? myWarehousesData?.[0].id!);
+  const { salesData,headerData,bodyData,activePage,setActivePage} = useSalesHooks(warehouseId! ?? myWarehousesData?.[0].id!);
 
   return (
     <div className={styles.container}>
@@ -69,6 +69,14 @@ const Sales:React.FC = () => {
                   headerData={headerData}
                   bodyData={bodyData}
                 />
+                  <CustomPagination
+                      limit={100}
+                      offset={activePage}
+                      onChange={(_, page) => {
+                        setActivePage(page-1);
+                        window.scrollTo(0, 0);
+                      }}
+                    />
               </div>
               :
               <Loading />

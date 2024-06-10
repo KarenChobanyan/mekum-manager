@@ -1,21 +1,18 @@
-import { useState } from "react";
-import { t } from 'i18next';
+import { useState } from 'react';
+import {t} from 'i18next';
 import moment from "moment";
-import { useGetSalesQuery } from "../../../API/actionsApi";
+import { useGetCashEntryQuery } from "../../../API/actionsApi";
 import { ITableFormItemData, ITableHeader, TableCellContentTypes } from "../../../Interfaces/componentTypes";
-import { AccounInvoiceResponce } from "../../../Interfaces/responseTypes";
-import styles from '../formTablestyles.module.scss'
+import { CashOutResponse } from "../../../Interfaces/responseTypes";
+import styles from '../formTablestyles.module.scss';
 
-const useSalesHooks = (id: string) => {
+const useCashEntryHooks = (id: string) => {
     const [activePage,setActivePage] = useState<number>(0);
-    const { data: salesData } = useGetSalesQuery({ id: id, limit: 7, offset: activePage });
+    const { data: cashEntryData } = useGetCashEntryQuery({ id: id, limit: 7, offset: activePage });
+    console.log(cashEntryData,"cashEntryData")
     const headerData: ITableHeader[] = [
         {
             title: `${t('Forms.Date')}`,
-            contentType: TableCellContentTypes.TEXT
-        },
-        {
-            title: `${t('Forms.Buyer')}`,
             contentType: TableCellContentTypes.TEXT
         },
         {
@@ -28,20 +25,13 @@ const useSalesHooks = (id: string) => {
         }
     ];
 
-    const createBodyData = (data: AccounInvoiceResponce): Array<ITableFormItemData[]> => {
+    const createBodyData = (data: CashOutResponse): Array<ITableFormItemData[]> => {
         return data?.map((item) => {
             return [
                 {
                     component:
                         <div className={styles.formItemTextBox}>
                             <div className={styles.formItemText}>{moment(item.date).format("DD/MM/YYYY")}</div>
-                        </div>,
-                    contentType: TableCellContentTypes.TEXT
-                },
-                {
-                    component:
-                        <div className={styles.formItemTextBox}>
-                            <div className={styles.formItemText}>{item.partner?.name!}</div>
                         </div>,
                     contentType: TableCellContentTypes.TEXT
                 },
@@ -55,7 +45,7 @@ const useSalesHooks = (id: string) => {
                 {
                     component:
                         <div className={styles.formItemTextBox}>
-                            <div className={styles.formItemText}>{item.accountInvoiceSpecification?.reduce((acc, current) => acc + (current.money * current.quantity), 0)}</div>
+                            <div className={styles.formItemText}>{item.amountCurrency1}</div>
                         </div>,
                     contentType: TableCellContentTypes.TEXT
                 },
@@ -63,15 +53,14 @@ const useSalesHooks = (id: string) => {
         })
     };
 
-    const bodyData = createBodyData(salesData!);
-
+    const bodyData = createBodyData(cashEntryData!);
     return {
-        salesData,
-        headerData,
+        cashEntryData,
         bodyData,
+        headerData,
         activePage,
         setActivePage
     }
 };
 
-export default useSalesHooks
+export default useCashEntryHooks
