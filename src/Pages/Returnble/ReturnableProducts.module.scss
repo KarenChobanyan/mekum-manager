@@ -1,0 +1,24 @@
+.returnableProducts{
+    display: flex;
+    flex-direction: column;
+    padding: 50px 30px;
+}
+.returnableProductsItem{
+    display: flex;
+    flex-direction: row;
+}
+.arow{
+    width: 70px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.button{
+   width: 200px;
+}
+
+.returnableProductsInput{
+    width: 250px !important;
+    border-radius: 10px;
+}

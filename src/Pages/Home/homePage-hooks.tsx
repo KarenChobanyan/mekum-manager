@@ -14,6 +14,11 @@ const useHomePageHooks = () => {
                         title: t('Actions.Users.Title'),
                         onClick: () => { navigate('/users') }
                     },
+                    {
+                        src: `${Users}`,
+                        title: t('Actions.Returnable.Title'),
+                        onClick: () => { navigate('/returnable') }
+                    },
                 ]
             case 2:
                 return [

@@ -200,6 +200,17 @@
   color: $main_color !important
 }
 
+.retunableProducts .MuiInputBase-root.MuiOutlinedInput-root {
+  border-radius: 10px ;
+  width:250px !important;
+  max-width: 250px !important;
+  height: 50px;
+  font-family: "Montserrat arm";
+  font-size: 14px !important;
+  font-weight: 400;
+  line-height: 15px !important;
+  color: $text_dark !important;
+}
 
 //media
 
