@@ -1,7 +1,7 @@
 import React from 'react';
 import { Control, Controller, FieldArrayWithId, FieldErrors, UseFieldArrayRemove, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import {t} from 'i18next';
-import { IStorageOutgoingFormValues } from './createStorageOutgoings-hooks';
+import { IStorageReturnFormValues } from './createStorageReturn-hooks';
 import { useAutocompleteData } from '../../../../General/Hooks/hooks';
 import { ITableFormItemData, ITableHeader, TableCellContentTypes } from '../../../../Interfaces/componentTypes';
 import { AuthInput, AutoComplete, CustomTable, TotalExitsCounter } from '../../../../Components';
@@ -9,22 +9,22 @@ import { RedTrashIcon } from '../../../../Assets/Icons';
 import styles from '../../formTablestyles.module.scss';
 
 interface IProps {
-    fields: FieldArrayWithId<IStorageOutgoingFormValues, "goods", "id">[],
+    fields: FieldArrayWithId<IStorageReturnFormValues, "goods", "id">[],
     remove: UseFieldArrayRemove,
-    register: UseFormRegister<IStorageOutgoingFormValues>,
-    control: Control<IStorageOutgoingFormValues, any>,
-    errors: FieldErrors<IStorageOutgoingFormValues>,
+    register: UseFormRegister<IStorageReturnFormValues>,
+    control: Control<IStorageReturnFormValues, any>,
+    errors: FieldErrors<IStorageReturnFormValues>,
     id: string,
     onAddItem: () => void,
-    setValue: UseFormSetValue<IStorageOutgoingFormValues>,
-    watch: UseFormWatch<IStorageOutgoingFormValues>,
+    setValue: UseFormSetValue<IStorageReturnFormValues>,
+    watch: UseFormWatch<IStorageReturnFormValues>,
 };
 
 
 
 const FormItems: React.FC<IProps> = (props) => {
     const { fields, remove, register, control, errors, id, onAddItem, setValue, watch } = props;
-    const { getGoodsUnitType, myGoodsdata, getRemainder } = useAutocompleteData(id!);
+    const { getAllGoodsUnitType, allGoodsData, getRemainder,setMeasurementUnitId } = useAutocompleteData(id!);
 
     const headerData: ITableHeader[] = [
         {
@@ -40,17 +40,10 @@ const FormItems: React.FC<IProps> = (props) => {
             contentType: TableCellContentTypes.NUMBER
         },
         {
-            title: `${t('Forms.Remainder')}`,
-            contentType: TableCellContentTypes.NUMBER
-        },
-        {
             title: `${t('Forms.Count')}`,
             contentType: TableCellContentTypes.NUMBER
         },
-        {
-            title: `${t('Forms.Money')}`,
-            contentType: TableCellContentTypes.NUMBER
-        }
+      
     ];
 
     const createItemForm = (): Array<ITableFormItemData[]> => {
@@ -73,17 +66,17 @@ const FormItems: React.FC<IProps> = (props) => {
                                             value={value}
                                             name={name}
                                             onChange={(value) => {
-                                                const unit = getGoodsUnitType(value?.id!)
+                                                const unit = getAllGoodsUnitType(value?.id!)
                                                 const materialValueId = value?.id!
                                                 if (materialValueId) {
-                                                    setValue(`goods.${index}.quantity`, String(getRemainder(materialValueId!)))
+                                                    setValue(`goods.${index}.measurementUnitId`,String(setMeasurementUnitId(materialValueId!)))
                                                 }
                                                 setValue(`goods.${index}.point`, unit!)
                                                 return onChange(value)
                                             }
                                             }
                                             id={name}
-                                            data={myGoodsdata}
+                                            data={allGoodsData}
                                             placeholder={t('Forms.Select_Material')}
                                             showErrorText={false}
                                             style={styles.formItemBox}
@@ -111,24 +104,9 @@ const FormItems: React.FC<IProps> = (props) => {
                 },
                 {
                     component:
-                        <AuthInput
-                            register={register}
-                            registerName={`goods.${index}.quantity`}
-                            showTextError={false}
-                            inputStyle={styles.formItemInput}
-                            inputBoxStyles={styles.formItemInputNumBox}
-                            required={false}
-                            disabled
-                            error={errors.goods?.[index]?.quantity}
-                        />,
-                    contentType: TableCellContentTypes.NUMBER
-                },
-                {
-                    component:
                         <Controller
                             control={control}
                             name={`goods.${index}.count`}
-                            rules={{ max: getRemainder(watch(`goods.${index}.materialValueId`)?.id!) }}
                             render={({ field: { onChange, name, value } }) => {
                                 return (
                                     <AuthInput
@@ -144,21 +122,6 @@ const FormItems: React.FC<IProps> = (props) => {
                             }
                             }
                         />,
-                    contentType: TableCellContentTypes.NUMBER
-                },
-                {
-                    component:
-                        <div className={styles.formItemTextBox}>
-                            <div className={styles.formItemText}>
-                            <TotalExitsCounter
-                            warehouseId={id!}
-                            materialValueId={watch(`goods.${index}.materialValueId`)?.id!}
-                            count={watch(`goods.${index}.count`)}
-                            setValue={setValue}
-                            index={index}
-                            />
-                            </div>
-                        </div>,
                     contentType: TableCellContentTypes.NUMBER
                 },
             ]

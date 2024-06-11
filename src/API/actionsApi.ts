@@ -1,8 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from './API';
-import { ICashoutRequest, IGetStorageEntriesRequestData, IPostStorageIncomeRequestData, IPostWarehouseExitRequest, IWarehouseTransferRequest } from '../Interfaces/requestTypes';
+import { ICashoutRequest, IGetStorageEntriesRequestData, IPostStorageIncomeRequestData, IPostWarehouseExitRequest, IPostWarehouseReturnRequest, IWarehouseTransferRequest } from '../Interfaces/requestTypes';
 import { AccounInvoiceResponce, CashOutResponse, IWarehouseEntryResponse, WarehouseExitResponse } from '../Interfaces/responseTypes';
-import { ICashoutFormValues } from '../Pages/ActionPages/CashOut/Create/createCashout-hooks';
 
 export const actionsApi = createApi({
     reducerPath: 'actionsApi',
@@ -94,6 +93,13 @@ export const actionsApi = createApi({
             }),
             invalidatesTags: ['WarehouseExits']
         }),
+        postWarehouseReturn: builder.mutation<any, IPostWarehouseReturnRequest>({
+            query: (credentials) => ({
+                url: '/mekum/return',
+                method: 'POST',
+                data: credentials,
+            }),
+        }),
     }),
 });
 
@@ -108,5 +114,6 @@ export const {
     usePostCashoutMutation,
     useGetCashEntryQuery,
     usePostCashEntryMutation,
-    usePostWarehouseTransferMutation
+    usePostWarehouseTransferMutation,
+    usePostWarehouseReturnMutation
 } = actionsApi;

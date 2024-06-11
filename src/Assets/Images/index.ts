@@ -7,6 +7,7 @@ import CashOut from './cashOut.png';
 import CashChange from './cashChange.png';
 import Users from './users.png';
 import NoDataImg from './noData.png'
+import StorageRemove from './storageRemove.png'
 
 export {
     Sales,
@@ -16,6 +17,7 @@ export {
     CashIncome,
     CashChange,
     IntoStorage,
+    StorageRemove,
     OutFromStorage,
     BetweenStorages,
 }

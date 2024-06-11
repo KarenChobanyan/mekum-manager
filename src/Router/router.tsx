@@ -5,8 +5,10 @@ import { CashIncomingPage, CashOutPage, CashTransfersPage, HomePage, LoginPage, 
 import Layout from '../Pages/Layout/layout';
 import MainPage from '../Pages/Main/mainPage';
 import StorageTransfers from '../Pages/ActionPages/StorageTransfers/storageTransfers';
-import { CreateStorageIncomePage,CreateStorageOutgoingsPage,CreateTorageTransfersPage,CreateSalesPage, CreateCashIncomePage, CreateCashoutPage,CreateCashTransferPage,CreateUserPage } from '../Pages/ActionPages';
 import ReturnableProducts from '../Pages/Returnble/ReturnableProducts';
+import { CreateStorageIncomePage,CreateStorageOutgoingsPage,CreateTorageTransfersPage,CreateSalesPage, CreateCashIncomePage, CreateCashoutPage,CreateCashTransferPage,CreateUserPage, StorageReturnPage } from '../Pages/ActionPages';
+import CreateStorageReturn from '../Pages/ActionPages/StorageReturns/Create/createStorageReturn';
+
 
 const Router: React.FC = () => {
     return (
@@ -131,10 +133,22 @@ const Router: React.FC = () => {
                     <Layout title={t('Actions.Cash_Changes.Title')} children={<CreateCashTransferPage/>} />
                 }
             />
+
                <Route
                     path='/returnable'
                 element={
                     <Layout title={t('Actions.Returnable.Title')} children={<ReturnableProducts/>} />
+
+             <Route
+                path='/warehouse_returns'
+                element={
+                    <Layout title={t('Actions.Warehouse_Return.Title')} children={<StorageReturnPage/>} />
+                }
+            />
+             <Route
+                path='/warehouse_returns/create/:id'
+                element={
+                    <Layout title={t('Actions.Warehouse_Return.Title')} children={<CreateStorageReturn/>} />
                 }
             />
         </Routes>
