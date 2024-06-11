@@ -8,7 +8,8 @@ import styles from '../formTablestyles.module.scss';
 
 const useStorageExits = (id: string) => {
     const [activePage, setActivePage] = useState<number>(0);
-    const { data: exitsData } = useGetWarehouseExitsQuery({ id: id, limit: 7, offset: activePage });
+    const [offset, setOffset] = useState<number>(0);
+    const { data: exitsData } = useGetWarehouseExitsQuery({ id: id, limit: 7, offset: offset });
     const headerData: ITableHeader[] = [
         {
             title: `${t('Forms.Warehouse')}`,
@@ -59,7 +60,8 @@ const useStorageExits = (id: string) => {
         headerData,
         bodyData,
         activePage,
-        setActivePage
+        setActivePage,
+        setOffset
     }
 };
 
