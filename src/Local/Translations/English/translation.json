@@ -96,6 +96,10 @@
     "Users": {
       "Title": "Users",
       "Create": "Register a new user"
+    }, 
+     "Returnable":{
+      "Title":"Returnable"
     }
   }
+
 }

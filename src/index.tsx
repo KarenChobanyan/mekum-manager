@@ -7,6 +7,7 @@ import './Local/i18Next/i18n';
 import { store } from './Store/store';
 import 'react-toastify/dist/ReactToastify.css';
 import './General/Styles/index.css';
+import ReturnableProducts from './Pages/Returnble/ReturnableProducts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

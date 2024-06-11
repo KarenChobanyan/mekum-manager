@@ -6,6 +6,7 @@ import Layout from '../Pages/Layout/layout';
 import MainPage from '../Pages/Main/mainPage';
 import StorageTransfers from '../Pages/ActionPages/StorageTransfers/storageTransfers';
 import { CreateStorageIncomePage,CreateStorageOutgoingsPage,CreateTorageTransfersPage,CreateSalesPage, CreateCashIncomePage, CreateCashoutPage,CreateCashTransferPage,CreateUserPage } from '../Pages/ActionPages';
+import ReturnableProducts from '../Pages/Returnble/ReturnableProducts';
 
 const Router: React.FC = () => {
     return (
@@ -128,6 +129,12 @@ const Router: React.FC = () => {
                 path='/cash_transfers/create'
                 element={
                     <Layout title={t('Actions.Cash_Changes.Title')} children={<CreateCashTransferPage/>} />
+                }
+            />
+               <Route
+                    path='/returnable'
+                element={
+                    <Layout title={t('Actions.Returnable.Title')} children={<ReturnableProducts/>} />
                 }
             />
         </Routes>

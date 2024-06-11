@@ -10,15 +10,15 @@ interface IAutoCompleteProps {
     data: IAutocompleteData | undefined;
     label?: string;
     disable?: boolean;
-    id: string;
+    id?: string;
     value?: IAutocompleteItem | null;
-    name: string;
+    name?: string;
     onChange: (arg: IAutocompleteItem | null) => void;
-    placeholder: string;
+    placeholder?: string;
     error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
     showErrorText?: boolean;
     style?: string;
-    labelStyle?: string
+    labelStyle?: any;
 }
 
 const AutoComplete: React.FC<IAutoCompleteProps> = (props) => {
