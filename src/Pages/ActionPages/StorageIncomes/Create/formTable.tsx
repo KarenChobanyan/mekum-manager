@@ -108,7 +108,7 @@ const FormItems: React.FC<IProps> = (props) => {
                                             }
                                             id={name}
                                             data={allGoodsData}
-                                            placeholder="Ընտրեք ապրանքը"
+                                            placeholder={t('Forms.Select_Material')}
                                             showErrorText={false}
                                             error={errors.goods?.[index]?.materialValueId}
                                             style={styles.formItemBox}

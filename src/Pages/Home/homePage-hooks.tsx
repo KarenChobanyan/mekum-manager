@@ -1,5 +1,5 @@
 import { IActionCard } from "../../Interfaces/componentTypes";
-import { BetweenStorages, Sales, OutFromStorage, IntoStorage, CashIncome, CashOut, CashChange, Users } from '../../Assets/Images';
+import { BetweenStorages, Sales, OutFromStorage, IntoStorage, CashIncome, CashOut, CashChange, Users, StorageRemove } from '../../Assets/Images';
 import { useGeneralHooks } from "../../General/Hooks/hooks";
 import { IGetMeResponseData } from "../../Interfaces/responseTypes";
 
@@ -51,6 +51,11 @@ const useHomePageHooks = () => {
                         src: `${CashChange}`,
                         title: t('Actions.Cash_Changes.Title'),
                         onClick: () => { navigate('/cash_transfers') }
+                    },
+                    {
+                        src: `${StorageRemove}`,
+                        title: t('Actions.Warehouse_Return.Title'),
+                        onClick: () => { navigate('/warehouse_returns') }
                     },
                 ]
             default:
