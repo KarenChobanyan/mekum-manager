@@ -66,7 +66,7 @@ const FormItems: React.FC<IProps> = (props) => {
                             rules={{ required: true }}
                             render={({ field: { onChange, name, value } }) => {
                                 return (
-                                    <div className='tableAutocomplete'>
+                                    <div className='tableAutocompleteBig'>
                                         <AutoComplete
                                             value={value}
                                             name={name}
