@@ -200,8 +200,8 @@ export const useAutocompleteData = (warehouseId?: string) => {
 
   const setMeasurementUnitId = (id: string) => {
     if (myGoods?.length) {
-      const good = myGoods.filter((item) => item.materialValueId === +id)
-      const measurementUnitId = good?.[0]?.totalCount!;
+      const good = allGoods?.filter((item) => item.id === +id)
+      const measurementUnitId = good?.[0]?.measurementUnitId!;
       return measurementUnitId
     } else {
       return undefined
