@@ -24,6 +24,8 @@
     "Date": "Ամսաթիվ",
     "Warehouse": "Պահեստ",
     "Select_Warehouse": "Ընտրեք պահեստը",
+    "Partner":"Գործնկեր",
+    "Select_Partner":"Ընտրեք գործնկեր",
     "PartnerIn": "Մատակարար",
     "Select_PartnerIn": "Ընտրեք մատակարարին",
     "Recipient":"Ստացող",
@@ -80,6 +82,9 @@
     },
     "Between_Storages": {
       "Title": "Տեղափոխություն պահեստների միջև"
+    },
+    "Warehouse_Return": {
+      "Title": "Վերադարձ պահեստ"
     },
     "Cash_Income": {
       "Title": "Մուտք դրամարկղին"

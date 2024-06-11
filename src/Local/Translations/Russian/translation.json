@@ -30,6 +30,8 @@
     "Date": "Дата",
     "Warehouse": "Склад",
     "Select_Warehouse":"Выберите склад",
+    "Partner":"Партнер",
+    "Select_Partner":"Выберите партнера",
     "PartnerIn": "Поставщик",
     "Select_PartnerIn": "Выберите поставщика",
     "Recipient":"Получатель",
@@ -80,6 +82,9 @@
     },
     "Between_Storages": {
       "Title": "Перенос между хранилищами"
+    },
+    "Warehouse_Return": {
+      "Title": "Возврат на склад"
     },
     "Cash_Income": {
       "Title": "Поступление в кассу"

@@ -13,18 +13,22 @@ import CreateSalesPage from './Sales/Create/createSales';
 import CreateCashIncomePage from './CashIncoming/Create/createCashIncome';
 import CreateCashoutPage from './CashOut/Create/createCashout';
 import CreateCashTransferPage from './CashTransfers/Create/createCashTransfer';
-import CreateUserPage from './Users/Create/createUser'
+import CreateUserPage from './Users/Create/createUser';
+import StorageReturnPage from './StorageReturns/storageReturn';
+import CreateStorageReturnPage from './StorageReturns/Create/createStorageReturn';
 
 export {
     CreateStorageIncomePage,
     CreateStorageOutgoingsPage,
     CreateTorageTransfersPage,
+    CreateStorageReturnPage,
     CreateCashTransferPage,
     CreateCashIncomePage,
     StorageTransfersPage,
     StorageOutgoingsPage,
     StorageIncomesPage,
     CashTransfersPage,
+    StorageReturnPage,
     CreateCashoutPage,
     CashIncomingPage,
     CreateSalesPage,

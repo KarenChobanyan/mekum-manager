@@ -30,6 +30,8 @@
     "Date": "Date",
     "Warehouse": "Warehouse",
     "Select_Warehouse":"Select the warehouse",
+    "Partner":"Partner",
+    "Select_Partner":"Select a partner",
     "PartnerIn": "Supplier",
     "Select_PartnerIn": "Select a supplier",
     "Recipient":"Recipient",
@@ -80,6 +82,9 @@
     },
     "Between_Storages": {
       "Title": "Transfer between storages"
+    },
+    "Warehouse_Return": {
+      "Title": "Warehouse Returns"
     },
     "Cash_Income": {
       "Title": "Incoming to the cash box"
