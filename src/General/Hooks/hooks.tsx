@@ -69,15 +69,7 @@ export const useDirectoriesHooks = () => {
   const {data:cashRegisters} = useGetCashRegistersQuery();
   const partners = partnersResponse?.data!;
 
-  const cashBoxesData: IAutocompleteItem[] = [
-    { id: "1", title: "Դրամարկղ 1" },
-    { id: "2", title: "Դրամարկղ 2" }
-  ];
-
-  const payersData: IAutocompleteItem[] = [
-    { id: "1", title: "Վճարող 1" },
-    { id: "2", title: "Վճարող 2" }
-  ];
+ 
 
   const roles: IAutocompleteItem[] = [
     { id: "1", title: t('Roles.Admin') },
@@ -89,8 +81,6 @@ export const useDirectoriesHooks = () => {
     allWarehouses,
     partners,
     cashRegisters,
-    cashBoxesData,
-    payersData,
     roles,
     goods,
     allGoods,
@@ -206,9 +196,17 @@ export const useAutocompleteData = (warehouseId?: string) => {
     } else {
       return undefined
     }
-
   };
 
+  const setMeasurementUnitId = (id: string) => {
+    if (myGoods?.length) {
+      const good = allGoods?.filter((item) => item.id === +id)
+      const measurementUnitId = good?.[0]?.measurementUnitId!;
+      return measurementUnitId
+    } else {
+      return undefined
+    }
+  };
 
   const myWarehousesData = createWarehouseData(myWarehouses!);
   const allWarehousesData = createWarehouseData(filteredWarehouses!);
@@ -230,7 +228,8 @@ export const useAutocompleteData = (warehouseId?: string) => {
     myGoodsdata,
     getRemainder,
     getGoodsUnitType,
-    getAllGoodsUnitType
+    getAllGoodsUnitType,
+    setMeasurementUnitId
   }
 };
 

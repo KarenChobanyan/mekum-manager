@@ -1,56 +1,59 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import moment from "moment";
+import { usePostWarehouseTransferMutation } from "../../../../API/actionsApi";
 import { useGeneralHooks } from "../../../../General/Hooks/hooks";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
+import { IGoodBatch } from "../../../../Interfaces/responseTypes";
+import { IWarehouseTransferGood, IWarehouseTransferRequest } from "../../../../Interfaces/requestTypes";
 
 export interface IStorageTransferFormValues {
-    date: string,
-    outputStorageId: IAutocompleteItem,
-    inputStorageId: IAutocompleteItem,
-    items: IStorageTransferItem[]
-}
-
-export interface IStorageTransferItem {
-    storageOutput?: string,
-    storageInput?: string,
-    title: IAutocompleteItem | null,
-    unitId: string,
-    price: string,
-    count: string,
-    discount: string
-    cost: string,
-    total: string
+    documentDate: string,
+    warehouseOutId: IAutocompleteItem,
+    warehouseEnterId: IAutocompleteItem,
+    goods: IStorageTransferItem[]
 };
 
+export interface IStorageTransferItem {
+    materialValueId: IAutocompleteItem | null,
+    point: string,
+    count: string,
+    quantity: string,
+    measurementUnitId?: string,
+    money: string,
+    exits: IGoodBatch[] | []
+};
+
+
 const useCreateStorageTransfersHooks = () => {
-    const { navigate } = useGeneralHooks();
-    const [storageOutputName, setStorageOutputName] = useState<string>("");
-    const [storageInputName, setStorageInputName] = useState<string>("");
+    const [add, { isLoading, isSuccess, isError }] = usePostWarehouseTransferMutation();
+    const { navigate, t } = useGeneralHooks();
+
     const { register, handleSubmit, watch, control, reset, setValue, formState: { errors } } = useForm<IStorageTransferFormValues>({
         defaultValues: {
-            items: [{ storageOutput: storageOutputName, storageInput: storageInputName, title: null, unitId: "", price: '', count: '', discount: "", cost: '', total: "" }]
+            goods: [{ materialValueId: null, quantity: '', point: '', count: '', money: "", exits: [] }]
         },
         mode: 'all'
     });
     const { fields, append, remove } = useFieldArray({
         control,
-        name: 'items'
+        name: 'goods'
     });
 
-
-
     useEffect(() => {
-        const storageOutputName = watch('outputStorageId')?.title!;
-        const storageInputName = watch('inputStorageId')?.title!;
-        if (storageOutputName || storageInputName) {
-            setStorageOutputName(storageOutputName)
-            setStorageInputName(storageInputName)
+        if (isSuccess) {
+            toast.success(t('Toast.Success.Register'))
+            navigate(-1)
+            reset();
+        } else if (isError) {
+            toast.error(t('Toast.Error.Register'))
         }
-    }, [watch("outputStorageId"), watch("inputStorageId")]);
+    }, [isSuccess, isError]);
 
 
     const onAddItem = () => {
-        append({ storageOutput: storageOutputName, storageInput: storageInputName, title: null, unitId: '', price: '', count: '', discount: "", cost: '', total: "" })
+        append({ materialValueId: null, quantity: '', point: '', count: '', money: "", exits: [] })
     };
 
     const onCencele = () => {
@@ -59,7 +62,28 @@ const useCreateStorageTransfersHooks = () => {
     };
 
     const onSubmit: SubmitHandler<IStorageTransferFormValues | FieldValues> = (values) => {
-        console.log(values)
+        console.log(values, 'values')
+        const goodsList: IWarehouseTransferGood[] = values.goods?.map((item: IStorageTransferItem): IWarehouseTransferGood => {
+            return {
+                warehouseOutId: +(values.warehouseOutId as IAutocompleteItem).id,
+                warehouseEnterId: +(values.warehouseEnterId as IAutocompleteItem).id,
+                availability: +item.quantity,
+                point: item.point,
+                count: +item.count,
+                materialValueId: +(item.materialValueId as IAutocompleteItem).id,
+                measurementUnitId: +item.measurementUnitId!,
+                exits: item.exits
+            }
+        });
+
+        const payload: IWarehouseTransferRequest = {
+            documentDate: moment(new Date()).format("YYYY-MM-DD"),
+            warehouseOutId: +(values.warehouseOutId as IAutocompleteItem).id,
+            warehouseEnterId: +(values.warehouseEnterId as IAutocompleteItem).id,
+            goods: goodsList
+        };
+        console.log(payload, 'payload')
+        add(payload)
     };
 
     return {
@@ -73,10 +97,9 @@ const useCreateStorageTransfersHooks = () => {
         control,
         errors,
         fields,
-        storageOutputName,
-        storageInputName,
+        isLoading,
         onAddItem,
-        onCencele
+        onCencele,
     }
 };
 

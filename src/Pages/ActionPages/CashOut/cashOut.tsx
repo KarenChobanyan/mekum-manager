@@ -11,7 +11,7 @@ const CashOut:React.FC = () => {
   const { cashRegistersData } = useAutocompleteData();
   const [cashRegisterId, setCashRegisterIdId] = useState<string | undefined>(cashRegistersData?.[0].id!)
   const { control } = useCashRegisterHooks();
-  const {cashoutsData,bodyData,headerData,activePage,setActivePage} = useCashOutHooks(cashRegisterId! ?? cashRegistersData?.[0].id!)
+  const {cashoutsData,bodyData,headerData,activePage,setActivePage,setOffset} = useCashOutHooks(cashRegisterId! ?? cashRegistersData?.[0].id!)
 
   return (
     <div className={styles.container}>
@@ -73,7 +73,8 @@ const CashOut:React.FC = () => {
                       limit={100}
                       offset={activePage}
                       onChange={(_, page) => {
-                        setActivePage(page-1);
+                        setOffset((page -1) * 7);
+                        setActivePage(page)
                         window.scrollTo(0, 0);
                       }}
                     />

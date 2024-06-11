@@ -2,14 +2,12 @@ import React from 'react';
 import { useGetGoodBatchesQuery } from '../../API/direcroriesApi';
 import { GetGoodBatchesResponse, IGoodBatch } from '../../Interfaces/responseTypes';
 import { UseFormSetValue } from 'react-hook-form';
-import { IStorageOutgoingFormValues } from '../../Pages/ActionPages/StorageOutgoings/Create/createStorageOutgoings-hooks';
-import { ISalesFormValues } from '../../Pages/ActionPages/Sales/Create/createSales-hooks';
 
 interface IProps {
     warehouseId?: string,
     materialValueId?: string,
     count?: string
-    setValue: UseFormSetValue<IStorageOutgoingFormValues | ISalesFormValues>,
+    setValue: UseFormSetValue<any>,
     index: number
 }
 
@@ -29,7 +27,8 @@ const TotalExitsCounter: React.FC<IProps> = (props) => {
                         total = total + (item.quantity * item.price!)
                         const exitItem:IGoodBatch = {
                             materialValueId:item.materialValueId,
-                            money:item.price,
+                            // money:item.price,
+                            price:item.price,
                             wareEntryOPrId:item.wareEntryOPrId,
                             warehouseEntryOrderId:item.warehouseEntryOrderId,
                             quantity:item.quantity
@@ -41,7 +40,8 @@ const TotalExitsCounter: React.FC<IProps> = (props) => {
                         total = total + (lastCount * item.price!)
                         const exitItem:IGoodBatch = {
                             materialValueId:item.materialValueId,
-                            money:item.price,
+                            // money:item.price,
+                            price:item.price,
                             wareEntryOPrId:item.wareEntryOPrId,
                             warehouseEntryOrderId:item.warehouseEntryOrderId,
                             quantity:lastCount

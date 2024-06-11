@@ -57,3 +57,21 @@ export interface ICashoutRequest {
   money: number,
 }
 
+export interface IWarehouseTransferRequest {
+  documentDate: string,
+  warehouseOutId: number,
+  warehouseEnterId: number,
+  goods: IWarehouseTransferGood[]
+}
+
+export interface IWarehouseTransferGood {
+  materialValueId: number,
+  point: string,
+  count: number,
+  warehouseOutId: number,
+  warehouseEnterId: number,
+  measurementUnitId: number,
+  availability: number,
+  exits: IGoodBatch[]
+}
+

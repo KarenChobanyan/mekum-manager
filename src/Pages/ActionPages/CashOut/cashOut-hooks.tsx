@@ -7,8 +7,9 @@ import { CashOutResponse } from "../../../Interfaces/responseTypes";
 import styles from '../formTablestyles.module.scss';
 
 const useCashOutHooks = (id: string) => {
-    const [activePage,setActivePage] = useState<number>(0)
-    const { data: cashoutsData } = useGetCashOutsQuery({ id: id, limit: 7, offset: activePage });
+    const [activePage,setActivePage] = useState<number>(1);
+    const [offset,setOffset] =  useState<number>(0)
+    const { data: cashoutsData } = useGetCashOutsQuery({ id: id, limit: 7, offset: offset });
     const headerData: ITableHeader[] = [
         {
             title: `${t('Forms.Date')}`,
@@ -58,7 +59,8 @@ const useCashOutHooks = (id: string) => {
         bodyData,
         headerData,
         activePage,
-        setActivePage
+        setActivePage,
+        setOffset
     }
 };
 

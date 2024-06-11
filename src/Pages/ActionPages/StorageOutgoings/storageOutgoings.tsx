@@ -11,7 +11,7 @@ const StorageOutgoings: React.FC = () => {
   const { myWarehousesData } = useAutocompleteData();
   const [warehouseId, setWarehouseId] = useState<string | undefined>(myWarehousesData?.[0].id!)
   const { control } = useWarehouseHooks();
-  const { exitsData, headerData, bodyData, activePage, setActivePage } = useStorageExits(warehouseId! ?? myWarehousesData?.[0].id!);
+  const { exitsData, headerData, bodyData, activePage, setActivePage,setOffset } = useStorageExits(warehouseId! ?? myWarehousesData?.[0].id!);
 
   return (
     <div className={styles.container}>
@@ -73,7 +73,8 @@ const StorageOutgoings: React.FC = () => {
                       limit={100}
                       offset={activePage}
                       onChange={(_, page) => {
-                        setActivePage(page - 1);
+                        setOffset((page -1) * 7);
+                        setActivePage(page);
                         window.scrollTo(0, 0);
                       }}
                     />

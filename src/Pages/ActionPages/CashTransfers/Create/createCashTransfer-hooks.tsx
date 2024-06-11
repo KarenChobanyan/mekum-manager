@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
-import { useDirectoriesHooks, useGeneralHooks } from "../../../../General/Hooks/hooks";
+import { useAutocompleteData, useGeneralHooks } from "../../../../General/Hooks/hooks";
 
 export interface ICashTransferFormValues {
     date: string,
@@ -12,7 +12,7 @@ export interface ICashTransferFormValues {
 };
 
 const useCreateCashTransferHooks = () => {
-    const {cashBoxesData} = useDirectoriesHooks();
+    const { cashRegistersData } = useAutocompleteData();
     const { navigate } = useGeneralHooks();
     const { register, handleSubmit,  control, reset, formState: { errors } } = useForm<ICashTransferFormValues>({mode:"all"});
 
@@ -30,7 +30,7 @@ const useCreateCashTransferHooks = () => {
         handleSubmit,
         onSubmit,
         onCencele,
-        cashBoxesData,
+        cashRegistersData,
         control,
         errors,
     }

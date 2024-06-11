@@ -1,12 +1,12 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from './API';
-import { ICashoutRequest, IGetStorageEntriesRequestData, IPostStorageIncomeRequestData, IPostWarehouseExitRequest } from '../Interfaces/requestTypes';
+import { ICashoutRequest, IGetStorageEntriesRequestData, IPostStorageIncomeRequestData, IPostWarehouseExitRequest, IWarehouseTransferRequest } from '../Interfaces/requestTypes';
 import { AccounInvoiceResponce, CashOutResponse, IWarehouseEntryResponse, WarehouseExitResponse } from '../Interfaces/responseTypes';
 import { ICashoutFormValues } from '../Pages/ActionPages/CashOut/Create/createCashout-hooks';
 
 export const actionsApi = createApi({
     reducerPath: 'actionsApi',
-    tagTypes: ['WarehouseEntries','WarehouseExits','Sales','CashOut','CashEntry'],
+    tagTypes: ['WarehouseEntries', 'WarehouseExits', 'Sales', 'CashOut', 'CashEntry'],
     baseQuery: axiosBaseQuery({
         baseUrl: process.env.REACT_APP_API_KEY,
     }),
@@ -86,6 +86,14 @@ export const actionsApi = createApi({
             }),
             invalidatesTags: ['CashEntry']
         }),
+        postWarehouseTransfer: builder.mutation<any, IWarehouseTransferRequest>({
+            query: (credentials) => ({
+                url: '/mekum/move',
+                method: 'POST',
+                data: credentials,
+            }),
+            invalidatesTags: ['WarehouseExits']
+        }),
     }),
 });
 
@@ -100,4 +108,5 @@ export const {
     usePostCashoutMutation,
     useGetCashEntryQuery,
     usePostCashEntryMutation,
+    usePostWarehouseTransferMutation
 } = actionsApi;

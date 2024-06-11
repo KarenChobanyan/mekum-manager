@@ -7,8 +7,9 @@ import { IWarehouseEntryResponse } from "../../../Interfaces/responseTypes";
 import { useState } from "react";
 
 const useStorageIncome = (id: string) => {
-    const [activePage,setActivePage] = useState<number>(0);
-    const { data: entryData } = useGetWarehouseEntriesQuery({ id: id!, limit: 7, offset: activePage });
+    const [activePage, setActivePage] = useState<number>(1);
+    const [offset, setOffset] = useState<number>(0);
+    const { data: entryData } = useGetWarehouseEntriesQuery({ id: id!, limit: 7, offset: offset });
     const headerData: ITableHeader[] = [
         {
             title: `${t('Forms.Date')}`,
@@ -70,7 +71,8 @@ const useStorageIncome = (id: string) => {
         entryData,
         bodyData,
         activePage,
-        setActivePage
+        setActivePage,
+        setOffset
     }
 };
 
