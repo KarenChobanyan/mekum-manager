@@ -8,22 +8,17 @@ import styles from "./ReturnableProducts.module.scss"
 
 
 const ReturnableProducts = () => {
-    const {control, onSubmit, handleSubmit,errors,getValues } = useReturnableProductsHooks();
+    const {control, onSubmit, handleSubmit,errors} = useReturnableProductsHooks();
     const { goodsData } = useAutocompleteData();
-    console.log(goodsData,"ijuih");
-
-    console.log(getValues(), "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
-    
-    
-   
+ 
     return (
         <div className={styles.returnableProducts}>
             <div className={`${styles.returnableProductsItem} retunableProducts`}>
             <Controller
                 control={control}
-                // rules={{
-                //     required: true,
-                // }}
+                rules={{
+                    required: true,
+                }}
                 render={({ field: { onChange, onBlur, value } }) => (
                     <AutoComplete 
                     data={goodsData}
@@ -39,9 +34,9 @@ const ReturnableProducts = () => {
             <div className={styles.arow}><img  src={arow}/></div>
             <Controller
                 control={control}
-                // rules={{
-                //     required: true,
-                // }}
+                rules={{
+                    required: true,
+                }}
                 render={({ field: { onChange, onBlur, value } }) => (
                     <AutoComplete
                     data={goodsData} 
