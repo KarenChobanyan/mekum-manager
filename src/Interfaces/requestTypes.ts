@@ -89,4 +89,8 @@ export interface IWarehouseReturnGood {
   warehouseId:number, 
   measurementUnitId: number,
 };
+export interface IPostRPostReturnable {
+  material_value_id_out:number,
+  material_value_id_in:number
+}
 

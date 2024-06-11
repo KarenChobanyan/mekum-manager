@@ -8,9 +8,8 @@ import styles from "./ReturnableProducts.module.scss"
 
 
 const ReturnableProducts = () => {
-    const {control, onSubmit, handleSubmit,errors} = useReturnableProductsHooks();
-    const { goodsData } = useAutocompleteData();
- 
+    const {control, onSubmit, handleSubmit,errors,goodsData} = useReturnableProductsHooks();
+    
     return (
         <div className={styles.returnableProducts}>
             <div className={`${styles.returnableProductsItem} retunableProducts`}>
@@ -29,7 +28,7 @@ const ReturnableProducts = () => {
                     error={errors.name1}
                      />
                 )}
-                name='name1'
+                name='material_out'
             />
             <div className={styles.arow}><img  src={arow}/></div>
             <Controller
@@ -47,7 +46,7 @@ const ReturnableProducts = () => {
                     error={errors.name2} />
                     
                 )}
-                name='name2'
+                name='material_in'
             />
             </div>
             <div className={styles.button}><Button onClick={handleSubmit(onSubmit)} type="submit" title="send" buttonType={ButtonTypes.Primery}/></div>
