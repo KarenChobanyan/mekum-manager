@@ -138,6 +138,8 @@ const Router: React.FC = () => {
                     path='/returnable'
                 element={
                     <Layout title={t('Actions.Returnable.Title')} children={<ReturnableProducts/>} />
+                }
+                />
 
              <Route
                 path='/warehouse_returns'
