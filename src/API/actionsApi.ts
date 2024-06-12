@@ -102,7 +102,7 @@ export const actionsApi = createApi({
         }),
         postReturnable: builder.mutation<any,IPostRPostReturnable>({
             query: (credentials) => ({
-                url: '/mekum/returnable-product/',
+                url: '/returnable-product/',
                 method: 'POST',
                 data: credentials,
             }),
