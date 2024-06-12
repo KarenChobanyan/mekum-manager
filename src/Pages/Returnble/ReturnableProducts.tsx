@@ -2,7 +2,6 @@ import { Controller } from "react-hook-form";
 import useReturnableProductsHooks from "./ReturnableProducts-hooks";
 import { ButtonTypes } from "../../Interfaces/componentTypes";
 import { AutoComplete, Button } from "../../Components";
-import { useAutocompleteData } from "../../General/Hooks/hooks";
 import arow from "../../Assets/Icons/arrow-right.svg"
 import styles from "./ReturnableProducts.module.scss"
 
@@ -26,7 +25,7 @@ const ReturnableProducts = () => {
                             onChange={onChange}
                             placeholder="Products"
                             style={styles.returnableProductsInput}
-                            error={errors.name1}
+                            error={errors.material_out}
                         />
                     )}
                     name='material_out'
@@ -44,7 +43,7 @@ const ReturnableProducts = () => {
                             onChange={onChange}
                             placeholder="Products"
                             style={styles.returnableProductsInput}
-                            error={errors.name2} />
+                            error={errors.material_in} />
 
                     )}
                     name='material_in'
