@@ -8,50 +8,50 @@ import styles from "./ReturnableProducts.module.scss"
 
 
 const ReturnableProducts = () => {
-    const {control, onSubmit, handleSubmit,errors} = useReturnableProductsHooks();
-    const { goodsData } = useAutocompleteData();
- 
+    const { control, onSubmit, handleSubmit, errors, oneSelectData,
+        secondSelectData } = useReturnableProductsHooks();
+
     return (
         <div className={styles.returnableProducts}>
             <div className={`${styles.returnableProductsItem} retunableProducts`}>
-            <Controller
-                control={control}
-                rules={{
-                    required: true,
-                }}
-                render={({ field: { onChange, onBlur, value } }) => (
-                    <AutoComplete 
-                    data={goodsData}
-                    value={value}
-                    onChange={onChange} 
-                    placeholder="Products" 
-                    style={styles.returnableProductsInput}
-                    error={errors.name1}
-                     />
-                )}
-                name='name1'
-            />
-            <div className={styles.arow}><img  src={arow}/></div>
-            <Controller
-                control={control}
-                rules={{
-                    required: true,
-                }}
-                render={({ field: { onChange, onBlur, value } }) => (
-                    <AutoComplete
-                    data={goodsData} 
-                    value={value} 
-                    onChange={onChange} 
-                    placeholder="Products" 
-                    style={styles.returnableProductsInput}
-                    error={errors.name2} />
-                    
-                )}
-                name='name2'
-            />
+                <Controller
+                    control={control}
+                    rules={{
+                        required: true,
+                    }}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                        <AutoComplete
+                            data={oneSelectData}
+                            value={value}
+                            onChange={onChange}
+                            placeholder="Products"
+                            style={styles.returnableProductsInput}
+                            error={errors.name1}
+                        />
+                    )}
+                    name='material_out'
+                />
+                <div className={styles.arow}><img src={arow} /></div>
+                <Controller
+                    control={control}
+                    rules={{
+                        required: true,
+                    }}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                        <AutoComplete
+                            data={secondSelectData}
+                            value={value}
+                            onChange={onChange}
+                            placeholder="Products"
+                            style={styles.returnableProductsInput}
+                            error={errors.name2} />
+
+                    )}
+                    name='material_in'
+                />
             </div>
-            <div className={styles.button}><Button onClick={handleSubmit(onSubmit)} type="submit" title="send" buttonType={ButtonTypes.Primery}/></div>
-            
+            <div className={styles.button}><Button onClick={handleSubmit(onSubmit)} type="submit" title="send" buttonType={ButtonTypes.Primery} /></div>
+
         </div>
     )
 }

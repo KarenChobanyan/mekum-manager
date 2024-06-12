@@ -1,11 +1,11 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from './API';
-import { ICashoutRequest, IGetStorageEntriesRequestData, IPostStorageIncomeRequestData, IPostWarehouseExitRequest, IPostWarehouseReturnRequest, IWarehouseTransferRequest } from '../Interfaces/requestTypes';
+import { ICashoutRequest, IGetStorageEntriesRequestData, IPostRPostReturnable, IPostStorageIncomeRequestData, IPostWarehouseExitRequest, IPostWarehouseReturnRequest, IWarehouseTransferRequest } from '../Interfaces/requestTypes';
 import { AccounInvoiceResponce, CashOutResponse, IWarehouseEntryResponse, WarehouseExitResponse } from '../Interfaces/responseTypes';
 
 export const actionsApi = createApi({
     reducerPath: 'actionsApi',
-    tagTypes: ['WarehouseEntries', 'WarehouseExits', 'Sales', 'CashOut', 'CashEntry'],
+    tagTypes: ['WarehouseEntries', 'WarehouseExits', 'Sales', 'CashOut', 'CashEntry','Returnable'],
     baseQuery: axiosBaseQuery({
         baseUrl: process.env.REACT_APP_API_KEY,
     }),
@@ -100,6 +100,14 @@ export const actionsApi = createApi({
                 data: credentials,
             }),
         }),
+        postReturnable: builder.mutation<any,IPostRPostReturnable>({
+            query: (credentials) => ({
+                url: '/returnable-product/',
+                method: 'POST',
+                data: credentials,
+            }),
+            invalidatesTags: ['Returnable']            
+        }),
     }),
 });
 
@@ -115,5 +123,6 @@ export const {
     useGetCashEntryQuery,
     usePostCashEntryMutation,
     usePostWarehouseTransferMutation,
-    usePostWarehouseReturnMutation
+    usePostWarehouseReturnMutation,
+    usePostReturnableMutation,
 } = actionsApi;
