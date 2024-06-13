@@ -17,7 +17,7 @@ const useStorageIncome = (id: string) => {
         },
         {
             title: `${t('Forms.PartnerIn')}`,
-            contentType: TableCellContentTypes.TEXT
+            contentType: TableCellContentTypes.SELECT
         },
         {
             title: `${t('Forms.Document_Number')}`,
@@ -44,7 +44,7 @@ const useStorageIncome = (id: string) => {
                         <div className={styles.formItemTextBox}>
                             <div className={styles.formItemText}>{item.partners.name!}</div>
                         </div>,
-                    contentType: TableCellContentTypes.TEXT
+                    contentType: TableCellContentTypes.SELECT
                 },
                 {
                     component:

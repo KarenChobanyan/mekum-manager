@@ -55,9 +55,25 @@
     cursor: pointer;
 }
 
+//media
+
+@media screen and (max-width:1210px) {
+    .itemText {
+        min-width: 120px;
+        max-width: 120px;
+        flex: 1;
+    }
+  }
+
 @media screen and (max-width:1100px) {
     .itemSelect {
         min-width: 310px;
+    }
+  }
+
+  @media screen and (max-width:1000px) {
+    .itemSelect {
+        min-width: max-content;
         flex: 1
     }
   }

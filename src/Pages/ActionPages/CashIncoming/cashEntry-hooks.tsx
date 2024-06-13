@@ -13,15 +13,15 @@ const useCashEntryHooks = (id: string) => {
     const headerData: ITableHeader[] = [
         {
             title: `${t('Forms.Date')}`,
-            contentType: TableCellContentTypes.TEXT
+            contentType: TableCellContentTypes.SELECT
         },
         {
             title: `${t('Forms.Document_Number')}`,
-            contentType: TableCellContentTypes.TEXT
+            contentType: TableCellContentTypes.SELECT
         },
         {
             title: `${t('Forms.Money')}`,
-            contentType: TableCellContentTypes.TEXT
+            contentType: TableCellContentTypes.SELECT
         }
     ];
 
@@ -33,21 +33,21 @@ const useCashEntryHooks = (id: string) => {
                         <div className={styles.formItemTextBox}>
                             <div className={styles.formItemText}>{moment(item.date).format("DD/MM/YYYY")}</div>
                         </div>,
-                    contentType: TableCellContentTypes.TEXT
+                    contentType: TableCellContentTypes.SELECT
                 },
                 {
                     component:
                         <div className={styles.formItemTextBox}>
                             <div className={styles.formItemText}>{item.documentNumber!}</div>
                         </div>,
-                    contentType: TableCellContentTypes.TEXT
+                    contentType: TableCellContentTypes.SELECT
                 },
                 {
                     component:
                         <div className={styles.formItemTextBox}>
                             <div className={styles.formItemText}>{item.amountCurrency1}</div>
                         </div>,
-                    contentType: TableCellContentTypes.TEXT
+                    contentType: TableCellContentTypes.SELECT
                 },
             ]
         })

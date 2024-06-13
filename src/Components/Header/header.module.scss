@@ -40,3 +40,11 @@
     @include flexStyles(flex,row,center,center);
     gap: 40px;
 }
+
+//media
+
+@media screen and (max-width:1210px) {
+    .title{
+font-size: 22px;
+    }
+  }

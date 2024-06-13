@@ -50,3 +50,12 @@
     color: $white;
 }
 
+//media
+
+@media screen and (max-width:1210px) {
+    .userData {
+        font-size: 15px;
+        gap: 5px;
+    }
+  }
+

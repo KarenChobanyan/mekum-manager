@@ -16,3 +16,17 @@
     @include flexStyles(flex,column,center,center);
     background-color: $avatar;
 }
+
+//media
+
+@media screen and (max-width:1210px) {
+    .imageBox{
+        width: 35px;
+        height: 35px;
+    }
+    .nameBox{
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+  }
