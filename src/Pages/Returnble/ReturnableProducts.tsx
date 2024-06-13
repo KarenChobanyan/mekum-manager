@@ -2,14 +2,12 @@ import { Controller } from "react-hook-form";
 import useReturnableProductsHooks from "./ReturnableProducts-hooks";
 import { ButtonTypes } from "../../Interfaces/componentTypes";
 import { AutoComplete, Button } from "../../Components";
-import { useAutocompleteData } from "../../General/Hooks/hooks";
 import arow from "../../Assets/Icons/arrow-right.svg"
 import styles from "./ReturnableProducts.module.scss"
 
 
 const ReturnableProducts = () => {
-    const { control, onSubmit, handleSubmit, errors, oneSelectData,
-        secondSelectData } = useReturnableProductsHooks();
+    const { control, onSubmit, handleSubmit, errors, oneSelectData,secondSelectData } = useReturnableProductsHooks();
 
     return (
         <div className={styles.returnableProducts}>
@@ -31,7 +29,7 @@ const ReturnableProducts = () => {
                     )}
                     name='material_out'
                 />
-                <div className={styles.arow}><img src={arow} /></div>
+                <div className={styles.arow}><img src={arow} alt="arrow" /></div>
                 <Controller
                     control={control}
                     rules={{

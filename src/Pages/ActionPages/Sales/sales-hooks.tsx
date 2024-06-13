@@ -17,7 +17,7 @@ const useSalesHooks = (id: string) => {
         },
         {
             title: `${t('Forms.Buyer')}`,
-            contentType: TableCellContentTypes.TEXT
+            contentType: TableCellContentTypes.SELECT
         },
         {
             title: `${t('Forms.Document_Number')}`,
@@ -44,7 +44,7 @@ const useSalesHooks = (id: string) => {
                         <div className={styles.formItemTextBox}>
                             <div className={styles.formItemText}>{item.partner?.name!}</div>
                         </div>,
-                    contentType: TableCellContentTypes.TEXT
+                    contentType: TableCellContentTypes.SELECT
                 },
                 {
                     component:

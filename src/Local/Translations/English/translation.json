@@ -47,7 +47,7 @@
     "Cost": "Cost",
     "Money": "Money",
     "Remainder":"Remainder",
-    "Document_Number":"Document number",
+    "Document_Number":"Code",
     "CassRegister":"Cash box",
     "Name":"Name",
     "Surname":"Surname"

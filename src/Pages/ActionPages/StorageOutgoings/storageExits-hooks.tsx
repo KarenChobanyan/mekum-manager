@@ -13,15 +13,15 @@ const useStorageExits = (id: string) => {
     const headerData: ITableHeader[] = [
         {
             title: `${t('Forms.Warehouse')}`,
-            contentType: TableCellContentTypes.TEXT
+            contentType: TableCellContentTypes.SELECT
         },
         {
             title: `${t('Forms.Date')}`,
-            contentType: TableCellContentTypes.TEXT
+            contentType: TableCellContentTypes.SELECT
         },
         {
             title:`${t('Forms.Document_Number')}`,
-            contentType: TableCellContentTypes.TEXT
+            contentType: TableCellContentTypes.SELECT
         }
     ];
 
@@ -33,21 +33,21 @@ const useStorageExits = (id: string) => {
                         <div className={styles.formItemTextBox}>
                             <div className={styles.formItemText}>{item.warehouse?.name!}</div>
                         </div>,
-                    contentType: TableCellContentTypes.TEXT
+                    contentType: TableCellContentTypes.SELECT
                 },
                 {
                     component:
                         <div className={styles.formItemTextBox}>
                             <div className={styles.formItemText}>{moment(item.date).format("DD/MM/YYYY")}</div>
                         </div>,
-                    contentType: TableCellContentTypes.TEXT
+                    contentType: TableCellContentTypes.SELECT
                 },
                 {
                     component:
                         <div className={styles.formItemTextBox}>
                             <div className={styles.formItemText}>{item.documentNumber!}</div>
                         </div>,
-                    contentType: TableCellContentTypes.TEXT
+                    contentType: TableCellContentTypes.SELECT
                 },
             ]
         })

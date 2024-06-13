@@ -19,15 +19,15 @@ const useUsersHooks = () => {
     const headerData: ITableHeader[] = [
         {
             title: `${t('Forms.Name')}`,
-            contentType: TableCellContentTypes.TEXT
+            contentType: TableCellContentTypes.SELECT
         },
         {
             title: `${t('Forms.Surname')}`,
-            contentType: TableCellContentTypes.TEXT
+            contentType: TableCellContentTypes.SELECT
         },
         {
             title: `${t('Roles.Role')}`,
-            contentType: TableCellContentTypes.TEXT
+            contentType: TableCellContentTypes.SELECT
         },
     ];
     const createBodyData = (data: GetUsersResponse): Array<ITableFormItemData[]> => {
@@ -38,21 +38,21 @@ const useUsersHooks = () => {
                         <div className={styles.formItemTextBox}>
                             <div className={styles.formItemText}>{item.name}</div>
                         </div>,
-                    contentType: TableCellContentTypes.TEXT
+                    contentType: TableCellContentTypes.SELECT
                 },
                 {
                     component:
                         <div className={styles.formItemTextBox}>
                             <div className={styles.formItemText}>{item.surname}</div>
                         </div>,
-                    contentType: TableCellContentTypes.TEXT
+                    contentType: TableCellContentTypes.SELECT
                 },
                 {
                     component:
                         <div className={styles.formItemTextBox}>
                             <div className={styles.formItemText}>{getUserRole(item.role_id!)}</div>
                         </div>,
-                    contentType: TableCellContentTypes.TEXT
+                    contentType: TableCellContentTypes.SELECT
                 },
             ]
         })

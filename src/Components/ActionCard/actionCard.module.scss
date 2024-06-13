@@ -37,3 +37,37 @@
     color: $white;
 }
 
+//media
+
+@media screen and (max-width:1220px) {
+    .container{
+        gap: 25px;
+        max-width: 200px;
+        width: 200px;
+        height: 220px;
+        gap: 10px;
+    }
+    .image{
+        max-width:150px;
+        max-height: 120px;
+      }
+
+}
+
+@media screen and (max-width:1010px) {
+    .container{
+        max-width: 180px;
+        width: 180px;
+        height: 200px;
+        gap: 10px;
+    }
+    .image{
+        max-width:130px;
+        max-height: 100px;
+      }
+      .title{
+        font-size: 18px;
+    }
+
+}
+
