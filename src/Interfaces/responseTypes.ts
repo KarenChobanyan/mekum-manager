@@ -439,6 +439,15 @@ export interface IGetWarehouseTransferResponseData {
 
 export type GetWarehouseTransferResponse = IGetWarehouseTransferResponseData[];
 
+export interface IWarehouseReturnData {
+  id:number,
+  date:string,
+  documentNumber:number,
+  partner:IGetPartnersRespData
+};
+
+export type WarehouseReturnsResponse = IWarehouseReturnData[];
+
 
 
 
