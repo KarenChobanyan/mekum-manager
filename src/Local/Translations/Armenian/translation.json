@@ -44,7 +44,12 @@
     "Document_Number":"Կոդ",
     "CassRegister":"Դրամարկղ",
     "Name":"Անուն",
-    "Surname":"Ազգանուն"
+    "Surname":"Ազգանուն",
+    "Type":"Տեսակ",
+    "In":"Մուտքեր",
+    "Out":"Ելքեր",
+    "Rectifier":"Ուղղարկող",
+    "Receptionist":"Ստացող"
   },
   "Roles": {
     "Admin": "Ադմինիստրատոր",

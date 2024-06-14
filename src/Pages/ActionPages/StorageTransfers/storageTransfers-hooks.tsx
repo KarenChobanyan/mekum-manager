@@ -1,31 +1,36 @@
 import { useState } from "react";
-import {t} from 'i18next';
+import { t } from 'i18next';
 import moment from "moment";
+import { useGetWarehouseTransfersQuery } from "../../../API/actionsApi";
+import { ISIN } from "../../../Interfaces/interfaces";
+import { useAutocompleteData } from "../../../General/Hooks/hooks";
 import { ITableFormItemData, ITableHeader, TableCellContentTypes } from "../../../Interfaces/componentTypes";
-import { useGetWarehouseReturnsQuery } from "../../../API/actionsApi";
-import { WarehouseReturnsResponse } from "../../../Interfaces/responseTypes";
+import { GetWarehouseTransferResponse } from "../../../Interfaces/responseTypes";
 import styles from '../formTablestyles.module.scss';
 
-const useStorageReturn = (id:string)=>{
+const useStorageTransferHook = (id: string) => {
+    const { warehouseDataTypes } = useAutocompleteData();
     const [activePage, setActivePage] = useState<number>(0);
     const [offset, setOffset] = useState<number>(0);
-    const { data: returnsData } = useGetWarehouseReturnsQuery({ id: id, limit: 7, offset: offset });
+    const [isIn, setIsIn] = useState<ISIN>(warehouseDataTypes[0].id as ISIN)
+    const { data: transfersData } = useGetWarehouseTransfersQuery({ id: id, limit: 7, offset: offset, isIn: isIn });
+
     const headerData: ITableHeader[] = [
         {
             title: `${t('Forms.Date')}`,
             contentType: TableCellContentTypes.TEXT
         },
         {
-            title: `${t('Forms.Partner')}`,
+            title: isIn === ISIN.TRUE ? `${t('Forms.Rectifier')}` : `${t('Forms.Receptionist')}`,
             contentType: TableCellContentTypes.SELECT
         },
         {
-            title:`${t('Forms.Document_Number')}`,
+            title: `${t('Forms.Document_Number')}`,
             contentType: TableCellContentTypes.SELECT
         }
     ];
 
-    const createBodyData = (data: WarehouseReturnsResponse): Array<ITableFormItemData[]> => {
+    const createBodyData = (data: GetWarehouseTransferResponse): Array<ITableFormItemData[]> => {
         return data?.map((item) => {
             return [
                 {
@@ -38,9 +43,17 @@ const useStorageReturn = (id:string)=>{
                 {
                     component:
                         <div className={styles.formItemTextBox}>
-                            <div className={styles.formItemText}>{item.partner?.name!}</div>
+                            <div className={styles.formItemText}>
+                                {
+                                    isIn === ISIN.TRUE
+                                        ?
+                                        item.warehouseOut?.name!
+                                        :
+                                        item.warehouseEnter?.name!
+                                }
+                            </div>
                         </div>,
-                    contentType: TableCellContentTypes.SELECT
+                    contentType: TableCellContentTypes.TEXT
                 },
                 {
                     component:
@@ -53,16 +66,19 @@ const useStorageReturn = (id:string)=>{
         })
     };
 
-    const bodyData = createBodyData(returnsData!);
+    const bodyData = createBodyData(transfersData!);
+
 
     return {
-        returnsData,
+        transfersData,
+        activePage,
         headerData,
         bodyData,
-        activePage,
         setActivePage,
-        setOffset
+        setOffset,
+        setIsIn,
+        isIn
     }
 };
 
-export default useStorageReturn
+export default useStorageTransferHook

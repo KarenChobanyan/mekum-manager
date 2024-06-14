@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
+import { Controller } from 'react-hook-form';
 import { useAutocompleteData, useGeneralHooks, useWarehouseHooks } from '../../../General/Hooks/hooks';
 import useStorageReturn from './storageReturn-hooks';
-import styles from '../styles.module.scss';
-import { Controller } from 'react-hook-form';
-import { AutoComplete, Button, Loading, NoData } from '../../../Components';
+import { AutoComplete, Button, CustomPagination, CustomTable, Loading, NoData } from '../../../Components';
 import { ButtonTypes } from '../../../Interfaces/componentTypes';
+import styles from '../styles.module.scss';
 
-const StorageReturn:React.FC = () => {
-    const { t, navigate } = useGeneralHooks();
-    const { myWarehousesData } = useAutocompleteData();
-    const [warehouseId, setWarehouseId] = useState<string | undefined>(myWarehousesData?.[0].id!)
-    const { control } = useWarehouseHooks();
-    const { returnData } = useStorageReturn(warehouseId! ?? myWarehousesData?.[0].id!);
+const StorageReturn: React.FC = () => {
+  const { t, navigate } = useGeneralHooks();
+  const { myWarehousesData } = useAutocompleteData();
+  const [warehouseId, setWarehouseId] = useState<string | undefined>(myWarehousesData?.[0].id!)
+  const { control } = useWarehouseHooks();
+  const { returnsData, headerData, bodyData, activePage, setActivePage, setOffset } = useStorageReturn(warehouseId! ?? myWarehousesData?.[0].id!);
 
   return (
     <div className={styles.container}>
       {
-        myWarehousesData && returnData
+        myWarehousesData && returnsData
           ?
           <>
             <div className={styles.top}>
@@ -49,7 +49,7 @@ const StorageReturn:React.FC = () => {
                 }}
               />
               {
-                returnData?.length! > 0
+                returnsData?.length! > 0
                 &&
                 <Button
                   buttonType={ButtonTypes.Primery}
@@ -59,29 +59,28 @@ const StorageReturn:React.FC = () => {
                 />
               }
             </div>
-            {returnData?.length! > 0
+            {returnsData?.length! > 0
               ?
               (
-                <div>Body</div>
-                // bodyData
-                //   ?
-                //   <div className={styles.fullBody}>
-                //     <CustomTable
-                //       headerData={headerData}
-                //       bodyData={bodyData}
-                //     />
-                //     <CustomPagination
-                //       limit={100}
-                //       offset={activePage}
-                //       onChange={(_, page) => {
-                //         setOffset((page -1) * 7);
-                //         setActivePage(page);
-                //         window.scrollTo(0, 0);
-                //       }}
-                //     />
-                //   </div>
-                //   :
-                //   <Loading />
+                bodyData
+                  ?
+                  <div className={styles.fullBody}>
+                    <CustomTable
+                      headerData={headerData}
+                      bodyData={bodyData}
+                    />
+                    <CustomPagination
+                      limit={100}
+                      offset={activePage}
+                      onChange={(_, page) => {
+                        setOffset((page - 1) * 7);
+                        setActivePage(page);
+                        window.scrollTo(0, 0);
+                      }}
+                    />
+                  </div>
+                  :
+                  <Loading />
               )
               :
               <div className={styles.emptyBody}>

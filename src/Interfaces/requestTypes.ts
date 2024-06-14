@@ -80,7 +80,7 @@ export interface IPostWarehouseReturnRequest {
   warehouseId: number,
   partnerId: number,
   goods: IWarehouseReturnGood[]
-}
+};
 
 export interface IWarehouseReturnGood {
   materialValueId: number,
@@ -89,8 +89,16 @@ export interface IWarehouseReturnGood {
   warehouseId:number, 
   measurementUnitId: number,
 };
+
 export interface IPostRPostReturnable {
   material_value_id_out:number,
   material_value_id_in:number
-}
+};
+
+export interface IGetWarehouseTransfersRequestData {
+  id:string,
+  limit:number,
+  offset:number,
+  isIn:string
+};
 

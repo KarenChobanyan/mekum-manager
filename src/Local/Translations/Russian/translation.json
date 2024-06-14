@@ -50,7 +50,12 @@
     "Document_Number":"Код",
     "CassRegister":"Касса",
      "Name":"Имя",
-    "Surname":"Фамилияe"
+    "Surname":"Фамилияe",
+    "Type":"Тип",
+    "In":"Входы",
+    "Out":"Выходы",
+    "Rectifier":"Отправитель",
+    "Receptionist":"Получатель"
   },
   "Employee":{
     "Title":"Сотрудник",

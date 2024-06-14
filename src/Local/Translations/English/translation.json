@@ -50,7 +50,12 @@
     "Document_Number":"Code",
     "CassRegister":"Cash box",
     "Name":"Name",
-    "Surname":"Surname"
+    "Surname":"Surname",
+    "Type":"Type",
+    "In":"Inputs",
+    "Out":"Exits",
+    "Rectifier":"Rectifier",
+    "Receptionist":"Receptionist"
   },
   "Employee":{
     "Title":"Employee",
