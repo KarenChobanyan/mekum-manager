@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from './API';
 import { ICashoutRequest, IGetStorageEntriesRequestData, IGetWarehouseTransfersRequestData, IPostStorageIncomeRequestData, IPostWarehouseExitRequest, IPostWarehouseReturnRequest, IWarehouseTransferRequest, PostRetunableRequestData } from '../Interfaces/requestTypes';
-import { AccounInvoiceResponce, CashOutResponse, GetWarehouseTransferResponse, IWarehouseEntryResponse, WarehouseExitResponse, WarehouseReturnsResponse } from '../Interfaces/responseTypes';
+import { AccounInvoiceResponce, CashOutResponse, GetReturnableProductsResponse, GetWarehouseTransferResponse, IWarehouseEntryResponse, WarehouseExitResponse, WarehouseReturnsResponse } from '../Interfaces/responseTypes';
 
 export const actionsApi = createApi({
     reducerPath: 'actionsApi',
@@ -124,6 +124,13 @@ export const actionsApi = createApi({
             }),
             invalidatesTags: ['Returnable']
         }),
+        getReturnableProducts: builder.query<GetReturnableProductsResponse, void>({
+            query: () => ({
+                url: `/returnable-product`,
+                method: 'GET',
+            }),
+            providesTags: ['Returnable']
+        }),
     }),
 });
 
@@ -142,5 +149,6 @@ export const {
     usePostWarehouseReturnMutation,
     usePostReturnableMutation,
     useGetWarehouseTransfersQuery,
-    useGetWarehouseReturnsQuery
+    useGetWarehouseReturnsQuery,
+    useGetReturnableProductsQuery
 } = actionsApi;

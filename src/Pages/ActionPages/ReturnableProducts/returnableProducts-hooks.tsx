@@ -1,75 +1,65 @@
-import { useEffect } from "react";
-import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import { useGeneralHooks } from "../../../General/Hooks/hooks";
-import { usePostReturnableMutation } from "../../../API/actionsApi";
-import { IAutocompleteItem } from "../../../Interfaces/componentTypes";
-import { IPostReturnable, PostRetunableRequestData } from "../../../Interfaces/requestTypes";
+import { useGetReturnableProductsQuery } from "../../../API/actionsApi";
+import { ITableFormItemData, ITableHeader, TableCellContentTypes } from "../../../Interfaces/componentTypes";
+import { t } from 'i18next';
+import { GetReturnableProductsResponse } from "../../../Interfaces/responseTypes";
+import styles from '../formTablestyles.module.scss'
+import { useAutocompleteData } from "../../../General/Hooks/hooks";
+import { useCallback } from "react";
 
-export interface IReturnableProductsForm {
-    products: IProducts[]
-};
+export interface IReturnableProductRenderItem {
+    material_value_id_out:string,
+    material_value_id_in:string,
+}
 
-export interface IProducts {
-    material_value_id_out: IAutocompleteItem | null,
-    material_value_id_in: IAutocompleteItem | null
-};
+const useReturnableProductsHook = () => {
+    const { data: returnableData } = useGetReturnableProductsQuery();
+    const { goodsData } = useAutocompleteData();
+    const setProductName = useCallback((id:number) => {
+        const product = goodsData?.filter((good)=>good.id === String(id))[0];
+        const name = product?.title
+        return name
+    }, [goodsData]);
 
-const useReturnableProducts = () => {
-    const { navigate, t } = useGeneralHooks();
-    const [add, { isLoading, isError, isSuccess }] = usePostReturnableMutation();
-    const { handleSubmit, control, formState: { errors }, watch, reset } = useForm<IReturnableProductsForm>({
-        defaultValues: {
-            products: [{ material_value_id_out: null, material_value_id_in: null }]
+    const headerData: ITableHeader[] = [
+        {
+            title: `${t('Forms.Product_1')}`,
+            contentType: TableCellContentTypes.SELECT
         },
-        mode: 'all'
-    });
-    const { fields, append, remove } = useFieldArray({
-        control,
-        name: 'products'
-    });
+        {
+            title: `${t('Forms.Product_2')}`,
+            contentType: TableCellContentTypes.SELECT
+        },
+    ];
 
-    useEffect(() => {
-        if (isSuccess) {
-            toast.success(t('Toast.Success.Register'))
-            navigate(-1)
-            reset();
-        } else if (isError) {
-            toast.error(t('Toast.Error.Register'))
-        }
-    }, [isSuccess, isError]);
+    const createBodyData = (data: GetReturnableProductsResponse): Array<ITableFormItemData[]> => {
+        return data?.map((item) => {
+            return [
+                {
+                    component:
+                        <div className={styles.formItemTextBox}>
+                            <div className={styles.formItemText}>{setProductName(item.material_value_id_out)}</div>
+                        </div>,
+                    contentType: TableCellContentTypes.SELECT
+                },
+                {
+                    component:
+                        <div className={styles.formItemTextBox}>
+                            <div className={styles.formItemText}>{setProductName(item.material_value_id_in)}</div>
+                        </div>,
+                    contentType: TableCellContentTypes.SELECT
+                },
 
-    const onAddItem = () => {
-        append({ material_value_id_out: null, material_value_id_in: null })
-    };
-
-
-    const onCancel = () => {
-        navigate(-1)
-    };
-
-    const onSubmit: SubmitHandler<IReturnableProductsForm> = (values) => {
-        const payload: PostRetunableRequestData = values.products?.map((item): IPostReturnable => {
-            return {
-                material_value_id_in: +(item.material_value_id_in!),
-                material_value_id_out: +(item.material_value_id_out!)
-            };
+            ]
         })
-        add(payload)
     };
+
+    const bodyData = createBodyData(returnableData!);
 
     return {
-        isLoading,
-        handleSubmit,
-        onSubmit,
-        onCancel,
-        remove,
-        onAddItem,
-        fields,
-        control,
-        errors,
-        watch
+        returnableData,
+        headerData,
+        bodyData
     }
 };
 
-export default useReturnableProducts
+export default useReturnableProductsHook

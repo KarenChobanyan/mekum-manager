@@ -1,12 +1,12 @@
 import React from 'react';
 import { t } from 'i18next';
 import { Control, Controller, FieldArrayWithId, FieldErrors, UseFieldArrayRemove, UseFormWatch } from 'react-hook-form';
-import { IReturnableProductsForm } from './returnableProducts-hooks';
-import { useAutocompleteData } from '../../../General/Hooks/hooks';
-import { ITableFormItemData, ITableHeader, TableCellContentTypes } from '../../../Interfaces/componentTypes';
-import { AutoComplete, CustomTable } from '../../../Components';
-import { RedTrashIcon } from '../../../Assets/Icons';
-import styles from '../formTablestyles.module.scss';
+import { IReturnableProductsForm } from './createReturnableProducts-hooks';
+import { useAutocompleteData } from '../../../../General/Hooks/hooks';
+import { ITableFormItemData, ITableHeader, TableCellContentTypes } from '../../../../Interfaces/componentTypes';
+import { AutoComplete, CustomTable } from '../../../../Components';
+import { RedTrashIcon } from '../../../../Assets/Icons';
+import styles from '../../formTablestyles.module.scss';
 
 interface IProps {
     fields: FieldArrayWithId<IReturnableProductsForm, "products", "id">[],
