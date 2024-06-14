@@ -24,14 +24,14 @@
     "Date": "Ամսաթիվ",
     "Warehouse": "Պահեստ",
     "Select_Warehouse": "Ընտրեք պահեստը",
-    "Partner":"Գործնկեր",
-    "Select_Partner":"Ընտրեք գործնկեր",
+    "Partner": "Գործնկեր",
+    "Select_Partner": "Ընտրեք գործնկեր",
     "PartnerIn": "Մատակարար",
     "Select_PartnerIn": "Ընտրեք մատակարարին",
-    "Recipient":"Ստացող",
-    "Select_Recipient":"Ընտրեք ստացողին",
-    "Buyer":"Գնորդ",
-    "Select_Buyer":"Ընտրեք գնորդին",
+    "Recipient": "Ստացող",
+    "Select_Recipient": "Ընտրեք ստացողին",
+    "Buyer": "Գնորդ",
+    "Select_Buyer": "Ընտրեք գնորդին",
     "Material": "Ապրանք",
     "Select_Material": "Ընտրեք ապրանքը",
     "Point": "Միավոր",
@@ -40,16 +40,18 @@
     "Discount": "Զեղչ",
     "Cost": "Արժեք",
     "Money": "Գումար",
-    "Remainder":"Մնացորդ",
-    "Document_Number":"Կոդ",
-    "CassRegister":"Դրամարկղ",
-    "Name":"Անուն",
-    "Surname":"Ազգանուն",
-    "Type":"Տեսակ",
-    "In":"Մուտքեր",
-    "Out":"Ելքեր",
-    "Rectifier":"Ուղղարկող",
-    "Receptionist":"Ստացող"
+    "Remainder": "Մնացորդ",
+    "Document_Number": "Կոդ",
+    "CassRegister": "Դրամարկղ",
+    "Name": "Անուն",
+    "Surname": "Ազգանուն",
+    "Type": "Տեսակ",
+    "In": "Մուտքեր",
+    "Out": "Ելքեր",
+    "Rectifier": "Ուղղարկող",
+    "Receptionist": "Ստացող",
+    "Product_1": "Ապրանք 1",
+    "Product_2": "Ապրանք 2"
   },
   "Roles": {
     "Admin": "Ադմինիստրատոր",
@@ -106,9 +108,9 @@
     "Users": {
       "Title": "Օգտատերեր",
       "Create": "Գրանցել նոր օգտատեր"
-    },    
-    "Returnable":{
-      "Title":"Վերադարձելի"
+    },
+    "Returnable": {
+      "Title": "Վերադարձ ապրանքներ"
     }
   }
 }

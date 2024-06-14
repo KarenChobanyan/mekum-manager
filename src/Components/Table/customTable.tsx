@@ -1,4 +1,5 @@
 import React from 'react';
+import {t} from 'i18next';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from '@mui/material';
 import CustomTableCell from './customTableCell';
 import { ITableFormItemData, TableCellTypes, TableHeaderData } from '../../Interfaces/componentTypes';
@@ -45,7 +46,7 @@ const CustomTable: React.FC<IProps> = (props) => {
               <TableCell>
                 <div className={styles.plusFooter} onClick={addAction}>
                   <img src={PlusIcon} alt='plusIcon' />
-                  <div>Ավելացնել</div>
+                  <div>{t('Button.Add')}</div>
                 </div>
               </TableCell>
             </TableFooter>

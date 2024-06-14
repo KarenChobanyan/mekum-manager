@@ -16,12 +16,14 @@ import CreateCashTransferPage from './CashTransfers/Create/createCashTransfer';
 import CreateUserPage from './Users/Create/createUser';
 import StorageReturnPage from './StorageReturns/storageReturn';
 import CreateStorageReturnPage from './StorageReturns/Create/createStorageReturn';
+import ReturnableProductsPage from './ReturnableProducts/returnableProducts';
 
 export {
     CreateStorageIncomePage,
     CreateStorageOutgoingsPage,
     CreateTorageTransfersPage,
     CreateStorageReturnPage,
+    ReturnableProductsPage,
     CreateCashTransferPage,
     CreateCashIncomePage,
     StorageTransfersPage,
