@@ -1,21 +1,26 @@
 import { FieldValues, UseFormRegister } from "react-hook-form";
 
 export interface ILoginFormValues {
-    username: string;
-    password: string;
-  }
-  
-  export type RegisterFormValues = {
-    name: string;
-    surname: string;
-    email: string;
-    password: string;
-  };
+  username: string;
+  password: string;
+}
 
-  export interface SearchInputValues {
-    search: string;
-  }
+export type RegisterFormValues = {
+  name: string;
+  surname: string;
+  email: string;
+  password: string;
+};
 
-  export type InputRegisterTypes = UseFormRegister<
+export interface SearchInputValues {
+  search: string;
+};
+
+export type InputRegisterTypes = UseFormRegister<
   FieldValues | ILoginFormValues | SearchInputValues
 >;
+
+export enum ISIN {
+  TRUE = 'true',
+  FALSE = 'false'
+};

@@ -35,7 +35,7 @@ const useHomePageHooks = () => {
                     {
                         src: `${BetweenStorages}`,
                         title: t('Actions.Between_Storages.Title'),
-                        onClick: () => { navigate('/storage_transfers/create') }
+                        onClick: () => { navigate('/storage_transfers') }
                     },
                     {
                         src: `${Sales}`,

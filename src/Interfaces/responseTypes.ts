@@ -385,7 +385,59 @@ export interface Currencies {
   isDefault: number;
 };
 
-export type CashOutResponse = ICashoutResponseData[]
+export type CashOutResponse = ICashoutResponseData[];
+
+export interface IWarehouseSignificance {
+    id: number;
+    name: string;
+    expenseAccountId: number;
+    partnerAccountId: number;
+    prepaymentAccountId: number;
+    outFlowAccountId?: null;
+    inflowAccountId?: null;
+    givenPrepaymentAccountId: number;
+    debPartnerAccountId: number;
+    estimateCode?: null;
+    economicActivityClassifierId: number;
+    taxableIncomeId: number;
+    isBasic: number;
+    isDefault: number;
+    forEstimate: number;
+};
+
+export interface IMovementNAProduct {
+  id: number;
+  name: string;
+  expenseAccountId: number;
+  partnerAccountId: number;
+  prepaymentAccountId: number;
+  outFlowAccountId?: null;
+  inflowAccountId?: null;
+  givenPrepaymentAccountId: number;
+  debPartnerAccountId: number;
+  estimateCode?: null;
+  economicActivityClassifierId: number;
+  taxableIncomeId: number;
+  isBasic: number;
+  isDefault: number;
+  forEstimate: number;
+};
+
+export type MovementNAProducts = IMovementNAProduct[];
+
+export interface IGetWarehouseTransferResponseData {
+  id:number,
+  date:string,
+  documentNumber:number,
+  warehouseOutId:number,
+  warehouseOut:IWarehouse,
+  warehouseEnter:IWarehouse,
+  warehouseSignificance:IWarehouseSignificance,
+  movementNAProduct:MovementNAProducts,
+  draft:number
+};
+
+export type GetWarehouseTransferResponse = IGetWarehouseTransferResponseData[];
 
 
 

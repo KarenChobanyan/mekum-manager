@@ -9,6 +9,7 @@ import { IAutocompleteData, IAutocompleteItem } from "../../Interfaces/component
 import { useGetAllGoodsQuery, useGetAllWarehousesQuery, useGetCashRegistersQuery, useGetEmployeesQuery, useGetGoodBatchesQuery, useGetGoodsQuery, useGetPartnersQuery, useGetWarehouseGoodsQuery, useGetWarehousesQuery } from "../../API/direcroriesApi";
 import { AllGoodsResponse, CashRegistersResponse, GetEmployeesResponseData, GetGoodBatchesResponse, GetWarehousesResponseData, GoodsResponseData, IAllGoodsResponseData, IGetPartnersRespData } from "../../Interfaces/responseTypes";
 import { removeCurrentUser } from "../../Store/Slices/authSlice";
+import { ISIN } from "../../Interfaces/interfaces";
 
 export const useGeneralHooks = () => {
   const { t, i18n } = useTranslation();
@@ -93,6 +94,16 @@ export const useAutocompleteData = (warehouseId?: string) => {
   const { data: myGoods } = useGetWarehouseGoodsQuery(warehouseId!);
   const myWarehousesIds = myWarehouses?.map((item) => item.id);
   const filteredWarehouses = allWarehouses?.filter((item) => !myWarehousesIds?.includes(item.id));
+  const warehouseDataTypes:IAutocompleteData = [
+    {
+      title:t('Forms.In'),
+      id:ISIN.TRUE
+    },
+    {
+      title:t('Forms.Out'),
+      id:ISIN.FALSE
+    }
+  ]
 
   const createWarehouseData = (data: GetWarehousesResponseData): IAutocompleteData | undefined => {
     if (data) {
@@ -226,6 +237,7 @@ export const useAutocompleteData = (warehouseId?: string) => {
     allGoodsData,
     partnersData,
     myGoodsdata,
+    warehouseDataTypes,
     getRemainder,
     getGoodsUnitType,
     getAllGoodsUnitType,
@@ -234,7 +246,7 @@ export const useAutocompleteData = (warehouseId?: string) => {
 };
 
 export const useWarehouseHooks = () => {
-  const { control } = useForm<{ warehouse: IAutocompleteItem }>();
+  const { control } = useForm<{ warehouse: IAutocompleteItem,type:IAutocompleteItem }>();
   return {
     control,
   }

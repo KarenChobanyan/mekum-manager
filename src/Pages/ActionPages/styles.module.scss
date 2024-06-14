@@ -38,6 +38,11 @@
     @include flexStyles(flex, row, flex-end, space-between);
 }
 
+.topSelectors{
+    @include flexStyles(flex, row, normal, normal); 
+    gap: 15px;
+}
+
 .button {
     border-radius: 10px;
     width: 200px;
