@@ -16,9 +16,9 @@
     "FirstName": "Invalid Name",
     "Surname": "Invalid Surname"
   },
-  "Header":{
-    "My_Page":"My page",
-    "Log_Out":"Log out"
+  "Header": {
+    "My_Page": "My page",
+    "Log_Out": "Log out"
   },
   "Roles": {
     "Admin": "Administrator",
@@ -29,15 +29,15 @@
   "Forms": {
     "Date": "Date",
     "Warehouse": "Warehouse",
-    "Select_Warehouse":"Select the warehouse",
-    "Partner":"Partner",
-    "Select_Partner":"Select a partner",
+    "Select_Warehouse": "Select the warehouse",
+    "Partner": "Partner",
+    "Select_Partner": "Select a partner",
     "PartnerIn": "Supplier",
     "Select_PartnerIn": "Select a supplier",
-    "Recipient":"Recipient",
-    "Select_Recipient":"Select the recipient",
-    "Buyer":"Buyer",
-    "Select_Buyer":"Select the buyer",
+    "Recipient": "Recipient",
+    "Select_Recipient": "Select the recipient",
+    "Buyer": "Buyer",
+    "Select_Buyer": "Select the buyer",
     "Material": "Product",
     "Select_Material": "Select the product",
     "Point": "Point",
@@ -46,20 +46,22 @@
     "Discount": "Discount",
     "Cost": "Cost",
     "Money": "Money",
-    "Remainder":"Remainder",
-    "Document_Number":"Code",
-    "CassRegister":"Cash box",
-    "Name":"Name",
-    "Surname":"Surname",
-    "Type":"Type",
-    "In":"Inputs",
-    "Out":"Exits",
-    "Rectifier":"Rectifier",
-    "Receptionist":"Receptionist"
+    "Remainder": "Remainder",
+    "Document_Number": "Code",
+    "CassRegister": "Cash box",
+    "Name": "Name",
+    "Surname": "Surname",
+    "Type": "Type",
+    "In": "Inputs",
+    "Out": "Exits",
+    "Rectifier": "Rectifier",
+    "Receptionist": "Receptionist",
+    "Product_1": "Product 1",
+    "Product_2": "Product 2"
   },
-  "Employee":{
-    "Title":"Employee",
-    "Placeholder":"Select the employee"
+  "Employee": {
+    "Title": "Employee",
+    "Placeholder": "Select the employee"
   },
   "NoData": {
     "NoData": "The list is empty"
@@ -106,10 +108,9 @@
     "Users": {
       "Title": "Users",
       "Create": "Register a new user"
-    }, 
-     "Returnable":{
-      "Title":"Returnable"
+    },
+    "Returnable": {
+      "Title": "Returnable products"
     }
   }
-
 }

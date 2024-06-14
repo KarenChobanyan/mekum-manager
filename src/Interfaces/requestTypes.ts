@@ -90,10 +90,12 @@ export interface IWarehouseReturnGood {
   measurementUnitId: number,
 };
 
-export interface IPostRPostReturnable {
+export interface IPostReturnable {
   material_value_id_out:number,
   material_value_id_in:number
 };
+
+export type PostRetunableRequestData = IPostReturnable[];
 
 export interface IGetWarehouseTransfersRequestData {
   id:string,

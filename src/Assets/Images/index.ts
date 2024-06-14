@@ -6,8 +6,9 @@ import CashIncome from './cashIncome.png';
 import CashOut from './cashOut.png';
 import CashChange from './cashChange.png';
 import Users from './users.png';
-import NoDataImg from './noData.png'
-import StorageRemove from './storageRemove.png'
+import NoDataImg from './noData.png';
+import StorageRemove from './storageRemove.png';
+import ReturnableImage from './returnable.png';
 
 export {
     Sales,
@@ -20,4 +21,5 @@ export {
     StorageRemove,
     OutFromStorage,
     BetweenStorages,
+    ReturnableImage,
 }

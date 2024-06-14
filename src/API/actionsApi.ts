@@ -1,11 +1,11 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from './API';
-import { ICashoutRequest, IGetStorageEntriesRequestData, IGetWarehouseTransfersRequestData, IPostRPostReturnable, IPostStorageIncomeRequestData, IPostWarehouseExitRequest, IPostWarehouseReturnRequest, IWarehouseTransferRequest } from '../Interfaces/requestTypes';
-import { AccounInvoiceResponce, CashOutResponse, GetWarehouseTransferResponse, IWarehouseEntryResponse, WarehouseExitResponse, WarehouseReturnsResponse } from '../Interfaces/responseTypes';
+import { ICashoutRequest, IGetStorageEntriesRequestData, IGetWarehouseTransfersRequestData, IPostStorageIncomeRequestData, IPostWarehouseExitRequest, IPostWarehouseReturnRequest, IWarehouseTransferRequest, PostRetunableRequestData } from '../Interfaces/requestTypes';
+import { AccounInvoiceResponce, CashOutResponse, GetReturnableProductsResponse, GetWarehouseTransferResponse, IWarehouseEntryResponse, WarehouseExitResponse, WarehouseReturnsResponse } from '../Interfaces/responseTypes';
 
 export const actionsApi = createApi({
     reducerPath: 'actionsApi',
-    tagTypes: ['WarehouseEntries', 'WarehouseExits', 'Sales', 'CashOut', 'CashEntry','Returnable','WarehouseTransfers','Returns'],
+    tagTypes: ['WarehouseEntries', 'WarehouseExits', 'Sales', 'CashOut', 'CashEntry', 'Returnable', 'WarehouseTransfers', 'Returns'],
     baseQuery: axiosBaseQuery({
         baseUrl: process.env.REACT_APP_API_KEY,
     }),
@@ -86,7 +86,7 @@ export const actionsApi = createApi({
             invalidatesTags: ['CashEntry']
         }),
         getWarehouseTransfers: builder.query<GetWarehouseTransferResponse, IGetWarehouseTransfersRequestData>({
-            query: ({ id, limit, offset,isIn }) => ({
+            query: ({ id, limit, offset, isIn }) => ({
                 url: `/mekum/movements?id=${id}&limit=${limit}&offset=${offset}&isIn=${isIn}`,
                 method: 'GET',
             }),
@@ -116,13 +116,20 @@ export const actionsApi = createApi({
             }),
             invalidatesTags: ['Returns']
         }),
-        postReturnable: builder.mutation<any,IPostRPostReturnable>({
+        postReturnable: builder.mutation<any, PostRetunableRequestData>({
             query: (credentials) => ({
-                url: '/returnable-product/',
+                url: '/returnable-product',
                 method: 'POST',
                 data: credentials,
             }),
-            invalidatesTags: ['Returnable']            
+            invalidatesTags: ['Returnable']
+        }),
+        getReturnableProducts: builder.query<GetReturnableProductsResponse, void>({
+            query: () => ({
+                url: `/returnable-product`,
+                method: 'GET',
+            }),
+            providesTags: ['Returnable']
         }),
     }),
 });
@@ -142,5 +149,6 @@ export const {
     usePostWarehouseReturnMutation,
     usePostReturnableMutation,
     useGetWarehouseTransfersQuery,
-    useGetWarehouseReturnsQuery
+    useGetWarehouseReturnsQuery,
+    useGetReturnableProductsQuery
 } = actionsApi;

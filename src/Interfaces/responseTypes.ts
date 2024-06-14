@@ -448,6 +448,15 @@ export interface IWarehouseReturnData {
 
 export type WarehouseReturnsResponse = IWarehouseReturnData[];
 
+export interface IReturnableProductResponseData {
+  id: number;
+  material_value_id_out: number;
+  material_value_id_in: number;
+  created_at: string;
+  updated_at: string;
+};
+
+export type GetReturnableProductsResponse = IReturnableProductResponseData[];
 
 
 

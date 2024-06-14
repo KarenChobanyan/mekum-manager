@@ -1,12 +1,11 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import {t} from 'i18next';
+import { t } from 'i18next';
 import { CashIncomingPage, CashOutPage, CashTransfersPage, HomePage, LoginPage, MyPage, SalesPage, StorageIncomesPage, StorageOutgoingsPage, UsersPage } from '../Pages';
 import Layout from '../Pages/Layout/layout';
 import MainPage from '../Pages/Main/mainPage';
 import StorageTransfers from '../Pages/ActionPages/StorageTransfers/storageTransfers';
-import ReturnableProducts from '../Pages/Returnble/ReturnableProducts';
-import { CreateStorageIncomePage,CreateStorageOutgoingsPage,CreateTorageTransfersPage,CreateSalesPage, CreateCashIncomePage, CreateCashoutPage,CreateCashTransferPage,CreateUserPage, StorageReturnPage } from '../Pages/ActionPages';
+import { CreateStorageIncomePage, CreateStorageOutgoingsPage, CreateTorageTransfersPage, CreateSalesPage, CreateCashIncomePage, CreateCashoutPage, CreateCashTransferPage, CreateUserPage, StorageReturnPage, ReturnableProductsPage ,CreateReturnableProductsPage} from '../Pages/ActionPages';
 import CreateStorageReturn from '../Pages/ActionPages/StorageReturns/Create/createStorageReturn';
 
 
@@ -28,129 +27,134 @@ const Router: React.FC = () => {
             <Route
                 path='/home'
                 element={
-                    <Layout children={<HomePage/>} />
+                    <Layout children={<HomePage />} />
                 }
             />
-             <Route
+            <Route
                 path='/my_page'
                 element={
-                    <Layout children={<MyPage/>} />
+                    <Layout children={<MyPage />} />
                 }
             />
-             <Route
+            <Route
                 path='/sales'
                 element={
-                    <Layout title={t('Actions.Sales.Title')} children={<SalesPage/>} />
+                    <Layout title={t('Actions.Sales.Title')} children={<SalesPage />} />
                 }
             />
-             <Route
+            <Route
                 path='/sales/create/:id'
                 element={
-                    <Layout title={t('Actions.Sales.Title')} children={<CreateSalesPage/>} />
+                    <Layout title={t('Actions.Sales.Title')} children={<CreateSalesPage />} />
                 }
             />
-             <Route
+            <Route
                 path='/users'
                 element={
-                    <Layout title={t('Actions.Users.Title')} children={<UsersPage/>} />
+                    <Layout title={t('Actions.Users.Title')} children={<UsersPage />} />
                 }
             />
-             <Route
+            <Route
                 path='/users/create'
                 element={
-                    <Layout title={t('Actions.Users.Create')} children={<CreateUserPage/>} />
+                    <Layout title={t('Actions.Users.Create')} children={<CreateUserPage />} />
                 }
             />
             <Route
                 path='/storage_incomings'
                 element={
-                    <Layout title={t('Actions.To_Storage.Title')} children={<StorageIncomesPage/>} />
+                    <Layout title={t('Actions.To_Storage.Title')} children={<StorageIncomesPage />} />
                 }
             />
-             <Route
+            <Route
                 path='/storage_incomings/create/:id'
                 element={
-                    <Layout title={t('Actions.To_Storage.Title')} children={<CreateStorageIncomePage/>} />
+                    <Layout title={t('Actions.To_Storage.Title')} children={<CreateStorageIncomePage />} />
                 }
             />
             <Route
                 path='/storage_outgoings'
                 element={
-                    <Layout title={t('Actions.From_Storage.Title')}  children={<StorageOutgoingsPage/>} />
+                    <Layout title={t('Actions.From_Storage.Title')} children={<StorageOutgoingsPage />} />
                 }
             />
             <Route
                 path='/storage_outgoings/create/:id'
                 element={
-                    <Layout title={t('Actions.From_Storage.Title')} children={<CreateStorageOutgoingsPage/>} />
+                    <Layout title={t('Actions.From_Storage.Title')} children={<CreateStorageOutgoingsPage />} />
                 }
             />
             <Route
                 path='/storage_transfers'
                 element={
-                    <Layout title={t('Actions.Between_Storages.Title')} children={<StorageTransfers/>} />
+                    <Layout title={t('Actions.Between_Storages.Title')} children={<StorageTransfers />} />
                 }
             />
-             <Route
+            <Route
                 path='/storage_transfers/create'
                 element={
-                    <Layout title={t('Actions.Between_Storages.Title')} children={<CreateTorageTransfersPage/>} />
+                    <Layout title={t('Actions.Between_Storages.Title')} children={<CreateTorageTransfersPage />} />
                 }
             />
-             <Route
+            <Route
                 path='/cash_incomings'
                 element={
-                    <Layout title={t('Actions.Cash_Income.Title')} children={<CashIncomingPage/>} />
+                    <Layout title={t('Actions.Cash_Income.Title')} children={<CashIncomingPage />} />
                 }
             />
-             <Route
+            <Route
                 path='/cash_incomings/create/:id'
                 element={
-                    <Layout title={t('Actions.Cash_Income.Title')} children={<CreateCashIncomePage/>} />
+                    <Layout title={t('Actions.Cash_Income.Title')} children={<CreateCashIncomePage />} />
                 }
             />
             <Route
                 path='/cashouts'
                 element={
-                    <Layout title={t('Actions.CashOut.Title')} children={<CashOutPage/>} />
+                    <Layout title={t('Actions.CashOut.Title')} children={<CashOutPage />} />
                 }
             />
-             <Route
+            <Route
                 path='/cashouts/create/:id'
                 element={
-                    <Layout title={t('Actions.CashOut.Title')} children={<CreateCashoutPage/>} />
+                    <Layout title={t('Actions.CashOut.Title')} children={<CreateCashoutPage />} />
                 }
             />
-             <Route
+            <Route
                 path='/cash_transfers'
                 element={
-                    <Layout title={t('Actions.Cash_Changes.Title')} children={<CashTransfersPage/>} />
+                    <Layout title={t('Actions.Cash_Changes.Title')} children={<CashTransfersPage />} />
                 }
             />
-             <Route
+            <Route
                 path='/cash_transfers/create'
                 element={
-                    <Layout title={t('Actions.Cash_Changes.Title')} children={<CreateCashTransferPage/>} />
+                    <Layout title={t('Actions.Cash_Changes.Title')} children={<CreateCashTransferPage />} />
                 }
             />
 
-               <Route
-                    path='/returnable'
+            <Route
+                path='/returnable'
                 element={
-                    <Layout title={t('Actions.Returnable.Title')} children={<ReturnableProducts/>} />
+                    <Layout title={t('Actions.Returnable.Title')} children={<ReturnableProductsPage />} />
                 }
-                />
-
-             <Route
+            />
+            <Route
+                path='/returnable/create'
+                element={
+                    <Layout title={t('Actions.Returnable.Title')} children={<CreateReturnableProductsPage/>} />
+                }
+            />
+            <Route
                 path='/warehouse_returns'
                 element={
-                    <Layout title={t('Actions.Warehouse_Return.Title')} children={<StorageReturnPage/>} />
+                    <Layout title={t('Actions.Warehouse_Return.Title')} children={<StorageReturnPage />} />
                 }
             />
-             <Route
+            <Route
                 path='/warehouse_returns/create/:id'
                 element={
-                    <Layout title={t('Actions.Warehouse_Return.Title')} children={<CreateStorageReturn/>} />
+                    <Layout title={t('Actions.Warehouse_Return.Title')} children={<CreateStorageReturn />} />
                 }
             />
         </Routes>
