@@ -48,13 +48,15 @@ export interface IExitGoods {
   count: number;
   warehouseId: number;
   money: number;
-  exits: IGoodBatch[]
+  exits: IGoodBatch[];
+  discount?:number
 };
 
 export interface ICashoutRequest {
   date: string,
   cashRegisterId: number,
   money: number,
+  partnersId:number,
 };
 
 export interface IWarehouseTransferRequest {

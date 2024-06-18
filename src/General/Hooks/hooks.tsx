@@ -70,8 +70,6 @@ export const useDirectoriesHooks = () => {
   const {data:cashRegisters} = useGetCashRegistersQuery();
   const partners = partnersResponse?.data!;
 
- 
-
   const roles: IAutocompleteItem[] = [
     { id: "1", title: t('Roles.Admin') },
     { id: "2", title: t('Roles.User') }
