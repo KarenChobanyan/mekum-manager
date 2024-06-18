@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import moment from "moment";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
 import { useAutocompleteData, useGeneralHooks } from "../../../../General/Hooks/hooks";
 import { usePostCashoutMutation } from "../../../../API/actionsApi";
@@ -41,7 +42,7 @@ const useCreateCashoutHooks = (id: string) => {
 
     const onSubmit: SubmitHandler<ICashoutFormValues | FieldValues> = (values) => {
         const payload: ICashoutRequest = {
-            date: values.date!,
+            date: moment(new Date()).format("YYYY-MM-DD"),
             cashRegisterId: +(values.cashRegisterId as IAutocompleteItem).id,
             partnersId:+(values.partner as IAutocompleteItem).id,
             money: +values.money

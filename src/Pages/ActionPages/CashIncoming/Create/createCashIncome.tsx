@@ -30,6 +30,7 @@ const CreateCashout: React.FC = () => {
                   inputStyle={styles.input}
                   inputBoxStyles={styles.input}
                   disabled
+                  required={false}
                   defaultValue={moment(new Date()).format("DD/MM/YYYY")}
                   labelStyle={styles.formInputLabel}
                   showTextError={false}
