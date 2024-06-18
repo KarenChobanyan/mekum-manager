@@ -6,17 +6,18 @@ import { UseFormSetValue } from 'react-hook-form';
 interface IProps {
     warehouseId?: string,
     materialValueId?: string,
-    count?: string
+    count?: string,
+    discount?:string,
     setValue: UseFormSetValue<any>,
     index: number
 }
 
 const TotalExitsCounter: React.FC<IProps> = (props) => {
-    const { warehouseId, materialValueId, count, index, setValue } = props;
+    const { warehouseId, materialValueId, count, index, setValue,discount } = props;
     const { data: goodBatchesData } = useGetGoodBatchesQuery({ warehouseId: warehouseId!, materialValueId: materialValueId! }, { skip: materialValueId === undefined && count === undefined });
 
     if (count && materialValueId) {
-        const totalMoneyCounter = (count: string, data: GetGoodBatchesResponse) => {
+        const totalMoneyCounter = (count: string, data: GetGoodBatchesResponse,discount?:string) => {
             let total: number = 0
             let initCount = +count
             let exits:IGoodBatch[] | [] = [];
@@ -40,7 +41,6 @@ const TotalExitsCounter: React.FC<IProps> = (props) => {
                         total = total + (lastCount * item.price!)
                         const exitItem:IGoodBatch = {
                             materialValueId:item.materialValueId,
-                            // money:item.price,
                             price:item.price,
                             wareEntryOPrId:item.wareEntryOPrId,
                             warehouseEntryOrderId:item.warehouseEntryOrderId,
@@ -51,10 +51,13 @@ const TotalExitsCounter: React.FC<IProps> = (props) => {
                 }
             });
             setValue(`goods.${index}.exits`,exits)
+            if(discount){
+                total = (total - ((total * +discount) / 100))
+            }
             return total
 
         };
-        const totalMoney = totalMoneyCounter(count!, goodBatchesData!)
+        const totalMoney = totalMoneyCounter(count!, goodBatchesData!,discount)
         setValue(`goods.${index}.money`,String(totalMoney!))
         return (
             <div>

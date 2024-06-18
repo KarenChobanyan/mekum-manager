@@ -21,6 +21,7 @@ export interface ISaleGoods {
     quantity: string,
     count: string,
     money: string,
+    discount:string,
     exits:IGoodBatch[] | []
 };
 
@@ -56,7 +57,7 @@ const useCreateSalesHooks = (id: string) => {
     }, [isSuccess, isError]);
 
     const onAddItem = () => {
-        append({ materialValueId: null, quantity: '', point: '',  count: '', money: "",exits:[] })
+        append({ materialValueId: null, quantity: '', point: '',  count: '', money: "",discount:'',exits:[] })
     };
 
     const onCencele = () => {
@@ -70,6 +71,7 @@ const useCreateSalesHooks = (id: string) => {
                 warehouseId: +(values.warehouseId as IAutocompleteItem).id,
                 point: item.point,
                 count: +item.count,
+                discount:+item.discount,
                 materialValueId: +(item.materialValueId as IAutocompleteItem).id,
                 money: +item.money,
                 exits: item.exits

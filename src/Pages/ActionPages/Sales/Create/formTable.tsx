@@ -48,6 +48,10 @@ const FormItems: React.FC<IProps> = (props) => {
             contentType: TableCellContentTypes.NUMBER
         },
         {
+            title: `${t('Forms.Discount')}`,
+            contentType: TableCellContentTypes.NUMBER
+        },
+        {
             title: `${t('Forms.Money')}`,
             contentType: TableCellContentTypes.NUMBER
         }
@@ -148,14 +152,48 @@ const FormItems: React.FC<IProps> = (props) => {
                 },
                 {
                     component:
+                        <AuthInput
+                            register={register}
+                            registerName={`goods.${index}.discount`}
+                            showTextError={false}
+                            type='number'
+                            maxDate="100"
+                            // onChange={(event) => {
+                            //      const discount = +event.currentTarget.value;
+                            //      const total = +watch(`goods.${index}.money`)
+                            //      if(discount){
+                            //         setValue(`goods.${index}.money`,String(total - ((total * discount) / 100)))
+                            //      }
+                            //     // const price = +watch(`goods.${index}.price`);
+                            //     // const count = +watch(`goods.${index}.count`);
+                            //     // if (price !== 0) {
+                            //     //     const cost = String(price - ((price * discount) / 100));
+                            //     //     setValue(`goods.${index}.cost`, cost);
+                            //     //     if (count !== 0) {
+                            //     //         const total = +cost * count;
+                            //     //         setValue(`goods.${index}.money`, String(total));
+                            //     //     }
+                            //     // }
+                            // }
+                            // }
+                            inputStyle={styles.formItemInput}
+                            inputBoxStyles={styles.formItemInputNumBox}
+                            required={false}
+                            error={errors.goods?.[index]?.discount}
+                        />,
+                    contentType: TableCellContentTypes.NUMBER
+                },
+                {
+                    component:
                         <div className={styles.formItemTextBox}>
                             <div className={styles.formItemText}>
                                 <TotalExitsCounter
                                     warehouseId={id!}
                                     materialValueId={watch(`goods.${index}.materialValueId`)?.id!}
                                     count={watch(`goods.${index}.count`)}
-                                    setValue={setValue}
-                                    index={index}
+                                    discount={watch(`goods.${index}.discount`)}
+                                setValue={setValue}
+                                index={index}
                                 />
                             </div>
                         </div>,
