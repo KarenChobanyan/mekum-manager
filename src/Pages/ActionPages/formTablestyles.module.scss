@@ -146,8 +146,39 @@
 
 //media
 
+@media screen and (max-width:1640px) {
+    .salesPartner {
+        max-width: 50vw;
+    }
+}
+
+
 @media screen and (max-width:1500px) {
     .body {
         margin-top: 20px;
+    }
+}
+
+@media screen and (max-width:1370px) {
+    .salesPartner {
+        max-width: 40vw;
+    }
+}
+
+@media screen and (max-width:1130px) {
+    .salesPartner {
+        max-width: 35vw;
+    }
+}
+
+@media screen and (max-width:1040px) {
+    .salesPartner {
+        max-width: 30vw;
+    }
+}
+
+@media screen and (max-width:960px) {
+    .salesPartner {
+        max-width: 25vw;
     }
 }

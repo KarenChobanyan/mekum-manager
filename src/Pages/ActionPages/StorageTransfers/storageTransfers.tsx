@@ -13,7 +13,6 @@ const StorageTransfers: React.FC = () => {
   const [warehouseId, setWarehouseId] = useState<string | undefined>(myWarehousesData?.[0].id!)
   const { control } = useWarehouseHooks();
   const { transfersData, activePage, setActivePage, setOffset, setIsIn, isIn, headerData, bodyData } = useStorageTransferHook(warehouseId! ?? myWarehousesData?.[0].id!);
-  console.log(transfersData)
 
   return (
     <div className={styles.container}>

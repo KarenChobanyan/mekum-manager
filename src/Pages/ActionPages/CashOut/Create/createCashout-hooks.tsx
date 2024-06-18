@@ -9,13 +9,14 @@ import { ICashoutRequest } from "../../../../Interfaces/requestTypes";
 export interface ICashoutFormValues {
     date: string,
     cashRegisterId: IAutocompleteItem,
+    partner:IAutocompleteItem,
     money: string,
 };
 
 const useCreateCashoutHooks = (id: string) => {
     const [add, { isLoading, isSuccess, isError }] = usePostCashoutMutation();
     const { navigate, t } = useGeneralHooks();
-    const { cashRegistersData } = useAutocompleteData();
+    const { cashRegistersData,partnersData } = useAutocompleteData();
     const cashRegister = cashRegistersData?.filter((item) => item.id === id)[0];
     const { register, handleSubmit, control, reset, setValue, formState: { errors } } = useForm<ICashoutFormValues>({ mode: "all" });
 
@@ -42,6 +43,7 @@ const useCreateCashoutHooks = (id: string) => {
         const payload: ICashoutRequest = {
             date: values.date!,
             cashRegisterId: +(values.cashRegisterId as IAutocompleteItem).id,
+            partnersId:+(values.partner as IAutocompleteItem).id,
             money: +values.money
         }
         add(payload)
@@ -53,6 +55,7 @@ const useCreateCashoutHooks = (id: string) => {
         onSubmit,
         onCencele,
         cashRegistersData,
+        partnersData,
         control,
         errors,
         isLoading,

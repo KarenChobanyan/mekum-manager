@@ -30,7 +30,6 @@ const CreateSales: React.FC = () => {
                   register={register}
                   registerName='documentDate'
                   label={t('Forms.Date')}
-                  type='date'
                   style={styles.inputBox}
                   inputStyle={styles.input}
                   inputBoxStyles={styles.input}

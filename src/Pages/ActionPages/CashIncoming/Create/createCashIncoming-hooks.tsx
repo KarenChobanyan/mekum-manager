@@ -9,13 +9,14 @@ import { ICashoutRequest } from "../../../../Interfaces/requestTypes";
 export interface ICachIncomingFormValues {
     date: string,
     cashRegisterId: IAutocompleteItem,
+    partner:IAutocompleteItem,
     money: string,
 };
 
 const useCreateCashEntryHooks = (id:string) => {
     const [add, { isLoading, isSuccess, isError }] = usePostCashEntryMutation();
     const { navigate, t } = useGeneralHooks();
-    const { cashRegistersData } = useAutocompleteData();
+    const { cashRegistersData,partnersData } = useAutocompleteData();
     const cashRegister = cashRegistersData?.filter((item) => item.id === id)[0];
     const { register, handleSubmit, control, reset, setValue, formState: { errors } } = useForm<ICachIncomingFormValues>({ mode: "all" });
 
@@ -42,6 +43,7 @@ const useCreateCashEntryHooks = (id:string) => {
         const payload: ICashoutRequest = {
             date: values.date!,
             cashRegisterId: +(values.cashRegisterId as IAutocompleteItem).id,
+            partnersId:+(values.partner as IAutocompleteItem).id,
             money: +values.money
         }
         add(payload)
@@ -56,6 +58,7 @@ const useCreateCashEntryHooks = (id:string) => {
         control,
         errors,
         isLoading,
+        partnersData,
     }
 };
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
+import moment from 'moment';
 import { t } from 'i18next';
 import useCreateCashTransferHooks from './createCashTransfer-hooks';
 import { ButtonTypes } from '../../../../Interfaces/componentTypes';
@@ -18,11 +19,12 @@ const CreateCashTransfer: React.FC = () => {
               register={register}
               registerName='date'
               label='Ամսաթիվ'
-              type='date'
               style={styles.inputBox}
               inputStyle={styles.input}
               inputBoxStyles={styles.input}
+              disabled
               labelStyle={styles.formInputLabel}
+              defaultValue={moment(new Date()).format("DD/MM/YYYY")}
               showTextError={false}
               error={errors.date}
             />

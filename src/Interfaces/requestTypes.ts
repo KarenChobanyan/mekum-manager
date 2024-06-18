@@ -55,6 +55,7 @@ export interface ICashoutRequest {
   date: string,
   cashRegisterId: number,
   money: number,
+  partnersId:number,
 };
 
 export interface IWarehouseTransferRequest {

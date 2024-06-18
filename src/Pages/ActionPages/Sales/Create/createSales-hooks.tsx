@@ -42,7 +42,7 @@ const useCreateSalesHooks = (id: string) => {
     });
 
     useEffect(() => {
-        setValue('warehouseId', warehouse!)
+        setValue('warehouseId', warehouse!);
     }, [warehouse]);
 
     useEffect(() => {
