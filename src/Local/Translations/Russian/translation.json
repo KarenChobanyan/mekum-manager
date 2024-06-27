@@ -43,6 +43,7 @@
     "Point": "Единица",
     "Count": "Cчет",
     "Price": "Цена",
+    "SalePrice":"Цена продажи",
     "Discount": "Скидка",
     "Cost": "Cтоимость",
     "Money": "Общий",
@@ -57,7 +58,10 @@
     "Rectifier":"Отправитель",
     "Receptionist":"Получатель",
     "Product_1": "Продукт 1",
-    "Product_2": "Продукт 2"
+    "Product_2": "Продукт 2",
+    "Warehouse_Out":"Выходной склад",
+    "Warehouse_In":"Входной склад",
+    "Warehouse_In—Placeholder":"Выберите входной склад"
   },
   "Employee":{
     "Title":"Сотрудник",

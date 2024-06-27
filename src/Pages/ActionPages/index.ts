@@ -8,7 +8,7 @@ import SalesPage from './Sales/sales';
 import UsersPage from './Users/users';
 import CreateStorageIncomePage from './StorageIncomes/Create/createStorageIncome';
 import CreateStorageOutgoingsPage from './StorageOutgoings/Create/createStorageOutgoings';
-import CreateTorageTransfersPage from './StorageTransfers/Create/createTorageTransfers';
+import CreateStorageTransfersPage from './StorageTransfers/Create/createStorageTransfers';
 import CreateSalesPage from './Sales/Create/createSales';
 import CreateCashIncomePage from './CashIncoming/Create/createCashIncome';
 import CreateCashoutPage from './CashOut/Create/createCashout';
@@ -22,7 +22,7 @@ import ReturnableProductsPage from './ReturnableProducts/returnableProducts'
 export {
     CreateReturnableProductsPage,
     CreateStorageOutgoingsPage,
-    CreateTorageTransfersPage,
+    CreateStorageTransfersPage,
     CreateStorageReturnPage,
     CreateStorageIncomePage,
     ReturnableProductsPage,

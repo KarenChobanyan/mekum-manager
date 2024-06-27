@@ -82,7 +82,7 @@ const CreateStorageIncome: React.FC = () => {
                             setPartnerName(value?.title!)
                             onChange(value)
                           }}
-                          id='supplierId'
+                          id='partnersId'
                           data={partnersData}
                           label={t('Forms.PartnerIn')}
                           placeholder={t('Forms.Select_PartnerIn')}

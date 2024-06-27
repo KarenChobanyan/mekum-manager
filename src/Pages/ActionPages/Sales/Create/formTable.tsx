@@ -18,12 +18,13 @@ interface IProps {
     onAddItem: () => void,
     setValue: UseFormSetValue<ISalesFormValues>,
     watch: UseFormWatch<ISalesFormValues>,
+    setSalePrice:(id:string)=>string
 };
 
 
 
 const FormItems: React.FC<IProps> = (props) => {
-    const { fields, remove, register, control, errors, id, onAddItem, setValue, watch } = props;
+    const { fields, remove, register, control, errors, id, onAddItem, setValue, watch,setSalePrice } = props;
     const { getGoodsUnitType, myGoodsdata, getRemainder } = useAutocompleteData(id!);
 
     const headerData: ITableHeader[] = [
@@ -41,6 +42,14 @@ const FormItems: React.FC<IProps> = (props) => {
         },
         {
             title: `${t('Forms.Remainder')}`,
+            contentType: TableCellContentTypes.NUMBER
+        },
+        {
+            title:  `${t('Forms.Price')}`,
+            contentType: TableCellContentTypes.NUMBER
+        },
+        {
+            title: `${t('Forms.SalePrice')}`,
             contentType: TableCellContentTypes.NUMBER
         },
         {
@@ -81,6 +90,7 @@ const FormItems: React.FC<IProps> = (props) => {
                                                 const materialValueId = value?.id!
                                                 if (materialValueId) {
                                                     setValue(`goods.${index}.quantity`, String(getRemainder(materialValueId!)))
+                                                    setValue(`goods.${index}.salePrice`,setSalePrice(materialValueId!))
                                                 }
                                                 setValue(`goods.${index}.point`, unit!)
                                                 return onChange(value)
@@ -129,6 +139,34 @@ const FormItems: React.FC<IProps> = (props) => {
                 },
                 {
                     component:
+                        <AuthInput
+                            register={register}
+                            registerName={`goods.${index}.salePrice`}
+                            showTextError={false}
+                            inputStyle={styles.formItemInput}
+                            inputBoxStyles={styles.formItemInputNumBox}
+                            required={false}
+                            disabled
+                            error={errors.goods?.[index]?.salePrice}
+                        />,
+                    contentType: TableCellContentTypes.NUMBER
+                },
+                {
+                    component:
+                        <AuthInput
+                            register={register}
+                            registerName={`goods.${index}.price`}
+                            showTextError={false}
+                            type='number'
+                            inputStyle={styles.formItemInput}
+                            inputBoxStyles={styles.formItemInputNumBox}
+                            required={false}
+                            error={errors.goods?.[index]?.price}
+                        />,
+                    contentType: TableCellContentTypes.NUMBER
+                },
+                {
+                    component:
                         <Controller
                             control={control}
                             name={`goods.${index}.count`}
@@ -158,24 +196,6 @@ const FormItems: React.FC<IProps> = (props) => {
                             showTextError={false}
                             type='number'
                             maxDate="100"
-                            // onChange={(event) => {
-                            //      const discount = +event.currentTarget.value;
-                            //      const total = +watch(`goods.${index}.money`)
-                            //      if(discount){
-                            //         setValue(`goods.${index}.money`,String(total - ((total * discount) / 100)))
-                            //      }
-                            //     // const price = +watch(`goods.${index}.price`);
-                            //     // const count = +watch(`goods.${index}.count`);
-                            //     // if (price !== 0) {
-                            //     //     const cost = String(price - ((price * discount) / 100));
-                            //     //     setValue(`goods.${index}.cost`, cost);
-                            //     //     if (count !== 0) {
-                            //     //         const total = +cost * count;
-                            //     //         setValue(`goods.${index}.money`, String(total));
-                            //     //     }
-                            //     // }
-                            // }
-                            // }
                             inputStyle={styles.formItemInput}
                             inputBoxStyles={styles.formItemInputNumBox}
                             required={false}
@@ -188,12 +208,14 @@ const FormItems: React.FC<IProps> = (props) => {
                         <div className={styles.formItemTextBox}>
                             <div className={styles.formItemText}>
                                 <TotalExitsCounter
+                                    salePrice={watch(`goods.${index}.salePrice`)}
+                                    price={watch(`goods.${index}.price`)}
                                     warehouseId={id!}
                                     materialValueId={watch(`goods.${index}.materialValueId`)?.id!}
                                     count={watch(`goods.${index}.count`)}
                                     discount={watch(`goods.${index}.discount`)}
-                                setValue={setValue}
-                                index={index}
+                                    setValue={setValue}
+                                    index={index}
                                 />
                             </div>
                         </div>,

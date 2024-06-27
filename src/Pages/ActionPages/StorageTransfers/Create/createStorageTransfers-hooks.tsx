@@ -3,14 +3,14 @@ import { toast } from "react-toastify";
 import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import moment from "moment";
 import { usePostWarehouseTransferMutation } from "../../../../API/actionsApi";
-import { useGeneralHooks } from "../../../../General/Hooks/hooks";
+import { useAutocompleteData, useGeneralHooks } from "../../../../General/Hooks/hooks";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
 import { IGoodBatch } from "../../../../Interfaces/responseTypes";
 import { IWarehouseTransferGood, IWarehouseTransferRequest } from "../../../../Interfaces/requestTypes";
 
 export interface IStorageTransferFormValues {
     documentDate: string,
-    warehouseOutId: IAutocompleteItem,
+    warehouseOutId: string,
     warehouseEnterId: IAutocompleteItem,
     goods: IStorageTransferItem[]
 };
@@ -26,7 +26,9 @@ export interface IStorageTransferItem {
 };
 
 
-const useCreateStorageTransfersHooks = () => {
+const useCreateStorageTransfersHooks = (id:string) => {
+    const { myWarehousesData } = useAutocompleteData();
+    const warehouse = myWarehousesData?.filter((item)=>item.id === id)[0];
     const [add, { isLoading, isSuccess, isError }] = usePostWarehouseTransferMutation();
     const { navigate, t } = useGeneralHooks();
 
@@ -40,6 +42,10 @@ const useCreateStorageTransfersHooks = () => {
         control,
         name: 'goods'
     });
+
+    useEffect(() => {
+        setValue('warehouseOutId',warehouse?.title!)
+    }, [warehouse]);
 
     useEffect(() => {
         if (isSuccess) {
@@ -65,7 +71,7 @@ const useCreateStorageTransfersHooks = () => {
         console.log(values, 'values')
         const goodsList: IWarehouseTransferGood[] = values.goods?.map((item: IStorageTransferItem): IWarehouseTransferGood => {
             return {
-                warehouseOutId: +(values.warehouseOutId as IAutocompleteItem).id,
+                warehouseOutId: +(warehouse as IAutocompleteItem).id,
                 warehouseEnterId: +(values.warehouseEnterId as IAutocompleteItem).id,
                 availability: +item.quantity,
                 point: item.point,
@@ -78,7 +84,7 @@ const useCreateStorageTransfersHooks = () => {
 
         const payload: IWarehouseTransferRequest = {
             documentDate: moment(new Date()).format("YYYY-MM-DD"),
-            warehouseOutId: +(values.warehouseOutId as IAutocompleteItem).id,
+            warehouseOutId: +(warehouse as IAutocompleteItem).id,
             warehouseEnterId: +(values.warehouseEnterId as IAutocompleteItem).id,
             goods: goodsList
         };
@@ -96,6 +102,7 @@ const useCreateStorageTransfersHooks = () => {
         watch,
         control,
         errors,
+        warehouse,
         fields,
         isLoading,
         onAddItem,

@@ -11,7 +11,7 @@ import moment from 'moment';
 
 const CreateSales: React.FC = () => {
   const { id } = useParams();
-  const { register, control, errors, fields, isLoading, onAddItem, handleSubmit, onSubmit, remove, onCencele, setValue, watch, } = useCreateSalesHooks(id!);
+  const { register, control, errors, fields, isLoading, onAddItem, handleSubmit, onSubmit, remove, onCencele, setValue, watch,setSalePrice } = useCreateSalesHooks(id!);
   const { t } = useGeneralHooks();
   const { myWarehousesData, partnersData } = useAutocompleteData();
 
@@ -105,6 +105,7 @@ const CreateSales: React.FC = () => {
                   onAddItem={onAddItem}
                   setValue={setValue}
                   watch={watch}
+                  setSalePrice={setSalePrice}
                 />
               </div>
               <div className={styles.buttonRow}>

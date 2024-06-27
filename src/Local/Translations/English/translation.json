@@ -43,6 +43,7 @@
     "Point": "Point",
     "Count": "Count",
     "Price": "Price",
+    "SalePrice":"Sale price",
     "Discount": "Discount",
     "Cost": "Cost",
     "Money": "Money",
@@ -57,7 +58,10 @@
     "Rectifier": "Rectifier",
     "Receptionist": "Receptionist",
     "Product_1": "Product 1",
-    "Product_2": "Product 2"
+    "Product_2": "Product 2",
+    "Warehouse_Out":"Output",
+    "Warehouse_In":"Input",
+    "Warehouse_In—Placeholder":"Select the input warehouse"
   },
   "Employee": {
     "Title": "Employee",

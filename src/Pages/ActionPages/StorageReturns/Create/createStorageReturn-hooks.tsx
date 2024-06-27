@@ -10,7 +10,7 @@ import { IPostWarehouseReturnRequest, IWarehouseReturnGood } from "../../../../I
 
 export interface IStorageReturnFormValues {
     documentDate: string,
-    warehouseId: IAutocompleteItem,
+    warehouseId: string,
     partnerId: IAutocompleteItem,
     goods: IStorageRetunItem[]
 };
@@ -42,7 +42,7 @@ const useCreateStorageReturnHooks = (id: string) => {
 
 
     useEffect(() => {
-        setValue('warehouseId', warehouse!)
+        setValue('warehouseId', warehouse?.title!)
     }, [warehouse]);
 
     useEffect(() => {
@@ -68,7 +68,7 @@ const useCreateStorageReturnHooks = (id: string) => {
     const onSubmit: SubmitHandler<IStorageOutgoingFormValues | FieldValues> = (values) => {
         const goodsList: IWarehouseReturnGood[] = values.goods?.map((item: IStorageRetunItem): IWarehouseReturnGood => {
             return {
-                warehouseId: +(values.warehouseId as IAutocompleteItem).id,
+                warehouseId: +(warehouse as IAutocompleteItem).id,
                 point: item.point,
                 count: +item.count,
                 materialValueId: +(item.materialValueId as IAutocompleteItem).id,
@@ -77,7 +77,7 @@ const useCreateStorageReturnHooks = (id: string) => {
                 });
                 const payload: IPostWarehouseReturnRequest = {
                     documentDate: moment(new Date()).format("YYYY-MM-DD"),
-                    warehouseId: +(values.warehouseId as IAutocompleteItem).id,
+                    warehouseId: +(warehouse as IAutocompleteItem).id,
                     partnerId: +(values.partnerId as IAutocompleteItem).id,
                     goods: goodsList
                     };
