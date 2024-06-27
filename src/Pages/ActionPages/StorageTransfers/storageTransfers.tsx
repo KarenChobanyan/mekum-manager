@@ -85,7 +85,7 @@ const StorageTransfers: React.FC = () => {
                 <Button
                   buttonType={ButtonTypes.Primery}
                   title={t('Button.Add')}
-                  onClick={() => navigate(`/storage_transfers/create`)}
+                  onClick={() => navigate(`/storage_transfers/create/${warehouseId ?? myWarehousesData?.[0].id!}`)}
                   buttonStyle={styles.button}
                 />
               }
@@ -118,7 +118,7 @@ const StorageTransfers: React.FC = () => {
                 <NoData
                   withButton={isIn === ISIN.FALSE}
                   btnText={t('Button.Add')}
-                  btnOnclick={() => navigate(`/storage_transfers/create`)}
+                  btnOnclick={() => navigate(`/storage_transfers/create/${warehouseId ?? myWarehousesData?.[0].id!}`)}
                 />
               </div>
             }

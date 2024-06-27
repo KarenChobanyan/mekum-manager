@@ -3,7 +3,7 @@ import { Control, Controller, FieldArrayWithId, FieldErrors, UseFieldArrayRemove
 import {t} from 'i18next';
 import { useAutocompleteData } from '../../../../General/Hooks/hooks';
 import { IStorageTransferFormValues } from './createStorageTransfers-hooks';
-import { ITableFormItemData, ITableHeader, TableCellContentTypes } from '../../../../Interfaces/componentTypes';
+import { IAutocompleteItem, ITableFormItemData, ITableHeader, TableCellContentTypes } from '../../../../Interfaces/componentTypes';
 import { AuthInput, AutoComplete, CustomTable, TotalExitsCounter } from '../../../../Components';
 import { RedTrashIcon } from '../../../../Assets/Icons';
 import styles from '../../formTablestyles.module.scss';
@@ -14,14 +14,14 @@ interface IProps {
     register: UseFormRegister<IStorageTransferFormValues>,
     control: Control<IStorageTransferFormValues, any>,
     errors: FieldErrors<IStorageTransferFormValues>,
+    warehouse:IAutocompleteItem,
     onAddItem: () => void,
     setValue: UseFormSetValue<IStorageTransferFormValues>,
     watch: UseFormWatch<IStorageTransferFormValues>,
 };
 
 const FormItems: React.FC<IProps> = (props) => {
-    const { fields, remove, register, control, errors, onAddItem, setValue, watch } = props;
-    const warehouse = watch('warehouseOutId');
+    const { fields,warehouse, remove, register, control, errors, onAddItem, setValue, watch } = props;
     const { getGoodsUnitType, myGoodsdata, getRemainder,setMeasurementUnitId } = useAutocompleteData(warehouse?.id!);
 
     const headerData: ITableHeader[] = [

@@ -37,6 +37,7 @@
     "Point": "Միավոր",
     "Count": "Քանակ",
     "Price": "Գին",
+    "SalePrice":"Վաճառքի գին",
     "Discount": "Զեղչ",
     "Cost": "Արժեք",
     "Money": "Գումար",
@@ -51,7 +52,10 @@
     "Rectifier": "Ուղղարկող",
     "Receptionist": "Ստացող",
     "Product_1": "Ապրանք 1",
-    "Product_2": "Ապրանք 2"
+    "Product_2": "Ապրանք 2",
+    "Warehouse_Out":"Ելք․ պահեստ",
+    "Warehouse_In":"Ստացող պահեստ",
+    "Warehouse_In—Placeholder":"Ընտրեք ստացող պահեստը"
   },
   "Roles": {
     "Admin": "Ադմինիստրատոր",
