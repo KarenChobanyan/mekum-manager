@@ -10,6 +10,7 @@ const useStorageIncome = (id: string) => {
     const [activePage, setActivePage] = useState<number>(1);
     const [offset, setOffset] = useState<number>(0);
     const { data: entryData } = useGetWarehouseEntriesQuery({ id: id!, limit: 7, offset: offset });
+
     const headerData: ITableHeader[] = [
         {
             title: `${t('Forms.Date')}`,
@@ -30,7 +31,7 @@ const useStorageIncome = (id: string) => {
     ];
 
     const createBodyData = (data: IWarehouseEntryResponse): Array<ITableFormItemData[]> => {
-        return data?.map((item) => {
+        return data?.result!.map((item) => {
             return [
                 {
                     component:

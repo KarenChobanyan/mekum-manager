@@ -10,12 +10,11 @@ interface IProps {
     discount?: string,
     setValue: UseFormSetValue<any>,
     index: number,
-    salePrice?: string,
     price?: string,
 };
 
 const TotalExitsCounter: React.FC<IProps> = (props) => {
-    const { warehouseId, materialValueId, count, index, setValue, discount, salePrice, price } = props;
+    const { warehouseId, materialValueId, count, index, setValue, discount, price } = props;
     const { data: goodBatchesData } = useGetGoodBatchesQuery({ warehouseId: warehouseId!, materialValueId: materialValueId! }, { skip: materialValueId === undefined && count === undefined });
     if (count && materialValueId) {
         const totalMoneyCounter = (count: string, data: GetGoodBatchesResponse, discount?: string) => {
@@ -52,24 +51,15 @@ const TotalExitsCounter: React.FC<IProps> = (props) => {
             });
             setValue(`goods.${index}.exits`, exits)
             if (discount) {
-                if (salePrice) {
-                    if (price) {
+                if (price) {
                         total = ((+price! * +count) - (((+price! * +count) * +discount) / 100))
-                    } else {
-                        total = ((+salePrice! * +count) - (((+salePrice! * +count) * +discount) / 100))
-                    }
-                } else {
+                    }else {
                     total = ((total) - ((total * +discount) / 100))
                 }
             } else {
-                if (salePrice) {
-                    if (price) {
-                        total = +price! * +count
-                    } else {
-                        total = +salePrice! * +count
-                    }
-                }
-            }
+                if(price){
+                    total = +price * +count
+                }}
             return total
         };
 

@@ -49,7 +49,7 @@ const CashIncoming: React.FC = () => {
                 }}
               />
               {
-                cashEntryData?.length! > 0
+                cashEntryData?.result!.length! > 0
                 &&
                 <Button
                   buttonType={ButtonTypes.Primery}
@@ -59,7 +59,7 @@ const CashIncoming: React.FC = () => {
                 />
               }
             </div>
-            {cashEntryData?.length! > 0
+            {cashEntryData?.result!.length! > 0
               ?
               (
                 bodyData
@@ -70,7 +70,7 @@ const CashIncoming: React.FC = () => {
                       bodyData={bodyData}
                     />
                     <CustomPagination
-                      limit={100}
+                      limit={cashEntryData?.total!}
                       offset={activePage}
                       onChange={(_, page) => {
                         setOffset((page -1) * 7);

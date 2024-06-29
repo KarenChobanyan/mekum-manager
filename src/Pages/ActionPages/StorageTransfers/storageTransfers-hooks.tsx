@@ -31,7 +31,7 @@ const useStorageTransferHook = (id: string) => {
     ];
 
     const createBodyData = (data: GetWarehouseTransferResponse): Array<ITableFormItemData[]> => {
-        return data?.map((item) => {
+        return data?.result!.map((item) => {
             return [
                 {
                     component:

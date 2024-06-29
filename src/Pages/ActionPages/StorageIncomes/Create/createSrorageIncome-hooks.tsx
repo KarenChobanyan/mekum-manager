@@ -29,10 +29,10 @@ export interface IStorageIncomeItem {
 
 
 
-const useCreateStorageIncomeHooks = (id:string) => {
+const useCreateStorageIncomeHooks = (id: string) => {
     const { myWarehousesData } = useAutocompleteData();
-    const warehouse = myWarehousesData?.filter((item)=>item.id === id)[0];
-    const { navigate,t } = useGeneralHooks();
+    const warehouse = myWarehousesData?.filter((item) => item.id === id)[0];
+    const { navigate, t } = useGeneralHooks();
     const [add, { isLoading, isSuccess, isError }] = usePostWarehoseEntryMutation();
     const [warehouseName, setWarehouseName] = useState<string>("");
     const [partnerName, setPartnerName] = useState<string>("");
@@ -48,7 +48,7 @@ const useCreateStorageIncomeHooks = (id:string) => {
     });
 
     useEffect(() => {
-        setValue('warehouseId',warehouse!)
+        setValue('warehouseId', warehouse!)
         setWarehouseName(warehouse?.title!)
     }, [warehouse]);
 
@@ -77,7 +77,7 @@ const useCreateStorageIncomeHooks = (id:string) => {
                 warehouseId: +(values.warehouseId as IAutocompleteItem).id,
                 point: item.point,
                 count: +item.count,
-                price: +item.price,
+                price: +item.cost!,
                 discount: +item.discount,
                 materialValueId: +(item.materialValueId as IAutocompleteItem).id,
                 money: +item.money,
@@ -91,7 +91,8 @@ const useCreateStorageIncomeHooks = (id:string) => {
             partnersId: +(values.partnersId as IAutocompleteItem).id,
             goods: goodsList
         };
-     add(payload)
+        console.log(payload)
+        add(payload)
     };
 
     return {

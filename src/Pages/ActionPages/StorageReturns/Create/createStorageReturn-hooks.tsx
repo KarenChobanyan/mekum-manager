@@ -81,7 +81,6 @@ const useCreateStorageReturnHooks = (id: string) => {
                     partnerId: +(values.partnerId as IAutocompleteItem).id,
                     goods: goodsList
                     };
-                console.log(payload)
         add(payload)
     };
 

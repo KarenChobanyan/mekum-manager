@@ -95,12 +95,14 @@ export interface IAllGoodsResponseData {
   isDeductible: number
 };
 
-export type AllGoodsResponse = IAllGoodsResponseData[]
+export interface AllGoodsResponse {
+  result: IAllGoodsResponseData[],
+  total: number,
+};
 
 export interface IGetPartnersResponse {
-  code: number;
-  data?: IGetPartnersRespData[] | null;
-  message: string;
+  result: IGetPartnersRespData[] | null;
+  total: number;
 };
 
 export interface IGetPartnersRespData {
@@ -145,7 +147,10 @@ export interface IWarehouseEntryOrderProduct {
   money: number
 };
 
-export type IWarehouseEntryResponse = IWarehouseEntryResponseData[] | [];
+export interface IWarehouseEntryResponse {
+  result: IWarehouseEntryResponseData[] | [],
+  total: number
+};
 
 export interface IGoodBatch {
   wareEntryOPrId: number,
@@ -153,7 +158,7 @@ export interface IGoodBatch {
   materialValueId: number,
   quantity: number,
   price?: number,
-  money?:number
+  money?: number
 };
 
 export type GetGoodBatchesResponse = IGoodBatch[];
@@ -208,7 +213,10 @@ export interface IExitSpecificationEntity {
 };
 
 
-export type WarehouseExitResponse = IWarehouseExitResponseData[];
+export interface WarehouseExitResponse {
+  result: IWarehouseExitResponseData[],
+  total: number
+};
 
 export interface IAccountInvoiceResponseData {
   id: number;
@@ -294,7 +302,10 @@ export interface AccountInvoiceSpecificationEntity {
   accInvProdId: number;
 };
 
-export type AccounInvoiceResponce = IAccountInvoiceResponseData[];
+export interface AccounInvoiceResponce {
+  result: IAccountInvoiceResponseData[] | [],
+  total: number
+};
 
 export interface ICashRegisterResponseData {
   account: Account;
@@ -328,7 +339,10 @@ export interface Account {
   disregard: number;
 };
 
-export type CashRegistersResponse = ICashRegisterResponseData[];
+export interface CashRegistersResponse {
+  result: ICashRegisterResponseData[],
+  total: number
+};
 
 export interface ICashoutResponseData {
   id: number;
@@ -378,6 +392,12 @@ export interface CashRegister {
   hdmPrintType?: null;
   currencyId: number;
 };
+
+export interface IAllCashRegistersResponse {
+  result: CashRegister[],
+  total: number
+};
+
 export interface Currencies {
   id: number;
   name: string;
@@ -385,24 +405,27 @@ export interface Currencies {
   isDefault: number;
 };
 
-export type CashOutResponse = ICashoutResponseData[];
+export interface CashOutResponse {
+  result: ICashoutResponseData[],
+  total: number,
+};
 
 export interface IWarehouseSignificance {
-    id: number;
-    name: string;
-    expenseAccountId: number;
-    partnerAccountId: number;
-    prepaymentAccountId: number;
-    outFlowAccountId?: null;
-    inflowAccountId?: null;
-    givenPrepaymentAccountId: number;
-    debPartnerAccountId: number;
-    estimateCode?: null;
-    economicActivityClassifierId: number;
-    taxableIncomeId: number;
-    isBasic: number;
-    isDefault: number;
-    forEstimate: number;
+  id: number;
+  name: string;
+  expenseAccountId: number;
+  partnerAccountId: number;
+  prepaymentAccountId: number;
+  outFlowAccountId?: null;
+  inflowAccountId?: null;
+  givenPrepaymentAccountId: number;
+  debPartnerAccountId: number;
+  estimateCode?: null;
+  economicActivityClassifierId: number;
+  taxableIncomeId: number;
+  isBasic: number;
+  isDefault: number;
+  forEstimate: number;
 };
 
 export interface IMovementNAProduct {
@@ -426,27 +449,32 @@ export interface IMovementNAProduct {
 export type MovementNAProducts = IMovementNAProduct[];
 
 export interface IGetWarehouseTransferResponseData {
-  id:number,
-  date:string,
-  documentNumber:number,
-  warehouseOutId:number,
-  warehouseOut:IWarehouse,
-  warehouseEnter:IWarehouse,
-  warehouseSignificance:IWarehouseSignificance,
-  movementNAProduct:MovementNAProducts,
-  draft:number
+  id: number,
+  date: string,
+  documentNumber: number,
+  warehouseOutId: number,
+  warehouseOut: IWarehouse,
+  warehouseEnter: IWarehouse,
+  warehouseSignificance: IWarehouseSignificance,
+  movementNAProduct: MovementNAProducts,
+  draft: number
 };
-
-export type GetWarehouseTransferResponse = IGetWarehouseTransferResponseData[];
+export interface GetWarehouseTransferResponse {
+  result: IGetWarehouseTransferResponseData[],
+  total: number
+};
 
 export interface IWarehouseReturnData {
-  id:number,
-  date:string,
-  documentNumber:number,
-  partner:IGetPartnersRespData
+  id: number,
+  date: string,
+  documentNumber: number,
+  partner: IGetPartnersRespData
 };
 
-export type WarehouseReturnsResponse = IWarehouseReturnData[];
+export interface WarehouseReturnsResponse {
+  result: IWarehouseReturnData[],
+  total: number
+};
 
 export interface IReturnableProductResponseData {
   id: number;

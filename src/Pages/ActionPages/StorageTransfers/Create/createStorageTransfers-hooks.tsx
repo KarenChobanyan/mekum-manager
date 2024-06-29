@@ -88,7 +88,6 @@ const useCreateStorageTransfersHooks = (id:string) => {
             warehouseEnterId: +(values.warehouseEnterId as IAutocompleteItem).id,
             goods: goodsList
         };
-        console.log(payload, 'payload')
         add(payload)
     };
 

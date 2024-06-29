@@ -5,7 +5,6 @@ import useHomePageHooks from './homePage-hooks';
 
 const HomePage: React.FC = () => {
   const { optionList } = useHomePageHooks()
-
   return (
     <div className={styles.container}>
       {optionList.length > 0

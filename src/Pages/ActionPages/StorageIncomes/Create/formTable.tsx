@@ -140,6 +140,7 @@ const FormItems: React.FC<IProps> = (props) => {
                             registerName={`goods.${index}.count`}
                             showTextError={false}
                             type='number'
+                            
                             onChange={(event) => {
                                 const count = +event.currentTarget.value;
                                 const cost = +watch(`goods.${index}.cost`);
@@ -149,6 +150,7 @@ const FormItems: React.FC<IProps> = (props) => {
                                 }
                             }
                             }
+                            patternValue={/^(?!0(\.0+)?$)\d+(\.\d+)?$/}
                             inputStyle={styles.formItemInput}
                             inputBoxStyles={styles.formItemInputNumBox}
                             error={errors.goods?.[index]?.count}
@@ -169,7 +171,7 @@ const FormItems: React.FC<IProps> = (props) => {
                                 if (price !== 0) {
                                     const cost = String(price - ((price * discount) / 100));
                                     setValue(`goods.${index}.cost`, cost);
-                                    if (count !== 0) {
+                                    if (count > 0) {
                                         const total = +cost * count
                                         setValue(`goods.${index}.money`, String(total))
                                     }
@@ -177,6 +179,7 @@ const FormItems: React.FC<IProps> = (props) => {
                                     setValue(`goods.${index}.cost`, "");
                                 }
                             }}
+                            patternValue={/^(?!0(\.0+)?$)\d+(\.\d+)?$/}
                             inputStyle={styles.formItemInput}
                             inputBoxStyles={styles.formItemInputNumBox}
                             error={errors.goods?.[index]?.price}
@@ -205,6 +208,7 @@ const FormItems: React.FC<IProps> = (props) => {
                                 }
                             }
                             }
+                            patternValue={/^(?!0(\.0+)?$)\d+(\.\d+)?$/}
                             inputStyle={styles.formItemInput}
                             inputBoxStyles={styles.formItemInputNumBox}
                             required={false}

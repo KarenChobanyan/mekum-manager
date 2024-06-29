@@ -63,6 +63,18 @@ export const directoriesApi = createApi({
                 method: 'GET',
             }),
         }),
+        getCashAllRegisters: builder.query<CashRegistersResponse, void>({
+            query: () => ({
+                url: '/mekum/all-cash-registers',
+                method: 'GET',
+            }),
+        }),
+    getAllCashRegisters: builder.query<CashRegistersResponse, void>({
+        query: () => ({
+            url: '/mekum/all-cash-registers',
+            method: 'GET',
+        }),
+    }),
     }),
 });
 
@@ -74,6 +86,8 @@ export const {
     useGetAllGoodsQuery,
     useGetPartnersQuery,
     useGetWarehouseGoodsQuery,
+    useGetCashAllRegistersQuery,
     useGetGoodBatchesQuery,
-    useGetCashRegistersQuery
+    useGetCashRegistersQuery,
+    useGetAllCashRegistersQuery
 } = directoriesApi;

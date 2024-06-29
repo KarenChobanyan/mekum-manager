@@ -26,7 +26,7 @@ const useStorageExits = (id: string) => {
     ];
 
     const createBodyData = (data: WarehouseExitResponse): Array<ITableFormItemData[]> => {
-        return data?.map((item) => {
+        return data?.result!.map((item) => {
             return [
                 {
                     component:

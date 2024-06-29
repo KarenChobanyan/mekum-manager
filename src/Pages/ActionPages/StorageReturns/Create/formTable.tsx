@@ -4,7 +4,7 @@ import {t} from 'i18next';
 import { IStorageReturnFormValues } from './createStorageReturn-hooks';
 import { useAutocompleteData } from '../../../../General/Hooks/hooks';
 import { ITableFormItemData, ITableHeader, TableCellContentTypes } from '../../../../Interfaces/componentTypes';
-import { AuthInput, AutoComplete, CustomTable, TotalExitsCounter } from '../../../../Components';
+import { AuthInput, AutoComplete, CustomTable } from '../../../../Components';
 import { RedTrashIcon } from '../../../../Assets/Icons';
 import styles from '../../formTablestyles.module.scss';
 
@@ -113,6 +113,7 @@ const FormItems: React.FC<IProps> = (props) => {
                                         registerName={`goods.${index}.count`}
                                         showTextError={false}
                                         type='number'
+                                        patternValue={/^(?!0(\.0+)?$)\d+(\.\d+)?$/}
                                         inputStyle={styles.formItemInput}
                                         inputBoxStyles={styles.formItemInputNumBox}
                                         error={errors.goods?.[index]?.count}

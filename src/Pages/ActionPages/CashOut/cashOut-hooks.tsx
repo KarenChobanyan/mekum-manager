@@ -36,7 +36,7 @@ const useCashOutHooks = (id: string) => {
     ];
 
     const createBodyData = (data: CashOutResponse): Array<ITableFormItemData[]> => {
-        return data?.map((item) => {
+        return data?.result!.map((item) => {
             return [
                 {
                     component:
