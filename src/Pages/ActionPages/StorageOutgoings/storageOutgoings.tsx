@@ -49,7 +49,7 @@ const StorageOutgoings: React.FC = () => {
                 }}
               />
               {
-                exitsData?.length! > 0
+                exitsData?.result!.length! > 0
                 &&
                 <Button
                   buttonType={ButtonTypes.Primery}
@@ -59,7 +59,7 @@ const StorageOutgoings: React.FC = () => {
                 />
               }
             </div>
-            {exitsData?.length! > 0
+            {exitsData?.result!.length! > 0
               ?
               (
                 bodyData
@@ -70,7 +70,7 @@ const StorageOutgoings: React.FC = () => {
                       bodyData={bodyData}
                     />
                     <CustomPagination
-                      limit={100}
+                      limit={exitsData?.total!}
                       offset={activePage}
                       onChange={(_, page) => {
                         setOffset((page -1) * 7);

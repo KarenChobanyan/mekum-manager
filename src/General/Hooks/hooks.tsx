@@ -6,8 +6,8 @@ import { t } from 'i18next'
 import moment from "moment";
 import { RootState, useAppDispatch, useAppSelector } from "../../Store/store";
 import { IAutocompleteData, IAutocompleteItem } from "../../Interfaces/componentTypes";
-import { useGetAllGoodsQuery, useGetAllWarehousesQuery, useGetCashRegistersQuery, useGetEmployeesQuery, useGetGoodBatchesQuery, useGetGoodsQuery, useGetPartnersQuery, useGetWarehouseGoodsQuery, useGetWarehousesQuery } from "../../API/direcroriesApi";
-import { AllGoodsResponse, CashRegistersResponse, GetEmployeesResponseData, GetGoodBatchesResponse, GetWarehousesResponseData, GoodsResponseData, IAllGoodsResponseData, IGetPartnersRespData } from "../../Interfaces/responseTypes";
+import { useGetAllGoodsQuery, useGetAllWarehousesQuery, useGetCashRegistersQuery, useGetEmployeesQuery, useGetGoodsQuery, useGetPartnersQuery, useGetWarehouseGoodsQuery, useGetWarehousesQuery } from "../../API/direcroriesApi";
+import { AllGoodsResponse, CashRegistersResponse, GetEmployeesResponseData, GetWarehousesResponseData, GoodsResponseData, IGetPartnersRespData } from "../../Interfaces/responseTypes";
 import { removeCurrentUser } from "../../Store/Slices/authSlice";
 import { ISIN } from "../../Interfaces/interfaces";
 
@@ -68,7 +68,7 @@ export const useDirectoriesHooks = () => {
   const { data: allGoods } = useGetAllGoodsQuery();
   const { data: partnersResponse } = useGetPartnersQuery();
   const {data:cashRegisters} = useGetCashRegistersQuery();
-  const partners = partnersResponse?.data!;
+  const partners = partnersResponse?.result!;
   const roles: IAutocompleteItem[] = [
     { id: "1", title: t('Roles.Admin') },
     { id: "2", title: t('Roles.User') }
@@ -141,7 +141,7 @@ export const useAutocompleteData = (warehouseId?: string) => {
 
   const createAllGoodsData = (data: AllGoodsResponse): IAutocompleteData | undefined => {
     if (data) {
-      return data!.map((item) => {
+      return data.result!.map((item) => {
         return {
           id: String(item.id!),
           title: item.name!
@@ -167,7 +167,7 @@ export const useAutocompleteData = (warehouseId?: string) => {
 
   const creatCashRegistersData = (data: CashRegistersResponse): IAutocompleteData | undefined => {
     if (data) {
-      return data!.map((item) => {
+      return data.result!.map((item) => {
         return {
           id: String(item.id),
           title: item.name
@@ -177,7 +177,7 @@ export const useAutocompleteData = (warehouseId?: string) => {
       return undefined
     }
   };
-
+  
   const getGoodsUnitType = useCallback((id: string) => {
     if (goods?.length) {
       const unit = goods?.filter((item) => +id === item.materialValueId)[0].point;
@@ -188,8 +188,8 @@ export const useAutocompleteData = (warehouseId?: string) => {
   }, [goods]);
 
   const getAllGoodsUnitType = useCallback((id: string) => {
-    if (allGoods?.length) {
-      const unit = allGoods?.filter((item) => +id === item.id)[0].measurementUnit.unit;
+    if (allGoods?.result.length) {
+      const unit = allGoods?.result!.filter((item) => +id === item.id)[0].measurementUnit.unit;
       return unit
     } else {
       return ''
@@ -208,7 +208,7 @@ export const useAutocompleteData = (warehouseId?: string) => {
 
   const setMeasurementUnitId = (id: string) => {
     if (myGoods?.length) {
-      const good = allGoods?.filter((item) => item.id === +id)
+      const good = allGoods?.result!.filter((item) => item.id === +id)
       const measurementUnitId = good?.[0]?.measurementUnitId!;
       return measurementUnitId
     } else {

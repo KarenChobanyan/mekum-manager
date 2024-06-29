@@ -80,7 +80,7 @@ const StorageTransfers: React.FC = () => {
                 />
               </div>
               {
-                (transfersData?.length! > 0 && isIn === ISIN.FALSE)
+                (transfersData?.result!.length! > 0 && isIn === ISIN.FALSE)
                 &&
                 <Button
                   buttonType={ButtonTypes.Primery}
@@ -90,7 +90,7 @@ const StorageTransfers: React.FC = () => {
                 />
               }
             </div>
-            {transfersData?.length! > 0
+            {transfersData?.result!.length! > 0
               ?
               (
                 bodyData
@@ -101,7 +101,7 @@ const StorageTransfers: React.FC = () => {
                       bodyData={bodyData}
                     />
                     <CustomPagination
-                      limit={100}
+                      limit={transfersData?.total!}
                       offset={activePage}
                       onChange={(_, page) => {
                         setOffset((page - 1) * 7);

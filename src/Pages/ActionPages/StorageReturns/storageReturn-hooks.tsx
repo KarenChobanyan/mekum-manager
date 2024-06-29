@@ -26,7 +26,7 @@ const useStorageReturn = (id:string)=>{
     ];
 
     const createBodyData = (data: WarehouseReturnsResponse): Array<ITableFormItemData[]> => {
-        return data?.map((item) => {
+        return data?.result!.map((item) => {
             return [
                 {
                     component:

@@ -18,7 +18,7 @@ export interface IRegisterFormValues {
 
 const useCreateUserHooks = () => {
     const { navigate, t } = useGeneralHooks();
-    const { roles,employees } = useDirectoriesHooks();
+   const { roles,employees } = useDirectoriesHooks();
     const [registrate, { isLoading, isSuccess, isError }] = useRegisterMutation();
     const { register, control, handleSubmit, reset, watch, setValue, formState: { errors } } = useForm<IRegisterFormValues>({ mode: "all" });
    

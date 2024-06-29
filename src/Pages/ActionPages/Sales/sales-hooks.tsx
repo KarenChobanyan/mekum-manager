@@ -3,13 +3,13 @@ import { t } from 'i18next';
 import moment from "moment";
 import { useGetSalesQuery } from "../../../API/actionsApi";
 import { ITableFormItemData, ITableHeader, TableCellContentTypes } from "../../../Interfaces/componentTypes";
-import { AccounInvoiceResponce} from "../../../Interfaces/responseTypes";
+import { AccounInvoiceResponce } from "../../../Interfaces/responseTypes";
 import styles from '../formTablestyles.module.scss'
 
 const useSalesHooks = (id: string) => {
-    const [offset,setOffset] = useState<number>(0);
-    const [activePage,setActivePage] = useState<number>(1)
-    const { data: salesData } = useGetSalesQuery({ id: id, limit: 7, offset: offset});
+    const [offset, setOffset] = useState<number>(0);
+    const [activePage, setActivePage] = useState<number>(1)
+    const { data: salesData } = useGetSalesQuery({ id: id, limit: 7, offset: offset });
     const headerData: ITableHeader[] = [
         {
             title: `${t('Forms.Date')}`,
@@ -30,7 +30,7 @@ const useSalesHooks = (id: string) => {
     ];
 
     const createBodyData = (data: AccounInvoiceResponce): Array<ITableFormItemData[]> => {
-        return data?.map((item) => {
+        return data?.result!.map((item) => {
             return [
                 {
                     component:

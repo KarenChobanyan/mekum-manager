@@ -13,7 +13,7 @@ const CreateUser: React.FC = () => {
 
     return (
         <div className={styles.container} >
-            {isLoading
+            {isLoading 
                 ?
                 <Loading />
                 :
