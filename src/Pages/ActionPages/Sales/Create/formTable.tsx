@@ -49,10 +49,6 @@ const FormItems: React.FC<IProps> = (props) => {
             contentType: TableCellContentTypes.NUMBER
         },
         {
-            title: `${t('Forms.SalePrice')}`,
-            contentType: TableCellContentTypes.NUMBER
-        },
-        {
             title: `${t('Forms.Count')}`,
             contentType: TableCellContentTypes.NUMBER
         },
@@ -90,7 +86,7 @@ const FormItems: React.FC<IProps> = (props) => {
                                                 const materialValueId = value?.id!
                                                 if (materialValueId) {
                                                     setValue(`goods.${index}.quantity`, String(getRemainder(materialValueId!)))
-                                                    setValue(`goods.${index}.salePrice`,setSalePrice(materialValueId!))
+                                                    setValue(`goods.${index}.price`,setSalePrice(materialValueId!))
                                                 }
                                                 setValue(`goods.${index}.point`, unit!)
                                                 return onChange(value)
@@ -139,30 +135,37 @@ const FormItems: React.FC<IProps> = (props) => {
                 },
                 {
                     component:
-                        <AuthInput
-                            register={register}
-                            registerName={`goods.${index}.salePrice`}
-                            showTextError={false}
-                            inputStyle={styles.formItemInput}
-                            inputBoxStyles={styles.formItemInputNumBox}
-                            required={false}
-                            disabled
-                            error={errors.goods?.[index]?.salePrice}
-                        />,
-                    contentType: TableCellContentTypes.NUMBER
-                },
-                {
-                    component:
-                        <AuthInput
+                    <Controller
+                    control={control}
+                    name={`goods.${index}.price`}
+                    rules={{
+                        required:'',
+                        validate:(value) => {
+                            if (value === "") {
+                              return "This field is required.";
+                            } else if (!/^\d+$/.test(value)) {
+                              return "Value must be a number.";
+                            }
+                            return true;
+                          }
+                        }}
+                    render={({ field: { onChange, name, value } }) => {
+                        return (
+                            <AuthInput
                             register={register}
                             registerName={`goods.${index}.price`}
                             showTextError={false}
                             type='number'
                             inputStyle={styles.formItemInput}
                             inputBoxStyles={styles.formItemInputNumBox}
-                            required={false}
+                            required={true}
                             error={errors.goods?.[index]?.price}
-                        />,
+                        />
+                        )
+                    }
+                    }
+                />,
+                        
                     contentType: TableCellContentTypes.NUMBER
                 },
                 {
@@ -179,6 +182,7 @@ const FormItems: React.FC<IProps> = (props) => {
                                         showTextError={false}
                                         type='number'
                                         inputStyle={styles.formItemInput}
+                                        required={true}
                                         inputBoxStyles={styles.formItemInputNumBox}
                                         error={errors.goods?.[index]?.count}
                                     />
@@ -208,7 +212,6 @@ const FormItems: React.FC<IProps> = (props) => {
                         <div className={styles.formItemTextBox}>
                             <div className={styles.formItemText}>
                                 <TotalExitsCounter
-                                    salePrice={watch(`goods.${index}.salePrice`)}
                                     price={watch(`goods.${index}.price`)}
                                     warehouseId={id!}
                                     materialValueId={watch(`goods.${index}.materialValueId`)?.id!}

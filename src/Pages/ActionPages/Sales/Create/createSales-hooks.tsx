@@ -20,8 +20,7 @@ export interface ISaleGoods {
     point: string,
     quantity: string,
     count: string,
-    salePrice?:string,
-    price?:string,
+    price:string,
     money: string,
     discount:string,
     exits:IGoodBatch[] | []
@@ -35,7 +34,7 @@ const useCreateSalesHooks = (id: string) => {
     const warehouse = myWarehousesData?.filter((item) => item.id === id)[0];
     const { register, handleSubmit, watch, control, reset, setValue, formState: { errors } } = useForm<ISalesFormValues>({
         defaultValues: {
-            goods: [{ materialValueId: null, quantity: '',discount:'',price:'',salePrice:"", point: '', count: '',  money: "",exits:[] }]
+            goods: [{ materialValueId: null, quantity: '',discount:'',price:'', point: '', count: '',  money: "",exits:[] }]
         },
         mode: 'all'
     });
@@ -59,7 +58,7 @@ const useCreateSalesHooks = (id: string) => {
     }, [isSuccess, isError]);
 
     const onAddItem = () => {
-        append({ materialValueId: null, quantity: '', point: '',price:'',salePrice:"",  count: '', money: "",discount:'',exits:[] })
+        append({ materialValueId: null, quantity: '', point: '',price:'',  count: '', money: "",discount:'',exits:[] })
     };
 
     const onCencele = () => {
