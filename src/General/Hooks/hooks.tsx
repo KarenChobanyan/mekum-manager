@@ -6,7 +6,7 @@ import { t } from 'i18next'
 import moment from "moment";
 import { RootState, useAppDispatch, useAppSelector } from "../../Store/store";
 import { IAutocompleteData, IAutocompleteItem } from "../../Interfaces/componentTypes";
-import { useGetAllGoodsQuery, useGetAllWarehousesQuery, useGetCashRegistersQuery, useGetEmployeesQuery, useGetGoodsQuery, useGetPartnersQuery, useGetWarehouseGoodsQuery, useGetWarehousesQuery } from "../../API/direcroriesApi";
+import { useGetAllCashRegistersQuery, useGetAllGoodsQuery, useGetAllWarehousesQuery, useGetCashRegistersQuery, useGetEmployeesQuery, useGetGoodsQuery, useGetPartnersQuery, useGetWarehouseGoodsQuery, useGetWarehousesQuery } from "../../API/direcroriesApi";
 import { AllGoodsResponse, CashRegistersResponse, GetEmployeesResponseData, GetWarehousesResponseData, GoodsResponseData, IGetPartnersRespData } from "../../Interfaces/responseTypes";
 import { removeCurrentUser } from "../../Store/Slices/authSlice";
 import { ISIN } from "../../Interfaces/interfaces";
@@ -68,6 +68,7 @@ export const useDirectoriesHooks = () => {
   const { data: allGoods } = useGetAllGoodsQuery();
   const { data: partnersResponse } = useGetPartnersQuery();
   const {data:cashRegisters} = useGetCashRegistersQuery();
+  const {data:allCashRegisters} = useGetAllCashRegistersQuery();
   const partners = partnersResponse?.result!;
   const roles: IAutocompleteItem[] = [
     { id: "1", title: t('Roles.Admin') },
@@ -79,6 +80,7 @@ export const useDirectoriesHooks = () => {
     allWarehouses,
     partners,
     cashRegisters,
+    allCashRegisters,
     roles,
     goods,
     allGoods,
@@ -87,7 +89,7 @@ export const useDirectoriesHooks = () => {
 };
 
 export const useAutocompleteData = (warehouseId?: string) => {
-  const { employees, myWarehouses, allWarehouses, goods, allGoods, partners,cashRegisters } = useDirectoriesHooks();
+  const { employees, myWarehouses, allWarehouses, goods, allGoods, partners,cashRegisters,allCashRegisters } = useDirectoriesHooks();
   const { data: myGoods } = useGetWarehouseGoodsQuery(warehouseId!);
   const myWarehousesIds = myWarehouses?.map((item) => item.id);
   const filteredWarehouses = allWarehouses?.filter((item) => !myWarehousesIds?.includes(item.id));
@@ -224,10 +226,12 @@ export const useAutocompleteData = (warehouseId?: string) => {
   const allGoodsData = createAllGoodsData(allGoods!);
   const partnersData = createPartnersData(partners!);
   const cashRegistersData = creatCashRegistersData(cashRegisters!);
+  const allCashRegistersData = creatCashRegistersData(allCashRegisters!);
 
   return {
     myWarehousesData,
     allWarehousesData,
+    allCashRegistersData,
     employeesData,
     cashRegistersData,
     goodsData,

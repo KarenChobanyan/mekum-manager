@@ -1,11 +1,12 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from './API';
-import { ICashoutRequest, IGetStorageEntriesRequestData, IGetWarehouseTransfersRequestData, IPostStorageIncomeRequestData, IPostWarehouseExitRequest, IPostWarehouseReturnRequest, IWarehouseTransferRequest, PostRetunableRequestData } from '../Interfaces/requestTypes';
+import { ICashoutRequest, IGetStorageEntriesRequestData, IGetWarehouseTransfersRequestData, IPostCashTransfer, IPostStorageIncomeRequestData, IPostWarehouseExitRequest, IPostWarehouseReturnRequest, IWarehouseTransferRequest, PostRetunableRequestData } from '../Interfaces/requestTypes';
 import { AccounInvoiceResponce, CashOutResponse, GetReturnableProductsResponse, GetWarehouseTransferResponse, IWarehouseEntryResponse, WarehouseExitResponse, WarehouseReturnsResponse } from '../Interfaces/responseTypes';
+import { directoriesApi } from './direcroriesApi';
 
 export const actionsApi = createApi({
     reducerPath: 'actionsApi',
-    tagTypes: ['WarehouseEntries', 'WarehouseExits', 'Sales', 'CashOut', 'CashEntry', 'Returnable', 'WarehouseTransfers', 'Returns'],
+    tagTypes: ['WarehouseEntries', 'WarehouseExits', 'Sales', 'CashOut', 'CashEntry', 'Returnable', 'WarehouseTransfers', 'Returns','CashTransfers'],
     baseQuery: axiosBaseQuery({
         baseUrl: process.env.REACT_APP_API_KEY,
     }),
@@ -16,7 +17,15 @@ export const actionsApi = createApi({
                 method: 'POST',
                 data: credentials,
             }),
-            invalidatesTags: ['WarehouseEntries']
+            invalidatesTags: ['WarehouseEntries'],
+            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+                try {
+                    await queryFulfilled;
+                    dispatch(directoriesApi.endpoints.getGoods.initiate());
+                } catch (error) {
+                    console.log(error)
+                }
+            },
         }),
         getWarehouseEntries: builder.query<IWarehouseEntryResponse, IGetStorageEntriesRequestData>({
             query: ({ id, limit, offset }) => ({
@@ -85,6 +94,21 @@ export const actionsApi = createApi({
             }),
             invalidatesTags: ['CashEntry']
         }),
+        getCashTransfers: builder.query<any, any>({
+            query: ({ id, limit, offset,isIn }) => ({
+                url: `/mekum/cash-flows-movement?id=${id}&limit=${limit}&offset=${offset}&isIn=${isIn}`,
+                method: 'GET',
+            }),
+            providesTags: ['CashTransfers']
+        }),
+        postCashTransfer: builder.mutation<any, IPostCashTransfer>({
+            query: (credentials) => ({
+                url: '/mekum/cash-flows-movement',
+                method: 'POST',
+                data: credentials,
+            }),
+            invalidatesTags: ['CashTransfers']
+        }),
         getWarehouseTransfers: builder.query<GetWarehouseTransferResponse, IGetWarehouseTransfersRequestData>({
             query: ({ id, limit, offset, isIn }) => ({
                 url: `/mekum/movements?id=${id}&limit=${limit}&offset=${offset}&isIn=${isIn}`,
@@ -145,6 +169,7 @@ export const {
     usePostCashoutMutation,
     useGetCashEntryQuery,
     usePostCashEntryMutation,
+    usePostCashTransferMutation,
     usePostWarehouseTransferMutation,
     usePostWarehouseReturnMutation,
     usePostReturnableMutation,

@@ -392,6 +392,12 @@ export interface CashRegister {
   hdmPrintType?: null;
   currencyId: number;
 };
+
+export interface IAllCashRegistersResponse {
+  result: CashRegister[],
+  total: number
+};
+
 export interface Currencies {
   id: number;
   name: string;

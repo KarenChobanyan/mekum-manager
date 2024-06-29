@@ -75,7 +75,8 @@ const useCreateStorageOutgoingHooks = (id: string) => {
                 count: +item.count,
                 materialValueId: +(item.materialValueId as IAutocompleteItem).id,
                 money: +item.money,
-                exits: item.exits
+                exits: item.exits,
+                measurementUnitId:7
             }
         });
         const payload: IPostWarehouseExitRequest = {

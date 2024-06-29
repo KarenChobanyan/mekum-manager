@@ -49,7 +49,8 @@ export interface IExitGoods {
   warehouseId: number;
   money: number;
   exits: IGoodBatch[];
-  discount?:number
+  discount?:number;
+  measurementUnitId: number
 };
 
 export interface ICashoutRequest {
@@ -104,5 +105,12 @@ export interface IGetWarehouseTransfersRequestData {
   limit:number,
   offset:number,
   isIn:string
+};
+
+export interface IPostCashTransfer {
+  entryCashRegisterId:number,
+  exitCashRegisterId:number,
+  money:number,
+  draft:boolean
 };
 

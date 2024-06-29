@@ -19,7 +19,7 @@ interface IProps {
 
 const FormTable: React.FC<IProps> = (props) => {
     const { fields, remove, control, errors, onAddItem, watch } = props;
-    const { goodsData } = useAutocompleteData();
+    const { allGoodsData } = useAutocompleteData();
 
     const headerData: ITableHeader[] = [
         {
@@ -58,9 +58,9 @@ const FormTable: React.FC<IProps> = (props) => {
                                             onChange={onChange}
                                             id={name}
                                             data={watch(`products.${index}.material_value_id_in`) ?
-                                                goodsData?.filter((item) => item.id !== watch(`products.${index}.material_value_id_in`)?.id!)
+                                                allGoodsData?.filter((item) => item.id !== watch(`products.${index}.material_value_id_in`)?.id!)
                                                 :
-                                                goodsData
+                                                allGoodsData
                                             }
                                             placeholder={t('Forms.Select_Material')}
                                             showErrorText={false}
@@ -88,9 +88,9 @@ const FormTable: React.FC<IProps> = (props) => {
                                             onChange={onChange}
                                             id={name}
                                             data={watch(`products.${index}.material_value_id_out`) ?
-                                                goodsData?.filter((item) => item.id !== watch(`products.${index}.material_value_id_out`)?.id!)
+                                                allGoodsData?.filter((item) => item.id !== watch(`products.${index}.material_value_id_out`)?.id!)
                                                 :
-                                                goodsData
+                                                allGoodsData
                                             }
                                             placeholder={t('Forms.Select_Material')}
                                             showErrorText={false}

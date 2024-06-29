@@ -135,6 +135,7 @@ const FormItems: React.FC<IProps> = (props) => {
                                         registerName={`goods.${index}.count`}
                                         showTextError={false}
                                         type='number'
+                                        patternValue={/^(?!0(\.0+)?$)\d+(\.\d+)?$/}
                                         inputStyle={styles.formItemInput}
                                         inputBoxStyles={styles.formItemInputNumBox}
                                         error={errors.goods?.[index]?.count}

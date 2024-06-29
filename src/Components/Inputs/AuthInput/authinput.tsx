@@ -38,7 +38,8 @@ export interface IInputProps {
   inputBoxStyles?:string,
   style?: string;
   showTextError?: boolean;
-  labelStyle?: string
+  labelStyle?: string,
+  step?:number,
 }
 
 const AuthInput: React.FC<IInputProps> = (props) => {
@@ -65,7 +66,8 @@ const AuthInput: React.FC<IInputProps> = (props) => {
     inputStyle,
     inputBoxStyles,
     labelStyle,
-    showTextError = true
+    showTextError = true,
+    step = 0.01
   } = props;
   const [inputValue, setInputValue] = useState<string | undefined>(
     defaultValue
@@ -111,6 +113,7 @@ const AuthInput: React.FC<IInputProps> = (props) => {
           placeholder={defaultValue ? undefined : placeholder}
           min={minDate}
           max={maxDate}
+          step={step}
           {...register(registerName, {
             required: required !== false && t('Input_Errors.Required'),
             onChange: onChange,

@@ -26,7 +26,7 @@ interface IProps {
 const FormItems: React.FC<IProps> = (props) => {
     const { fields, remove, register, control, errors, id, onAddItem, setValue, watch,setSalePrice } = props;
     const { getGoodsUnitType, myGoodsdata, getRemainder } = useAutocompleteData(id!);
-
+console.log(myGoodsdata,'myGoods')
     const headerData: ITableHeader[] = [
         {
             title: "",
@@ -157,6 +157,7 @@ const FormItems: React.FC<IProps> = (props) => {
                             showTextError={false}
                             type='number'
                             inputStyle={styles.formItemInput}
+                            patternValue={/^(?!0(\.0+)?$)\d+(\.\d+)?$/}
                             inputBoxStyles={styles.formItemInputNumBox}
                             required={true}
                             error={errors.goods?.[index]?.price}
@@ -180,6 +181,7 @@ const FormItems: React.FC<IProps> = (props) => {
                                         register={register}
                                         registerName={`goods.${index}.count`}
                                         showTextError={false}
+                                        patternValue={/^(?!0(\.0+)?$)\d+(\.\d+)?$/}
                                         type='number'
                                         inputStyle={styles.formItemInput}
                                         required={true}
@@ -200,6 +202,7 @@ const FormItems: React.FC<IProps> = (props) => {
                             showTextError={false}
                             type='number'
                             maxDate="100"
+                            patternValue={/^(?!0(\.0+)?$)\d+(\.\d+)?$/}
                             inputStyle={styles.formItemInput}
                             inputBoxStyles={styles.formItemInputNumBox}
                             required={false}
