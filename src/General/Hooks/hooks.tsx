@@ -255,7 +255,7 @@ export const useWarehouseHooks = () => {
 };
 
 export const useCashRegisterHooks = () => {
-  const { control } = useForm<{ cashRegister: IAutocompleteItem }>();
+  const { control } = useForm<{ cashRegister: IAutocompleteItem,type:IAutocompleteItem }>();
   return {
     control,
   }
@@ -264,4 +264,5 @@ export const useCashRegisterHooks = () => {
 
 export const useGoodExitsHooks = ()=>{
 
-}
+};
+

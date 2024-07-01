@@ -6,8 +6,10 @@ import useCreateCashTransferHooks from './createCashTransfer-hooks';
 import { ButtonTypes } from '../../../../Interfaces/componentTypes';
 import { AuthInput, AutoComplete, Button, Loading, } from '../../../../Components';
 import styles from '../../formTablestyles.module.scss';
+import { useParams } from 'react-router';
 
 const CreateCashTransfer: React.FC = () => {
+  const {id} = useParams();
   const { register, control, onSubmit, onCencele, handleSubmit, watch, isLoading, cashRegistersData,allCashRegistersData, errors } = useCreateCashTransferHooks();
 
   return (
