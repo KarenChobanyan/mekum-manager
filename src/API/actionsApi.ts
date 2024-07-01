@@ -94,7 +94,7 @@ export const actionsApi = createApi({
             }),
             invalidatesTags: ['CashEntry']
         }),
-        getCashTransfers: builder.query<any, any>({
+        getCashTransfers: builder.query<CashOutResponse, IGetWarehouseTransfersRequestData>({
             query: ({ id, limit, offset,isIn }) => ({
                 url: `/mekum/cash-flows-movement?id=${id}&limit=${limit}&offset=${offset}&isIn=${isIn}`,
                 method: 'GET',
@@ -170,6 +170,7 @@ export const {
     useGetCashEntryQuery,
     usePostCashEntryMutation,
     usePostCashTransferMutation,
+    useGetCashTransfersQuery,
     usePostWarehouseTransferMutation,
     usePostWarehouseReturnMutation,
     usePostReturnableMutation,
