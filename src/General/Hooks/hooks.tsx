@@ -7,7 +7,7 @@ import moment from "moment";
 import { RootState, useAppDispatch, useAppSelector } from "../../Store/store";
 import { IAutocompleteData, IAutocompleteItem } from "../../Interfaces/componentTypes";
 import { useGetAllCashRegistersQuery, useGetAllGoodsQuery, useGetAllWarehousesQuery, useGetCashRegistersQuery, useGetEmployeesQuery, useGetGoodsQuery, useGetPartnersQuery, useGetWarehouseGoodsQuery, useGetWarehousesQuery } from "../../API/direcroriesApi";
-import { AllGoodsResponse, CashRegistersResponse, GetEmployeesResponseData, GetWarehousesResponseData, GoodsResponseData, IGetPartnersRespData } from "../../Interfaces/responseTypes";
+import { AllGoodsResponse, CashRegistersResponse, GetEmployeesResponseData, GetWarehousesResponseData, GoodsResponseData, IGetPartnersRespData, } from "../../Interfaces/responseTypes";
 import { removeCurrentUser } from "../../Store/Slices/authSlice";
 import { ISIN } from "../../Interfaces/interfaces";
 
@@ -21,6 +21,10 @@ export const useGeneralHooks = () => {
   const currentUser = useAppSelector(
     (state: RootState) => state?.auth?.currentUser
   );
+
+  if (!currentUser) {
+    localStorage.removeItem("mm_access_token");
+  };
   const formatDate = (date: Date) => {
     return moment(date).format("DD.MM.YYYY");
   };
@@ -67,8 +71,8 @@ export const useDirectoriesHooks = () => {
   const { data: goods } = useGetGoodsQuery();
   const { data: allGoods } = useGetAllGoodsQuery();
   const { data: partnersResponse } = useGetPartnersQuery();
-  const {data:cashRegisters} = useGetCashRegistersQuery();
-  const {data:allCashRegisters} = useGetAllCashRegistersQuery();
+  const { data: cashRegisters } = useGetCashRegistersQuery();
+  const { data: allCashRegisters } = useGetAllCashRegistersQuery();
   const partners = partnersResponse?.result!;
   const roles: IAutocompleteItem[] = [
     { id: "1", title: t('Roles.Admin') },
@@ -89,18 +93,18 @@ export const useDirectoriesHooks = () => {
 };
 
 export const useAutocompleteData = (warehouseId?: string) => {
-  const { employees, myWarehouses, allWarehouses, goods, allGoods, partners,cashRegisters,allCashRegisters } = useDirectoriesHooks();
+  const { employees, myWarehouses, allWarehouses, goods, allGoods, partners, cashRegisters, allCashRegisters } = useDirectoriesHooks();
   const { data: myGoods } = useGetWarehouseGoodsQuery(warehouseId!);
   const myWarehousesIds = myWarehouses?.map((item) => item.id);
   const filteredWarehouses = allWarehouses?.filter((item) => !myWarehousesIds?.includes(item.id));
-  const warehouseDataTypes:IAutocompleteData = [
+  const warehouseDataTypes: IAutocompleteData = [
     {
-      title:t('Forms.In'),
-      id:ISIN.TRUE
+      title: t('Forms.In'),
+      id: ISIN.TRUE
     },
     {
-      title:t('Forms.Out'),
-      id:ISIN.FALSE
+      title: t('Forms.Out'),
+      id: ISIN.FALSE
     }
   ]
 
@@ -179,9 +183,9 @@ export const useAutocompleteData = (warehouseId?: string) => {
       return undefined
     }
   };
-  
+
   const getGoodsUnitType = useCallback((id: string) => {
-    if (goods?.length) {
+    if (goods?.length! > 0) {
       const unit = goods?.filter((item) => +id === item.materialValueId)[0].point;
       return unit
     } else {
@@ -248,21 +252,21 @@ export const useAutocompleteData = (warehouseId?: string) => {
 };
 
 export const useWarehouseHooks = () => {
-  const { control } = useForm<{ warehouse: IAutocompleteItem,type:IAutocompleteItem }>();
+  const { control } = useForm<{ warehouse: IAutocompleteItem, type: IAutocompleteItem }>();
   return {
     control,
   }
 };
 
 export const useCashRegisterHooks = () => {
-  const { control } = useForm<{ cashRegister: IAutocompleteItem,type:IAutocompleteItem }>();
+  const { control } = useForm<{ cashRegister: IAutocompleteItem, type: IAutocompleteItem }>();
   return {
     control,
   }
 };
 
 
-export const useGoodExitsHooks = ()=>{
+export const useGoodExitsHooks = () => {
 
 };
 

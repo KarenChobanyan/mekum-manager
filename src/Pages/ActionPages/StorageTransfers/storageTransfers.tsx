@@ -12,7 +12,7 @@ const StorageTransfers: React.FC = () => {
   const { myWarehousesData, warehouseDataTypes } = useAutocompleteData();
   const [warehouseId, setWarehouseId] = useState<string | undefined>(myWarehousesData?.[0].id!)
   const { control } = useWarehouseHooks();
-  const { transfersData, activePage, setActivePage, setOffset, setIsIn, isIn, headerData, bodyData } = useStorageTransferHook(warehouseId! ?? myWarehousesData?.[0].id!);
+  const { transfersData, activePage, setActivePage, setOffset, setIsIn,onSubmitCheckedEntries,checkedItems,setCheckedItems, isIn, headerDataForEntries,headerDataForExits, bodyDataForEntries,bodyDataForExits } = useStorageTransferHook(warehouseId! ?? myWarehousesData?.[0].id!);
 
   return (
     <div className={styles.container}>
@@ -65,6 +65,7 @@ const StorageTransfers: React.FC = () => {
                           onChange={(value) => {
                             onChange(value)
                             setIsIn(value?.id! as ISIN)
+                            value?.id! === ISIN.FALSE && setCheckedItems([])
                           }}
                           id='warehouseId'
                           data={warehouseDataTypes}
@@ -89,16 +90,26 @@ const StorageTransfers: React.FC = () => {
                   buttonStyle={styles.button}
                 />
               }
+              {
+                checkedItems.length > 0 && isIn === ISIN.TRUE
+                &&
+                <Button
+                  buttonType={ButtonTypes.Primery}
+                  title={t('Button.Submit')}
+                  onClick={onSubmitCheckedEntries}
+                  buttonStyle={styles.button}
+                />
+              }
             </div>
             {transfersData?.result!.length! > 0
               ?
               (
-                bodyData
+                bodyDataForEntries || bodyDataForExits
                   ?
                   <div className={styles.fullBody}>
                     <CustomTable
-                      headerData={headerData}
-                      bodyData={bodyData}
+                      headerData={isIn === 'true' ? headerDataForEntries : headerDataForExits}
+                      bodyData={isIn === 'true' ? bodyDataForEntries : bodyDataForExits}
                     />
                     <CustomPagination
                       limit={transfersData?.total!}

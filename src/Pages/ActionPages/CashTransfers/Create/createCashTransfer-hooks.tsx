@@ -44,8 +44,7 @@ const useCreateCashTransferHooks = () => {
             draft: false
         }
         add(payload)
-        console.log(payload)
-    };
+       };
 
     return {
         register,

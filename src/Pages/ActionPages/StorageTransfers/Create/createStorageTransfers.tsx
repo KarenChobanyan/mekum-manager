@@ -15,7 +15,8 @@ const CreateTorageTransfers: React.FC = () => {
   const { t } = useGeneralHooks();
   const { myWarehousesData, allWarehousesData } = useAutocompleteData();
   const createwharehouseInData = ()=>{
-    const allWarehouses = [...allWarehousesData!,...myWarehousesData!];
+    const myWarehouse = myWarehousesData ?? []
+    const allWarehouses = allWarehousesData ? [...allWarehousesData!,...myWarehouse!] : [];
     const warehouseInData = allWarehouses.filter((item)=>item.id !== id);
     return warehouseInData
   };

@@ -2,12 +2,14 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from './API';
 import { AllGoodsResponse, CashRegistersResponse, GetEmployeesResponseData, GetGoodBatchesResponse, GetWarehousesResponseData, GoodsResponseData, IGetPartnersResponse } from '../Interfaces/responseTypes';
 import { IGetGoodBatchRequest } from '../Interfaces/requestTypes';
+import { tagTypes as actionsTagTypes } from './actionsApi';
 
 export const directoriesApi = createApi({
     reducerPath: 'directoriesApi',
     baseQuery: axiosBaseQuery({
         baseUrl: process.env.REACT_APP_API_KEY,
     }),
+    tagTypes:[...actionsTagTypes],
     endpoints: (builder) => ({
         getWarehouses: builder.query<GetWarehousesResponseData, void>({
             query: () => ({
@@ -32,18 +34,21 @@ export const directoriesApi = createApi({
                 url: '/mekum/goods',
                 method: 'GET',
             }),
+            providesTags: ['WarehouseEntries','Sales']
         }),
         getAllGoods: builder.query<AllGoodsResponse, void>({
             query: () => ({
                 url: '/mekum/all-goods',
                 method: 'GET',
             }),
+            providesTags: ['WarehouseEntries','Sales']
         }),
         getWarehouseGoods: builder.query<GoodsResponseData, string>({
             query: (id) => ({
                 url: `/mekum/goods?id=${id}`,
                 method: 'GET',
             }),
+            providesTags: ['WarehouseEntries','Sales']
         }),
         getPartners: builder.query<IGetPartnersResponse, void>({
             query: () => ({
@@ -56,6 +61,7 @@ export const directoriesApi = createApi({
                 url: `/mekum/good-batches?warehouseId=${credentials.warehouseId}&materialValueId=${credentials.materialValueId}`,
                 method: 'GET',
             }),
+            providesTags: ['WarehouseEntries','Sales']
         }),
         getCashRegisters: builder.query<CashRegistersResponse, void>({
             query: () => ({

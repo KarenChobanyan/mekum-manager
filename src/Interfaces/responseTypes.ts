@@ -431,6 +431,10 @@ export interface IWarehouseSignificance {
 export interface IMovementNAProduct {
   id: number;
   name: string;
+  point:string,
+  materialValueId:number,
+  count:number,
+  measurementUnitId:number,
   expenseAccountId: number;
   partnerAccountId: number;
   prepaymentAccountId: number;
@@ -455,6 +459,7 @@ export interface IGetWarehouseTransferResponseData {
   warehouseOutId: number,
   warehouseOut: IWarehouse,
   warehouseEnter: IWarehouse,
+  warehouseEnterId:number,
   warehouseSignificance: IWarehouseSignificance,
   movementNAProduct: MovementNAProducts,
   draft: number

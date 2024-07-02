@@ -31,7 +31,6 @@ const useCreateStorageTransfersHooks = (id:string) => {
     const warehouse = myWarehousesData?.filter((item)=>item.id === id)[0];
     const [add, { isLoading, isSuccess, isError }] = usePostWarehouseTransferMutation();
     const { navigate, t } = useGeneralHooks();
-
     const { register, handleSubmit, watch, control, reset, setValue, formState: { errors } } = useForm<IStorageTransferFormValues>({
         defaultValues: {
             goods: [{ materialValueId: null, quantity: '', point: '', count: '', money: "", exits: [] }]
@@ -68,7 +67,6 @@ const useCreateStorageTransfersHooks = (id:string) => {
     };
 
     const onSubmit: SubmitHandler<IStorageTransferFormValues | FieldValues> = (values) => {
-        console.log(values, 'values')
         const goodsList: IWarehouseTransferGood[] = values.goods?.map((item: IStorageTransferItem): IWarehouseTransferGood => {
             return {
                 warehouseOutId: +(warehouse as IAutocompleteItem).id,

@@ -66,6 +66,16 @@ export interface IWarehouseTransferRequest {
   warehouseEnterId: number,
   goods: IWarehouseTransferGood[]
 };
+export interface IAcceptWarehouseTransferRequest {
+  id:number,
+  data:{
+    documentDate: string,
+    warehouseOutId: number,
+    warehouseEnterId: number,
+    goods: IWarehouseTransferGood[],
+    documentNumber:number
+  }
+};
 
 export interface IWarehouseTransferGood {
   materialValueId: number,
