@@ -22,7 +22,7 @@ interface IProps {
 
 const FormItems: React.FC<IProps> = (props) => {
     const { fields,warehouse, remove, register, control, errors, onAddItem, setValue, watch } = props;
-    const { getGoodsUnitType, myGoodsdata, getRemainder,setMeasurementUnitId } = useAutocompleteData(warehouse?.id!);
+    const { getGoodsUnitType,allGoodsData, getRemainder,setMeasurementUnitId } = useAutocompleteData(warehouse?.id!);
 
     const headerData: ITableHeader[] = [
         {
@@ -82,7 +82,7 @@ const FormItems: React.FC<IProps> = (props) => {
                                             }
                                             }
                                             id={name}
-                                            data={myGoodsdata}
+                                            data={allGoodsData}
                                             placeholder={t('Forms.Select_Material')}
                                             showErrorText={false}
                                             style={styles.formItemBox}

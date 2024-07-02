@@ -1,12 +1,13 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from './API';
-import { ICashoutRequest, IGetStorageEntriesRequestData, IGetWarehouseTransfersRequestData, IPostCashTransfer, IPostStorageIncomeRequestData, IPostWarehouseExitRequest, IPostWarehouseReturnRequest, IWarehouseTransferRequest, PostRetunableRequestData } from '../Interfaces/requestTypes';
+import { IAcceptWarehouseTransferRequest, ICashoutRequest, IGetStorageEntriesRequestData, IGetWarehouseTransfersRequestData, IPostCashTransfer, IPostStorageIncomeRequestData, IPostWarehouseExitRequest, IPostWarehouseReturnRequest, IWarehouseTransferRequest, PostRetunableRequestData } from '../Interfaces/requestTypes';
 import { AccounInvoiceResponce, CashOutResponse, GetReturnableProductsResponse, GetWarehouseTransferResponse, IWarehouseEntryResponse, WarehouseExitResponse, WarehouseReturnsResponse } from '../Interfaces/responseTypes';
 import { directoriesApi } from './direcroriesApi';
 
+export const tagTypes =  ['WarehouseEntries', 'WarehouseExits', 'Sales', 'CashOut', 'CashEntry', 'Returnable', 'WarehouseTransfers', 'Returns','CashTransfers'];
 export const actionsApi = createApi({
     reducerPath: 'actionsApi',
-    tagTypes: ['WarehouseEntries', 'WarehouseExits', 'Sales', 'CashOut', 'CashEntry', 'Returnable', 'WarehouseTransfers', 'Returns','CashTransfers'],
+    tagTypes: tagTypes,
     baseQuery: axiosBaseQuery({
         baseUrl: process.env.REACT_APP_API_KEY,
     }),
@@ -124,6 +125,14 @@ export const actionsApi = createApi({
             }),
             invalidatesTags: ['WarehouseTransfers']
         }),
+        acceptWarehouseTransfer: builder.mutation<any, IAcceptWarehouseTransferRequest>({
+            query: (credentials) => ({
+                url: `/mekum/accept-move/${credentials.id}`,
+                method: 'PUT',
+                data: credentials.data,
+            }),
+            invalidatesTags: ['WarehouseTransfers']
+        }),
         getWarehouseReturns: builder.query<WarehouseReturnsResponse, IGetStorageEntriesRequestData>({
             query: ({ id, limit, offset }) => ({
                 url: `/mekum/returns?id=${id}&limit=${limit}&offset=${offset}`,
@@ -172,6 +181,7 @@ export const {
     usePostCashTransferMutation,
     useGetCashTransfersQuery,
     usePostWarehouseTransferMutation,
+    useAcceptWarehouseTransferMutation,
     usePostWarehouseReturnMutation,
     usePostReturnableMutation,
     useGetWarehouseTransfersQuery,
