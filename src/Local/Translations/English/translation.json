@@ -76,6 +76,10 @@
     },
     "Error": {
       "Register": "Registration failed"
+    },
+    "Warning": {
+      "No_Warehouse": "You do not have a registered warehouse",
+      "No_CashRegister": "You do not have a registered wallet"
     }
   },
   "Button": {
