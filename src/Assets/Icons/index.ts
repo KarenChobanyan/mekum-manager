@@ -7,7 +7,6 @@ import RedTrashIcon from './redTrash.svg';
 import PlusIcon from './plusIcon.svg';
 import LogOutIcon from './logOut.svg';
 import AvatarIcon from './avatar.svg';
-import CheckedIcon from './checked.svg';
 
 export {
     ArmenianFlag,
@@ -19,5 +18,4 @@ export {
     LogOutIcon,
     PlusIcon,
     AvatarIcon,
-    CheckedIcon
 }
