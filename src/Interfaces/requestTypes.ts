@@ -123,3 +123,13 @@ export interface IPostCashTransfer {
   money:number,
 };
 
+export interface IAcceptCashTransfer {
+  id:number,
+  data:{
+    entryCashRegisterId:number,
+    exitCashRegisterId:number,
+    money:number,
+    documentNumber: number;
+  }
+}
+

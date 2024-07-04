@@ -67,7 +67,7 @@ const CreateStorageOutgoings: React.FC = () => {
                     );
                   }}
                 />
-                <Controller
+                {/* <Controller
                   control={control}
                   name='partnerId'
                   rules={{
@@ -92,7 +92,7 @@ const CreateStorageOutgoings: React.FC = () => {
                       </div>
                     );
                   }}
-                />
+                /> */}
               </div>
               <div className={styles.itemsBox}>
                 <FormItems

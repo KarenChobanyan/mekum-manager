@@ -70,7 +70,7 @@ const Sales: React.FC = () => {
                       bodyData={bodyData}
                     />
                     <CustomPagination
-                      limit={salesData?.total!}
+                      limit={salesData?.total! / 7}
                       offset={activePage}
                       onChange={(_, page) => {
                         setOffset((page - 1) * 7);

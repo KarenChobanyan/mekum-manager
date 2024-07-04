@@ -70,7 +70,7 @@ const CashOut:React.FC = () => {
                   bodyData={bodyData}
                 />
                  <CustomPagination
-                      limit={cashoutsData?.total!}
+                      limit={cashoutsData?.total! / 7 }
                       offset={activePage}
                       onChange={(_, page) => {
                         setOffset((page -1) * 7);

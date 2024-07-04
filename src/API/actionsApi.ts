@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from './API';
-import { IAcceptWarehouseTransferRequest, ICashoutRequest, IGetStorageEntriesRequestData, IGetWarehouseTransfersRequestData, IPostCashTransfer, IPostStorageIncomeRequestData, IPostWarehouseExitRequest, IPostWarehouseReturnRequest, IWarehouseTransferRequest, PostRetunableRequestData } from '../Interfaces/requestTypes';
+import { IAcceptCashTransfer, IAcceptWarehouseTransferRequest, ICashoutRequest, IGetStorageEntriesRequestData, IGetWarehouseTransfersRequestData, IPostCashTransfer, IPostStorageIncomeRequestData, IPostWarehouseExitRequest, IPostWarehouseReturnRequest, IWarehouseTransferRequest, PostRetunableRequestData } from '../Interfaces/requestTypes';
 import { AccounInvoiceResponce, CashOutResponse, GetReturnableProductsResponse, GetWarehouseTransferResponse, IWarehouseEntryResponse, WarehouseExitResponse, WarehouseReturnsResponse } from '../Interfaces/responseTypes';
 import { directoriesApi } from './direcroriesApi';
 import { tagTypes } from './types';
@@ -110,6 +110,14 @@ export const actionsApi = createApi({
             }),
             invalidatesTags: ['CashTransfers']
         }),
+        acceptCashTransfers: builder.mutation<any, IAcceptCashTransfer>({
+            query: (credentials) => ({
+                url: `/mekum/accept-cash-move/${credentials.id}`,
+                method: 'PUT',
+                data: credentials.data,
+            }),
+            invalidatesTags: ['CashTransfers']
+        }),
         getWarehouseTransfers: builder.query<GetWarehouseTransferResponse, IGetWarehouseTransfersRequestData>({
             query: ({ id, limit, offset, isIn }) => ({
                 url: `/mekum/movements?id=${id}&limit=${limit}&offset=${offset}&isIn=${isIn}`,
@@ -180,6 +188,7 @@ export const {
     usePostCashEntryMutation,
     usePostCashTransferMutation,
     useGetCashTransfersQuery,
+    useAcceptCashTransfersMutation,
     usePostWarehouseTransferMutation,
     useAcceptWarehouseTransferMutation,
     usePostWarehouseReturnMutation,

@@ -108,14 +108,6 @@ const CreateCashTransfer: React.FC = () => {
                   labelStyle={styles.formInputLabel}
                   error={errors.money}
                 />
-                {/* <TextArea
-              register={register}
-              registerName='description'
-              label='Նկարագրություն'
-              style={styles.inputBox}
-              inputStyle={styles.input}
-              labelStyle={styles.formInputLabel}
-            /> */}
               </div>
               <div className={styles.buttonRow}>
                 <div className={styles.buttons}>

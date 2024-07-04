@@ -13,7 +13,7 @@ const CashTransfers: React.FC = () => {
   const { cashRegistersData, warehouseDataTypes } = useAutocompleteData();
   const [cashRegisterId, setCashRegisterId] = useState<string | undefined>(cashRegistersData?.[0].id!)
   const { control } = useCashRegisterHooks();
-  const { transfersData, activePage, setActivePage, setOffset, setIsIn, isIn, headerDataForEntries, headerDataForExits, bodyDataForEntries, bodyDataForExits } = useCashTransfersHook(cashRegisterId! ?? cashRegistersData?.[0].id!);
+  const { transfersData, activePage, setActivePage, setOffset, setIsIn, isIn, headerDataForEntries, headerDataForExits, bodyDataForEntries,checkedItems, bodyDataForExits,onSubmitCheckedEntries } = useCashTransfersHook(cashRegisterId! ?? cashRegistersData?.[0].id!);
 
 
   return (
@@ -40,7 +40,7 @@ const CashTransfers: React.FC = () => {
                             onChange(value)
                             setCashRegisterId(value?.id!)
                           }}
-                          id='warehouseId'
+                          id='cashRegister'
                           data={cashRegistersData}
                           label={t('Forms.Warehouse')}
                           placeholder={t('Forms.Select_Warehouse')}
@@ -91,6 +91,16 @@ const CashTransfers: React.FC = () => {
                   buttonStyle={styles.button}
                 />
               }
+               {
+                checkedItems.length > 0 && isIn === ISIN.TRUE
+                &&
+                <Button
+                  buttonType={ButtonTypes.Primery}
+                  title={t('Button.Submit')}
+                  onClick={onSubmitCheckedEntries}
+                  buttonStyle={styles.button}
+                />
+              }
             </div>
             {transfersData?.result!.length! > 0
               ?
@@ -103,7 +113,7 @@ const CashTransfers: React.FC = () => {
                       bodyData={isIn === 'true' ? bodyDataForEntries : bodyDataForExits}
                     />
                     <CustomPagination
-                      limit={transfersData?.total!}
+                      limit={transfersData?.total! / 7}
                       offset={activePage}
                       onChange={(_, page) => {
                         setOffset((page - 1) * 7);

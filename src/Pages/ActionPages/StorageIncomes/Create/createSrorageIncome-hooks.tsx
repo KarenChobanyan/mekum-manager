@@ -56,6 +56,9 @@ const useCreateStorageIncomeHooks = (id: string) => {
         if (isSuccess) {
             toast.success(t('Toast.Success.Register'))
             navigate(-1)
+            setTimeout(()=>{
+                window.location.reload()
+            },1000)
             reset();
         } else if (isError) {
             toast.error(t('Toast.Error.Register'))

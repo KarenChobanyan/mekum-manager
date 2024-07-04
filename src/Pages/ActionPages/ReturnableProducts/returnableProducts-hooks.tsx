@@ -13,9 +13,9 @@ export interface IReturnableProductRenderItem {
 
 const useReturnableProductsHook = () => {
     const { data: returnableData } = useGetReturnableProductsQuery();
-    const { goodsData } = useAutocompleteData();
+    const { goodsData,allGoodsData } = useAutocompleteData();
     const setProductName = useCallback((id:number) => {
-        const product = goodsData?.filter((good)=>good.id === String(id))[0];
+        const product = allGoodsData?.filter((good)=>good.id === String(id))[0];
         const name = product?.title
         return name
     }, [goodsData]);

@@ -345,7 +345,16 @@ export interface CashRegistersResponse {
 };
 
 export interface ICashoutResponseData {
+  entryCashRegisterId:number,
+  exitCashRegisterId:number,
+  money:number,
   id: number;
+  exitCashRegister:{
+    name:string
+  },
+  entryCashRegister:{
+    name:string
+  },
   cashRegisterId: number;
   date: string;
   documentNumber: number;

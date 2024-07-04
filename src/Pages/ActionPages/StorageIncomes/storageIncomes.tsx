@@ -70,7 +70,7 @@ const StorageIncomes: React.FC = () => {
                       bodyData={bodyData}
                     />
                     <CustomPagination
-                      limit={entryData?.total!}
+                      limit={entryData?.total! / 7}
                       offset={activePage}
                       onChange={(_, page) => {
                         setOffset((page -1) * 7);

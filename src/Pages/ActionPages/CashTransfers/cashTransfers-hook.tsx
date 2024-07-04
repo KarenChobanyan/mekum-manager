@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAutocompleteData } from "../../../General/Hooks/hooks";
-import { useGetCashTransfersQuery } from "../../../API/actionsApi";
+import { useAcceptCashTransfersMutation, useGetCashTransfersQuery } from "../../../API/actionsApi";
 import { ISIN } from "../../../Interfaces/interfaces";
 import { ITableFormItemData, ITableHeader, TableCellContentTypes } from "../../../Interfaces/componentTypes";
 import { t } from 'i18next';
@@ -11,6 +11,8 @@ import { ClipLoader } from "react-spinners";
 import { Checkbox } from "@mui/material";
 import { orange } from "@mui/material/colors";
 import { CheckBox } from "@mui/icons-material";
+import { IAcceptCashTransfer } from "../../../Interfaces/requestTypes";
+import { toast } from "react-toastify";
 
 interface ICHeckedEntry {
     loading: boolean,
@@ -19,6 +21,7 @@ interface ICHeckedEntry {
 
 const useCashTransfersHook = (id: string) => {
     const { warehouseDataTypes } = useAutocompleteData();
+    const [accept, { isLoading, isSuccess, isError }] = useAcceptCashTransfersMutation();
     const [activePage, setActivePage] = useState<number>(0);
     const [offset, setOffset] = useState<number>(0);
     const [checkedItems, setCheckedItems] = useState<ICHeckedEntry[] | []>([]);
@@ -29,6 +32,45 @@ const useCashTransfersHook = (id: string) => {
         const filteredTmp = tmp.filter((item) => item.item.id !== +id);
         setCheckedItems(filteredTmp);
     };
+
+    useEffect(() => {
+        if (isSuccess) {
+            toast.success(t('Toast.Success.Register'))
+        } else if (isError) {
+            toast.error(t('Toast.Error.Register'))
+        }
+    }, [isSuccess, isError]);
+
+
+    const processEntry = async (item:  ICashoutResponseData) => {
+        console.log(item,'item')
+        try {
+            const payload: IAcceptCashTransfer = {
+                id:item.id,
+                data:{
+                    documentNumber:item.documentNumber,
+                    entryCashRegisterId:item.entryCashRegisterId,
+                    exitCashRegisterId:item.exitCashRegisterId,
+                    money:item.money
+                }
+            };
+            await accept(payload);
+        } catch (error) {
+            toast.error(`${error}`);
+        }
+    };
+
+    const onSubmitCheckedEntries = async () => {
+        const tmp = [...checkedItems];
+        tmp.forEach((item) => item.loading = true)
+        setCheckedItems(tmp)
+        for (const item of checkedItems) {
+            await processEntry(item.item).then(() => {
+                setCheckedItems([])
+            });
+        }
+    };
+
 
     const headerDataForEntries: ITableHeader[] = [
         {
@@ -113,9 +155,9 @@ const useCashTransfersHook = (id: string) => {
                                 {
                                     isIn === ISIN.TRUE
                                         ?
-                                        item.cashRegister?.name!
+                                        item.exitCashRegister.name!
                                         :
-                                        item.cashRegister?.name!
+                                        item.entryCashRegister.name!
                                 }
                             </div>
                         </div>,
@@ -153,9 +195,9 @@ const useCashTransfersHook = (id: string) => {
                                 {
                                     isIn === ISIN.TRUE
                                         ?
-                                        item.cashRegister?.name!
+                                        item.exitCashRegister.name!
                                         :
-                                        item.cashRegister?.name!
+                                        item.entryCashRegister.name!
                                 }
                             </div>
                         </div>,
@@ -165,7 +207,7 @@ const useCashTransfersHook = (id: string) => {
                     component:
                         <div className={styles.formItemTextBox}>
                             <div className={styles.formItemText}>
-                                {/* {item.documentNumber!} */}
+                                {item.documentNumber!}
                             </div>
                         </div>,
                     contentType: TableCellContentTypes.SELECT
@@ -186,6 +228,8 @@ const useCashTransfersHook = (id: string) => {
         headerDataForExits,
         bodyDataForEntries,
         bodyDataForExits,
+        checkedItems,
+        onSubmitCheckedEntries,
         setActivePage,
         setOffset,
         setIsIn,
