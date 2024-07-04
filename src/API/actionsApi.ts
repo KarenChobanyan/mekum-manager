@@ -3,8 +3,8 @@ import axiosBaseQuery from './API';
 import { IAcceptWarehouseTransferRequest, ICashoutRequest, IGetStorageEntriesRequestData, IGetWarehouseTransfersRequestData, IPostCashTransfer, IPostStorageIncomeRequestData, IPostWarehouseExitRequest, IPostWarehouseReturnRequest, IWarehouseTransferRequest, PostRetunableRequestData } from '../Interfaces/requestTypes';
 import { AccounInvoiceResponce, CashOutResponse, GetReturnableProductsResponse, GetWarehouseTransferResponse, IWarehouseEntryResponse, WarehouseExitResponse, WarehouseReturnsResponse } from '../Interfaces/responseTypes';
 import { directoriesApi } from './direcroriesApi';
+import { tagTypes } from './types';
 
-export const tagTypes =  ['WarehouseEntries', 'WarehouseExits', 'Sales', 'CashOut', 'CashEntry', 'Returnable', 'WarehouseTransfers', 'Returns','CashTransfers'];
 export const actionsApi = createApi({
     reducerPath: 'actionsApi',
     tagTypes: tagTypes,
@@ -18,7 +18,7 @@ export const actionsApi = createApi({
                 method: 'POST',
                 data: credentials,
             }),
-            invalidatesTags: ['WarehouseEntries'],
+            invalidatesTags: ['WarehouseEntries','MyGoods'],
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
                     await queryFulfilled;
@@ -48,7 +48,7 @@ export const actionsApi = createApi({
                 method: 'POST',
                 data: credentials,
             }),
-            invalidatesTags: ['WarehouseExits']
+            invalidatesTags: ['WarehouseExits','MyGoods']
         }),
         getSales: builder.query<AccounInvoiceResponce, IGetStorageEntriesRequestData>({
             query: ({ id, limit, offset }) => ({
@@ -63,7 +63,7 @@ export const actionsApi = createApi({
                 method: 'POST',
                 data: credentials,
             }),
-            invalidatesTags: ['Sales']
+            invalidatesTags: ['Sales','MyGoods']
         }),
         getCashOuts: builder.query<CashOutResponse, IGetStorageEntriesRequestData>({
             query: ({ id, limit, offset }) => ({

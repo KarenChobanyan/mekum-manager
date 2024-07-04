@@ -2,7 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from './API';
 import { AllGoodsResponse, CashRegistersResponse, GetEmployeesResponseData, GetGoodBatchesResponse, GetWarehousesResponseData, GoodsResponseData, IGetPartnersResponse } from '../Interfaces/responseTypes';
 import { IGetGoodBatchRequest } from '../Interfaces/requestTypes';
-import { tagTypes as actionsTagTypes } from './actionsApi';
+import { tagTypes as actionsTagTypes } from './types';
 
 export const directoriesApi = createApi({
     reducerPath: 'directoriesApi',
@@ -34,7 +34,7 @@ export const directoriesApi = createApi({
                 url: '/mekum/goods',
                 method: 'GET',
             }),
-            providesTags: ['WarehouseEntries','Sales']
+            providesTags: ['WarehouseEntries','Sales','MyGoods']
         }),
         getAllGoods: builder.query<AllGoodsResponse, void>({
             query: () => ({
@@ -48,7 +48,7 @@ export const directoriesApi = createApi({
                 url: `/mekum/goods?id=${id}`,
                 method: 'GET',
             }),
-            providesTags: ['WarehouseEntries','Sales']
+            providesTags: ['WarehouseEntries','Sales','MyGoods']
         }),
         getPartners: builder.query<IGetPartnersResponse, void>({
             query: () => ({

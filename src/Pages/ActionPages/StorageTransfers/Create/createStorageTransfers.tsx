@@ -48,7 +48,7 @@ const CreateTorageTransfers: React.FC = () => {
                   <AuthInput
                   register={register}
                   registerName='warehouseOutId'
-                  label={t('Forms.Date')}
+                  label={t('Forms.Warehouse_Out')}
                   style={styles.inputBox}
                   inputStyle={styles.input}
                   inputBoxStyles={styles.input}

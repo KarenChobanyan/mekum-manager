@@ -52,6 +52,8 @@ const axiosBaseQuery =
       async (err) => {
         removeLoaderElement();
         if (err.response.status === 403 || err.response.status === 401) {
+          localStorage.removeItem('mm_access_token')
+          window.location.replace('/')
         }
         return Promise.reject(err);
       }

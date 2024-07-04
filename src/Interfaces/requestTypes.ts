@@ -121,6 +121,5 @@ export interface IPostCashTransfer {
   entryCashRegisterId:number,
   exitCashRegisterId:number,
   money:number,
-  draft:boolean
 };
 

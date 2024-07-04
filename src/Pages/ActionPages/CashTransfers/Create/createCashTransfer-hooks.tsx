@@ -41,7 +41,6 @@ const useCreateCashTransferHooks = () => {
             exitCashRegisterId: +(values.exitCashRegisterId as IAutocompleteItem).id,
             entryCashRegisterId: +(values.entryCashRegisterId as IAutocompleteItem).id,
             money: +values.money,
-            draft: false
         }
         add(payload)
        };

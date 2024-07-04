@@ -8,14 +8,14 @@ import useCashTransfersHook from './cashTransfers-hook';
 import { Controller } from 'react-hook-form';
 import { ButtonTypes } from '../../../Interfaces/componentTypes';
 
-const CashTransfers:React.FC = () => {
-  const {t,navigate} = useGeneralHooks();
-  const { cashRegistersData,warehouseDataTypes} = useAutocompleteData();
+const CashTransfers: React.FC = () => {
+  const { t, navigate } = useGeneralHooks();
+  const { cashRegistersData, warehouseDataTypes } = useAutocompleteData();
   const [cashRegisterId, setCashRegisterId] = useState<string | undefined>(cashRegistersData?.[0].id!)
-  const {control} = useCashRegisterHooks();
-  const { transfersData, activePage, setActivePage, setOffset, setIsIn, isIn, headerData, bodyData } = useCashTransfersHook(cashRegisterId! ?? cashRegistersData?.[0].id!);
+  const { control } = useCashRegisterHooks();
+  const { transfersData, activePage, setActivePage, setOffset, setIsIn, isIn, headerDataForEntries, headerDataForExits, bodyDataForEntries, bodyDataForExits } = useCashTransfersHook(cashRegisterId! ?? cashRegistersData?.[0].id!);
 
-  
+
   return (
     <div className={styles.container}>
       {
@@ -95,12 +95,12 @@ const CashTransfers:React.FC = () => {
             {transfersData?.result!.length! > 0
               ?
               (
-                bodyData
+                bodyDataForEntries || bodyDataForExits
                   ?
                   <div className={styles.fullBody}>
                     <CustomTable
-                      headerData={headerData}
-                      bodyData={bodyData}
+                      headerData={isIn === 'true' ? headerDataForEntries : headerDataForExits}
+                      bodyData={isIn === 'true' ? bodyDataForEntries : bodyDataForExits}
                     />
                     <CustomPagination
                       limit={transfersData?.total!}

@@ -186,8 +186,12 @@ export const useAutocompleteData = (warehouseId?: string) => {
 
   const getGoodsUnitType = useCallback((id: string) => {
     if (goods?.length! > 0) {
-      const unit = goods?.filter((item) => +id === item.materialValueId)[0].point;
-      return unit
+      try {
+        const unit = goods?.filter((item) => +id === item.materialValueId)?.[0].point;
+        return unit
+      } catch (error) {
+        return 'անհայտ'
+      }
     } else {
       return ""
     }

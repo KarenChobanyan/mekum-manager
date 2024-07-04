@@ -15,7 +15,7 @@ import { countGoodExits, fetchData } from "../../../Utils/utilits";
 import { CheckBox } from "@mui/icons-material";
 import styles from '../formTablestyles.module.scss';
 
-export interface ICHeckedEntry {
+ interface ICHeckedEntry {
     loading: boolean,
     item: IGetWarehouseTransferResponseData
 };
