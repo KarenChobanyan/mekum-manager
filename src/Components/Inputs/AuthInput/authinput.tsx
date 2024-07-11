@@ -5,11 +5,12 @@ import {
   Merge,
   FieldErrorsImpl,
   Validate,
+  UseFormRegister,
 } from 'react-hook-form';
 import moment from 'moment';
 import { useBorder } from '../input-hooks';
 import { t } from 'i18next';
-import { InputRegisterTypes, ILoginFormValues } from '../../../Interfaces/interfaces';
+import { ILoginFormValues } from '../../../Interfaces/interfaces';
 import AuthError from '../../AuthError/authError';
 import styles from './authInputs.module.scss';
 
@@ -17,7 +18,7 @@ export interface IInputProps {
   placeholder?: string;
   label?: string;
   type?: string;
-  register: InputRegisterTypes;
+  register: UseFormRegister<FieldValues | any>;
   registerName: string;
   patternValue?: RegExp;
   message?: string;

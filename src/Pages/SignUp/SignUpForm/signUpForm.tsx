@@ -1,6 +1,6 @@
 import React from 'react';
 import { FieldErrors, FieldValues, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
-import {t} from 'i18next';
+import { t } from 'i18next';
 import { AuthInput, Button } from '../../../Components';
 import { usePassword } from '../../../Components/Inputs/input-hooks';
 import { HidePasswordIcon, ShowPasswordIcon } from '../../../Assets/Icons';
@@ -16,15 +16,12 @@ interface IProps {
     //loading
 };
 
-const SignUpForm:React.FC<IProps>= (props) => {
-    const {onSubmit,handleSubmit,register,errors} = props;
+const SignUpForm: React.FC<IProps> = (props) => {
+    const { onSubmit, handleSubmit, register, errors } = props;
     const { password, changeType } = usePassword();
 
-  return (
-    <div className={styles.container}>
-            <div className={styles.title}>
-                <span>{t('Login_Form.Title')}</span>
-            </div>
+    return (
+        <div className={styles.container}>
             <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
                 <div className={styles.formInputs}>
                     <AuthInput
@@ -33,8 +30,8 @@ const SignUpForm:React.FC<IProps>= (props) => {
                         error={errors.firstName}
                         required
                         label={t('Forms.Name')}
-                        placeholder={t('Login_Form.Login_placeholder')}
-                        message={t("Login_Form.Login_Error")}
+                        placeholder={t('Sign_Up.Name_Placeholder')}
+                        message={t("Input_Errors.FirstName")}
                         patternValue={/^[A-Za-z]{3,}$/}
                     />
                     <AuthInput
@@ -42,12 +39,12 @@ const SignUpForm:React.FC<IProps>= (props) => {
                         registerName='lastName'
                         error={errors.lastName}
                         required
-                        label={t('Login_Form.Login_label')}
-                        placeholder={t('Login_Form.Login_placeholder')}
-                        message={t("Login_Form.Login_Error")}
+                        label={t('Forms.Surname')}
+                        placeholder={t('Sign_Up.Surname_Placeholder')}
+                        message={t("Input_Errors.Surname")}
                         patternValue={/^[A-Za-z]{3,}$/}
                     />
-                     <AuthInput
+                    <AuthInput
                         register={register}
                         registerName='email'
                         error={errors.email}
@@ -65,6 +62,8 @@ const SignUpForm:React.FC<IProps>= (props) => {
                         placeholder={t('Login_Form.Password_placeholder')}
                         required
                         type={password ? 'password' : 'text'}
+                        message={t("Input_Errors.Password")}
+                        patternValue={/^.{6,}$/}
                         children={
                             <img
                                 className={styles.inputIcon}
@@ -78,12 +77,12 @@ const SignUpForm:React.FC<IProps>= (props) => {
                 <Button
                     type='submit'
                     buttonType={ButtonTypes.Primery}
-                    title={t('Button.Login')}
-                    // isLoading={loginLoading}
+                    title={t('Login_Form.Sign_Up')}
+                // isLoading={loginLoading}
                 />
             </form>
         </div>
-  )
+    )
 }
 
 export default SignUpForm

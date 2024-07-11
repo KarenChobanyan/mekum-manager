@@ -29,7 +29,7 @@
 
 .signUpRow{
     width: 100%;
-    @include flexStyles(flex, column, center, center);
+    @include flexStyles(flex, row, center, center);
     gap: 10px;
 }
 
@@ -39,11 +39,17 @@
 }
 
 .signUp{
-    @include textStyles("Inter", 17px, 600, 18px, $buttun_darkBlue);
+    @include textStyles("Inter", 16px, 600, 18px, $buttun_darkBlue);
     letter-spacing: .01em;
     cursor: pointer;
 }
 
 .signUp:hover{
    text-decoration: underline;
+}
+
+@media screen and (max-height:800px) {
+    .container {
+        margin-top: 50px;
+    }
 }
