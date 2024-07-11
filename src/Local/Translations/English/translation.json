@@ -6,7 +6,12 @@
     "Login_placeholder": "Type your e-mail ",
     "Password_label": "Password",
     "Passwor_Error": "Min. 8 characters",
-    "Password_placeholder": "Type your password"
+    "Password_placeholder": "Type your password",
+    "No_Account":"Don't have an account?",
+    "Sign_Up":"Sign Up"
+  },
+  "Sign_Up":{
+    "Title":"Registration"
   },
   "Input_Errors": {
     "Required": "Required",

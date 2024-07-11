@@ -7,6 +7,7 @@ import MainPage from '../Pages/Main/mainPage';
 import StorageTransfers from '../Pages/ActionPages/StorageTransfers/storageTransfers';
 import { CreateStorageIncomePage, CreateStorageOutgoingsPage, CreateStorageTransfersPage, CreateSalesPage, CreateCashIncomePage, CreateCashoutPage, CreateCashTransferPage, CreateUserPage, StorageReturnPage, ReturnableProductsPage ,CreateReturnableProductsPage} from '../Pages/ActionPages';
 import CreateStorageReturn from '../Pages/ActionPages/StorageReturns/Create/createStorageReturn';
+import SignUpPage from '../Pages/SignUp/signUpPage';
 
 
 const Router: React.FC = () => {
@@ -22,6 +23,12 @@ const Router: React.FC = () => {
                 path='/login'
                 element={
                     <Layout children={<LoginPage />} />
+                }
+            />
+            <Route
+                path='/signUp'
+                element={
+                    <Layout title={t('Sign_Up.Title')} children={<SignUpPage/>} />
                 }
             />
             <Route

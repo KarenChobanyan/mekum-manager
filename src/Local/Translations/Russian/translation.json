@@ -6,7 +6,12 @@
     "Login_placeholder": "Введите e-mail ",
     "Password_label": "Пароль",
     "Passwor_Error": "Не менее 8 символов",
-    "Password_placeholder": "Введите ваш пароль"
+    "Password_placeholder": "Введите ваш пароль",
+    "No_Account":"У вас нет учетной записи?",
+    "Sign_Up":"Зарегистрироваться"
+  },
+  "Sign_Up":{
+    "Title":"Pегистрация"
   },
   "Input_Errors": {
     "Required": "Oбязательный",
