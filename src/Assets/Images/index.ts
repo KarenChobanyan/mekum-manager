@@ -9,6 +9,7 @@ import Users from './users.png';
 import NoDataImg from './noData.png';
 import StorageRemove from './storageRemove.png';
 import ReturnableImage from './returnable.png';
+import CompaniesImage from './companies.png';
 
 export {
     Sales,
@@ -22,4 +23,5 @@ export {
     OutFromStorage,
     BetweenStorages,
     ReturnableImage,
+    CompaniesImage
 }

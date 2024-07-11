@@ -11,7 +11,9 @@
     "Sign_Up":"Зарегистрироваться"
   },
   "Sign_Up":{
-    "Title":"Pегистрация"
+    "Title":"Pегистрация",
+     "Name_Placeholder":"Введите имя",
+    "Surname_Placeholder":"Введите фамилию"
   },
   "Input_Errors": {
     "Required": "Oбязательный",
@@ -124,6 +126,9 @@
     },    
      "Returnable":{
       "Title":"Возвратная продукция"
+    },
+    "Companies":{
+      "Title":"Компании"
     }
   }
 }

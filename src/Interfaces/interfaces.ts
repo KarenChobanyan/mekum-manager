@@ -1,4 +1,5 @@
 import { FieldValues, UseFormRegister } from "react-hook-form";
+import { ICachIncomingFormValues } from "../Pages/ActionPages/CashIncoming/Create/createCashIncoming-hooks";
 
 export interface ILoginFormValues {
   username: string;
@@ -17,7 +18,7 @@ export interface SearchInputValues {
 };
 
 export type InputRegisterTypes = UseFormRegister<
-  FieldValues | ILoginFormValues | SearchInputValues
+  FieldValues | ILoginFormValues | SearchInputValues | ICachIncomingFormValues | ISignUpFormValues
 >;
 
 export enum ISIN {

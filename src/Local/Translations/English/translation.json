@@ -11,7 +11,9 @@
     "Sign_Up":"Sign Up"
   },
   "Sign_Up":{
-    "Title":"Registration"
+    "Title":"Registration",
+    "Name_Placeholder":"Enter the name",
+    "Surname_Placeholder":"Enter the last name"
   },
   "Input_Errors": {
     "Required": "Required",
@@ -124,6 +126,9 @@
     },
     "Returnable": {
       "Title": "Returnable products"
+    },
+    "Companies":{
+      "Title":"Companies"
     }
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {t} from 'i18next';
+import { t } from 'i18next';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from '@mui/material';
 import CustomTableCell from './customTableCell';
 import { ITableFormItemData, TableCellTypes, TableHeaderData } from '../../Interfaces/componentTypes';
@@ -9,15 +9,17 @@ import styles from './table.module.scss';
 interface IProps {
   bodyData: Array<ITableFormItemData[]>,
   headerData: TableHeaderData,
-  addAction?: () => void
+  addAction?: () => void,
+  editable?: boolean,
+  onEdit?:()=>void
 }
 
 const CustomTable: React.FC<IProps> = (props) => {
-  const { headerData, bodyData, addAction = false } = props;
+  const { headerData, bodyData, addAction = false, editable,onEdit } = props;
 
   return (
     <div className='customTable'>
-      <TableContainer  component={Paper} >
+      <TableContainer component={Paper} >
         <Table sx={{ minWidth: '100%' }} aria-label="customized table">
           <TableHead >
             <TableRow >
@@ -30,10 +32,18 @@ const CustomTable: React.FC<IProps> = (props) => {
           </TableHead>
           <TableBody>
             {bodyData.map((data, index) => (
-              <TableRow key={index} >
+              <TableRow key={index}
+                className={editable ? styles.editableRow : ''}
+                onClick={editable ? ()=> onEdit!() : ()=>{}}
+              >
                 {data.map((item, index) => {
                   return (
-                    <CustomTableCell type={TableCellTypes.BODY} data={item.component} key={index} contentType={item.contentType} />
+                    <CustomTableCell
+                      type={TableCellTypes.BODY}
+                      data={item.component}
+                      key={index}
+                      contentType={item.contentType}
+                    />
                   )
                 })}
               </TableRow>

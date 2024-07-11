@@ -8,7 +8,9 @@ import styles from '../styles.module.scss';
 const Users:React.FC = () => {
   const {t,navigate} = useGeneralHooks();
   const {usersData,bodyData,headerData} = useUsersHooks();
-  
+ const onEdit = ()=>{
+  console.log('data')
+ }
   return (
     <div className={styles.container}>
        {
@@ -37,6 +39,8 @@ const Users:React.FC = () => {
                     <CustomTable
                       headerData={headerData}
                       bodyData={bodyData}
+                      editable
+                      onEdit={onEdit}
                     />
                   </div>
                  :

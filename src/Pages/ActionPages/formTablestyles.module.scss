@@ -97,14 +97,14 @@
 
 .formItemTextBox {
     width: 250px;
-    border: 1px solid #d0d5dd;
-    border-radius: 10px;
+    // border: 1px solid #d0d5dd;
+    // border-radius: 10px;
     width: 100%;
     margin-top: 8px;
     @include flexStyles(flex, row, center, space-between);
     padding: 16px;
     overflow: hidden;
-    background-color: $formInput;
+    // background-color: $formInput;
 }
 
 .formItemText {
@@ -112,7 +112,8 @@
     outline: none;
     height: 15px;
     border: none;
-    background: $formInput ;
+    text-align: center;
+    // background: $formInput ;
     flex: 0.9;
 }
 

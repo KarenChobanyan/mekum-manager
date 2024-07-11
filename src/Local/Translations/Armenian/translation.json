@@ -11,7 +11,9 @@
     "Sign_Up":"Գրանցվել"
   },
   "Sign_Up":{
-    "Title":"Գրանցում"
+    "Title":"Գրանցում",
+    "Name_Placeholder":"Մուտքագրեք անունը",
+    "Surname_Placeholder":"Մուտքագրեք ազգանունը"
   },
   "Header": {
     "My_Page": "Իմ էջը",
@@ -124,6 +126,9 @@
     },
     "Returnable": {
       "Title": "Վերադարձ ապրանքներ"
+    },
+    "Companies":{
+      "Title":"Կազմակերպություններ"
     }
   }
 }

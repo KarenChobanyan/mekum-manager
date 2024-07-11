@@ -8,6 +8,8 @@ import StorageTransfers from '../Pages/ActionPages/StorageTransfers/storageTrans
 import { CreateStorageIncomePage, CreateStorageOutgoingsPage, CreateStorageTransfersPage, CreateSalesPage, CreateCashIncomePage, CreateCashoutPage, CreateCashTransferPage, CreateUserPage, StorageReturnPage, ReturnableProductsPage ,CreateReturnableProductsPage} from '../Pages/ActionPages';
 import CreateStorageReturn from '../Pages/ActionPages/StorageReturns/Create/createStorageReturn';
 import SignUpPage from '../Pages/SignUp/signUpPage';
+import Companies from '../Pages/ActionPages/Companies/companies';
+import CreateCompany from '../Pages/ActionPages/Companies/Create/createCompany';
 
 
 const Router: React.FC = () => {
@@ -65,6 +67,18 @@ const Router: React.FC = () => {
                 path='/users/create'
                 element={
                     <Layout title={t('Actions.Users.Create')} children={<CreateUserPage />} />
+                }
+            />
+            <Route
+                path='/companies'
+                element={
+                    <Layout title={t('Actions.Companies.Title')} children={<Companies />} />
+                }
+            />
+            <Route
+                path='/companies/create'
+                element={
+                    <Layout title={t('Actions.Companies.Title')} children={<CreateCompany />} />
                 }
             />
             <Route
