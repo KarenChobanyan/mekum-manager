@@ -126,6 +126,9 @@
     },
     "Returnable": {
       "Title": "Returnable products"
+    },
+    "Companies":{
+      "Title":"Companies"
     }
   }
 }

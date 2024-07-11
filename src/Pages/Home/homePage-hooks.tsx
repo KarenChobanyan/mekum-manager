@@ -1,5 +1,5 @@
 import { IActionCard } from "../../Interfaces/componentTypes";
-import { BetweenStorages, Sales, OutFromStorage, IntoStorage, CashIncome, CashOut, CashChange, Users, StorageRemove, ReturnableImage } from '../../Assets/Images';
+import { BetweenStorages, Sales, OutFromStorage, IntoStorage, CashIncome, CashOut, CashChange, Users, StorageRemove, ReturnableImage, CompaniesImage } from '../../Assets/Images';
 import { useAutocompleteData, useGeneralHooks } from "../../General/Hooks/hooks";
 import { toast } from "react-toastify";
 
@@ -14,6 +14,11 @@ const useHomePageHooks = () => {
                         src: `${Users}`,
                         title: t('Actions.Users.Title'),
                         onClick: () => { navigate('/users') }
+                    },
+                    {
+                        src: `${CompaniesImage}`,
+                        title: t('Actions.Companies.Title'),
+                        onClick: () => { navigate('/companies') }
                     },
                     {
                         src: `${ReturnableImage}`,
