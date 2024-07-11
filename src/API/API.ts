@@ -40,54 +40,56 @@ const axiosBaseQuery =
     unknown,
     unknown
   > =>
-  async ({ url, method, data, params }) => {
-    axios.interceptors.response.use(
-      (res) => {
-        removeLoaderElement();
-        if (res?.data?.error) {
-          return Promise.reject(res?.data?.error);
-        }
-        return res;
-      },
-      async (err) => {
-        removeLoaderElement();
-        if (err.response.status === 403 || err.response.status === 401) {
-          localStorage.removeItem('mm_access_token')
-          window.location.replace('/')
-        }
-        return Promise.reject(err);
-      }
-    );
-    axios.interceptors.request.use(
-      (config) => {
-        if (isValidRequestForInterceptor(config.url!)) {
-          createLoaderElement();
-        }
-        const token =
-          localStorage.getItem('mm_access_token') &&
-          localStorage.getItem('mm_access_token');
-        if (config.url !== '/login' && !!config?.headers && token) {
-          config.headers.Authorization = `Bearer ${token}`;
-        }
-        return config;
-      },
-      (error) => {
-        return Promise.reject(error);
-      }
-    );
-    try {
-      const result = await axios({ url: baseUrl + url, method, data, params });
-      return { data: result.data };
-    } catch (axiosError) {
-      let err = axiosError as any;
-      notify(err?.response?.data?.message);
-      return {
-        error: {
-          error: err.response?.status,
-          result: err.response?.data,
+    async ({ url, method, data, params }) => {
+      axios.interceptors.response.use(
+        (res) => {
+          removeLoaderElement();
+          if (res?.data?.error) {
+            return Promise.reject(res?.data?.error);
+          }
+          return res;
         },
-      };
-    }
-  };
+        async (err) => {
+          removeLoaderElement();
+          if (err.response.status === 403 || err.response.status === 404 || err.response.status === 404 || err.response.status === 400) {
+            if (window.location.pathname !== '/login') {
+              localStorage.removeItem('mm_access_token')
+              window.location.replace('/')
+            }
+          }
+          return Promise.reject(err);
+        }
+      );
+      axios.interceptors.request.use(
+        (config) => {
+          if (isValidRequestForInterceptor(config.url!)) {
+            createLoaderElement();
+          }
+          const token =
+            localStorage.getItem('mm_access_token') &&
+            localStorage.getItem('mm_access_token');
+          if (config.url !== '/login' && !!config?.headers && token) {
+            config.headers.Authorization = `Bearer ${token}`;
+          }
+          return config;
+        },
+        (error) => {
+          return Promise.reject(error);
+        }
+      );
+      try {
+        const result = await axios({ url: baseUrl + url, method, data, params });
+        return { data: result.data };
+      } catch (axiosError) {
+        let err = axiosError as any;
+        notify(err?.response?.data?.message);
+        return {
+          error: {
+            error: err.response?.status,
+            result: err.response?.data,
+          },
+        };
+      }
+    };
 
 export default axiosBaseQuery;

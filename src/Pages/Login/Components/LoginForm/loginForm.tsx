@@ -1,12 +1,13 @@
 import React from 'react';
 import { t } from 'i18next';
 import { FieldErrors, FieldValues, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
+import { useGeneralHooks } from '../../../../General/Hooks/hooks';
 import { ILoginFormValues } from '../../../../Interfaces/interfaces';
 import { ButtonTypes } from '../../../../Interfaces/componentTypes';
 import { Button, AuthInput } from '../../../../Components';
-import styles from './loginForm.module.scss';
 import { usePassword } from '../../../../Components/Inputs/input-hooks';
 import { HidePasswordIcon, ShowPasswordIcon } from '../../../../Assets/Icons';
+import styles from './loginForm.module.scss';
 
 interface IProps {
     register: UseFormRegister<ILoginFormValues>,
@@ -14,10 +15,12 @@ interface IProps {
     handleSubmit: UseFormHandleSubmit<ILoginFormValues, undefined>,
     errors: FieldErrors<ILoginFormValues>,
     loginLoading: boolean
-}
+};
+
 const LoginForm: React.FC<IProps> = (props) => {
     const { register, onSubmit, handleSubmit, errors, loginLoading } = props;
     const { password, changeType } = usePassword();
+    const {navigate} = useGeneralHooks();
 
     return (
         <div className={styles.container}>
@@ -60,8 +63,13 @@ const LoginForm: React.FC<IProps> = (props) => {
                     title={t('Button.Login')}
                     isLoading={loginLoading}
                 />
-
             </form>
+            <div className={styles.signUpRow}>
+                <p className={styles.signUpText}>{t('Login_Form.No_Account')}</p>
+                <p className={styles.signUp}
+                onClick={()=>navigate('/signUp')}
+                >{t('Login_Form.Sign_Up')}</p>
+            </div>
         </div>
     )
 }

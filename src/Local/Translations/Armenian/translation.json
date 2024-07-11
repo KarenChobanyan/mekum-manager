@@ -6,7 +6,12 @@
     "Login_placeholder": "Մուտքագրեք ձեր էլ. հասցեն",
     "Password_label": "Գաղտնաբառ",
     "Password_Error": "Առնվազն 8 նիշ",
-    "Password_placeholder": "Մուտքագրեք ձեր գաղտնաբառը"
+    "Password_placeholder": "Մուտքագրեք ձեր գաղտնաբառը",
+    "No_Account":"Դեռ չունե՞ք հաշիվ",
+    "Sign_Up":"Գրանցվել"
+  },
+  "Sign_Up":{
+    "Title":"Գրանցում"
   },
   "Header": {
     "My_Page": "Իմ էջը",

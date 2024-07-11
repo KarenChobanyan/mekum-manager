@@ -24,3 +24,10 @@ export enum ISIN {
   TRUE = 'true',
   FALSE = 'false'
 };
+
+export interface ISignUpFormValues {
+  firstName:string,
+  lastName:string,
+  email:string,
+  password:string
+};

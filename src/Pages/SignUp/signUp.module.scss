@@ -1,0 +1,7 @@
+@import '../../General//Styles//variables';
+@import '../../General/Styles/mixin';
+
+.container {
+    @include flexStyles(flex, column, center, normal);
+    flex-grow: 1;
+}

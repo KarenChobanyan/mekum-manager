@@ -11,10 +11,10 @@ interface IProps {
 
 const Layout: React.FC<IProps> = (props) => {
     const { children,title } = props;
-   
+    const allowedPaths:string[]=['/login','/signUp']
     const { accessToken, navigate, location,dispatch } = useGeneralHooks();
     useEffect(() => {
-        if (!accessToken && location.pathname !== '/login') {
+        if (!accessToken && !allowedPaths.includes(location.pathname) ) {
             navigate('/login')
         }else if(accessToken){
             dispatch(getMe())

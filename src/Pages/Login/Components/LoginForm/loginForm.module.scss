@@ -7,7 +7,8 @@
     background-color: $white;
     padding: 20px;
     border-radius: 21px;
-    margin-top: 150px
+    margin-top: 150px;
+    gap:10px;
 }
 
 .title {
@@ -24,4 +25,25 @@
 .formInputs {
     @include flexStyles(flex, column, normal, normal);
     gap: 15px;
+}
+
+.signUpRow{
+    width: 100%;
+    @include flexStyles(flex, column, center, center);
+    gap: 10px;
+}
+
+.signUpText {
+    @include textStyles("Inter", 16px, 500, 18px, $text_dark);
+    letter-spacing: .01em;
+}
+
+.signUp{
+    @include textStyles("Inter", 17px, 600, 18px, $buttun_darkBlue);
+    letter-spacing: .01em;
+    cursor: pointer;
+}
+
+.signUp:hover{
+   text-decoration: underline;
 }
