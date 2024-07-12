@@ -19,19 +19,19 @@
 }
 
 .bigText {
-    @include textStyles("Inter", 24px, 600, normal, $white);
+    @include textStyles("Montserrat arm", 24px, 600, normal, $white);
     box-sizing: content-box;
 }
 
 .smallText {
-    @include textStyles("fantasy", 16px, 200, normal, $white);
+    @include textStyles("Montserrat arm", 16px, 200, normal, $white);
     padding-bottom: 1px;
     letter-spacing: 0.3px;
 }
 
 .title{
     flex: 1;
-    @include textStyles("", 26px, 200, normal, $white);
+    @include textStyles("Montserrat arm", 26px, 400, normal, $white);
     text-align: center;
 }
 

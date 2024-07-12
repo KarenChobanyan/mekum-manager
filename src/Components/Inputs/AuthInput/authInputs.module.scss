@@ -29,7 +29,7 @@
 }
 
 .input {
-  @include textStyles('', 14px, 500, 15px, $text_dark);
+  @include textStyles("Montserrat arm", 14px, 500, 15px, $text_dark);
   outline: none;
   border: none;
   background: $input_bg ;

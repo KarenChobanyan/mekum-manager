@@ -1,15 +1,15 @@
-import BetweenStorages from './betweenStorages.png';
-import OutFromStorage from './outFromStorage.png';
-import Sales from './sale.png';
-import IntoStorage from './toStorage.png';
-import CashIncome from './cashIncome.png';
-import CashOut from './cashOut.png';
-import CashChange from './cashChange.png';
-import Users from './users.png';
-import NoDataImg from './noData.png';
-import StorageRemove from './storageRemove.png';
-import ReturnableImage from './returnable.png';
-import CompaniesImage from './companies.png';
+import BetweenStorages from './betweenStorages.webp';
+import OutFromStorage from './outFromStorage.webp';
+import Sales from './sale.webp';
+import IntoStorage from './toStorage.webp';
+import CashIncome from './cashIncome.webp';
+import CashOut from './cashOut.webp';
+import CashChange from './cashChange.webp';
+import Users from './users.webp';
+import NoDataImg from './noData.webp';
+import StorageRemove from './storageRemove.webp';
+import ReturnableImage from './returnable.webp';
+import CompaniesImage from './companies.webp';
 
 export {
     Sales,
