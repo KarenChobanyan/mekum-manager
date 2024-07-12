@@ -49,3 +49,9 @@ export interface ITableFormItemData {
   component: ReactNode,
   contentType:TableCellContentTypes
 };
+
+export interface ITableBodyData {
+  id:number,
+  data:ITableFormItemData[]
+}
+

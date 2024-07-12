@@ -8,8 +8,8 @@ import styles from '../styles.module.scss';
 const Users:React.FC = () => {
   const {t,navigate} = useGeneralHooks();
   const {usersData,bodyData,headerData} = useUsersHooks();
- const onEdit = ()=>{
-  console.log('data')
+ const onEdit = (id:number)=>{
+  navigate(`/users/edit/${id}`)
  }
   return (
     <div className={styles.container}>

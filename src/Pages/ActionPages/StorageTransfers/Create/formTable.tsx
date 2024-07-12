@@ -1,9 +1,9 @@
 import React from 'react';
 import { Control, Controller, FieldArrayWithId, FieldErrors, UseFieldArrayRemove, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
-import {t} from 'i18next';
+import { t } from 'i18next';
 import { useAutocompleteData } from '../../../../General/Hooks/hooks';
 import { IStorageTransferFormValues } from './createStorageTransfers-hooks';
-import { IAutocompleteItem, ITableFormItemData, ITableHeader, TableCellContentTypes } from '../../../../Interfaces/componentTypes';
+import { IAutocompleteItem, ITableBodyData, ITableHeader, TableCellContentTypes } from '../../../../Interfaces/componentTypes';
 import { AuthInput, AutoComplete, CustomTable, TotalExitsCounter } from '../../../../Components';
 import { RedTrashIcon } from '../../../../Assets/Icons';
 import styles from '../../formTablestyles.module.scss';
@@ -14,15 +14,15 @@ interface IProps {
     register: UseFormRegister<IStorageTransferFormValues>,
     control: Control<IStorageTransferFormValues, any>,
     errors: FieldErrors<IStorageTransferFormValues>,
-    warehouse:IAutocompleteItem,
+    warehouse: IAutocompleteItem,
     onAddItem: () => void,
     setValue: UseFormSetValue<IStorageTransferFormValues>,
     watch: UseFormWatch<IStorageTransferFormValues>,
 };
 
 const FormItems: React.FC<IProps> = (props) => {
-    const { fields,warehouse, remove, register, control, errors, onAddItem, setValue, watch } = props;
-    const { getGoodsUnitType,myGoodsdata, getRemainder,setMeasurementUnitId } = useAutocompleteData(warehouse?.id!);
+    const { fields, warehouse, remove, register, control, errors, onAddItem, setValue, watch } = props;
+    const { getGoodsUnitType, myGoodsdata, getRemainder, setMeasurementUnitId } = useAutocompleteData(warehouse?.id!);
 
     const headerData: ITableHeader[] = [
         {
@@ -50,118 +50,121 @@ const FormItems: React.FC<IProps> = (props) => {
             contentType: TableCellContentTypes.NUMBER
         }
     ];
-    
-    const createItemForm = (): Array<ITableFormItemData[]> => {
-        return fields.map((item, index): ITableFormItemData[] => {
-            return [
-                {
-                    component: <img src={RedTrashIcon} alt="redTrash" onClick={() => remove(index)} className={styles.deleteIcon} />,
-                    contentType: TableCellContentTypes.ICON
-                },
-                {
-                    component:
-                        <Controller
-                            control={control}
-                            name={`goods.${index}.materialValueId`}
-                            rules={{ required: true }}
-                            render={({ field: { onChange, name, value } }) => {
-                                return (
-                                    <div className='tableAutocompleteBig'>
-                                        <AutoComplete
-                                            value={value}
-                                            name={name}
-                                            onChange={(value) => {
-                                                const unit = getGoodsUnitType(value?.id!)
-                                                const materialValueId = value?.id!
-                                                if (materialValueId) {
-                                                    setValue(`goods.${index}.quantity`, String(getRemainder(materialValueId!)))
-                                                    setValue(`goods.${index}.measurementUnitId`,String(setMeasurementUnitId(materialValueId!)))
+
+    const createItemForm = (): Array<ITableBodyData> => {
+        return fields.map((item, index) => {
+            return {
+                id: index,
+                data: [
+                    {
+                        component: <img src={RedTrashIcon} alt="redTrash" onClick={() => remove(index)} className={styles.deleteIcon} />,
+                        contentType: TableCellContentTypes.ICON
+                    },
+                    {
+                        component:
+                            <Controller
+                                control={control}
+                                name={`goods.${index}.materialValueId`}
+                                rules={{ required: true }}
+                                render={({ field: { onChange, name, value } }) => {
+                                    return (
+                                        <div className='tableAutocompleteBig'>
+                                            <AutoComplete
+                                                value={value}
+                                                name={name}
+                                                onChange={(value) => {
+                                                    const unit = getGoodsUnitType(value?.id!)
+                                                    const materialValueId = value?.id!
+                                                    if (materialValueId) {
+                                                        setValue(`goods.${index}.quantity`, String(getRemainder(materialValueId!)))
+                                                        setValue(`goods.${index}.measurementUnitId`, String(setMeasurementUnitId(materialValueId!)))
+                                                    }
+                                                    setValue(`goods.${index}.point`, unit!)
+                                                    return onChange(value)
                                                 }
-                                                setValue(`goods.${index}.point`, unit!)
-                                                return onChange(value)
-                                            }
-                                            }
-                                            id={name}
-                                            data={myGoodsdata}
-                                            placeholder={t('Forms.Select_Material')}
-                                            showErrorText={false}
-                                            style={styles.formItemBox}
-                                            error={errors.goods?.[index]?.materialValueId}
+                                                }
+                                                id={name}
+                                                data={myGoodsdata}
+                                                placeholder={t('Forms.Select_Material')}
+                                                showErrorText={false}
+                                                style={styles.formItemBox}
+                                                error={errors.goods?.[index]?.materialValueId}
+                                            />
+                                        </div>
+                                    );
+                                }}
+                            />,
+                        contentType: TableCellContentTypes.SELECT
+                    },
+                    {
+                        component:
+                            <AuthInput
+                                register={register}
+                                registerName={`goods.${index}.point`}
+                                showTextError={false}
+                                inputStyle={styles.formItemInput}
+                                inputBoxStyles={styles.formItemInputNumBox}
+                                required={false}
+                                disabled
+                                error={errors.goods?.[index]?.point}
+                            />,
+                        contentType: TableCellContentTypes.NUMBER
+                    },
+                    {
+                        component:
+                            <AuthInput
+                                register={register}
+                                registerName={`goods.${index}.quantity`}
+                                showTextError={false}
+                                inputStyle={styles.formItemInput}
+                                inputBoxStyles={styles.formItemInputNumBox}
+                                required={false}
+                                disabled
+                                error={errors.goods?.[index]?.quantity}
+                            />,
+                        contentType: TableCellContentTypes.NUMBER
+                    },
+                    {
+                        component:
+                            <Controller
+                                control={control}
+                                name={`goods.${index}.count`}
+                                rules={{ max: getRemainder(watch(`goods.${index}.materialValueId`)?.id!) }}
+                                render={({ field: { onChange, name, value } }) => {
+                                    return (
+                                        <AuthInput
+                                            register={register}
+                                            registerName={`goods.${index}.count`}
+                                            showTextError={false}
+                                            type='number'
+                                            patternValue={/^(?!0(\.0+)?$)\d+(\.\d+)?$/}
+                                            inputStyle={styles.formItemInput}
+                                            inputBoxStyles={styles.formItemInputNumBox}
+                                            error={errors.goods?.[index]?.count}
                                         />
-                                    </div>
-                                );
-                            }}
-                        />,
-                    contentType: TableCellContentTypes.SELECT
-                },
-                {
-                    component:
-                        <AuthInput
-                            register={register}
-                            registerName={`goods.${index}.point`}
-                            showTextError={false}
-                            inputStyle={styles.formItemInput}
-                            inputBoxStyles={styles.formItemInputNumBox}
-                            required={false}
-                            disabled
-                            error={errors.goods?.[index]?.point}
-                        />,
-                    contentType: TableCellContentTypes.NUMBER
-                },
-                {
-                    component:
-                        <AuthInput
-                            register={register}
-                            registerName={`goods.${index}.quantity`}
-                            showTextError={false}
-                            inputStyle={styles.formItemInput}
-                            inputBoxStyles={styles.formItemInputNumBox}
-                            required={false}
-                            disabled
-                            error={errors.goods?.[index]?.quantity}
-                        />,
-                    contentType: TableCellContentTypes.NUMBER
-                },
-                {
-                    component:
-                        <Controller
-                            control={control}
-                            name={`goods.${index}.count`}
-                            rules={{ max: getRemainder(watch(`goods.${index}.materialValueId`)?.id!) }}
-                            render={({ field: { onChange, name, value } }) => {
-                                return (
-                                    <AuthInput
-                                        register={register}
-                                        registerName={`goods.${index}.count`}
-                                        showTextError={false}
-                                        type='number'
-                                        patternValue={/^(?!0(\.0+)?$)\d+(\.\d+)?$/}
-                                        inputStyle={styles.formItemInput}
-                                        inputBoxStyles={styles.formItemInputNumBox}
-                                        error={errors.goods?.[index]?.count}
+                                    )
+                                }
+                                }
+                            />,
+                        contentType: TableCellContentTypes.NUMBER
+                    },
+                    {
+                        component:
+                            <div className={styles.formItemTextBox}>
+                                <div className={styles.formItemText}>
+                                    <TotalExitsCounter
+                                        warehouseId={warehouse?.id!}
+                                        materialValueId={watch(`goods.${index}.materialValueId`)?.id!}
+                                        count={watch(`goods.${index}.count`)}
+                                        setValue={setValue}
+                                        index={index}
                                     />
-                                )
-                            }
-                            }
-                        />,
-                    contentType: TableCellContentTypes.NUMBER
-                },
-                {
-                    component:
-                        <div className={styles.formItemTextBox}>
-                            <div className={styles.formItemText}>
-                            <TotalExitsCounter
-                            warehouseId={warehouse?.id!}
-                            materialValueId={watch(`goods.${index}.materialValueId`)?.id!}
-                            count={watch(`goods.${index}.count`)}
-                            setValue={setValue}
-                            index={index}
-                            />
-                            </div>
-                        </div>,
-                    contentType: TableCellContentTypes.NUMBER
-                },
-            ]
+                                </div>
+                            </div>,
+                        contentType: TableCellContentTypes.NUMBER
+                    },
+                ]
+            }
         })
     };
 

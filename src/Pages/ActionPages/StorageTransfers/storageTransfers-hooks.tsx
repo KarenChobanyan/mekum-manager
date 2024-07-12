@@ -7,7 +7,7 @@ import { orange } from "@mui/material/colors";
 import { useAcceptWarehouseTransferMutation, useGetWarehouseTransfersQuery } from "../../../API/actionsApi";
 import { ISIN } from "../../../Interfaces/interfaces";
 import { useAutocompleteData } from "../../../General/Hooks/hooks";
-import { ITableFormItemData, ITableHeader, TableCellContentTypes } from "../../../Interfaces/componentTypes";
+import { ITableBodyData, ITableHeader, TableCellContentTypes } from "../../../Interfaces/componentTypes";
 import { ClipLoader } from "react-spinners";
 import { GetWarehouseTransferResponse, IGetWarehouseTransferResponseData } from "../../../Interfaces/responseTypes";
 import { IAcceptWarehouseTransferRequest, } from "../../../Interfaces/requestTypes";
@@ -15,7 +15,7 @@ import { countGoodExits, fetchData } from "../../../Utils/utilits";
 import { CheckBox } from "@mui/icons-material";
 import styles from '../formTablestyles.module.scss';
 
- interface ICHeckedEntry {
+interface ICHeckedEntry {
     loading: boolean,
     item: IGetWarehouseTransferResponseData
 };
@@ -124,7 +124,7 @@ const useStorageTransferHook = (id: string) => {
         }
     ];
 
-    const createBodyDataForEntries = (data: GetWarehouseTransferResponse): Array<ITableFormItemData[]> => {
+    const createBodyDataForEntries = (data: GetWarehouseTransferResponse): Array<ITableBodyData> => {
         return data?.result!.map((item) => {
             const icon = item.draft === 1
                 ?
@@ -152,67 +152,73 @@ const useStorageTransferHook = (id: string) => {
                 )
                 :
                 <CheckBox color='success' fontSize="large" />;
-            return [
-                {
-                    component: icon,
-                    contentType: TableCellContentTypes.ICON
-                },
-                {
-                    component: <div className={styles.formItemTextBox}>
-                        <div className={styles.formItemText}>{moment(item.date).format("DD/MM/YYYY")}</div>
-                    </div>,
-                    contentType: TableCellContentTypes.TEXT
-                },
-                {
-                    component: <div className={styles.formItemTextBox}>
-                        <div className={styles.formItemText}>
-                            {
-                                isIn === ISIN.TRUE
-                                    ? item.warehouseOut?.name!
-                                    : item.warehouseEnter?.name!
-                            }
-                        </div>
-                    </div>,
-                    contentType: TableCellContentTypes.SELECT
-                },
-                {
-                    component: <div className={styles.formItemTextBox}>
-                        <div className={styles.formItemText}>{item.documentNumber!}</div>
-                    </div>,
-                    contentType: TableCellContentTypes.SELECT
-                },
-            ];
+            return {
+                id: item.id,
+                data: [
+                    {
+                        component: icon,
+                        contentType: TableCellContentTypes.ICON
+                    },
+                    {
+                        component: <div className={styles.formItemTextBox}>
+                            <div className={styles.formItemText}>{moment(item.date).format("DD/MM/YYYY")}</div>
+                        </div>,
+                        contentType: TableCellContentTypes.TEXT
+                    },
+                    {
+                        component: <div className={styles.formItemTextBox}>
+                            <div className={styles.formItemText}>
+                                {
+                                    isIn === ISIN.TRUE
+                                        ? item.warehouseOut?.name!
+                                        : item.warehouseEnter?.name!
+                                }
+                            </div>
+                        </div>,
+                        contentType: TableCellContentTypes.SELECT
+                    },
+                    {
+                        component: <div className={styles.formItemTextBox}>
+                            <div className={styles.formItemText}>{item.documentNumber!}</div>
+                        </div>,
+                        contentType: TableCellContentTypes.SELECT
+                    },
+                ]
+            }
         });
     };
 
-    const createBodyDataForExits = (data: GetWarehouseTransferResponse): Array<ITableFormItemData[]> => {
+    const createBodyDataForExits = (data: GetWarehouseTransferResponse): Array<ITableBodyData> => {
         return data?.result!.map((item) => {
-            return [
-                {
-                    component: <div className={styles.formItemTextBox}>
-                        <div className={styles.formItemText}>{moment(item.date).format("DD/MM/YYYY")}</div>
-                    </div>,
-                    contentType: TableCellContentTypes.TEXT
-                },
-                {
-                    component: <div className={styles.formItemTextBox}>
-                        <div className={styles.formItemText}>
-                            {
-                                isIn === ISIN.TRUE
-                                    ? item.warehouseOut?.name!
-                                    : item.warehouseEnter?.name!
-                            }
-                        </div>
-                    </div>,
-                    contentType: TableCellContentTypes.SELECT
-                },
-                {
-                    component: <div className={styles.formItemTextBox}>
-                        <div className={styles.formItemText}>{item.documentNumber!}</div>
-                    </div>,
-                    contentType: TableCellContentTypes.SELECT
-                },
-            ];
+            return {
+                id: item.id,
+                data: [
+                    {
+                        component: <div className={styles.formItemTextBox}>
+                            <div className={styles.formItemText}>{moment(item.date).format("DD/MM/YYYY")}</div>
+                        </div>,
+                        contentType: TableCellContentTypes.TEXT
+                    },
+                    {
+                        component: <div className={styles.formItemTextBox}>
+                            <div className={styles.formItemText}>
+                                {
+                                    isIn === ISIN.TRUE
+                                        ? item.warehouseOut?.name!
+                                        : item.warehouseEnter?.name!
+                                }
+                            </div>
+                        </div>,
+                        contentType: TableCellContentTypes.SELECT
+                    },
+                    {
+                        component: <div className={styles.formItemTextBox}>
+                            <div className={styles.formItemText}>{item.documentNumber!}</div>
+                        </div>,
+                        contentType: TableCellContentTypes.SELECT
+                    },
+                ]
+            }
         });
     };
 

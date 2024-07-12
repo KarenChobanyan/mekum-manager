@@ -10,6 +10,7 @@ import CreateStorageReturn from '../Pages/ActionPages/StorageReturns/Create/crea
 import SignUpPage from '../Pages/SignUp/signUpPage';
 import Companies from '../Pages/ActionPages/Companies/companies';
 import CreateCompany from '../Pages/ActionPages/Companies/Create/createCompany';
+import EditUser from '../Pages/ActionPages/Users/Edit/editUser';
 
 
 const Router: React.FC = () => {
@@ -67,6 +68,12 @@ const Router: React.FC = () => {
                 path='/users/create'
                 element={
                     <Layout title={t('Actions.Users.Create')} children={<CreateUserPage />} />
+                }
+            />
+             <Route
+                path='/users/edit/:id'
+                element={
+                    <Layout title={t('Actions.Users.Title')} children={<EditUser />} />
                 }
             />
             <Route

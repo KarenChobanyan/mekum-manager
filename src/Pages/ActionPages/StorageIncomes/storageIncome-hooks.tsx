@@ -1,5 +1,5 @@
 import { useGetWarehouseEntriesQuery } from "../../../API/actionsApi";
-import { ITableFormItemData, ITableHeader, TableCellContentTypes } from "../../../Interfaces/componentTypes";
+import { ITableBodyData, ITableHeader, TableCellContentTypes } from "../../../Interfaces/componentTypes";
 import { t } from 'i18next';
 import styles from '../formTablestyles.module.scss'
 import moment from "moment";
@@ -30,38 +30,41 @@ const useStorageIncome = (id: string) => {
         }
     ];
 
-    const createBodyData = (data: IWarehouseEntryResponse): Array<ITableFormItemData[]> => {
+    const createBodyData = (data: IWarehouseEntryResponse): Array<ITableBodyData> => {
         return data?.result!.map((item) => {
-            return [
-                {
-                    component:
-                        <div className={styles.formItemTextBox}>
-                            <div className={styles.formItemText}>{moment(item.documentDate).format("DD/MM/YYYY")}</div>
-                        </div>,
-                    contentType: TableCellContentTypes.TEXT
-                },
-                {
-                    component:
-                        <div className={styles.formItemTextBox}>
-                            <div className={styles.formItemText}>{item.partners.name!}</div>
-                        </div>,
-                    contentType: TableCellContentTypes.SELECT
-                },
-                {
-                    component:
-                        <div className={styles.formItemTextBox}>
-                            <div className={styles.formItemText}>{item.documentNumber!}</div>
-                        </div>,
-                    contentType: TableCellContentTypes.TEXT
-                },
-                {
-                    component:
-                        <div className={styles.formItemTextBox}>
-                            <div className={styles.formItemText}>{item?.warehouseEntryOrderProduct?.reduce((acc, current) => acc + current.money, 0)}</div>
-                        </div>,
-                    contentType: TableCellContentTypes.TEXT
-                },
-            ]
+            return {
+                id: item.id,
+                data: [
+                    {
+                        component:
+                            <div className={styles.formItemTextBox}>
+                                <div className={styles.formItemText}>{moment(item.documentDate).format("DD/MM/YYYY")}</div>
+                            </div>,
+                        contentType: TableCellContentTypes.TEXT
+                    },
+                    {
+                        component:
+                            <div className={styles.formItemTextBox}>
+                                <div className={styles.formItemText}>{item.partners.name!}</div>
+                            </div>,
+                        contentType: TableCellContentTypes.SELECT
+                    },
+                    {
+                        component:
+                            <div className={styles.formItemTextBox}>
+                                <div className={styles.formItemText}>{item.documentNumber!}</div>
+                            </div>,
+                        contentType: TableCellContentTypes.TEXT
+                    },
+                    {
+                        component:
+                            <div className={styles.formItemTextBox}>
+                                <div className={styles.formItemText}>{item?.warehouseEntryOrderProduct?.reduce((acc, current) => acc + current.money, 0)}</div>
+                            </div>,
+                        contentType: TableCellContentTypes.TEXT
+                    },
+                ]
+            }
         })
     };
 

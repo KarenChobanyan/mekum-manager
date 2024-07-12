@@ -1,5 +1,5 @@
 import { useGetUsersQuery } from "../../../API/authApi";
-import { ITableFormItemData, ITableHeader, TableCellContentTypes } from "../../../Interfaces/componentTypes";
+import { ITableBodyData, ITableHeader, TableCellContentTypes } from "../../../Interfaces/componentTypes";
 import { t } from 'i18next'
 import { GetUsersResponse } from "../../../Interfaces/responseTypes";
 import styles from '../formTablestyles.module.scss';
@@ -30,31 +30,34 @@ const useUsersHooks = () => {
             contentType: TableCellContentTypes.SELECT
         },
     ];
-    const createBodyData = (data: GetUsersResponse): Array<ITableFormItemData[]> => {
+    const createBodyData = (data: GetUsersResponse): Array<ITableBodyData> => {
         return data?.map((item) => {
-            return [
-                {
-                    component:
-                        <div className={styles.formItemTextBox}>
-                            <div className={styles.formItemText}>{item.name}</div>
-                        </div>,
-                    contentType: TableCellContentTypes.SELECT
-                },
-                {
-                    component:
-                        <div className={styles.formItemTextBox}>
-                            <div className={styles.formItemText}>{item.surname}</div>
-                        </div>,
-                    contentType: TableCellContentTypes.SELECT
-                },
-                {
-                    component:
-                        <div className={styles.formItemTextBox}>
-                            <div className={styles.formItemText}>{getUserRole(item.role_id!)}</div>
-                        </div>,
-                    contentType: TableCellContentTypes.SELECT
-                },
-            ]
+            return {
+                id:item.id!,
+                data: [
+                    {
+                        component:
+                            <div className={styles.formItemTextBox}>
+                                <div className={styles.formItemText}>{item.name}</div>
+                            </div>,
+                        contentType: TableCellContentTypes.SELECT
+                    },
+                    {
+                        component:
+                            <div className={styles.formItemTextBox}>
+                                <div className={styles.formItemText}>{item.surname}</div>
+                            </div>,
+                        contentType: TableCellContentTypes.SELECT
+                    },
+                    {
+                        component:
+                            <div className={styles.formItemTextBox}>
+                                <div className={styles.formItemText}>{getUserRole(item.role_id!)}</div>
+                            </div>,
+                        contentType: TableCellContentTypes.SELECT
+                    },
+                ]
+            }
         })
     };
 
