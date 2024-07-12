@@ -11,7 +11,8 @@
 .cellHeader {
     @include flexStyles(flex, row, center, center);
     text-wrap: nowrap;
-    padding: 10px 21px;
+    padding: 20px 5px;
+    @include textStyles('Montserrat arm', 15px, 500, 15px, $dark_grey);
     background-color: $table_header;
     border-right: 1px solid $dark_grey;
     background-color: $table_header;

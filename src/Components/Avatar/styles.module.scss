@@ -12,7 +12,7 @@
     height: 48px;
     border-radius: 100%;
     text-align: center;
-    @include textStyles (monospace,25px,800,initial,$white);
+    @include textStyles ("Montserrat arm",25px,800,initial,$white);
     @include flexStyles(flex,column,center,center);
     background-color: $avatar;
 }

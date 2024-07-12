@@ -30,7 +30,7 @@
 }
 
 .iconButtonTitle {
-  @include textStyles('DM Sans', 14px, 400, normal, $input_bg);
+  @include textStyles("Montserrat arm", 14px, 400, normal, $input_bg);
   margin-right: 10px;
 }
 
@@ -40,7 +40,7 @@
 }
 
 .bigTitle {
-  @include textStyles('DM Sans', 16px, 700, 16px, $white);
+  @include textStyles("Montserrat arm", 16px, 700, 16px, $white);
 }
 .alignCenter {
   display: flex;

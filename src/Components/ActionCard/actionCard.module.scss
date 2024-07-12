@@ -35,7 +35,7 @@
 .title{
     max-width: 100%;
     text-align: center;
-    @include textStyles("Inter",20px,600, 25px,$dark_grey);
+    @include textStyles("DM Sans",20px,600, 25px,$dark_grey);
     letter-spacing: 0.2px;
     padding: 0 5px;
     transition: 0.3s;

@@ -13,7 +13,15 @@ const CustomTableCell: React.FC<IProps> = (props) => {
 
   return (
     <div className={`${styles[`cell${type}`]} ${styles[`item${contentType}`]}`}>
-      {data}
+      {
+        type === TableCellTypes.HEADER
+        ?
+        <div style={{width:'100%',display:"flex",flexDirection:"column",alignItems:'center'}}>
+          {data}
+          </div>
+          :
+          data
+      }
     </div>
   )
 }

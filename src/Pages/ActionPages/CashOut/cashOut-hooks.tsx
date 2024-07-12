@@ -1,19 +1,19 @@
 import { useState } from 'react';
-import {t} from 'i18next';
+import { t } from 'i18next';
 import moment from "moment";
 import { useGetCashOutsQuery } from "../../../API/actionsApi";
-import { ITableFormItemData, ITableHeader, TableCellContentTypes } from "../../../Interfaces/componentTypes";
+import { ITableBodyData, ITableHeader, TableCellContentTypes } from "../../../Interfaces/componentTypes";
 import { CashOutResponse } from "../../../Interfaces/responseTypes";
-import styles from '../formTablestyles.module.scss';
 import { useAutocompleteData } from '../../../General/Hooks/hooks';
+import styles from '../formTablestyles.module.scss';
 
 const useCashOutHooks = (id: string) => {
-    const [activePage,setActivePage] = useState<number>(1);
-    const [offset,setOffset] =  useState<number>(0)
+    const [activePage, setActivePage] = useState<number>(1);
+    const [offset, setOffset] = useState<number>(0)
     const { data: cashoutsData } = useGetCashOutsQuery({ id: id, limit: 7, offset: offset });
-    const {partnersData} = useAutocompleteData();
-    const setPartnerName = (id:string)=>{
-        const partner = partnersData?.filter((item)=>item.id === id)?.[0];
+    const { partnersData } = useAutocompleteData();
+    const setPartnerName = (id: string) => {
+        const partner = partnersData?.filter((item) => item.id === id)?.[0];
         return partner?.title
     };
     const headerData: ITableHeader[] = [
@@ -35,42 +35,45 @@ const useCashOutHooks = (id: string) => {
         }
     ];
 
-    const createBodyData = (data: CashOutResponse): Array<ITableFormItemData[]> => {
+    const createBodyData = (data: CashOutResponse): Array<ITableBodyData> => {
         return data?.result!.map((item) => {
-            return [
-                {
-                    component:
-                        <div className={styles.formItemTextBox}>
-                            <div className={styles.formItemText}>{moment(item.date).format("DD/MM/YYYY")}</div>
-                        </div>,
-                    contentType: TableCellContentTypes.NUMBER
-                },
-                {
-                    component:
-                        <div className={`${styles.formItemTextBox} ${styles.salesPartner}`}>
-                            <div className={styles.formItemText}>{setPartnerName(String(item.partnersId))}</div>
-                        </div>,
-                    contentType: TableCellContentTypes.SELECT
-                },
-                {
-                    component:
-                        <div className={styles.formItemTextBox}>
-                            <div className={styles.formItemText}>{item.documentNumber!}</div>
-                        </div>,
-                    contentType: TableCellContentTypes.NUMBER
-                },
-                {
-                    component:
-                        <div className={styles.formItemTextBox}>
-                            <div className={styles.formItemText}>{item.amountCurrency1}</div>
-                        </div>,
-                    contentType: TableCellContentTypes.NUMBER
-                },
-            ]
+            return {
+                id: item.id,
+                data: [
+                    {
+                        component:
+                            <div className={styles.formItemTextBox}>
+                                <div className={styles.formItemText}>{moment(item.date).format("DD/MM/YYYY")}</div>
+                            </div>,
+                        contentType: TableCellContentTypes.NUMBER
+                    },
+                    {
+                        component:
+                            <div className={`${styles.formItemTextBox} ${styles.salesPartner}`}>
+                                <div className={styles.formItemText}>{setPartnerName(String(item.partnersId))}</div>
+                            </div>,
+                        contentType: TableCellContentTypes.SELECT
+                    },
+                    {
+                        component:
+                            <div className={styles.formItemTextBox}>
+                                <div className={styles.formItemText}>{item.documentNumber!}</div>
+                            </div>,
+                        contentType: TableCellContentTypes.NUMBER
+                    },
+                    {
+                        component:
+                            <div className={styles.formItemTextBox}>
+                                <div className={styles.formItemText}>{item.amountCurrency1}</div>
+                            </div>,
+                        contentType: TableCellContentTypes.NUMBER
+                    },
+                ]
+            }
         })
     };
 
-    const bodyData = createBodyData(cashoutsData !);
+    const bodyData = createBodyData(cashoutsData!);
     return {
         cashoutsData,
         bodyData,

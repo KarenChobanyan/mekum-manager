@@ -4,7 +4,7 @@
 .error {
     color: $errorColor;
     font-feature-settings: 'clig' off, 'liga' off;
-    @include textStyles("Inter", 11px, 400, 12px, $errorColor);
+    @include textStyles("DM Sans", 11px, 400, 12px, $errorColor);
     margin-top: 0.8vh;
     margin-left: 5px;
     min-height: 12px;

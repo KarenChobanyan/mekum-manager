@@ -1,10 +1,9 @@
+import { useEffect } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
 import { useDirectoriesHooks, useGeneralHooks } from "../../../../General/Hooks/hooks";
-import { IAutocompleteData, IAutocompleteItem } from "../../../../Interfaces/componentTypes";
+import {  IAutocompleteItem } from "../../../../Interfaces/componentTypes";
 import { useRegisterMutation } from "../../../../API/authApi";
-import { useEffect } from "react";
-import { GetEmployeesResponseData } from "../../../../Interfaces/responseTypes";
 
 export interface IRegisterFormValues {
     role: IAutocompleteItem,
