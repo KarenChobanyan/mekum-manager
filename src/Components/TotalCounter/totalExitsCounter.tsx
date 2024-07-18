@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
 import { useGetGoodBatchesQuery } from '../../API/direcroriesApi';
 import { GetGoodBatchesResponse, IGoodBatch } from '../../Interfaces/responseTypes';
