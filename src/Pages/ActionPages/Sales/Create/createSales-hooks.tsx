@@ -42,6 +42,7 @@ const initModal: ISaleModal = {
 const useCreateSalesHooks = (id: string) => {
     const { navigate, t } = useGeneralHooks();
     const [modal, setModal] = useState<ISaleModal>(initModal);
+    const [total, setTotal] = useState<number>(0);
     const [add, { isLoading, isSuccess, isError }] = usePostSaleMutation();
     const { myWarehousesData, myGoods } = useAutocompleteData(id!);
     const warehouse = myWarehousesData?.filter((item) => item.id === id)[0];
@@ -61,7 +62,8 @@ const useCreateSalesHooks = (id: string) => {
     }, [warehouse]);
 
     useEffect(() => {
-        if (isSuccess && modal.money === "0") {
+        console.log(modal, 'modal')
+        if (isSuccess && modal.money !== "0") {
             toast.success(t('Toast.Success.Register'))
             navigate(-1)
             reset();
@@ -77,9 +79,10 @@ const useCreateSalesHooks = (id: string) => {
         return String(total)
     };
 
-    
+
     const onCloseModal = () => {
-        setModal(initModal)
+        setModal(initModal);
+        navigate(-1)
     };
 
     const onAddItem = () => {
@@ -97,7 +100,8 @@ const useCreateSalesHooks = (id: string) => {
         return String(materialPrice)
     };
 
-    const onSubmit: SubmitHandler<ISalesFormValues | FieldValues> = async(values) => {
+
+    const onSubmit: SubmitHandler<ISalesFormValues | FieldValues> = async (values) => {
         const goodsList: IExitGoods[] = values.goods?.map((item: ISaleGoods): IExitGoods => {
             return {
                 warehouseId: +(values.warehouseId as IAutocompleteItem).id,
@@ -119,21 +123,27 @@ const useCreateSalesHooks = (id: string) => {
         add(payload)
     };
 
-    const onOpenModal = async() => {
-            const tmp: ISaleModal = {
-                open: true,
-                partner: watch('partnerId'),
-                money: countTotal(),
-            }
-            console.log(tmp,'tmpppp')
-            setModal(tmp)
+    const setModalAsync = (newState: ISaleModal) => {
+        return new Promise<void>((resolve) => {
+                setModal(newState);
+                resolve();
+        });
+    };
+
+    const onOpenModal = async () => {
+        const tmp: ISaleModal = {
+            open: true,
+            partner: watch('partnerId'),
+            money: countTotal(),
+        }
+        setModal(tmp)
     };
 
     const handleOpenModal = async () => {
         try {
-            setModal({...modal,money:"0"})
+            await setModalAsync({ ...modal, money: "0" });
             await handleSubmit(onSubmit)();
-            onOpenModal();
+            await onOpenModal();
         } catch (error) {
             console.error('Form submission failed:', error);
         }
@@ -159,6 +169,7 @@ const useCreateSalesHooks = (id: string) => {
         onCloseModal,
         handleOpenModal,
         isValid,
+        total,
     }
 };
 

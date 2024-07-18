@@ -14,7 +14,7 @@ interface IProps {
 const SaleModal: React.FC<IProps> = (props) => {
     const { data, handleClose, } = props;
     const { open, money, partner } = data;
-    const { control, register, handleSubmit, reset, errors, setValue, onSubmit, cashRegistersData, t } = useSalesModal(partner!);
+    const { control, register, handleSubmit, reset, errors, onSubmit, cashRegistersData, t,isLoading } = useSalesModal(partner!,handleClose);
     const onClose = () => {
         handleClose();
         reset()
@@ -87,6 +87,7 @@ const SaleModal: React.FC<IProps> = (props) => {
                             />
                             <Button
                                 type='submit'
+                                isLoading={isLoading}
                                 buttonType={ButtonTypes.Primery}
                                 title={t('Button.Submit')}
                                 buttonStyle={styles.button}

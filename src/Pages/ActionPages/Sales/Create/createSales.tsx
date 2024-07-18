@@ -7,12 +7,12 @@ import useCreateSalesHooks from './createSales-hooks';
 import { ButtonTypes } from '../../../../Interfaces/componentTypes';
 import FormItems from './formTable';
 import { AuthInput, AutoComplete, Button, Loading } from '../../../../Components';
-import styles from '../../formTablestyles.module.scss';
 import SaleModal from '../Modal/saleModal';
+import styles from '../../formTablestyles.module.scss';
 
 const CreateSales: React.FC = () => {
   const { id } = useParams();
-  const { register, control, errors, fields, isLoading, onAddItem, handleSubmit, onSubmit, remove, onCencele, setValue, isValid, watch, setSalePrice, onCloseModal, modal, handleOpenModal } = useCreateSalesHooks(id!);
+  const { register, control, errors, fields, isLoading, onAddItem, handleSubmit, onSubmit, remove, onCencele, setValue, isValid, watch, setSalePrice, onCloseModal, modal, handleOpenModal,total } = useCreateSalesHooks(id!);
   const { t } = useGeneralHooks();
   const { myWarehousesData, partnersData } = useAutocompleteData();
 
@@ -133,6 +133,7 @@ const CreateSales: React.FC = () => {
                     buttonStyle={styles.button}
                   />
                 </div>
+                {total}
               </div>
             </form>
         }

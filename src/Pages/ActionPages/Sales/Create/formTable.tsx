@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { Control, Controller, FieldArrayWithId, FieldErrors, UseFieldArrayRemove, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { t } from 'i18next';
 import { ISalesFormValues } from './createSales-hooks';
@@ -18,7 +18,7 @@ interface IProps {
     onAddItem: () => void,
     setValue: UseFormSetValue<ISalesFormValues>,
     watch: UseFormWatch<ISalesFormValues>,
-    setSalePrice:(id:string)=>string
+    setSalePrice:(id:string)=>string,
 };
 
 

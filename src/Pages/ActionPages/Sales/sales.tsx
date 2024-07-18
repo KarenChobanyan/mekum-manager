@@ -67,10 +67,10 @@ const Sales: React.FC = () => {
                   <div className={styles.fullBody}>
                     <CustomTable
                       headerData={headerData}
-                      bodyData={bodyData}
+                      bodyData={bodyData.reverse()}
                     />
                     <CustomPagination
-                      limit={salesData?.total! / 7}
+                      limit={Math.floor(salesData?.total! / 7)}
                       offset={activePage}
                       onChange={(_, page) => {
                         setOffset((page - 1) * 7);
