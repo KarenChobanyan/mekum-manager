@@ -93,7 +93,8 @@
     "Login": "Войти",
     "Add": "Добавить",
     "Submit": "Отправить",
-    "Cancel": "Отмена"
+    "Cancel": "Отмена",
+    "Submit&Levy":"Подтвердить и оплатить"
   },
   "Actions": {
     "To_Storage": {

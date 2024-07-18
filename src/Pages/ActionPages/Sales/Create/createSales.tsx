@@ -1,17 +1,18 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
+import { useParams } from 'react-router';
+import moment from 'moment';
 import { useAutocompleteData, useGeneralHooks } from '../../../../General/Hooks/hooks';
 import useCreateSalesHooks from './createSales-hooks';
 import { ButtonTypes } from '../../../../Interfaces/componentTypes';
 import FormItems from './formTable';
 import { AuthInput, AutoComplete, Button, Loading } from '../../../../Components';
 import styles from '../../formTablestyles.module.scss';
-import { useParams } from 'react-router';
-import moment from 'moment';
+import SaleModal from '../Modal/saleModal';
 
 const CreateSales: React.FC = () => {
   const { id } = useParams();
-  const { register, control, errors, fields, isLoading, onAddItem, handleSubmit, onSubmit, remove, onCencele, setValue, watch,setSalePrice } = useCreateSalesHooks(id!);
+  const { register, control, errors, fields, isLoading, onAddItem, handleSubmit, onSubmit, remove, onCencele, setValue, isValid, watch, setSalePrice, onCloseModal, modal, handleOpenModal } = useCreateSalesHooks(id!);
   const { t } = useGeneralHooks();
   const { myWarehousesData, partnersData } = useAutocompleteData();
 
@@ -109,7 +110,7 @@ const CreateSales: React.FC = () => {
                 />
               </div>
               <div className={styles.buttonRow}>
-                <div className={styles.buttons}>
+                <div className={styles.buttons} style={{ width: '600px' }}>
                   <Button
                     type='button'
                     onClick={onCencele}
@@ -123,9 +124,24 @@ const CreateSales: React.FC = () => {
                     title={t('Button.Submit')}
                     buttonStyle={styles.button}
                   />
+                  <Button
+                    type='button'
+                    onClick={handleOpenModal}
+                    disable={!isValid}
+                    buttonType={isValid ? ButtonTypes.Primery : ButtonTypes.Disabled}
+                    title={t('Button.Submit&Levy')}
+                    buttonStyle={styles.button}
+                  />
                 </div>
               </div>
             </form>
+        }
+        {isValid
+          &&
+          <SaleModal
+            data={modal}
+            handleClose={onCloseModal}
+          />
         }
 
       </div>

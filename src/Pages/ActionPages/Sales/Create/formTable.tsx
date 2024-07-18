@@ -26,7 +26,6 @@ interface IProps {
 const FormItems: React.FC<IProps> = (props) => {
     const { fields, remove, register, control, errors, id, onAddItem, setValue, watch,setSalePrice } = props;
     const { getGoodsUnitType, myGoodsdata, getRemainder } = useAutocompleteData(id!);
-console.log(myGoodsdata,'myGoods')
     const headerData: ITableHeader[] = [
         {
             title: "",
