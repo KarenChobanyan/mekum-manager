@@ -1,4 +1,4 @@
-import {useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
 import { useAutocompleteData, useGeneralHooks } from "../../../../General/Hooks/hooks";
@@ -20,21 +20,34 @@ export interface ISaleGoods {
     point: string,
     quantity: string,
     count: string,
-    price:string,
+    price: string,
     money: string,
-    discount:string,
-    exits:IGoodBatch[] | []
+    discount: string,
+    exits: IGoodBatch[] | []
 };
+
+export interface ISaleModal {
+    open: boolean,
+    partner: IAutocompleteItem | null,
+    money: string | null,
+};
+
+const initModal: ISaleModal = {
+    open: false,
+    partner: null,
+    money: null
+}
 
 
 const useCreateSalesHooks = (id: string) => {
-    const { navigate,t } = useGeneralHooks();
+    const { navigate, t } = useGeneralHooks();
+    const [modal, setModal] = useState<ISaleModal>(initModal);
     const [add, { isLoading, isSuccess, isError }] = usePostSaleMutation();
-    const { myWarehousesData,myGoods } = useAutocompleteData(id!);
+    const { myWarehousesData, myGoods } = useAutocompleteData(id!);
     const warehouse = myWarehousesData?.filter((item) => item.id === id)[0];
-    const { register, handleSubmit, watch, control, reset, setValue, formState: { errors } } = useForm<ISalesFormValues>({
+    const { register, handleSubmit, watch, control, reset, setValue, getValues, formState: { errors, isValid } } = useForm<ISalesFormValues>({
         defaultValues: {
-            goods: [{ materialValueId: null, quantity: '',discount:'',price:'', point: '', count: '',  money: "",exits:[] }]
+            goods: [{ materialValueId: null, quantity: '', discount: '', price: '', point: '', count: '', money: "", exits: [] }]
         },
         mode: 'all'
     });
@@ -48,7 +61,7 @@ const useCreateSalesHooks = (id: string) => {
     }, [warehouse]);
 
     useEffect(() => {
-        if (isSuccess) {
+        if (isSuccess && modal.money === "0") {
             toast.success(t('Toast.Success.Register'))
             navigate(-1)
             reset();
@@ -57,8 +70,20 @@ const useCreateSalesHooks = (id: string) => {
         }
     }, [isSuccess, isError]);
 
+    const countTotal = () => {
+        const tmp = getValues().goods;
+        const moneys = tmp.map((item) => +item.money);
+        const total = moneys.reduce((acc, item) => acc + item, 0);
+        return String(total)
+    };
+
+    
+    const onCloseModal = () => {
+        setModal(initModal)
+    };
+
     const onAddItem = () => {
-        append({ materialValueId: null, quantity: '', point: '',price:'',  count: '', money: "",discount:'',exits:[] })
+        append({ materialValueId: null, quantity: '', point: '', price: '', count: '', money: "", discount: '', exits: [] })
     };
 
     const onCencele = () => {
@@ -66,23 +91,23 @@ const useCreateSalesHooks = (id: string) => {
         reset()
     };
 
-    const setSalePrice = (materialValueId:string)=>{
-        const material = myGoods?.filter((good)=>good.materialValueId === +materialValueId!)?.[0];
+    const setSalePrice = (materialValueId: string) => {
+        const material = myGoods?.filter((good) => good.materialValueId === +materialValueId!)?.[0];
         const materialPrice = material?.price!;
         return String(materialPrice)
     };
 
-    const onSubmit: SubmitHandler<ISalesFormValues | FieldValues> = (values) => {
+    const onSubmit: SubmitHandler<ISalesFormValues | FieldValues> = async(values) => {
         const goodsList: IExitGoods[] = values.goods?.map((item: ISaleGoods): IExitGoods => {
             return {
                 warehouseId: +(values.warehouseId as IAutocompleteItem).id,
                 point: item.point,
                 count: +item.count,
-                discount:+item.discount,
+                discount: +item.discount,
                 materialValueId: +(item.materialValueId as IAutocompleteItem).id,
                 money: +item.money,
                 exits: item.exits,
-                measurementUnitId:7
+                measurementUnitId: 7
             }
         });
         const payload: IPostWarehouseExitRequest = {
@@ -91,8 +116,29 @@ const useCreateSalesHooks = (id: string) => {
             partnerId: +(values.partnerId as IAutocompleteItem).id,
             goods: goodsList
         };
-         add(payload)
+        add(payload)
     };
+
+    const onOpenModal = async() => {
+            const tmp: ISaleModal = {
+                open: true,
+                partner: watch('partnerId'),
+                money: countTotal(),
+            }
+            console.log(tmp,'tmpppp')
+            setModal(tmp)
+    };
+
+    const handleOpenModal = async () => {
+        try {
+            setModal({...modal,money:"0"})
+            await handleSubmit(onSubmit)();
+            onOpenModal();
+        } catch (error) {
+            console.error('Form submission failed:', error);
+        }
+    };
+
 
     return {
         register,
@@ -108,7 +154,11 @@ const useCreateSalesHooks = (id: string) => {
         isLoading,
         onAddItem,
         onCencele,
-        setSalePrice
+        setSalePrice,
+        modal,
+        onCloseModal,
+        handleOpenModal,
+        isValid,
     }
 };
 

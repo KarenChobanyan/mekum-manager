@@ -13,7 +13,7 @@
     width: 100%;
     max-height: 100%;
     min-height: 100%;
-    padding: 5px 5px 15px;
+    padding: 5px 5px 20px;
     @include flexStyles(flex, column, normal, normal);
     background-color: $light_bg;
     border-radius: 15px;
@@ -54,9 +54,7 @@
 }
 
 .formInputLabel {
-    font-size: 18px;
-    font-weight: 600;
-    color: $main_color;
+    @include textStyles("Montserrat arm", 18px, 600, normal, $main_color);
 }
 
 .itemsBox {
@@ -77,7 +75,7 @@
 }
 
 .formItemInputNumBox {
-    width: 100%;
+    // width: 100%;
     background-color: $formInput;
     padding: 16px 5px;
 }
@@ -118,7 +116,7 @@
 }
 
 .buttonRow {
-    width: 97vw;
+    // width: 97vw;
     border-top: 1px solid $dark_grey;
     background-color: $light_bg;
     position: fixed;
@@ -143,6 +141,7 @@
 
 .button {
     border-radius: 10px !important;
+    width: fit-content;
 }
 
 //media

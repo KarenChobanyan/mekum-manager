@@ -12,6 +12,7 @@ import { ButtonTypes } from '../../Interfaces/componentTypes';
 interface IProps {
   open: boolean;
   title: string;
+  titleStyle?:string,
   children: ReactNode;
   buttonTitle?: string;
   loading?: boolean;
@@ -28,6 +29,7 @@ const CustomModal: React.FC<IProps> = (props) => {
     onClick,
     handleClose,
     buttonTitle,
+    titleStyle
   } = props;
 
   return (
@@ -38,7 +40,7 @@ const CustomModal: React.FC<IProps> = (props) => {
         open={open}
         className='customized-dialog'
       >
-        <DialogTitle id='customized-dialog-title'>{title}</DialogTitle>
+        <DialogTitle className={titleStyle!}>{title}</DialogTitle>
         <IconButton
           aria-label='close'
           onClick={handleClose}

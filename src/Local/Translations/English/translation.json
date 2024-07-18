@@ -93,7 +93,8 @@
     "Login": "Login",
     "Add": "Add",
     "Submit": "Submit",
-    "Cancel": "Cancel"
+    "Cancel": "Cancel",
+    "Submit&Levy":"Confirm and charge"
   },
   "Actions": {
     "To_Storage": {

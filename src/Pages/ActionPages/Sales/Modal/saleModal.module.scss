@@ -1,0 +1,56 @@
+@import '../../../../General/Styles/mixin';
+@import '../../../../General/Styles/variables';
+
+
+.container {
+    width: 100%;
+    @include flexStyles(flex, column, normal, normal);
+    gap: 20px;
+    // border: 1px solid green;
+}
+
+.form {
+    width: 100%;
+    @include flexStyles(flex, column, normal, normal);
+    gap: 15px;
+    // border: 1px solid red;
+}
+
+.title {
+    @include textStyles("Montserrat arm", 22px, 600, normal, $buttun_darkBlue !important);
+}
+
+.formInputLabel {
+    @include textStyles("Montserrat arm", 16px, 600, normal, $main_color);
+}
+
+.inputBox {
+    flex: 1;
+    @include flexStyles(flex, column, normal, normal);
+    gap: 5px;
+}
+
+.textDiv {
+    background-color: $formInput;
+    @include textStyles("Montserrat arm", 14px, 400, 16px, $text_dark);
+    padding: 16px;
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+    margin-top: 8px;
+}
+
+.input {
+    background-color: $formInput;
+    font-size: 16px;
+    line-height: 18px;
+    padding: 5px;
+}
+
+.buttons {
+    width: 100%;
+    @include flexStyles(flex, row, center, space-between);
+}
+
+.button {
+    width: fit-content;
+}
