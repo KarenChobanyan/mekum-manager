@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from './API';
 import { ILoginFormValues } from '../Interfaces/interfaces';
-import { GetUsersResponse, ILoginResponse } from '../Interfaces/responseTypes';
+import { GetUsersResponse, IGetMeResponseData, ILoginResponse } from '../Interfaces/responseTypes';
 import { IRegisterFormValues } from '../Pages/ActionPages/Users/Create/createUser-hooks';
 
 export const authApi = createApi({
@@ -33,11 +33,18 @@ export const authApi = createApi({
       }),
       providesTags: ['Users']
   }),
+  getUserById: builder.query<IGetMeResponseData, string>({
+    query: (id) => ({
+        url: `/users/${id}`,
+        method: 'GET',
+    }),
+}),
   }),
 });
 
 export const  {
   useLoginMutation,
   useRegisterMutation,
-  useGetUsersQuery
+  useGetUsersQuery,
+  useGetUserByIdQuery
 } = authApi;

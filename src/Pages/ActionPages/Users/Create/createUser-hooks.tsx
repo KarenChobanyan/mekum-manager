@@ -12,11 +12,12 @@ export interface IRegisterFormValues {
     username: string,
     password: string,
     mekum_id: string,
+    company_id:string,
     employee?: IAutocompleteItem
 };
 
 const useCreateUserHooks = () => {
-    const { navigate, t } = useGeneralHooks();
+    const { navigate, t,currentUser } = useGeneralHooks();
    const { roles,employees } = useDirectoriesHooks();
     const [registrate, { isLoading, isSuccess, isError }] = useRegisterMutation();
     const { register, control, handleSubmit, reset, watch, setValue, formState: { errors } } = useForm<IRegisterFormValues>({ mode: "all" });
@@ -28,11 +29,13 @@ const useCreateUserHooks = () => {
 
     useEffect(() => {
         const employeID = watch('employee')?.id;
+        const companyId = currentUser.company_id;
         if (employeID) {
             const employee = employees?.filter((emp) => emp.id === +employeID)[0];
             setValue('name', employee?.firstName!);
             setValue('surename', employee?.lastName!);
-            setValue('mekum_id', employeID)
+            setValue('mekum_id', employeID);
+            setValue('company_id', String(companyId));
         }
     },[watch('employee')])
 
@@ -53,7 +56,8 @@ const useCreateUserHooks = () => {
             surename: values.surename,
             username: values.username,
             password: values.password,
-            mekum_id: values.mekum_id
+            mekum_id: values.mekum_id,
+            company_id:values.company_id,
         };
         registrate(payload);
     };

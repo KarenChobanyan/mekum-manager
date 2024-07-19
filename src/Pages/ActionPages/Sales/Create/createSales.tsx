@@ -12,7 +12,7 @@ import styles from '../../formTablestyles.module.scss';
 
 const CreateSales: React.FC = () => {
   const { id } = useParams();
-  const { register, control, errors, fields, isLoading, onAddItem, handleSubmit, onSubmit, remove, onCencele, setValue, isValid, watch, setSalePrice, onCloseModal, modal, handleOpenModal,total } = useCreateSalesHooks(id!);
+  const { register, control, errors, fields, isLoading, onAddItem, handleSubmit, onSubmit, remove, onCencele, setValue, isValid, watch, setSalePrice, onCloseModal, modal, handleOpenModal, total } = useCreateSalesHooks(id!);
   const { t } = useGeneralHooks();
   const { myWarehousesData, partnersData } = useAutocompleteData();
 
@@ -133,7 +133,13 @@ const CreateSales: React.FC = () => {
                     buttonStyle={styles.button}
                   />
                 </div>
-                {total}
+                <div className={styles.totalBox}>
+                  <p className={styles.totalText}>{t('Actions.Sales.Total')}</p>
+                  <span className={styles.totalCount}>
+                    {total}
+                  </span>
+                  <span className={styles.totalAmmount}>{t('Actions.Sales.AMD')}</span>
+                </div>
               </div>
             </form>
         }

@@ -10,6 +10,7 @@ export interface IGetMeResponse {
 export interface IGetMeResponseData {
   id?: number;
   role_id?: number;
+  company_id?:number;
   mekum_id?: string | null;
   username?: string;
   name?: string;

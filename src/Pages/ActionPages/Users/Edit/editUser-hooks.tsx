@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useRegisterMutation } from "../../../../API/authApi";
+import { useGetUserByIdQuery, useRegisterMutation } from "../../../../API/authApi";
 import { useDirectoriesHooks, useGeneralHooks } from "../../../../General/Hooks/hooks";
 import { IRegisterFormValues } from "../Create/createUser-hooks";
 
 const useEditUser = (id:string)=>{
-    const { navigate, t } = useGeneralHooks();
+    const { data: currentEmployee } = useGetUserByIdQuery(id!,{ skip: !id });
+    const { navigate, t,currentUser } = useGeneralHooks();
     const { roles,employees } = useDirectoriesHooks();
      const [registrate, { isLoading, isSuccess, isError }] = useRegisterMutation();
      const { register, control, handleSubmit, reset, watch, setValue, formState: { errors } } = useForm<IRegisterFormValues>({ mode: "all" });
@@ -15,14 +16,24 @@ const useEditUser = (id:string)=>{
          navigate(-1)
          reset()
      };
+
+     useEffect(()=>{
+        if(currentEmployee){
+            console.log(currentEmployee,'currentEmployee2')
+            const employee = employees?.filter((emp) => emp.id === +currentEmployee.id!)[0];
+            setValue('employee',{id:String(employee?.id!),title:employee?.fullName!})
+        }
+     },[currentEmployee])
  
      useEffect(() => {
          const employeID = watch('employee')?.id;
+         const companyId = currentUser.company_id;
          if (employeID) {
              const employee = employees?.filter((emp) => emp.id === +employeID)[0];
              setValue('name', employee?.firstName!);
              setValue('surename', employee?.lastName!);
-             setValue('mekum_id', employeID)
+             setValue('mekum_id', employeID);
+             setValue('company_id', String(companyId))
          }
      },[watch('employee')])
  
@@ -43,7 +54,8 @@ const useEditUser = (id:string)=>{
              surename: values.surename,
              username: values.username,
              password: values.password,
-             mekum_id: values.mekum_id
+             mekum_id: values.mekum_id,
+             company_id:values.company_id,
          };
          registrate(payload);
      };
@@ -57,6 +69,7 @@ const useEditUser = (id:string)=>{
          errors,
          control,
          isLoading,
+         currentEmployee
      }
 };
 
