@@ -122,18 +122,6 @@ const CreateUser: React.FC = () => {
                                 labelStyle={styles.formInputLabel}
                                 error={errors.password}
                             />
-                            <AuthInput
-                                register={register}
-                                registerName='mekum_id'
-                                label='Mekum ID'
-                                disabled
-                                style={styles.inputBox}
-                                inputStyle={styles.input}
-                                inputBoxStyles={styles.input}
-                                labelStyle={styles.formInputLabel}
-                                showTextError={false}
-                                error={errors.mekum_id}
-                            />
                         </div>
                         <div className={styles.buttonRow}>
                             <div className={styles.buttons}>

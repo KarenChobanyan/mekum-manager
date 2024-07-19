@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import moment from "moment";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
 import { useAutocompleteData, useGeneralHooks } from "../../../../General/Hooks/hooks";
 import { IGoodBatch } from "../../../../Interfaces/responseTypes";
 import { usePostSaleMutation } from "../../../../API/actionsApi";
-import { toast } from "react-toastify";
 import { IExitGoods, IPostWarehouseExitRequest } from "../../../../Interfaces/requestTypes";
-import moment from "moment";
 
 export interface ISalesFormValues {
     documentDate: string,
@@ -57,13 +57,27 @@ const useCreateSalesHooks = (id: string) => {
         name: 'goods'
     });
 
+    const countTotalForRender = (goods:any[]) => {
+        const moneys = goods.map((item) => +item.money);
+        const total = moneys.reduce((acc, item) => acc + item, 0);
+        return total;
+    };
+
+    useEffect(() => {
+        const subscription = watch((values) => {
+            const newTotal = countTotalForRender(values.goods!);
+            setTotal(newTotal);
+        });
+        return () => subscription.unsubscribe();
+    }, [watch]);
+
     useEffect(() => {
         setValue('warehouseId', warehouse!);
     }, [warehouse]);
 
+   
     useEffect(() => {
-        console.log(modal, 'modal')
-        if (isSuccess && modal.money !== "0") {
+        if (isSuccess && modal.money === null) {
             toast.success(t('Toast.Success.Register'))
             navigate(-1)
             reset();
@@ -120,13 +134,14 @@ const useCreateSalesHooks = (id: string) => {
             partnerId: +(values.partnerId as IAutocompleteItem).id,
             goods: goodsList
         };
-        add(payload)
+        await add(payload)
     };
 
-    const setModalAsync = (newState: ISaleModal) => {
+    const setModalAsync = () => {
         return new Promise<void>((resolve) => {
-                setModal(newState);
-                resolve();
+            const tmp: ISaleModal = { ...modal, money: '0' }
+            setModal(tmp);
+            resolve();
         });
     };
 
@@ -141,7 +156,7 @@ const useCreateSalesHooks = (id: string) => {
 
     const handleOpenModal = async () => {
         try {
-            await setModalAsync({ ...modal, money: "0" });
+            await setModalAsync();
             await handleSubmit(onSubmit)();
             await onOpenModal();
         } catch (error) {

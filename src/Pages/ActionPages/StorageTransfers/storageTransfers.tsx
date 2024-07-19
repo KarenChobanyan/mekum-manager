@@ -112,7 +112,7 @@ const StorageTransfers: React.FC = () => {
                       bodyData={isIn === 'true' ? bodyDataForEntries : bodyDataForExits}
                     />
                     <CustomPagination
-                      limit={transfersData?.total!}
+                      limit={Math.ceil(transfersData?.total!/7)}
                       offset={activePage}
                       onChange={(_, page) => {
                         setOffset((page - 1) * 7);

@@ -87,7 +87,6 @@ const SaleModal: React.FC<IProps> = (props) => {
                             />
                             <Button
                                 type='submit'
-                                isLoading={isLoading}
                                 buttonType={ButtonTypes.Primery}
                                 title={t('Button.Submit')}
                                 buttonStyle={styles.button}

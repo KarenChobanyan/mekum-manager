@@ -13,7 +13,7 @@ const CashTransfers: React.FC = () => {
   const { cashRegistersData, warehouseDataTypes } = useAutocompleteData();
   const [cashRegisterId, setCashRegisterId] = useState<string | undefined>(cashRegistersData?.[0].id!)
   const { control } = useCashRegisterHooks();
-  const { transfersData, activePage, setActivePage, setOffset, setIsIn, isIn, headerDataForEntries, headerDataForExits, bodyDataForEntries,checkedItems, bodyDataForExits,onSubmitCheckedEntries } = useCashTransfersHook(cashRegisterId! ?? cashRegistersData?.[0].id!);
+  const { transfersData, activePage, setActivePage, setOffset, setIsIn, isIn, headerDataForEntries, headerDataForExits, bodyDataForEntries, checkedItems, bodyDataForExits, onSubmitCheckedEntries } = useCashTransfersHook(cashRegisterId! ?? cashRegistersData?.[0].id!);
 
 
   return (
@@ -91,7 +91,7 @@ const CashTransfers: React.FC = () => {
                   buttonStyle={styles.button}
                 />
               }
-               {
+              {
                 checkedItems.length > 0 && isIn === ISIN.TRUE
                 &&
                 <Button
@@ -113,7 +113,7 @@ const CashTransfers: React.FC = () => {
                       bodyData={isIn === 'true' ? bodyDataForEntries : bodyDataForExits}
                     />
                     <CustomPagination
-                      limit={transfersData?.total! / 7}
+                      limit={Math.ceil(transfersData?.total! / 7)}
                       offset={activePage}
                       onChange={(_, page) => {
                         setOffset((page - 1) * 7);

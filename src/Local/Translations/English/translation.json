@@ -119,7 +119,9 @@
       "Title": "Transfer between cash boxes"
     },
     "Sales": {
-      "Title": "Sale"
+      "Title": "Sale",
+      "Total":"Total:",
+      "AMD":"AMD"
     },
     "Users": {
       "Title": "Users",
