@@ -19,6 +19,10 @@ const BUTTON_STYLES = {
   [ButtonTypes.WithoutBg]: {
     button: styles.withoutBgButton,
     title: styles.withoutBgTitle,
+  },
+  [ButtonTypes.Success]: {
+    button: styles.successBtn,
+    title: styles.bigTitle,
   }
 };
 

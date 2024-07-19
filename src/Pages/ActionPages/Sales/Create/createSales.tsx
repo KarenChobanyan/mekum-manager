@@ -128,7 +128,7 @@ const CreateSales: React.FC = () => {
                     type='button'
                     onClick={handleOpenModal}
                     disable={!isValid}
-                    buttonType={isValid ? ButtonTypes.Primery : ButtonTypes.Disabled}
+                    buttonType={isValid ? ButtonTypes.Success : ButtonTypes.Disabled}
                     title={t('Button.Submit&Levy')}
                     buttonStyle={styles.button}
                   />

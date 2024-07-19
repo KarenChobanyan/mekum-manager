@@ -38,7 +38,6 @@ const CustomModal: React.FC<IProps> = (props) => {
         onClose={handleClose}
         aria-labelledby='customized-dialog-title'
         open={open}
-        className='customized-dialog'
       >
         <DialogTitle className={titleStyle!}>{title}</DialogTitle>
         <IconButton

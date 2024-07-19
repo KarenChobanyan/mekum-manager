@@ -28,14 +28,6 @@ const FormItems: React.FC<IProps> = (props) => {
             contentType: TableCellContentTypes.ICON
         },
         {
-            title: `${t('Forms.Warehouse')}`,
-            contentType: TableCellContentTypes.TEXT
-        },
-        {
-            title: `${t('Forms.PartnerIn')}`,
-            contentType: TableCellContentTypes.TEXT
-        },
-        {
             title: `${t('Forms.Material')}`,
             contentType: TableCellContentTypes.SELECT
         },
@@ -75,20 +67,6 @@ const FormItems: React.FC<IProps> = (props) => {
                     {
                         component: <img src={RedTrashIcon} alt="redTrash" onClick={() => remove(index)} className={styles.deleteIcon} />,
                         contentType: TableCellContentTypes.ICON
-                    },
-                    {
-                        component:
-                            <div className={styles.formItemTextBox}>
-                                <div className={styles.formItemText}>{storageName}</div>
-                            </div>,
-                        contentType: TableCellContentTypes.TEXT
-                    },
-                    {
-                        component:
-                            <div className={styles.formItemTextBox}>
-                                <div className={styles.formItemText}>{partnerName}</div>
-                            </div>,
-                        contentType: TableCellContentTypes.TEXT
                     },
                     {
                         component:

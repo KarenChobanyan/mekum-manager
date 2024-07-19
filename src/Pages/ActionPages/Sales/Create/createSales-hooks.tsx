@@ -62,8 +62,7 @@ const useCreateSalesHooks = (id: string) => {
     }, [warehouse]);
 
     useEffect(() => {
-        console.log(modal, 'modal')
-        if (isSuccess && modal.money !== "0") {
+        if (isSuccess && modal.money === null) {
             toast.success(t('Toast.Success.Register'))
             navigate(-1)
             reset();
@@ -120,12 +119,13 @@ const useCreateSalesHooks = (id: string) => {
             partnerId: +(values.partnerId as IAutocompleteItem).id,
             goods: goodsList
         };
-        add(payload)
+       await add(payload)
     };
 
-    const setModalAsync = (newState: ISaleModal) => {
+    const setModalAsync = () => {
         return new Promise<void>((resolve) => {
-                setModal(newState);
+            const tmp:ISaleModal = {...modal,money:'0'}
+                setModal(tmp);
                 resolve();
         });
     };
@@ -141,7 +141,7 @@ const useCreateSalesHooks = (id: string) => {
 
     const handleOpenModal = async () => {
         try {
-            await setModalAsync({ ...modal, money: "0" });
+            await setModalAsync();
             await handleSubmit(onSubmit)();
             await onOpenModal();
         } catch (error) {

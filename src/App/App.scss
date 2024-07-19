@@ -299,7 +299,7 @@
 }
 
 .modalAutocomplete .MuiAutocomplete-listbox {
-  width: 100% !important;
+  // width: 100% !important;
   text-wrap: wrap !important;
 }
 
@@ -366,6 +366,10 @@
 
 .modalAutocomplete .Mui-disabled {
   -webkit-text-fill-color :$text_dark !important
+}
+
+.modalAutocomplete .MuiPaper-root {
+ border-radius: 10px !important;
 }
 
 
