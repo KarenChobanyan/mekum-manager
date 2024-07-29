@@ -35,9 +35,9 @@ const CreateTorageTransfers: React.FC = () => {
                   register={register}
                   registerName='documentDate'
                   label={t('Forms.Date')}
-                  style={styles.inputBox}
+                  style={styles.inputRow}
                   inputStyle={styles.input}
-                  inputBoxStyles={styles.input}
+                  inputBoxStyles={styles.inputBox}
                   disabled
                   required={false}
                   defaultValue={moment(new Date()).format("DD/MM/YYYY")}
@@ -49,9 +49,9 @@ const CreateTorageTransfers: React.FC = () => {
                   register={register}
                   registerName='warehouseOutId'
                   label={t('Forms.Warehouse_Out')}
-                  style={styles.inputBox}
+                  style={styles.inputRow}
                   inputStyle={styles.input}
-                  inputBoxStyles={styles.input}
+                  inputBoxStyles={styles.inputBox}
                   disabled
                   required={false}
                   labelStyle={styles.formInputLabel}
@@ -76,7 +76,7 @@ const CreateTorageTransfers: React.FC = () => {
                           label={t('Forms.Warehouse_In')}
                           placeholder={t('Forms.Warehouse_In—Placeholder')}
                           showErrorText={false}
-                          style={styles.inputBox}
+                          style={styles.inputRow}
                           labelStyle={styles.formInputLabel}
                           error={errors.warehouseEnterId}
                         />

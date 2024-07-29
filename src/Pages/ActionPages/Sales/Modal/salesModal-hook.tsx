@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import moment from "moment";
@@ -9,11 +9,12 @@ import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
 import { ICashoutRequest } from "../../../../Interfaces/requestTypes";
 
 const useSalesModal = (partner: IAutocompleteItem,handleClose:()=>void) => {
-    const { register, handleSubmit, control, reset, setValue, formState: { errors } } = useForm<ICachIncomingFormValues>({ mode: "all" });
+    const { register, handleSubmit, control, reset,watch, setValue, formState: { errors } } = useForm<ICachIncomingFormValues>({ mode: "all" });
     const { cashRegistersData } = useAutocompleteData();
     const {partners} = useDirectoriesHooks();
     const { t, navigate } = useGeneralHooks();
     const [add, { isLoading, isSuccess, isError }] = usePostCashEntryMutation();
+    const [warning,setWarning] = useState<string | null>(null);
 
     useEffect(()=>{
         if(partner){
@@ -25,6 +26,14 @@ const useSalesModal = (partner: IAutocompleteItem,handleClose:()=>void) => {
     useEffect(() => {
         setValue('partner', partner)
     }, [partner, setValue]);
+
+    useEffect(()=>{
+        if(+watch('money') > +watch('debt')){
+           setWarning(t('Input_Errors.Debt'))
+        }else{
+           setWarning(null)
+        }
+       },[watch('debt'),watch('money')])
 
     useEffect(() => {
         if (isSuccess) {
@@ -62,7 +71,8 @@ const useSalesModal = (partner: IAutocompleteItem,handleClose:()=>void) => {
         onSubmit,
         cashRegistersData,
         t,
-        isLoading
+        isLoading,
+        warning
     }
 };
 

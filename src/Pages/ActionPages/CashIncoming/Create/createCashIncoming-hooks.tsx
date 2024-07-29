@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import moment from "moment";
@@ -21,7 +21,8 @@ const useCreateCashEntryHooks = (id:string) => {
     const { cashRegistersData,partnersData } = useAutocompleteData();
     const {partners} = useDirectoriesHooks();
     const cashRegister = cashRegistersData?.filter((item) => item.id === id)[0];
-    const { register, handleSubmit, control, reset, setValue, formState: { errors } } = useForm<ICachIncomingFormValues>({ mode: "all" });
+    const { register, handleSubmit,watch, control, reset, setValue, formState: { errors } } = useForm<ICachIncomingFormValues>({ mode: "all" });
+    const [warning,setWarning] = useState<string | null>(null);
 
     
     useEffect(() => {
@@ -42,6 +43,14 @@ const useCreateCashEntryHooks = (id:string) => {
         navigate(-1)
         reset()
     };
+
+    useEffect(()=>{
+     if(+watch('money') > +watch('debt')){
+        setWarning(t('Input_Errors.Debt'))
+     }else{
+        setWarning(null)
+     }
+    },[watch('debt'),watch('money')])
 
     const setPartnerDebt = (partnerId:string)=>{
         const currentPartner = partners.filter((item)=>item.id === + partnerId)?.[0];
@@ -69,6 +78,7 @@ const useCreateCashEntryHooks = (id:string) => {
         isLoading,
         setPartnerDebt,
         partnersData,
+        warning,
     }
 };
 

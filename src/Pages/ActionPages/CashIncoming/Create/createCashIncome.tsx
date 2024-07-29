@@ -10,7 +10,7 @@ import styles from '../../formTablestyles.module.scss';
 
 const CreateCashout: React.FC = () => {
   const { id } = useParams();
-  const { register, control, onSubmit, onCencele, handleSubmit, cashRegistersData, partnersData, errors, isLoading,setPartnerDebt } = useCreateCashEntryHooks(id!);
+  const { register, control, onSubmit, onCencele, handleSubmit, cashRegistersData, partnersData, errors, isLoading,setPartnerDebt,warning } = useCreateCashEntryHooks(id!);
 
   return (
     <div className={styles.container} >
@@ -26,9 +26,9 @@ const CreateCashout: React.FC = () => {
                   register={register}
                   registerName='date'
                   label={t('Forms.Date')}
-                  style={styles.inputBox}
+                  style={styles.inputRow}
                   inputStyle={styles.input}
-                  inputBoxStyles={styles.input}
+                  inputBoxStyles={styles.inputBox}
                   disabled
                   required={false}
                   defaultValue={moment(new Date()).format("DD/MM/YYYY")}
@@ -55,7 +55,7 @@ const CreateCashout: React.FC = () => {
                           label={t('Forms.CassRegister')}
                           placeholder={t('Forms.Select_CashRegister')}
                           showErrorText={false}
-                          style={styles.inputBox}
+                          style={styles.inputRow}
                           labelStyle={styles.formInputLabel}
                           error={errors.cashRegisterId}
                         />
@@ -85,7 +85,7 @@ const CreateCashout: React.FC = () => {
                           label={t('Forms.Partner')}
                           placeholder={t('Forms.Select_Partner')}
                           showErrorText={false}
-                          style={styles.inputBox}
+                          style={styles.inputRow}
                           labelStyle={styles.formInputLabel}
                           error={errors.partner}
                         />
@@ -100,10 +100,10 @@ const CreateCashout: React.FC = () => {
                   showTextError={false}
                   disabled
                   type='number'
-                  style={styles.inputBox}
+                  style={styles.inputRow}
                   inputStyle={styles.input}
                   labelStyle={styles.formInputLabel}
-                  inputBoxStyles={styles.input}
+                  inputBoxStyles={styles.inputBox}
                 />
                 <AuthInput
                   register={register}
@@ -111,11 +111,12 @@ const CreateCashout: React.FC = () => {
                   label={t('Forms.Money')}
                   showTextError={false}
                   type='number'
-                  style={styles.inputBox}
+                  style={styles.inputRow}
                   inputStyle={styles.input}
-                  inputBoxStyles={styles.input}
+                  inputBoxStyles={styles.inputBox}
                   labelStyle={styles.formInputLabel}
                   error={errors.money}
+                  warning={warning}
                 />
               </div>
               <div className={styles.buttonRow}>

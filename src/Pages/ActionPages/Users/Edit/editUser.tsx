@@ -39,7 +39,7 @@ const EditUser: React.FC = () => {
                                                     label={t('Roles.Role')}
                                                     placeholder={t('Roles.Placeholder')}
                                                     showErrorText={false}
-                                                    style={styles.inputBox}
+                                                    style={styles.inputRow}
                                                     labelStyle={styles.formInputLabel}
                                                     error={errors.role}
                                                 />
@@ -65,7 +65,7 @@ const EditUser: React.FC = () => {
                                                     label={t('Employee.Title')}
                                                     placeholder={t('Employee.Placeholder')}
                                                     showErrorText={false}
-                                                    style={styles.inputBox}
+                                                    style={styles.inputRow}
                                                     labelStyle={styles.formInputLabel}
                                                     error={errors.employee}
                                                 />
@@ -77,11 +77,11 @@ const EditUser: React.FC = () => {
                                     register={register}
                                     registerName='name'
                                     label={t('Forms.Name')}
-                                    style={styles.inputBox}
+                                    style={styles.inputRow}
                                     message={t('Input_Errors.FirstName')}
                                     patternValue={/^\s*[\p{L}-]{3,}\s*$/u}
                                     inputStyle={styles.input}
-                                    inputBoxStyles={styles.input}
+                                    inputBoxStyles={styles.inputBox}
                                     labelStyle={styles.formInputLabel}
                                     error={errors.name}
                                 />
@@ -91,9 +91,9 @@ const EditUser: React.FC = () => {
                                     label={t('Forms.Surname')}
                                     message={t('Input_Errors.Surname')}
                                     patternValue={/^\s*[\p{L}-]{3,}\s*$/u}
-                                    style={styles.inputBox}
+                                    style={styles.inputRow}
                                     inputStyle={styles.input}
-                                    inputBoxStyles={styles.input}
+                                    inputBoxStyles={styles.inputBox}
                                     labelStyle={styles.formInputLabel}
                                     error={errors.surename}
                                 />
@@ -103,9 +103,9 @@ const EditUser: React.FC = () => {
                                     label={t('Login_Form.Login_label')}
                                     message={t('Input_Errors.Email')}
                                     patternValue={/^\s*[A-ZA-z0-9._%+-]+@[A-Za-z0-9.-]+[A-Za-z]{2,}\s*$/gim}
-                                    style={styles.inputBox}
+                                    style={styles.inputRow}
                                     inputStyle={styles.input}
-                                    inputBoxStyles={styles.input}
+                                    inputBoxStyles={styles.inputBox}
                                     labelStyle={styles.formInputLabel}
                                     error={errors.username}
                                 />
@@ -117,9 +117,9 @@ const EditUser: React.FC = () => {
                                     patternValue={
                                         /^.{6,}$/gm
                                     }
-                                    style={styles.inputBox}
+                                    style={styles.inputRow}
                                     inputStyle={styles.input}
-                                    inputBoxStyles={styles.input}
+                                    inputBoxStyles={styles.inputBox}
                                     labelStyle={styles.formInputLabel}
                                     error={errors.password}
                                 />

@@ -1,0 +1,12 @@
+@import '../../General/Styles/mixin';
+@import '../../General/Styles/variables';
+
+.container {
+    color: $warning;
+    font-feature-settings: 'clig' off, 'liga' off;
+    @include textStyles("DM Sans", 11px, 400, 12px, $warning);
+    margin-top: 0.8vh;
+    min-height: 12px;
+    text-wrap: wrap;
+}
+

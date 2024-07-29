@@ -31,9 +31,9 @@ const CreateSales: React.FC = () => {
                   register={register}
                   registerName='documentDate'
                   label={t('Forms.Date')}
-                  style={styles.inputBox}
+                  style={styles.inputRow}
                   inputStyle={styles.input}
-                  inputBoxStyles={styles.input}
+                  inputBoxStyles={styles.inputBox}
                   disabled
                   required={false}
                   defaultValue={moment(new Date()).format("DD/MM/YYYY")}
@@ -60,7 +60,7 @@ const CreateSales: React.FC = () => {
                           label={t('Forms.Warehouse')}
                           placeholder={t('Forms.Select_Warehouse')}
                           showErrorText={false}
-                          style={styles.inputBox}
+                          style={styles.inputRow}
                           labelStyle={styles.formInputLabel}
                           error={errors.warehouseId}
                         />
@@ -86,7 +86,7 @@ const CreateSales: React.FC = () => {
                           label={t('Forms.Buyer')}
                           placeholder={t('Forms.Select_Buyer')}
                           showErrorText={false}
-                          style={styles.inputBox}
+                          style={styles.inputRow}
                           labelStyle={styles.formInputLabel}
                           error={errors.partnerId}
                         />

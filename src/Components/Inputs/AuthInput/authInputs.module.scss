@@ -28,6 +28,10 @@
   border: 1px solid $errorColor !important;
 }
 
+.warningBorder{
+  border: 1px solid $warning !important;
+}
+
 .input {
   @include textStyles("Montserrat arm", 14px, 500, 15px, $text_dark);
   outline: none;

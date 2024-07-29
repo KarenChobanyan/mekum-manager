@@ -30,9 +30,9 @@ const CreateStorageReturn:React.FC = () => {
                     register={register}
                     registerName='documentDate'
                     label={t('Forms.Date')}
-                    style={styles.inputBox}
+                    style={styles.inputRow}
                     inputStyle={styles.input}
-                    inputBoxStyles={styles.input}
+                    inputBoxStyles={styles.inputBox}
                     disabled
                     required={false}
                     defaultValue={moment(new Date()).format("DD/MM/YYYY")}
@@ -44,7 +44,7 @@ const CreateStorageReturn:React.FC = () => {
                     register={register}
                     registerName='warehouseId'
                     label={t('Forms.Warehouse')}
-                    style={styles.inputBox}
+                    style={styles.inputRow}
                     inputStyle={styles.input}
                     inputBoxStyles={styles.input}
                     disabled
@@ -71,7 +71,7 @@ const CreateStorageReturn:React.FC = () => {
                             label={t('Forms.Partner')}
                             placeholder={t('Forms.Select_Partner')}
                             showErrorText={false}
-                            style={styles.inputBox}
+                            style={styles.inputRow}
                             labelStyle={styles.formInputLabel}
                             error={errors.partnerId}
                           />

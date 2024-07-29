@@ -21,7 +21,8 @@
     "Email": "Incorrect E-mail Address",
     "Password": "At least 6 characters",
     "FirstName": "Invalid Name",
-    "Surname": "Invalid Surname"
+    "Surname": "Invalid Surname",
+    "Debt":"The amount entered exceeds the partner's debt"
   },
   "Header": {
     "My_Page": "My page",

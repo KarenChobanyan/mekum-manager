@@ -26,9 +26,9 @@ const CreateCashout: React.FC = () => {
                   register={register}
                   registerName='date'
                   label='Ամսաթիվ'
-                  style={styles.inputBox}
+                  style={styles.inputRow}
                   inputStyle={styles.input}
-                  inputBoxStyles={styles.input}
+                  inputBoxStyles={styles.inputBox}
                   disabled
                   required={false}
                   defaultValue={moment(new Date()).format("DD/MM/YYYY")}
@@ -55,7 +55,7 @@ const CreateCashout: React.FC = () => {
                           label={t('Forms.CassRegister')}
                           placeholder={t('Forms.Select_CashRegister')}
                           showErrorText={false}
-                          style={styles.inputBox}
+                          style={styles.inputRow}
                           labelStyle={styles.formInputLabel}
                           error={errors.cashRegisterId}
                         />
@@ -70,10 +70,10 @@ const CreateCashout: React.FC = () => {
                   showTextError={false}
                   disabled
                   type='number'
-                  style={styles.inputBox}
+                  style={styles.inputRow}
                   inputStyle={styles.input}
                   labelStyle={styles.formInputLabel}
-                  inputBoxStyles={styles.input}
+                  inputBoxStyles={styles.inputBox}
                 />
                 <Controller
                   control={control}
@@ -93,7 +93,7 @@ const CreateCashout: React.FC = () => {
                           label={t('Forms.Partner')}
                           placeholder={t('Forms.Select_Partner')}
                           showErrorText={false}
-                          style={styles.inputBox}
+                          style={styles.inputRow}
                           labelStyle={styles.formInputLabel}
                           error={errors.partner}
                         />
@@ -107,9 +107,9 @@ const CreateCashout: React.FC = () => {
                   label={t('Forms.Money')}
                   showTextError={false}
                   type='number'
-                  style={styles.inputBox}
+                  style={styles.inputRow}
                   inputStyle={styles.input}
-                  inputBoxStyles={styles.input}
+                  inputBoxStyles={styles.inputBox}
                   labelStyle={styles.formInputLabel}
                   error={errors.money}
                 />
