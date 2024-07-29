@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Controller } from 'react-hook-form';
-import { AutoComplete, Button, CustomPagination, CustomTable, Loading, NoData } from '../../../Components';
-import { useAutocompleteData, useCashRegisterHooks, useGeneralHooks } from '../../../General/Hooks/hooks';
+import { AuthInput, AutoComplete, Button, CustomPagination, CustomTable, Loading, NoData } from '../../../Components';
+import { useAutocompleteData, useCashRegisterHooks, useDirectoriesHooks, useGeneralHooks } from '../../../General/Hooks/hooks';
 import useCashOutHooks from './cashOut-hooks';
 import { ButtonTypes } from '../../../Interfaces/componentTypes';
 import styles from '../styles.module.scss';
@@ -9,9 +9,15 @@ import styles from '../styles.module.scss';
 const CashOut: React.FC = () => {
   const { t, navigate } = useGeneralHooks();
   const { cashRegistersData } = useAutocompleteData();
+  const {cashRegisters} = useDirectoriesHooks();
   const [cashRegisterId, setCashRegisterIdId] = useState<string | undefined>(cashRegistersData?.[0].id!)
-  const { control } = useCashRegisterHooks();
-  const { cashoutsData, bodyData, headerData, activePage, setActivePage, setOffset } = useCashOutHooks(cashRegisterId! ?? cashRegistersData?.[0].id!)
+  const { control, register, setValue } = useCashRegisterHooks();
+  const { cashoutsData, bodyData, headerData, activePage, setActivePage, setOffset } = useCashOutHooks(cashRegisterId! ?? cashRegistersData?.[0].id!);
+
+  useEffect(()=>{
+    const currentCashRegister = cashRegisters?.result.filter((item)=>item.id === +cashRegisterId!)?.[0];
+    setValue('balance',String(currentCashRegister?.code!))
+  },[cashRegisterId]);
 
   return (
     <div className={styles.container}>
@@ -20,34 +26,46 @@ const CashOut: React.FC = () => {
           ?
           <>
             <div className={styles.top}>
-              <Controller
-                control={control}
-                name='cashRegister'
-                rules={{
-                  required: t('Input_Errors.Required'),
-                }}
-                render={({ field: { onChange, name, value } }) => {
-                  return (
-                    <div className='formAutocomplete'>
-                      <AutoComplete
-                        value={value ?? cashRegistersData?.[0]!}
-                        name={name}
-                        onChange={(value) => {
-                          onChange(value)
-                          setCashRegisterIdId(value?.id!)
-                        }}
-                        id='warehouseId'
-                        data={cashRegistersData}
-                        label={t('Forms.CassRegister')}
-                        placeholder={t('Forms.Select_Warehouse')}
-                        showErrorText={false}
-                        style={styles.inputBox}
-                        labelStyle={styles.formInputLabel}
-                      />
-                    </div>
-                  );
-                }}
-              />
+              <div className={styles.topInputs}>
+                <Controller
+                  control={control}
+                  name='cashRegister'
+                  rules={{
+                    required: t('Input_Errors.Required'),
+                  }}
+                  render={({ field: { onChange, name, value } }) => {
+                    return (
+                      <div className='formAutocomplete'>
+                        <AutoComplete
+                          value={value ?? cashRegistersData?.[0]!}
+                          name={name}
+                          onChange={(value) => {
+                            onChange(value)
+                            setCashRegisterIdId(value?.id!)
+                          }}
+                          id='warehouseId'
+                          data={cashRegistersData}
+                          label={t('Forms.CassRegister')}
+                          placeholder={t('Forms.Select_Warehouse')}
+                          showErrorText={false}
+                          labelStyle={styles.formInputLabel}
+                        />
+                      </div>
+                    );
+                  }}
+                />
+                <AuthInput
+                  register={register}
+                  registerName='balance'
+                  label={t('Forms.Remainder')}
+                  showTextError={false}
+                  disabled
+                  type='number'
+                  inputStyle={styles.inputBox}
+                  inputBoxStyles={styles.inputBox}
+                  labelStyle={styles.formInputLabel}
+                />
+              </div>
               {
                 cashoutsData?.result!.length! > 0
                 &&

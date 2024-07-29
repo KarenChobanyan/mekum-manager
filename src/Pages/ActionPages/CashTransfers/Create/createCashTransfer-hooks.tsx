@@ -2,24 +2,30 @@ import { useEffect } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
-import { useAutocompleteData, useGeneralHooks } from "../../../../General/Hooks/hooks";
+import { useAutocompleteData, useDirectoriesHooks, useGeneralHooks } from "../../../../General/Hooks/hooks";
 import { IPostCashTransfer } from "../../../../Interfaces/requestTypes";
 import { usePostCashTransferMutation } from "../../../../API/actionsApi";
 
 export interface ICashTransferFormValues {
     date: string,
     exitCashRegisterId: IAutocompleteItem,
+    balance:string,
     entryCashRegisterId: IAutocompleteItem,
     money: string,
     draft: string
 };
 
-const useCreateCashTransferHooks = () => {
+const useCreateCashTransferHooks = (id:string) => {
     const { cashRegistersData, allCashRegistersData } = useAutocompleteData();
     const [add, { isLoading, isSuccess, isError }] = usePostCashTransferMutation();
     const { navigate, t } = useGeneralHooks();
-    const { register, handleSubmit, control, reset, watch, formState: { errors } } = useForm<ICashTransferFormValues>({ mode: "all" });
+    const {cashRegisters} = useDirectoriesHooks();
+    const { register, handleSubmit, control, reset, watch,setValue, formState: { errors } } = useForm<ICashTransferFormValues>({ mode: "all" });
 
+    useEffect(()=>{
+        const currentCashRegister = cashRegisters?.result.filter((item)=>item.id === +id!)?.[0];
+        setValue('balance',String(currentCashRegister?.code!))
+      },[id]);
 
     useEffect(() => {
         if (isSuccess) {

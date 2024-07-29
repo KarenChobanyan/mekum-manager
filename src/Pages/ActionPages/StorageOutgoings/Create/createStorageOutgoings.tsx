@@ -30,9 +30,9 @@ const CreateStorageOutgoings: React.FC = () => {
                   register={register}
                   registerName='documentDate'
                   label={t('Forms.Date')}
-                  style={styles.inputBox}
+                  style={styles.inputRow}
                   inputStyle={styles.input}
-                  inputBoxStyles={styles.input}
+                  inputBoxStyles={styles.inputBox}
                   disabled
                   required={false}
                   defaultValue={moment(new Date()).format("DD/MM/YYYY")}
@@ -59,7 +59,7 @@ const CreateStorageOutgoings: React.FC = () => {
                           label={t('Forms.Warehouse')}
                           placeholder={t('Forms.Select_Warehouse')}
                           showErrorText={false}
-                          style={styles.inputBox}
+                          style={styles.inputRow}
                           labelStyle={styles.formInputLabel}
                           error={errors.warehouseId}
                         />
@@ -67,32 +67,6 @@ const CreateStorageOutgoings: React.FC = () => {
                     );
                   }}
                 />
-                {/* <Controller
-                  control={control}
-                  name='partnerId'
-                  rules={{
-                    required: t('Input_Errors.Required'),
-                  }}
-                  render={({ field: { onChange, name, value } }) => {
-                    return (
-                      <div className='formAutocomplete'>
-                        <AutoComplete
-                          value={value}
-                          name={name}
-                          onChange={onChange}
-                          id='partnersId'
-                          data={partnersData}
-                          label={t('Forms.Recipient')}
-                          placeholder={t('Forms.Select_Recipient')}
-                          showErrorText={false}
-                          style={styles.inputBox}
-                          labelStyle={styles.formInputLabel}
-                          error={errors.partnerId}
-                        />
-                      </div>
-                    );
-                  }}
-                /> */}
               </div>
               <div className={styles.itemsBox}>
                 <FormItems

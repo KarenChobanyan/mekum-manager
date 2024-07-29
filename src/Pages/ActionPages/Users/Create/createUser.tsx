@@ -38,7 +38,7 @@ const CreateUser: React.FC = () => {
                                                 label={t('Roles.Role')}
                                                 placeholder={t('Roles.Placeholder')}
                                                 showErrorText={false}
-                                                style={styles.inputBox}
+                                                style={styles.inputRow}
                                                 labelStyle={styles.formInputLabel}
                                                 error={errors.role}
                                             />
@@ -64,7 +64,7 @@ const CreateUser: React.FC = () => {
                                                 label={t('Employee.Title')}
                                                 placeholder={t('Employee.Placeholder')}
                                                 showErrorText={false}
-                                                style={styles.inputBox}
+                                                style={styles.inputRow}
                                                 labelStyle={styles.formInputLabel}
                                                 error={errors.employee}
                                             />
@@ -75,50 +75,50 @@ const CreateUser: React.FC = () => {
                             <AuthInput
                                 register={register}
                                 registerName='name'
-                                label='Անուն'
-                                style={styles.inputBox}
+                                label={t('Forms.Name')}
+                                style={styles.inputRow}
                                 message={t('Input_Errors.FirstName')}
                                 patternValue={/^\s*[\p{L}-]{3,}\s*$/u}
                                 inputStyle={styles.input}
-                                inputBoxStyles={styles.input}
+                                inputBoxStyles={styles.inputBox}
                                 labelStyle={styles.formInputLabel}
                                 error={errors.name}
                             />
                             <AuthInput
                                 register={register}
                                 registerName='surename'
-                                label='Ազգանուն'
+                                label={t('Forms.Surname')}
                                 message={t('Input_Errors.Surname')}
                                 patternValue={/^\s*[\p{L}-]{3,}\s*$/u}
-                                style={styles.inputBox}
+                                style={styles.inputRow}
                                 inputStyle={styles.input}
-                                inputBoxStyles={styles.input}
+                                inputBoxStyles={styles.inputBox}
                                 labelStyle={styles.formInputLabel}
                                 error={errors.surename}
                             />
                             <AuthInput
                                 register={register}
                                 registerName='username'
-                                label='էլ․ հասցե'
+                                label={t('Login_Form.Login_label')}
                                 message={t('Input_Errors.Email')}
                                 patternValue={/^\s*[A-ZA-z0-9._%+-]+@[A-Za-z0-9.-]+[A-Za-z]{2,}\s*$/gim}
-                                style={styles.inputBox}
+                                style={styles.inputRow}
                                 inputStyle={styles.input}
-                                inputBoxStyles={styles.input}
+                                inputBoxStyles={styles.inputBox}
                                 labelStyle={styles.formInputLabel}
                                 error={errors.username}
                             />
                             <AuthInput
                                 register={register}
                                 registerName='password'
-                                label='Գաղտնաբառ'
+                                label={t('Login_Form.Password_label')}
                                 message={t('Input_Errors.Password')}
                                 patternValue={
                                     /^.{6,}$/gm
                                 }
-                                style={styles.inputBox}
+                                style={styles.inputRow}
                                 inputStyle={styles.input}
-                                inputBoxStyles={styles.input}
+                                inputBoxStyles={styles.inputBox}
                                 labelStyle={styles.formInputLabel}
                                 error={errors.password}
                             />
@@ -129,13 +129,13 @@ const CreateUser: React.FC = () => {
                                     type='button'
                                     onClick={onCencele}
                                     buttonType={ButtonTypes.Primery}
-                                    title='Չեղարկել'
+                                    title={t('Button.Cancel')}
                                     buttonStyle={styles.button}
                                 />
                                 <Button
                                     type='submit'
                                     buttonType={ButtonTypes.Primery}
-                                    title='Հաստատել'
+                                    title={t('Button.Submit')}
                                     buttonStyle={styles.button}
                                 />
                             </div>

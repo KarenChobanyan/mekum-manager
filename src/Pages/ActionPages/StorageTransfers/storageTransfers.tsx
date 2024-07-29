@@ -43,7 +43,6 @@ const StorageTransfers: React.FC = () => {
                           label={t('Forms.Warehouse')}
                           placeholder={t('Forms.Select_Warehouse')}
                           showErrorText={false}
-                          style={styles.inputBox}
                           labelStyle={styles.formInputLabel}
                         />
                       </div>
@@ -72,7 +71,6 @@ const StorageTransfers: React.FC = () => {
                           label={t('Forms.Type')}
                           placeholder={t('Forms.Select_Warehouse')}
                           showErrorText={false}
-                          style={styles.inputBox}
                           labelStyle={styles.formInputLabel}
                         />
                       </div>

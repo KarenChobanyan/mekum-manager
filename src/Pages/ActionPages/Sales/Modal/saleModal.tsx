@@ -14,7 +14,7 @@ interface IProps {
 const SaleModal: React.FC<IProps> = (props) => {
     const { data, handleClose, } = props;
     const { open, money, partner } = data;
-    const { control, register, handleSubmit, reset, errors, onSubmit, cashRegistersData, t,isLoading } = useSalesModal(partner!,handleClose);
+    const { control, register, handleSubmit, reset, errors, onSubmit, cashRegistersData, t, isLoading,warning } = useSalesModal(partner!, handleClose);
     const onClose = () => {
         handleClose();
         reset()
@@ -64,6 +64,18 @@ const SaleModal: React.FC<IProps> = (props) => {
                         </div>
                         <AuthInput
                             register={register}
+                            registerName='debt'
+                            label={t('Forms.Debt')}
+                            showTextError={false}
+                            disabled
+                            type='number'
+                            style={styles.inputBox}
+                            inputStyle={styles.input}
+                            labelStyle={styles.formInputLabel}
+                            inputBoxStyles={styles.input}
+                        />
+                        <AuthInput
+                            register={register}
                             registerName='money'
                             label={t('Forms.Money')}
                             showTextError={false}
@@ -74,6 +86,7 @@ const SaleModal: React.FC<IProps> = (props) => {
                             inputBoxStyles={styles.input}
                             labelStyle={styles.formInputLabel}
                             error={errors.money}
+                            warning={warning}
                         />
                     </div>
                     <div >

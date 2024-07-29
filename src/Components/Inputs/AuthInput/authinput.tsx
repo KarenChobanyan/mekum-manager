@@ -11,6 +11,7 @@ import moment from 'moment';
 import { useBorder } from '../input-hooks';
 import { t } from 'i18next';
 import { ILoginFormValues } from '../../../Interfaces/interfaces';
+import AuthWarning from '../../AuthWarning/authWarning';
 import AuthError from '../../AuthError/authError';
 import styles from './authInputs.module.scss';
 
@@ -36,11 +37,12 @@ export interface IInputProps {
   | Record<string, Validate<any, FieldValues | ILoginFormValues>>
   | undefined;
   inputStyle?: string;
-  inputBoxStyles?:string,
+  inputBoxStyles?: string;
   style?: string;
   showTextError?: boolean;
   labelStyle?: string,
-  step?:number,
+  step?: number,
+  warning?: string | null;
 }
 
 const AuthInput: React.FC<IInputProps> = (props) => {
@@ -68,7 +70,8 @@ const AuthInput: React.FC<IInputProps> = (props) => {
     inputBoxStyles,
     labelStyle,
     showTextError = true,
-    step = 0.01
+    step = 0.01,
+    warning = null
   } = props;
   const [inputValue, setInputValue] = useState<string | undefined>(
     defaultValue
@@ -88,54 +91,55 @@ const AuthInput: React.FC<IInputProps> = (props) => {
         </label>
       }
       <div className={styles.inputContainer}>
-      <div
-        className={`${styles.inputBox} ${border && styles.border} ${inputBoxStyles} ${error && styles.errorBorder}`}
-        onFocus={renderBorder}
-        onBlur={removeBorder}
-      >
-        <input
-          id={id}
-          type={type}
-          disabled={disabled}
-          defaultValue={
-            inputValue ? (type === 'date' ? undefined : inputValue) : undefined
-          }
-          value={
-            inputValue
-              ? type === 'date'
-                ? moment(defaultValue).format('YYYY-MM-DD')
+        <div
+          className={`${styles.inputBox} ${border && styles.border} ${inputBoxStyles} ${error && styles.errorBorder} ${warning && styles.warningBorder}`}
+          onFocus={renderBorder}
+          onBlur={removeBorder}
+        >
+          <input
+            id={id}
+            type={type}
+            disabled={disabled}
+            defaultValue={
+              inputValue ? (type === 'date' ? undefined : inputValue) : undefined
+            }
+            value={
+              inputValue
+                ? type === 'date'
+                  ? moment(defaultValue).format('YYYY-MM-DD')
+                  : undefined
                 : undefined
-              : undefined
-          }
-          onKeyDown={(e) => {
-            type === 'date' && e.preventDefault();
-          }}
-          className={`${styles.input} ${inputStyle}`}
-          placeholder={defaultValue ? undefined : placeholder}
-          min={minDate}
-          max={maxDate}
-          step={step}
-          {...register(registerName, {
-            required: required !== false && t('Input_Errors.Required'),
-            onChange: onChange,
-            validate: validation,
-            pattern: {
-              value: patternValue || /.*/,
-              message: message || '',
-            },
-          })}
-        />
-        {children && (
-          <div
-            onClick={renderBorder}
-            onBlur={removeBorder}
-            className={styles.eyeCont}
-          >
-            {children && children}
-          </div>
-        )}
-      </div>
-      {showTextError && <AuthError text={error && error.message} />}
+            }
+            onKeyDown={(e) => {
+              type === 'date' && e.preventDefault();
+            }}
+            className={`${styles.input} ${inputStyle}`}
+            placeholder={defaultValue ? undefined : placeholder}
+            min={minDate}
+            max={maxDate}
+            step={step}
+            {...register(registerName, {
+              required: required !== false && t('Input_Errors.Required'),
+              onChange: onChange,
+              validate: validation,
+              pattern: {
+                value: patternValue || /.*/,
+                message: message || '',
+              },
+            })}
+          />
+          {children && (
+            <div
+              onClick={renderBorder}
+              onBlur={removeBorder}
+              className={styles.eyeCont}
+            >
+              {children && children}
+            </div>
+          )}
+        </div>
+        {showTextError && <AuthError text={error && error.message} />}
+        {warning && <AuthWarning text={warning} />}
       </div>
     </div>
   );

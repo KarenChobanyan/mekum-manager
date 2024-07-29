@@ -42,10 +42,9 @@ const CashTransfers: React.FC = () => {
                           }}
                           id='cashRegister'
                           data={cashRegistersData}
-                          label={t('Forms.Warehouse')}
+                          label={t('Forms.CassRegister')}
                           placeholder={t('Forms.Select_Warehouse')}
                           showErrorText={false}
-                          style={styles.inputBox}
                           labelStyle={styles.formInputLabel}
                         />
                       </div>
@@ -73,7 +72,6 @@ const CashTransfers: React.FC = () => {
                           label={t('Forms.Type')}
                           placeholder={t('Forms.Select_Warehouse')}
                           showErrorText={false}
-                          style={styles.inputBox}
                           labelStyle={styles.formInputLabel}
                         />
                       </div>

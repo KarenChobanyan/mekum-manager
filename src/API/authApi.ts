@@ -28,23 +28,31 @@ export const authApi = createApi({
     }),
     getUsers: builder.query<GetUsersResponse, void>({
       query: () => ({
-          url: '/users',
-          method: 'GET',
+        url: '/users',
+        method: 'GET',
       }),
       providesTags: ['Users']
-  }),
-  getUserById: builder.query<IGetMeResponseData, string>({
-    query: (id) => ({
+    }),
+    getUserById: builder.query<GetUsersResponse, string>({
+      query: (id) => ({
         url: `/users/${id}`,
         method: 'GET',
+      }),
     }),
-}),
+    removeUser: builder.mutation<any, string>({
+      query: (id) => ({
+        url: `/users/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Users']
+    }),
   }),
 });
 
-export const  {
+export const {
   useLoginMutation,
   useRegisterMutation,
   useGetUsersQuery,
-  useGetUserByIdQuery
+  useGetUserByIdQuery,
+  useRemoveUserMutation
 } = authApi;

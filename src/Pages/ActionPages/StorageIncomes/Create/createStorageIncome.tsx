@@ -29,9 +29,9 @@ const CreateStorageIncome: React.FC = () => {
                   register={register}
                   registerName='documentDate'
                   label={t('Forms.Date')}
-                  style={styles.inputBox}
+                  style={styles.inputRow}
                   inputStyle={styles.input}
-                  inputBoxStyles={styles.input}
+                  inputBoxStyles={styles.inputBox}
                   required={false}
                   disabled
                   defaultValue={moment(new Date()).format("DD/MM/YYYY")}
@@ -58,7 +58,7 @@ const CreateStorageIncome: React.FC = () => {
                           label={t('Forms.Warehouse')}
                           placeholder={t('Forms.Select_Warehouse')}
                           showErrorText={false}
-                          style={styles.inputBox}
+                          style={styles.inputRow}
                           labelStyle={styles.formInputLabel}
                           error={errors.warehouseId}
                         />
@@ -87,7 +87,7 @@ const CreateStorageIncome: React.FC = () => {
                           label={t('Forms.PartnerIn')}
                           placeholder={t('Forms.Select_PartnerIn')}
                           showErrorText={false}
-                          style={styles.inputBox}
+                          style={styles.inputRow}
                           labelStyle={styles.formInputLabel}
                           error={errors.partnersId}
                         />

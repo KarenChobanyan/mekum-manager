@@ -39,10 +39,18 @@
     gap: 15px;
 }
 
-.inputBox {
+.inputRow {
     @include flexStyles(flex, row, center, space-between);
     gap: 30px;
     flex: 1;
+}
+
+.inputBox{
+    @include flexStyles(flex, row, flex-end !important, normal);
+    width: 280px;
+    max-width: 280px;
+    background-color: $formInput;
+    padding: 8px;
 }
 
 .input {
@@ -147,6 +155,12 @@
 .button {
     border-radius: 10px !important;
     width: fit-content;
+}
+
+.deleteButton {
+    border-radius: 10px !important;
+    width: fit-content;
+    background-color: $errorColor
 }
 
 .totalBox{

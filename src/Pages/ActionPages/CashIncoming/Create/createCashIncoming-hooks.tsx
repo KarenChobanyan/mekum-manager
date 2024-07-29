@@ -1,9 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import moment from "moment";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
-import { useAutocompleteData, useGeneralHooks } from "../../../../General/Hooks/hooks";
+import { useAutocompleteData, useDirectoriesHooks, useGeneralHooks } from "../../../../General/Hooks/hooks";
 import { usePostCashEntryMutation } from "../../../../API/actionsApi";
 import { ICashoutRequest } from "../../../../Interfaces/requestTypes";
 
@@ -11,6 +11,7 @@ export interface ICachIncomingFormValues {
     date: string,
     cashRegisterId: IAutocompleteItem,
     partner:IAutocompleteItem,
+    debt:string,
     money: string,
 };
 
@@ -18,9 +19,12 @@ const useCreateCashEntryHooks = (id:string) => {
     const [add, { isLoading, isSuccess, isError }] = usePostCashEntryMutation();
     const { navigate, t } = useGeneralHooks();
     const { cashRegistersData,partnersData } = useAutocompleteData();
+    const {partners} = useDirectoriesHooks();
     const cashRegister = cashRegistersData?.filter((item) => item.id === id)[0];
-    const { register, handleSubmit, control, reset, setValue, formState: { errors } } = useForm<ICachIncomingFormValues>({ mode: "all" });
+    const { register, handleSubmit,watch, control, reset, setValue, formState: { errors } } = useForm<ICachIncomingFormValues>({ mode: "all" });
+    const [warning,setWarning] = useState<string | null>(null);
 
+    
     useEffect(() => {
         setValue('cashRegisterId', cashRegister!)
     }, [cashRegister]);
@@ -38,6 +42,19 @@ const useCreateCashEntryHooks = (id:string) => {
     const onCencele = () => {
         navigate(-1)
         reset()
+    };
+
+    useEffect(()=>{
+     if(+watch('money') > +watch('debt')){
+        setWarning(t('Input_Errors.Debt'))
+     }else{
+        setWarning(null)
+     }
+    },[watch('debt'),watch('money')])
+
+    const setPartnerDebt = (partnerId:string)=>{
+        const currentPartner = partners.filter((item)=>item.id === + partnerId)?.[0];
+        setValue('debt',String(currentPartner.code!))
     };
 
     const onSubmit: SubmitHandler<ICachIncomingFormValues | FieldValues> = (values) => {
@@ -59,7 +76,9 @@ const useCreateCashEntryHooks = (id:string) => {
         control,
         errors,
         isLoading,
+        setPartnerDebt,
         partnersData,
+        warning,
     }
 };
 

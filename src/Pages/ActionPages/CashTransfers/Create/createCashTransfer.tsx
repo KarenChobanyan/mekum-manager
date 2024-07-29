@@ -10,7 +10,7 @@ import { useParams } from 'react-router';
 
 const CreateCashTransfer: React.FC = () => {
   const {id} = useParams();
-  const { register, control, onSubmit, onCencele, handleSubmit, watch, isLoading, cashRegistersData,allCashRegistersData, errors } = useCreateCashTransferHooks();
+  const { register, control, onSubmit, onCencele, handleSubmit, watch, isLoading, cashRegistersData,allCashRegistersData, errors } = useCreateCashTransferHooks(id!);
 
   return (
     <div className={styles.container} >
@@ -26,9 +26,9 @@ const CreateCashTransfer: React.FC = () => {
                   register={register}
                   registerName='date'
                   label='Ամսաթիվ'
-                  style={styles.inputBox}
+                  style={styles.inputRow}
                   inputStyle={styles.input}
-                  inputBoxStyles={styles.input}
+                  inputBoxStyles={styles.inputBox}
                   disabled
                   labelStyle={styles.formInputLabel}
                   required={false}
@@ -58,13 +58,25 @@ const CreateCashTransfer: React.FC = () => {
                           label='Ելք․ դրամարկղ'
                           placeholder="Ընտրեք ելք․ դրամարկղը"
                           showErrorText={false}
-                          style={styles.inputBox}
+                          style={styles.inputRow}
                           labelStyle={styles.formInputLabel}
                           error={errors.exitCashRegisterId}
                         />
                       </div>
                     );
                   }}
+                />
+                 <AuthInput
+                  register={register}
+                  registerName='balance'
+                  label={t('Forms.Remainder')}
+                  showTextError={false}
+                  disabled
+                  type='number'
+                  style={styles.inputRow}
+                  inputStyle={styles.input}
+                  labelStyle={styles.formInputLabel}
+                  inputBoxStyles={styles.inputBox}
                 />
                 <Controller
                   control={control}
@@ -88,7 +100,7 @@ const CreateCashTransfer: React.FC = () => {
                           label='Մուտք դարամարկղ'
                           placeholder="Ընտրեք դրամարկղը"
                           showErrorText={false}
-                          style={styles.inputBox}
+                          style={styles.inputRow}
                           labelStyle={styles.formInputLabel}
                           error={errors.entryCashRegisterId}
                         />
@@ -102,9 +114,9 @@ const CreateCashTransfer: React.FC = () => {
                   label='Գումար'
                   showTextError={false}
                   type='number'
-                  style={styles.inputBox}
+                  style={styles.inputRow}
                   inputStyle={styles.input}
-                  inputBoxStyles={styles.input}
+                  inputBoxStyles={styles.inputBox}
                   labelStyle={styles.formInputLabel}
                   error={errors.money}
                 />

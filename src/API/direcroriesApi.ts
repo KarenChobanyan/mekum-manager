@@ -9,7 +9,7 @@ export const directoriesApi = createApi({
     baseQuery: axiosBaseQuery({
         baseUrl: process.env.REACT_APP_API_KEY,
     }),
-    tagTypes:[...actionsTagTypes],
+    tagTypes: [...actionsTagTypes],
     endpoints: (builder) => ({
         getWarehouses: builder.query<GetWarehousesResponseData, void>({
             query: () => ({
@@ -34,21 +34,21 @@ export const directoriesApi = createApi({
                 url: '/mekum/goods',
                 method: 'GET',
             }),
-            providesTags: ['WarehouseEntries','Sales','MyGoods']
+            providesTags: ['WarehouseEntries', 'Sales', 'MyGoods']
         }),
         getAllGoods: builder.query<AllGoodsResponse, void>({
             query: () => ({
                 url: '/mekum/all-goods',
                 method: 'GET',
             }),
-            providesTags: ['WarehouseEntries','Sales']
+            providesTags: ['WarehouseEntries', 'Sales']
         }),
         getWarehouseGoods: builder.query<GoodsResponseData, string>({
             query: (id) => ({
                 url: `/mekum/goods?id=${id}`,
                 method: 'GET',
             }),
-            providesTags: ['WarehouseEntries','Sales','MyGoods']
+            providesTags: ['WarehouseEntries', 'Sales', 'MyGoods']
         }),
         getPartners: builder.query<IGetPartnersResponse, void>({
             query: () => ({
@@ -61,7 +61,7 @@ export const directoriesApi = createApi({
                 url: `/mekum/good-batches?warehouseId=${credentials.warehouseId}&materialValueId=${credentials.materialValueId}`,
                 method: 'GET',
             }),
-            providesTags: ['WarehouseEntries','Sales']
+            providesTags: ['WarehouseEntries', 'Sales']
         }),
         getCashRegisters: builder.query<CashRegistersResponse, void>({
             query: () => ({
@@ -75,12 +75,12 @@ export const directoriesApi = createApi({
                 method: 'GET',
             }),
         }),
-    getAllCashRegisters: builder.query<CashRegistersResponse, void>({
-        query: () => ({
-            url: '/mekum/all-cash-registers',
-            method: 'GET',
+        getAllCashRegisters: builder.query<CashRegistersResponse, void>({
+            query: () => ({
+                url: '/mekum/all-cash-registers',
+                method: 'GET',
+            }),
         }),
-    }),
     }),
 });
 

@@ -2,16 +2,17 @@ import { useState } from 'react';
 import { t } from 'i18next';
 import moment from "moment";
 import { useGetCashEntryQuery } from "../../../API/actionsApi";
-import { ITableBodyData, ITableFormItemData, ITableHeader, TableCellContentTypes } from "../../../Interfaces/componentTypes";
+import { ITableBodyData, ITableHeader, TableCellContentTypes } from "../../../Interfaces/componentTypes";
 import { CashOutResponse } from "../../../Interfaces/responseTypes";
-import styles from '../formTablestyles.module.scss';
 import { useAutocompleteData } from '../../../General/Hooks/hooks';
+import styles from '../formTablestyles.module.scss';
 
 const useCashEntryHooks = (id: string) => {
     const [activePage, setActivePage] = useState<number>(1);
     const [offset, setOffset] = useState<number>(0);
     const { partnersData } = useAutocompleteData();
     const { data: cashEntryData } = useGetCashEntryQuery({ id: id, limit: 7, offset: offset });
+    
     const setPartnerName = (id: string) => {
         const partner = partnersData?.filter((item) => item.id === id)?.[0];
         return partner?.title

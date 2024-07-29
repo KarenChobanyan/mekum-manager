@@ -41,7 +41,6 @@ const Sales: React.FC = () => {
                         label={t('Forms.Warehouse')}
                         placeholder={t('Forms.Select_Warehouse')}
                         showErrorText={false}
-                        style={styles.inputBox}
                         labelStyle={styles.formInputLabel}
                       />
                     </div>

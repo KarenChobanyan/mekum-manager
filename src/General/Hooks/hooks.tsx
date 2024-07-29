@@ -263,9 +263,12 @@ export const useWarehouseHooks = () => {
 };
 
 export const useCashRegisterHooks = () => {
-  const { control } = useForm<{ cashRegister: IAutocompleteItem, type: IAutocompleteItem }>();
+  const { control,register,setValue,reset } = useForm<{ cashRegister: IAutocompleteItem, type: IAutocompleteItem,balance:string }>();
   return {
     control,
+    register,
+    setValue,
+    reset
   }
 };
 
