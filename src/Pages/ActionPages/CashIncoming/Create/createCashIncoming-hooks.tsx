@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import moment from "moment";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
-import { useAutocompleteData, useGeneralHooks } from "../../../../General/Hooks/hooks";
+import { useAutocompleteData, useDirectoriesHooks, useGeneralHooks } from "../../../../General/Hooks/hooks";
 import { usePostCashEntryMutation } from "../../../../API/actionsApi";
 import { ICashoutRequest } from "../../../../Interfaces/requestTypes";
 
@@ -11,6 +11,7 @@ export interface ICachIncomingFormValues {
     date: string,
     cashRegisterId: IAutocompleteItem,
     partner:IAutocompleteItem,
+    balance:string;
     money: string,
 };
 
@@ -18,8 +19,14 @@ const useCreateCashEntryHooks = (id:string) => {
     const [add, { isLoading, isSuccess, isError }] = usePostCashEntryMutation();
     const { navigate, t } = useGeneralHooks();
     const { cashRegistersData,partnersData } = useAutocompleteData();
+    const {cashRegisters} = useDirectoriesHooks();
     const cashRegister = cashRegistersData?.filter((item) => item.id === id)[0];
     const { register, handleSubmit, control, reset, setValue, formState: { errors } } = useForm<ICachIncomingFormValues>({ mode: "all" });
+
+    useEffect(()=>{
+        const currentCashRegister = cashRegisters?.result.filter((item)=>item.id === +id!)?.[0];
+        setValue('balance',String(currentCashRegister?.code!))
+      },[id]);
 
     useEffect(() => {
         setValue('cashRegisterId', cashRegister!)

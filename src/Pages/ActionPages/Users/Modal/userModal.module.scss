@@ -1,0 +1,22 @@
+@import '../../../../General/Styles/mixin';
+@import '../../../../General/Styles/variables';
+
+.container {
+    width: 100%;
+    @include flexStyles(flex,column,normal,normal);
+    gap: 30px;
+}
+
+.text{
+    @include textStyles("Montserrat arm", 16px, 500, normal, $main_color);
+}
+
+.buttonRow{
+    width: 100%;
+    @include flexStyles(flex,row,normal,flex-end);
+    gap: 20px;
+}
+
+.button{
+    width: fit-content;
+}

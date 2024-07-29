@@ -149,6 +149,12 @@
     width: fit-content;
 }
 
+.deleteButton {
+    border-radius: 10px !important;
+    width: fit-content;
+    background-color: $errorColor
+}
+
 .totalBox{
     @include flexStyles(flex, row, center, normal);
     gap: 20px;

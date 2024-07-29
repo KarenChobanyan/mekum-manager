@@ -10,7 +10,7 @@ import { useParams } from 'react-router';
 
 const CreateCashTransfer: React.FC = () => {
   const {id} = useParams();
-  const { register, control, onSubmit, onCencele, handleSubmit, watch, isLoading, cashRegistersData,allCashRegistersData, errors } = useCreateCashTransferHooks();
+  const { register, control, onSubmit, onCencele, handleSubmit, watch, isLoading, cashRegistersData,allCashRegistersData, errors } = useCreateCashTransferHooks(id!);
 
   return (
     <div className={styles.container} >
@@ -65,6 +65,18 @@ const CreateCashTransfer: React.FC = () => {
                       </div>
                     );
                   }}
+                />
+                 <AuthInput
+                  register={register}
+                  registerName='balance'
+                  label={t('Forms.Remainder')}
+                  showTextError={false}
+                  disabled
+                  type='number'
+                  style={styles.inputBox}
+                  inputStyle={styles.input}
+                  labelStyle={styles.formInputLabel}
+                  inputBoxStyles={styles.input}
                 />
                 <Controller
                   control={control}

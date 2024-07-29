@@ -25,7 +25,7 @@ const CreateCashout: React.FC = () => {
                 <AuthInput
                   register={register}
                   registerName='date'
-                  label='Ամսաթիվ'
+                  label={t('Forms.Date')}
                   style={styles.inputBox}
                   inputStyle={styles.input}
                   inputBoxStyles={styles.input}
@@ -53,7 +53,7 @@ const CreateCashout: React.FC = () => {
                           data={cashRegistersData}
                           disable
                           label={t('Forms.CassRegister')}
-                          placeholder="Ընտրեք դրամարկղը"
+                          placeholder={t('Forms.Select_CashRegister')}
                           showErrorText={false}
                           style={styles.inputBox}
                           labelStyle={styles.formInputLabel}
@@ -62,6 +62,18 @@ const CreateCashout: React.FC = () => {
                       </div>
                     );
                   }}
+                />
+                <AuthInput
+                  register={register}
+                  registerName='balance'
+                  label={t('Forms.Remainder')}
+                  showTextError={false}
+                  disabled
+                  type='number'
+                  style={styles.inputBox}
+                  inputStyle={styles.input}
+                  labelStyle={styles.formInputLabel}
+                  inputBoxStyles={styles.input}
                 />
                 <Controller
                   control={control}

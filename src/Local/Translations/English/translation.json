@@ -7,13 +7,13 @@
     "Password_label": "Password",
     "Passwor_Error": "Min. 8 characters",
     "Password_placeholder": "Type your password",
-    "No_Account":"Don't have an account?",
-    "Sign_Up":"Sign Up"
+    "No_Account": "Don't have an account?",
+    "Sign_Up": "Sign Up"
   },
-  "Sign_Up":{
-    "Title":"Registration",
-    "Name_Placeholder":"Enter the name",
-    "Surname_Placeholder":"Enter the last name"
+  "Sign_Up": {
+    "Title": "Registration",
+    "Name_Placeholder": "Enter the name",
+    "Surname_Placeholder": "Enter the last name"
   },
   "Input_Errors": {
     "Required": "Required",
@@ -50,7 +50,7 @@
     "Point": "Point",
     "Count": "Count",
     "Price": "Price",
-    "SalePrice":"Sale price",
+    "SalePrice": "Sale price",
     "Discount": "Discount",
     "Cost": "Cost",
     "Money": "Money",
@@ -66,9 +66,10 @@
     "Receptionist": "Receptionist",
     "Product_1": "Product 1",
     "Product_2": "Product 2",
-    "Warehouse_Out":"Output",
-    "Warehouse_In":"Input",
-    "Warehouse_In—Placeholder":"Select the input warehouse"
+    "Warehouse_Out": "Output",
+    "Warehouse_In": "Input",
+    "Warehouse_In—Placeholder": "Select the input warehouse",
+    "Select_CashRegister": "Select the checkout"
   },
   "Employee": {
     "Title": "Employee",
@@ -79,10 +80,12 @@
   },
   "Toast": {
     "Success": {
-      "Register": "Successful registration"
+      "Register": "Successful registration",
+      "Remove": "The user has been removed"
     },
     "Error": {
-      "Register": "Registration failed"
+      "Register": "Registration failed",
+      "Action": "An error occurred"
     },
     "Warning": {
       "No_Warehouse": "You do not have a registered warehouse",
@@ -94,7 +97,10 @@
     "Add": "Add",
     "Submit": "Submit",
     "Cancel": "Cancel",
-    "Submit&Levy":"Confirm and charge"
+    "Submit&Levy": "Confirm and charge",
+    "Close": "Close",
+    "Save": " Save",
+    "Delete": "Delete"
   },
   "Actions": {
     "To_Storage": {
@@ -120,18 +126,22 @@
     },
     "Sales": {
       "Title": "Sale",
-      "Total":"Total:",
-      "AMD":"AMD"
+      "Total": "Total:",
+      "AMD": "AMD"
     },
     "Users": {
       "Title": "Users",
       "Create": "Register a new user"
     },
+    "Remove_User": {
+      "Title": "Delete user",
+      "Text": "Clicking the confirm button will remove the user from the organization"
+    },
     "Returnable": {
       "Title": "Returnable products"
     },
-    "Companies":{
-      "Title":"Companies"
+    "Companies": {
+      "Title": "Companies"
     }
   }
 }

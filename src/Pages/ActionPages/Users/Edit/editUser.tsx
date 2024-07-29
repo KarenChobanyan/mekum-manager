@@ -7,18 +7,17 @@ import { AuthInput, AutoComplete, Button, Loading } from '../../../../Components
 import { useAutocompleteData } from '../../../../General/Hooks/hooks';
 import { ButtonTypes } from '../../../../Interfaces/componentTypes';
 import styles from '../../formTablestyles.module.scss';
+import UserModal from '../Modal/userModal';
 
 const EditUser: React.FC = () => {
     const { id } = useParams();
-
-    const { control, register, onSubmit, handleSubmit, isLoading, errors, onCencele, roles, currentEmployee } = useEditUser(id!);
-    console.log(currentEmployee,'currentEmployee')
+    const { control, register, onSubmit, handleSubmit, isLoading, errors, onCencele, roles, currentEmployeeData,onCloseModal,openModal,onOpenModal } = useEditUser(id!);
     const { employeesData } = useAutocompleteData();
     return (
         <div className={styles.container} >
             <div className={styles.body}>
                 {
-                    currentEmployee
+                    currentEmployeeData
                         ?
                         <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
                             <div className={styles.form}>
@@ -77,7 +76,7 @@ const EditUser: React.FC = () => {
                                 <AuthInput
                                     register={register}
                                     registerName='name'
-                                    label='Անուն'
+                                    label={t('Forms.Name')}
                                     style={styles.inputBox}
                                     message={t('Input_Errors.FirstName')}
                                     patternValue={/^\s*[\p{L}-]{3,}\s*$/u}
@@ -89,7 +88,7 @@ const EditUser: React.FC = () => {
                                 <AuthInput
                                     register={register}
                                     registerName='surename'
-                                    label='Ազգանուն'
+                                    label={t('Forms.Surname')}
                                     message={t('Input_Errors.Surname')}
                                     patternValue={/^\s*[\p{L}-]{3,}\s*$/u}
                                     style={styles.inputBox}
@@ -101,7 +100,7 @@ const EditUser: React.FC = () => {
                                 <AuthInput
                                     register={register}
                                     registerName='username'
-                                    label='էլ․ հասցե'
+                                    label={t('Login_Form.Login_label')}
                                     message={t('Input_Errors.Email')}
                                     patternValue={/^\s*[A-ZA-z0-9._%+-]+@[A-Za-z0-9.-]+[A-Za-z]{2,}\s*$/gim}
                                     style={styles.inputBox}
@@ -113,7 +112,7 @@ const EditUser: React.FC = () => {
                                 <AuthInput
                                     register={register}
                                     registerName='password'
-                                    label='Գաղտնաբառ'
+                                    label={t('Login_Form.Password_label')}
                                     message={t('Input_Errors.Password')}
                                     patternValue={
                                         /^.{6,}$/gm
@@ -131,16 +130,28 @@ const EditUser: React.FC = () => {
                                         type='button'
                                         onClick={onCencele}
                                         buttonType={ButtonTypes.Primery}
-                                        title='Չեղարկել'
+                                        title={t('Button.Close')}
                                         buttonStyle={styles.button}
                                     />
                                     <Button
                                         type='submit'
                                         buttonType={ButtonTypes.Primery}
-                                        title='Հաստատել'
+                                        title={t('Button.Save')}
                                         buttonStyle={styles.button}
                                     />
+                                    <Button
+                                        type='button'
+                                        buttonType={ButtonTypes.Primery}
+                                        title={t('Button.Delete')}
+                                        onClick={onOpenModal}
+                                        buttonStyle={styles.deleteButton}
+                                    />
                                 </div>
+                                <UserModal
+                                id={id!}
+                                open={openModal}
+                                handleClose={onCloseModal}
+                                />
                             </div>
                         </form>
                         :

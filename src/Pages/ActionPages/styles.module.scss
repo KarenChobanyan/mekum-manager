@@ -38,6 +38,18 @@
     @include flexStyles(flex, row, flex-end, space-between);
 }
 
+.topInputs {
+    @include flexStyles(flex, row, normal, normal);
+    gap: 20px
+}
+
+.inputBox{
+    background-color: $formInput;
+    font-size: 16px;
+    line-height: 18px;
+    padding: 7.5px;
+}
+
 .topSelectors{
     @include flexStyles(flex, row, normal, normal); 
     gap: 15px;

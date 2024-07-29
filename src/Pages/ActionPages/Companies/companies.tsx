@@ -15,7 +15,6 @@ const Companies: React.FC = () => {
                     :
                     <div className={styles.emptyBody}>
                         <NoData
-                            withButton
                             btnText={t('Button.Add')}
                             btnOnclick={() => navigate(`/companies/create`)}
                         />
