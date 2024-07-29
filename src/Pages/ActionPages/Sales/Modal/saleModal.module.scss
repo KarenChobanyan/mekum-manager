@@ -47,6 +47,7 @@
 .buttons {
     width: 100%;
     @include flexStyles(flex, row, center, space-between);
+    gap: 20px;
 }
 
 .button {

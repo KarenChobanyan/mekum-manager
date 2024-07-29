@@ -69,7 +69,8 @@
     "Warehouse_Out": "Output",
     "Warehouse_In": "Input",
     "Warehouse_In—Placeholder": "Select the input warehouse",
-    "Select_CashRegister": "Select the checkout"
+    "Select_CashRegister": "Select the checkout",
+    "Debt": "Debt"
   },
   "Employee": {
     "Title": "Employee",

@@ -63,7 +63,8 @@
     "Warehouse_Out": "Ելք․ պահեստ",
     "Warehouse_In": "Ստացող պահեստ",
     "Warehouse_In—Placeholder": "Ընտրեք ստացող պահեստը",
-    "Select_CashRegister": "Ընտրեք դրամարկղը"
+    "Select_CashRegister": "Ընտրեք դրամարկղը",
+    "Debt":"Պարտք"
   },
   "Roles": {
     "Admin": "Ադմինիստրատոր",

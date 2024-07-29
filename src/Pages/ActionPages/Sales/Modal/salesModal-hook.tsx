@@ -4,15 +4,23 @@ import { toast } from "react-toastify";
 import moment from "moment";
 import { usePostCashEntryMutation } from "../../../../API/actionsApi";
 import { ICachIncomingFormValues } from "../../CashIncoming/Create/createCashIncoming-hooks";
-import { useAutocompleteData, useGeneralHooks } from "../../../../General/Hooks/hooks";
+import { useAutocompleteData, useDirectoriesHooks, useGeneralHooks } from "../../../../General/Hooks/hooks";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
 import { ICashoutRequest } from "../../../../Interfaces/requestTypes";
 
 const useSalesModal = (partner: IAutocompleteItem,handleClose:()=>void) => {
     const { register, handleSubmit, control, reset, setValue, formState: { errors } } = useForm<ICachIncomingFormValues>({ mode: "all" });
     const { cashRegistersData } = useAutocompleteData();
+    const {partners} = useDirectoriesHooks();
     const { t, navigate } = useGeneralHooks();
     const [add, { isLoading, isSuccess, isError }] = usePostCashEntryMutation();
+
+    useEffect(()=>{
+        if(partner){
+            const currentPartner = partners.filter((item)=>item.id === +partner.id!)?.[0];
+            setValue('debt',String(currentPartner.code!))
+        }
+    },[partner,partners]);
 
     useEffect(() => {
         setValue('partner', partner)

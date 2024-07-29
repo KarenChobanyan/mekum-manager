@@ -10,7 +10,7 @@ import styles from '../../formTablestyles.module.scss';
 
 const CreateCashout: React.FC = () => {
   const { id } = useParams();
-  const { register, control, onSubmit, onCencele, handleSubmit, cashRegistersData, partnersData, errors, isLoading } = useCreateCashEntryHooks(id!);
+  const { register, control, onSubmit, onCencele, handleSubmit, cashRegistersData, partnersData, errors, isLoading,setPartnerDebt } = useCreateCashEntryHooks(id!);
 
   return (
     <div className={styles.container} >
@@ -63,18 +63,6 @@ const CreateCashout: React.FC = () => {
                     );
                   }}
                 />
-                <AuthInput
-                  register={register}
-                  registerName='balance'
-                  label={t('Forms.Remainder')}
-                  showTextError={false}
-                  disabled
-                  type='number'
-                  style={styles.inputBox}
-                  inputStyle={styles.input}
-                  labelStyle={styles.formInputLabel}
-                  inputBoxStyles={styles.input}
-                />
                 <Controller
                   control={control}
                   name='partner'
@@ -87,7 +75,11 @@ const CreateCashout: React.FC = () => {
                         <AutoComplete
                           value={value}
                           name={name}
-                          onChange={onChange}
+                          onChange={(value)=>{
+                            onChange(value)
+                            setPartnerDebt(value?.id!)
+                          }
+                          }
                           id='recipientId'
                           data={partnersData}
                           label={t('Forms.Partner')}
@@ -100,6 +92,18 @@ const CreateCashout: React.FC = () => {
                       </div>
                     );
                   }}
+                />
+                 <AuthInput
+                  register={register}
+                  registerName='debt'
+                  label={t('Forms.Debt')}
+                  showTextError={false}
+                  disabled
+                  type='number'
+                  style={styles.inputBox}
+                  inputStyle={styles.input}
+                  labelStyle={styles.formInputLabel}
+                  inputBoxStyles={styles.input}
                 />
                 <AuthInput
                   register={register}

@@ -11,7 +11,7 @@ export interface ICachIncomingFormValues {
     date: string,
     cashRegisterId: IAutocompleteItem,
     partner:IAutocompleteItem,
-    balance:string;
+    debt:string,
     money: string,
 };
 
@@ -19,15 +19,11 @@ const useCreateCashEntryHooks = (id:string) => {
     const [add, { isLoading, isSuccess, isError }] = usePostCashEntryMutation();
     const { navigate, t } = useGeneralHooks();
     const { cashRegistersData,partnersData } = useAutocompleteData();
-    const {cashRegisters} = useDirectoriesHooks();
+    const {partners} = useDirectoriesHooks();
     const cashRegister = cashRegistersData?.filter((item) => item.id === id)[0];
     const { register, handleSubmit, control, reset, setValue, formState: { errors } } = useForm<ICachIncomingFormValues>({ mode: "all" });
 
-    useEffect(()=>{
-        const currentCashRegister = cashRegisters?.result.filter((item)=>item.id === +id!)?.[0];
-        setValue('balance',String(currentCashRegister?.code!))
-      },[id]);
-
+    
     useEffect(() => {
         setValue('cashRegisterId', cashRegister!)
     }, [cashRegister]);
@@ -45,6 +41,11 @@ const useCreateCashEntryHooks = (id:string) => {
     const onCencele = () => {
         navigate(-1)
         reset()
+    };
+
+    const setPartnerDebt = (partnerId:string)=>{
+        const currentPartner = partners.filter((item)=>item.id === + partnerId)?.[0];
+        setValue('debt',String(currentPartner.code!))
     };
 
     const onSubmit: SubmitHandler<ICachIncomingFormValues | FieldValues> = (values) => {
@@ -66,6 +67,7 @@ const useCreateCashEntryHooks = (id:string) => {
         control,
         errors,
         isLoading,
+        setPartnerDebt,
         partnersData,
     }
 };
