@@ -19,7 +19,7 @@ const useUsersHooks = () => {
     const headerData: ITableHeader[] = [
         {
             title: `${t('Forms.Name')}`,
-            contentType: TableCellContentTypes.SELECT
+            contentType: TableCellContentTypes.TEXT
         },
         {
             title: `${t('Forms.Surname')}`,
@@ -40,7 +40,7 @@ const useUsersHooks = () => {
                             <div className={styles.formItemTextBox}>
                                 <div className={styles.formItemText}>{item.name}</div>
                             </div>,
-                        contentType: TableCellContentTypes.SELECT
+                        contentType: TableCellContentTypes.TEXT
                     },
                     {
                         component:

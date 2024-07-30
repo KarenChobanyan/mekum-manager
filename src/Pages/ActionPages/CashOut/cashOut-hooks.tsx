@@ -4,13 +4,14 @@ import moment from "moment";
 import { useGetCashOutsQuery } from "../../../API/actionsApi";
 import { ITableBodyData, ITableHeader, TableCellContentTypes } from "../../../Interfaces/componentTypes";
 import { CashOutResponse } from "../../../Interfaces/responseTypes";
-import { useAutocompleteData } from '../../../General/Hooks/hooks';
+import { useAutocompleteData, useGeneralHooks } from '../../../General/Hooks/hooks';
 import styles from '../formTablestyles.module.scss';
 
 const useCashOutHooks = (id: string) => {
+    const {renderDataLimit} = useGeneralHooks();
     const [activePage, setActivePage] = useState<number>(1);
     const [offset, setOffset] = useState<number>(0)
-    const { data: cashoutsData } = useGetCashOutsQuery({ id: id, limit: 7, offset: offset });
+    const { data: cashoutsData } = useGetCashOutsQuery({ id: id, limit: renderDataLimit, offset: offset });
     const { partnersData } = useAutocompleteData();
     const setPartnerName = (id: string) => {
         const partner = partnersData?.filter((item) => item.id === id)?.[0];
@@ -49,8 +50,8 @@ const useCashOutHooks = (id: string) => {
                     },
                     {
                         component:
-                            <div className={`${styles.formItemTextBox} ${styles.salesPartner}`}>
-                                <div className={styles.formItemText}>{setPartnerName(String(item.partnersId))}</div>
+                            <div className={`${styles.formItemTextBox}`}>
+                                <div className={`${styles.formItemText} ${styles.salesPartner}`}>{setPartnerName(String(item.partnersId))}</div>
                             </div>,
                         contentType: TableCellContentTypes.SELECT
                     },

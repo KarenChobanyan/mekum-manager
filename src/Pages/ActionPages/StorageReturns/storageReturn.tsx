@@ -7,7 +7,7 @@ import { ButtonTypes } from '../../../Interfaces/componentTypes';
 import styles from '../styles.module.scss';
 
 const StorageReturn: React.FC = () => {
-  const { t, navigate } = useGeneralHooks();
+  const { t, navigate,renderDataLimit } = useGeneralHooks();
   const { myWarehousesData } = useAutocompleteData();
   const [warehouseId, setWarehouseId] = useState<string | undefined>(myWarehousesData?.[0].id!)
   const { control } = useWarehouseHooks();
@@ -69,7 +69,7 @@ const StorageReturn: React.FC = () => {
                       bodyData={bodyData}
                     />
                     <CustomPagination
-                      limit={Math.ceil(returnsData?.total! / 7)}
+                      limit={Math.ceil(returnsData?.total! / renderDataLimit)}
                       offset={activePage}
                       onChange={(_, page) => {
                         setOffset((page - 1) * 7);

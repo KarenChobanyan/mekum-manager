@@ -2,14 +2,16 @@ import { useState } from "react";
 import { t } from 'i18next';
 import moment from "moment";
 import { useGetSalesQuery } from "../../../API/actionsApi";
-import { ITableBodyData, ITableFormItemData, ITableHeader, TableCellContentTypes } from "../../../Interfaces/componentTypes";
+import { useGeneralHooks } from "../../../General/Hooks/hooks";
+import { ITableBodyData, ITableHeader, TableCellContentTypes } from "../../../Interfaces/componentTypes";
 import { AccounInvoiceResponce } from "../../../Interfaces/responseTypes";
 import styles from '../formTablestyles.module.scss'
 
 const useSalesHooks = (id: string) => {
+    const {renderDataLimit} = useGeneralHooks();
     const [offset, setOffset] = useState<number>(0);
     const [activePage, setActivePage] = useState<number>(1)
-    const { data: salesData } = useGetSalesQuery({ id: id, limit: 7, offset: offset });
+    const { data: salesData } = useGetSalesQuery({ id: id, limit: renderDataLimit, offset: offset });
     const headerData: ITableHeader[] = [
         {
             title: `${t('Forms.Date')}`,
@@ -43,8 +45,8 @@ const useSalesHooks = (id: string) => {
                     },
                     {
                         component:
-                            <div className={`${styles.formItemTextBox} ${styles.salesPartner}`} >
-                                <div className={styles.formItemText}>{item.partner?.name!}</div>
+                            <div className={`${styles.formItemTextBox} `} >
+                                <div className={`${styles.formItemText} ${styles.salesPartner}`}>{item.partner?.name!}</div>
                             </div>,
                         contentType: TableCellContentTypes.SELECT
                     },

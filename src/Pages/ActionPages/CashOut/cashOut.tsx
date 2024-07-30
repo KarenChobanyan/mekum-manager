@@ -7,7 +7,7 @@ import { ButtonTypes } from '../../../Interfaces/componentTypes';
 import styles from '../styles.module.scss';
 
 const CashOut: React.FC = () => {
-  const { t, navigate } = useGeneralHooks();
+  const { t, navigate,renderDataLimit } = useGeneralHooks();
   const { cashRegistersData } = useAutocompleteData();
   const {cashRegisters} = useDirectoriesHooks();
   const [cashRegisterId, setCashRegisterIdId] = useState<string | undefined>(cashRegistersData?.[0].id!)
@@ -88,7 +88,7 @@ const CashOut: React.FC = () => {
                       bodyData={bodyData}
                     />
                     <CustomPagination
-                      limit={Math.ceil(cashoutsData?.total! / 7)}
+                      limit={Math.ceil(cashoutsData?.total! / renderDataLimit)}
                       offset={activePage}
                       onChange={(_, page) => {
                         setOffset((page - 1) * 7);

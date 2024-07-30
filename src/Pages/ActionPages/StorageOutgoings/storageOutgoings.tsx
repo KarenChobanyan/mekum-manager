@@ -7,7 +7,7 @@ import { AutoComplete, Button, CustomPagination, CustomTable, Loading, NoData } 
 import styles from '../styles.module.scss';
 
 const StorageOutgoings: React.FC = () => {
-  const { t, navigate } = useGeneralHooks();
+  const { t, navigate,renderDataLimit } = useGeneralHooks();
   const { myWarehousesData } = useAutocompleteData();
   const [warehouseId, setWarehouseId] = useState<string | undefined>(myWarehousesData?.[0].id!)
   const { control } = useWarehouseHooks();
@@ -69,7 +69,7 @@ const StorageOutgoings: React.FC = () => {
                       bodyData={bodyData}
                     />
                     <CustomPagination
-                      limit={Math.ceil(exitsData?.total! / 7)}
+                      limit={Math.ceil(exitsData?.total! / renderDataLimit)}
                       offset={activePage}
                       onChange={(_, page) => {
                         setOffset((page -1) * 7);

@@ -36,19 +36,15 @@ const FormItems: React.FC<IProps> = (props) => {
             contentType: TableCellContentTypes.SELECT
         },
         {
-            title: `${t('Forms.Point')}`,
-            contentType: TableCellContentTypes.NUMBER
-        },
-        {
             title: `${t('Forms.Remainder')}`,
             contentType: TableCellContentTypes.NUMBER
         },
         {
-            title:  `${t('Forms.Price')}`,
+            title: `${t('Forms.Count')}`,
             contentType: TableCellContentTypes.NUMBER
         },
         {
-            title: `${t('Forms.Count')}`,
+            title:  `${t('Forms.Price')}`,
             contentType: TableCellContentTypes.NUMBER
         },
         {
@@ -58,7 +54,11 @@ const FormItems: React.FC<IProps> = (props) => {
         {
             title: `${t('Forms.Money')}`,
             contentType: TableCellContentTypes.NUMBER
-        }
+        },
+        {
+            title: `${t('Forms.Point')}`,
+            contentType: TableCellContentTypes.NUMBER
+        },
     ];
 
     const createItemForm = (): Array<ITableBodyData> => {
@@ -110,20 +110,6 @@ const FormItems: React.FC<IProps> = (props) => {
                         component:
                             <AuthInput
                                 register={register}
-                                registerName={`goods.${index}.point`}
-                                showTextError={false}
-                                inputStyle={styles.formItemInput}
-                                inputBoxStyles={styles.formItemInputNumBox}
-                                required={false}
-                                disabled
-                                error={errors.goods?.[index]?.point}
-                            />,
-                        contentType: TableCellContentTypes.NUMBER
-                    },
-                    {
-                        component:
-                            <AuthInput
-                                register={register}
                                 registerName={`goods.${index}.quantity`}
                                 showTextError={false}
                                 inputStyle={styles.formItemInput}
@@ -131,6 +117,31 @@ const FormItems: React.FC<IProps> = (props) => {
                                 required={false}
                                 disabled
                                 error={errors.goods?.[index]?.quantity}
+                            />,
+                        contentType: TableCellContentTypes.NUMBER
+                    },
+                    {
+                        component:
+                            <Controller
+                                control={control}
+                                name={`goods.${index}.count`}
+                                rules={{ max: getRemainder(watch(`goods.${index}.materialValueId`)?.id!) }}
+                                render={({ field: { onChange, name, value } }) => {
+                                    return (
+                                        <AuthInput
+                                            register={register}
+                                            registerName={`goods.${index}.count`}
+                                            showTextError={false}
+                                            patternValue={/^(?!0(\.0+)?$)\d+(\.\d+)?$/}
+                                            type='number'
+                                            inputStyle={styles.formItemInput}
+                                            required={true}
+                                            inputBoxStyles={styles.formItemInputNumBox}
+                                            error={errors.goods?.[index]?.count}
+                                        />
+                                    )
+                                }
+                                }
                             />,
                         contentType: TableCellContentTypes.NUMBER
                     },
@@ -172,31 +183,6 @@ const FormItems: React.FC<IProps> = (props) => {
                     },
                     {
                         component:
-                            <Controller
-                                control={control}
-                                name={`goods.${index}.count`}
-                                rules={{ max: getRemainder(watch(`goods.${index}.materialValueId`)?.id!) }}
-                                render={({ field: { onChange, name, value } }) => {
-                                    return (
-                                        <AuthInput
-                                            register={register}
-                                            registerName={`goods.${index}.count`}
-                                            showTextError={false}
-                                            patternValue={/^(?!0(\.0+)?$)\d+(\.\d+)?$/}
-                                            type='number'
-                                            inputStyle={styles.formItemInput}
-                                            required={true}
-                                            inputBoxStyles={styles.formItemInputNumBox}
-                                            error={errors.goods?.[index]?.count}
-                                        />
-                                    )
-                                }
-                                }
-                            />,
-                        contentType: TableCellContentTypes.NUMBER
-                    },
-                    {
-                        component:
                             <AuthInput
                                 register={register}
                                 registerName={`goods.${index}.discount`}
@@ -226,6 +212,20 @@ const FormItems: React.FC<IProps> = (props) => {
                                     />
                                 </div>
                             </div>,
+                        contentType: TableCellContentTypes.NUMBER
+                    },
+                    {
+                        component:
+                            <AuthInput
+                                register={register}
+                                registerName={`goods.${index}.point`}
+                                showTextError={false}
+                                inputStyle={styles.formItemInput}
+                                inputBoxStyles={styles.formItemInputNumBox}
+                                required={false}
+                                disabled
+                                error={errors.goods?.[index]?.point}
+                            />,
                         contentType: TableCellContentTypes.NUMBER
                     },
                 ]

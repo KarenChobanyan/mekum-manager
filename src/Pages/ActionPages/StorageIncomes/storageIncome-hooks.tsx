@@ -1,15 +1,17 @@
+import { useState } from "react";
+import { t } from 'i18next';
+import moment from "moment";
 import { useGetWarehouseEntriesQuery } from "../../../API/actionsApi";
 import { ITableBodyData, ITableHeader, TableCellContentTypes } from "../../../Interfaces/componentTypes";
-import { t } from 'i18next';
-import styles from '../formTablestyles.module.scss'
-import moment from "moment";
 import { IWarehouseEntryResponse } from "../../../Interfaces/responseTypes";
-import { useState } from "react";
+import { useGeneralHooks } from "../../../General/Hooks/hooks";
+import styles from '../formTablestyles.module.scss'
 
 const useStorageIncome = (id: string) => {
+    const {renderDataLimit} = useGeneralHooks();
     const [activePage, setActivePage] = useState<number>(1);
     const [offset, setOffset] = useState<number>(0);
-    const { data: entryData } = useGetWarehouseEntriesQuery({ id: id!, limit: 7, offset: offset });
+    const { data: entryData } = useGetWarehouseEntriesQuery({ id: id!, limit: renderDataLimit, offset: offset });
 
     const headerData: ITableHeader[] = [
         {
@@ -45,7 +47,7 @@ const useStorageIncome = (id: string) => {
                     {
                         component:
                             <div className={styles.formItemTextBox}>
-                                <div className={styles.formItemText}>{item.partners.name!}</div>
+                                <div className={`${styles.formItemText} ${styles.formItemBigText}  ${styles.salesPartner}`}>{item.partners.name!}</div>
                             </div>,
                         contentType: TableCellContentTypes.SELECT
                     },

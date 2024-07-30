@@ -2,7 +2,6 @@
 @import '../../General/Styles/variables';
 
 .container {
-    border: 1px solid green;
     width: inherit !important;
     overflow: auto !important;
     flex: 1 !important;
@@ -48,11 +47,11 @@
 }
 
 .plusFooter {
+    @include textStyles('Montserrat arm', 18px, 500, 18px, $buttun_darkBlue);
     @include flexStyles(flex, row, center, normal);
     gap: 15px;
     color: $buttun_darkBlue;
     width: fit-content;
-    font-size: 18px;
     cursor: pointer;
 }
 
@@ -85,4 +84,34 @@
         min-width: max-content;
         flex: 1
     }
+}
+
+@media screen and (max-width:800px) {
+    .cellHeader {
+        @include flexStyles(flex, row, center, center);
+        padding: 8px 5px;
+        font-size: 12px;
+    }
+
+    .cellBody {
+        padding: 5px;
+    }
+    .itemSelect {
+        min-width: 210px;
+        width: 210px;
+    }
+    .itemText {
+        min-width: 100px;
+        width: 100px;
+    }
+    .itemIcon {
+        width: 30px;
+    }
+    .itemNumber {
+        width: 80px;
+    }
+    .plusFooter {
+       font-size: 14px;
+    }
+
 }

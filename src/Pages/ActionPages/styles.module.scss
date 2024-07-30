@@ -3,15 +3,16 @@
 
 .container {
     flex: 1;
-    @include flexStyles(flex,column,center,center);
+    @include flexStyles(flex, column, center, center);
     padding: 15px 10px;
 }
 
-.emptyBody{
-    flex:1;
+.emptyBody {
+    flex: 1;
     width: 100%;
-    @include flexStyles(flex,column,center,center);
+    @include flexStyles(flex, column, center, center);
     background-color: $light_bg;
+    padding: 20px 0;
     border-radius: 15px;
     box-shadow: -1px 0px 5px -1px $main_color;
 }
@@ -43,7 +44,7 @@
     gap: 20px
 }
 
-.inputBox{
+.inputBox {
     background-color: $formInput;
     font-size: 16px;
     line-height: 18px;
@@ -51,8 +52,8 @@
     align-items: flex-end
 }
 
-.topSelectors{
-    @include flexStyles(flex, row, normal, normal); 
+.topSelectors {
+    @include flexStyles(flex, row, normal, normal);
     gap: 15px;
 }
 
@@ -60,4 +61,32 @@
     border-radius: 10px;
     width: 200px;
     height: 50px;
+}
+
+@media screen and (max-width:800px) {
+    .top {
+        margin-top: 15px;
+    }
+    .topInputs {
+        gap: 10px
+    }
+    .button {
+        width: fit-content;
+        height: fit-content;
+    }
+
+    .buttoTitle {
+        font-size: 14px;
+        line-height: 14px;
+    }
+    .emptyBody {
+       padding:50px 0px;
+    }
+    .inputBox {
+        background-color: $formInput;
+        font-size: 12px;
+        line-height: 12px;
+        padding: 6px;
+        align-items: flex-end;
+    }
 }

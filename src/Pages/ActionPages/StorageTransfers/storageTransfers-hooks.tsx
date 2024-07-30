@@ -6,7 +6,7 @@ import { Checkbox } from "@mui/material";
 import { orange } from "@mui/material/colors";
 import { useAcceptWarehouseTransferMutation, useGetWarehouseTransfersQuery } from "../../../API/actionsApi";
 import { ISIN } from "../../../Interfaces/interfaces";
-import { useAutocompleteData } from "../../../General/Hooks/hooks";
+import { useAutocompleteData, useGeneralHooks } from "../../../General/Hooks/hooks";
 import { ITableBodyData, ITableHeader, TableCellContentTypes } from "../../../Interfaces/componentTypes";
 import { ClipLoader } from "react-spinners";
 import { GetWarehouseTransferResponse, IGetWarehouseTransferResponseData } from "../../../Interfaces/responseTypes";
@@ -22,12 +22,13 @@ interface ICHeckedEntry {
 
 const useStorageTransferHook = (id: string) => {
     const { warehouseDataTypes, getRemainder } = useAutocompleteData();
+    const {renderDataLimit} = useGeneralHooks();
     const [activePage, setActivePage] = useState<number>(0);
     const [offset, setOffset] = useState<number>(0);
     const [isIn, setIsIn] = useState<ISIN>(warehouseDataTypes[0].id as ISIN);
     const [checkedItems, setCheckedItems] = useState<ICHeckedEntry[] | []>([]);
-    const [accept, { isLoading, isSuccess, isError }] = useAcceptWarehouseTransferMutation();
-    const { data: transfersData } = useGetWarehouseTransfersQuery({ id: id, limit: 7, offset: offset, isIn: isIn });
+    const [accept, { isSuccess, isError }] = useAcceptWarehouseTransferMutation();
+    const { data: transfersData } = useGetWarehouseTransfersQuery({ id: id, limit: renderDataLimit, offset: offset, isIn: isIn });
     const removeCheckedEntry = (id: number) => {
         const tmp = [...checkedItems];
         const filteredTmp = tmp.filter((item) => item.item.id !== +id);
@@ -105,7 +106,7 @@ const useStorageTransferHook = (id: string) => {
         },
         {
             title: t('Forms.Document_Number'),
-            contentType: TableCellContentTypes.SELECT
+            contentType: TableCellContentTypes.TEXT
         }
     ];
 
@@ -181,7 +182,7 @@ const useStorageTransferHook = (id: string) => {
                         component: <div className={styles.formItemTextBox}>
                             <div className={styles.formItemText}>{item.documentNumber!}</div>
                         </div>,
-                        contentType: TableCellContentTypes.SELECT
+                        contentType: TableCellContentTypes.TEXT
                     },
                 ]
             }

@@ -1,12 +1,11 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
 import { useParams } from 'react-router';
-import moment from 'moment';
 import { useAutocompleteData, useGeneralHooks } from '../../../../General/Hooks/hooks';
 import useCreateSalesHooks from './createSales-hooks';
 import { ButtonTypes } from '../../../../Interfaces/componentTypes';
 import FormItems from './formTable';
-import { AuthInput, AutoComplete, Button, Loading } from '../../../../Components';
+import { AutoComplete, Button, Loading } from '../../../../Components';
 import SaleModal from '../Modal/saleModal';
 import styles from '../../formTablestyles.module.scss';
 
@@ -14,7 +13,7 @@ const CreateSales: React.FC = () => {
   const { id } = useParams();
   const { register, control, errors, fields, isLoading, onAddItem, handleSubmit, onSubmit, remove, onCencele, setValue, isValid, watch, setSalePrice, onCloseModal, modal, handleOpenModal, total } = useCreateSalesHooks(id!);
   const { t } = useGeneralHooks();
-  const { myWarehousesData, partnersData } = useAutocompleteData();
+  const { partnersData } = useAutocompleteData();
 
 
   return (
@@ -27,33 +26,6 @@ const CreateSales: React.FC = () => {
             :
             <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
               <div className={styles.form}>
-                <AuthInput
-                  register={register}
-                  registerName='documentDate'
-                  label={t('Forms.Date')}
-                  style={styles.inputRow}
-                  inputStyle={styles.input}
-                  inputBoxStyles={styles.inputBox}
-                  disabled
-                  required={false}
-                  defaultValue={moment(new Date()).format("DD/MM/YYYY")}
-                  labelStyle={styles.formInputLabel}
-                  showTextError={false}
-                  error={errors.documentDate}
-                />
-                 <AuthInput
-                  register={register}
-                  registerName='warehouseId'
-                  label={t('Forms.Warehouse')}
-                  style={styles.inputRow}
-                  inputStyle={styles.input}
-                  inputBoxStyles={styles.inputBox}
-                  disabled
-                  required={false}
-                  labelStyle={styles.formInputLabel}
-                  showTextError={false}
-                  error={errors.warehouseId}
-                />
                 <Controller
                   control={control}
                   name='partnerId'
@@ -72,7 +44,6 @@ const CreateSales: React.FC = () => {
                           label={t('Forms.Buyer')}
                           placeholder={t('Forms.Select_Buyer')}
                           showErrorText={false}
-                          style={styles.inputRow}
                           labelStyle={styles.formInputLabel}
                           error={errors.partnerId}
                         />
@@ -117,14 +88,17 @@ const CreateSales: React.FC = () => {
                     buttonType={isValid ? ButtonTypes.Success : ButtonTypes.Disabled}
                     title={t('Button.Submit&Levy')}
                     buttonStyle={styles.button}
+                    buttonTitleStyle={styles.longTitle}
                   />
                 </div>
                 <div className={styles.totalBox}>
                   <p className={styles.totalText}>{t('Actions.Sales.Total')}</p>
+                  <div>
                   <span className={styles.totalCount}>
                     {total}
                   </span>
                   <span className={styles.totalAmmount}>{t('Actions.Sales.AMD')}</span>
+                  </div>
                 </div>
               </div>
             </form>

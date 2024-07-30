@@ -167,7 +167,7 @@ const Router: React.FC = () => {
             <Route
                 path='/returnable'
                 element={
-                    <Layout title={t('Actions.Returnable.Title')} children={<User children={<ReturnableProductsPage />}/>} />
+                    <Layout title={t('Actions.Returnable.Title')} children={<Admin children={<ReturnableProductsPage />}/>} />
                 }
             />
             <Route
@@ -179,7 +179,7 @@ const Router: React.FC = () => {
             <Route
                 path='/warehouse_returns'
                 element={
-                    <Layout title={t('Actions.Warehouse_Return.Title')} children={<Admin children={<StorageReturnPage />}/>} />
+                    <Layout title={t('Actions.Warehouse_Return.Title')} children={<User children={<StorageReturnPage />}/>} />
                 }
             />
             <Route

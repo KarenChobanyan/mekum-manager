@@ -14,3 +14,10 @@
     flex: 1;
     @include flexStyles(flex,column,normal,normal)
 }
+
+@media screen and (max-width:800px) {
+    .page{
+        margin-top: 25px;
+    }
+  }
+  

@@ -7,7 +7,7 @@ import { AutoComplete, Button, CustomPagination, CustomTable, Loading, NoData } 
 import styles from '../styles.module.scss';
 
 const StorageIncomes: React.FC = () => {
-  const { t, navigate } = useGeneralHooks();
+  const { t, navigate,renderDataLimit } = useGeneralHooks();
   const { myWarehousesData } = useAutocompleteData();
   const [warehouseId, setWarehouseId] = useState<string | undefined>(myWarehousesData?.[0].id!)
   const { control } = useWarehouseHooks();
@@ -55,6 +55,7 @@ const StorageIncomes: React.FC = () => {
                   title={t('Button.Add')}
                   onClick={() => navigate(`/storage_incomings/create/${warehouseId ?? myWarehousesData?.[0].id!}`)}
                   buttonStyle={styles.button}
+                  buttonTitleStyle={styles.buttoTitle}
                 />
               }
             </div>
@@ -69,7 +70,7 @@ const StorageIncomes: React.FC = () => {
                       bodyData={bodyData}
                     />
                     <CustomPagination
-                      limit={Math.ceil(entryData?.total! / 7)}
+                      limit={Math.ceil(entryData?.total! / renderDataLimit)}
                       offset={activePage}
                       onChange={(_, page) => {
                         setOffset((page -1) * 7);

@@ -7,7 +7,7 @@ import { ButtonTypes } from '../../../Interfaces/componentTypes';
 import styles from '../styles.module.scss';
 
 const CashIncoming: React.FC = () => {
-  const { t, navigate } = useGeneralHooks();
+  const { t, navigate,renderDataLimit } = useGeneralHooks();
   const { cashRegistersData } = useAutocompleteData();
   const {cashRegisters} = useDirectoriesHooks();
   const [cashRegisterId, setCashRegisterId] = useState<string | undefined>(cashRegistersData?.[0].id!);
@@ -66,6 +66,7 @@ const CashIncoming: React.FC = () => {
                     inputStyle={styles.inputBox}
                     inputBoxStyles={styles.inputBox}
                     labelStyle={styles.formInputLabel}
+                    style={styles.formInputContainer}
                   />
                 </div>
               </div>
@@ -91,7 +92,7 @@ const CashIncoming: React.FC = () => {
                       bodyData={bodyData}
                     />
                     <CustomPagination
-                      limit={Math.ceil(cashEntryData?.total! / 7)}
+                      limit={Math.ceil(cashEntryData?.total! / renderDataLimit)}
                       offset={activePage}
                       onChange={(_, page) => {
                         setOffset((page - 1) * 7);
