@@ -4,14 +4,15 @@ import moment from "moment";
 import { useGetCashEntryQuery } from "../../../API/actionsApi";
 import { ITableBodyData, ITableHeader, TableCellContentTypes } from "../../../Interfaces/componentTypes";
 import { CashOutResponse } from "../../../Interfaces/responseTypes";
-import { useAutocompleteData } from '../../../General/Hooks/hooks';
+import { useAutocompleteData, useGeneralHooks } from '../../../General/Hooks/hooks';
 import styles from '../formTablestyles.module.scss';
 
 const useCashEntryHooks = (id: string) => {
+    const {renderDataLimit} = useGeneralHooks();
     const [activePage, setActivePage] = useState<number>(1);
     const [offset, setOffset] = useState<number>(0);
     const { partnersData } = useAutocompleteData();
-    const { data: cashEntryData } = useGetCashEntryQuery({ id: id, limit: 7, offset: offset });
+    const { data: cashEntryData } = useGetCashEntryQuery({ id: id, limit: renderDataLimit, offset: offset });
     
     const setPartnerName = (id: string) => {
         const partner = partnersData?.filter((item) => item.id === id)?.[0];
@@ -20,19 +21,15 @@ const useCashEntryHooks = (id: string) => {
     const headerData: ITableHeader[] = [
         {
             title: `${t('Forms.Date')}`,
-            contentType: TableCellContentTypes.SELECT
+            contentType: TableCellContentTypes.TEXT
         },
         {
             title: `${t('Forms.Partner')}`,
             contentType: TableCellContentTypes.SELECT
         },
         {
-            title: `${t('Forms.Document_Number')}`,
-            contentType: TableCellContentTypes.SELECT
-        },
-        {
             title: `${t('Forms.Money')}`,
-            contentType: TableCellContentTypes.SELECT
+            contentType: TableCellContentTypes.TEXT
         }
     ];
 
@@ -46,19 +43,12 @@ const useCashEntryHooks = (id: string) => {
                             <div className={styles.formItemTextBox}>
                                 <div className={styles.formItemText}>{moment(item.date).format("DD/MM/YYYY")}</div>
                             </div>,
-                        contentType: TableCellContentTypes.SELECT
+                        contentType: TableCellContentTypes.TEXT
                     },
                     {
                         component:
                             <div className={styles.formItemTextBox}>
-                                <div className={styles.formItemText}>{setPartnerName(String(item.partnersId))}</div>
-                            </div>,
-                        contentType: TableCellContentTypes.SELECT
-                    },
-                    {
-                        component:
-                            <div className={styles.formItemTextBox}>
-                                <div className={styles.formItemText}>{item.documentNumber!}</div>
+                                <div className={`${styles.formItemText} ${styles.salesPartner}`}>{setPartnerName(String(item.partnersId))}</div>
                             </div>,
                         contentType: TableCellContentTypes.SELECT
                     },
@@ -67,7 +57,7 @@ const useCashEntryHooks = (id: string) => {
                             <div className={styles.formItemTextBox}>
                                 <div className={styles.formItemText}>{item.amountCurrency1}</div>
                             </div>,
-                        contentType: TableCellContentTypes.SELECT
+                        contentType: TableCellContentTypes.TEXT
                     },
                 ]
             }

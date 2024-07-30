@@ -31,33 +31,6 @@ const CreateTorageTransfers: React.FC = () => {
             :
             <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
               <div className={styles.form}>
-                <AuthInput
-                  register={register}
-                  registerName='documentDate'
-                  label={t('Forms.Date')}
-                  style={styles.inputRow}
-                  inputStyle={styles.input}
-                  inputBoxStyles={styles.inputBox}
-                  disabled
-                  required={false}
-                  defaultValue={moment(new Date()).format("DD/MM/YYYY")}
-                  labelStyle={styles.formInputLabel}
-                  showTextError={false}
-                  error={errors.documentDate}
-                />
-                  <AuthInput
-                  register={register}
-                  registerName='warehouseOutId'
-                  label={t('Forms.Warehouse_Out')}
-                  style={styles.inputRow}
-                  inputStyle={styles.input}
-                  inputBoxStyles={styles.inputBox}
-                  disabled
-                  required={false}
-                  labelStyle={styles.formInputLabel}
-                  showTextError={false}
-                  error={errors.warehouseOutId}
-                />
                 <Controller
                   control={control}
                   name='warehouseEnterId'
@@ -76,7 +49,6 @@ const CreateTorageTransfers: React.FC = () => {
                           label={t('Forms.Warehouse_In')}
                           placeholder={t('Forms.Warehouse_In—Placeholder')}
                           showErrorText={false}
-                          style={styles.inputRow}
                           labelStyle={styles.formInputLabel}
                           error={errors.warehouseEnterId}
                         />

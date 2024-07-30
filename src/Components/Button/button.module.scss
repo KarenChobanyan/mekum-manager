@@ -59,3 +59,17 @@
   background-color: $success;
   padding: 16px 24px;
 }
+
+//media
+
+@media screen and (max-width:800px) {
+  .primeryButton {
+    padding: 12px;
+  }
+  .successBtn{
+    padding: 12px;
+  }
+  .disabledButton {
+    padding: 12px;
+  }
+}

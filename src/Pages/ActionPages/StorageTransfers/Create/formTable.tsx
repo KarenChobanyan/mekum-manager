@@ -34,10 +34,6 @@ const FormItems: React.FC<IProps> = (props) => {
             contentType: TableCellContentTypes.SELECT
         },
         {
-            title: `${t('Forms.Point')}`,
-            contentType: TableCellContentTypes.NUMBER
-        },
-        {
             title: `${t('Forms.Remainder')}`,
             contentType: TableCellContentTypes.NUMBER
         },
@@ -48,7 +44,11 @@ const FormItems: React.FC<IProps> = (props) => {
         {
             title: `${t('Forms.Money')}`,
             contentType: TableCellContentTypes.NUMBER
-        }
+        },
+        {
+            title: `${t('Forms.Point')}`,
+            contentType: TableCellContentTypes.NUMBER
+        },
     ];
 
     const createItemForm = (): Array<ITableBodyData> => {
@@ -95,20 +95,6 @@ const FormItems: React.FC<IProps> = (props) => {
                                 }}
                             />,
                         contentType: TableCellContentTypes.SELECT
-                    },
-                    {
-                        component:
-                            <AuthInput
-                                register={register}
-                                registerName={`goods.${index}.point`}
-                                showTextError={false}
-                                inputStyle={styles.formItemInput}
-                                inputBoxStyles={styles.formItemInputNumBox}
-                                required={false}
-                                disabled
-                                error={errors.goods?.[index]?.point}
-                            />,
-                        contentType: TableCellContentTypes.NUMBER
                     },
                     {
                         component:
@@ -161,6 +147,20 @@ const FormItems: React.FC<IProps> = (props) => {
                                     />
                                 </div>
                             </div>,
+                        contentType: TableCellContentTypes.NUMBER
+                    },
+                    {
+                        component:
+                            <AuthInput
+                                register={register}
+                                registerName={`goods.${index}.point`}
+                                showTextError={false}
+                                inputStyle={styles.formItemInput}
+                                inputBoxStyles={styles.formItemInputNumBox}
+                                required={false}
+                                disabled
+                                error={errors.goods?.[index]?.point}
+                            />,
                         contentType: TableCellContentTypes.NUMBER
                     },
                 ]

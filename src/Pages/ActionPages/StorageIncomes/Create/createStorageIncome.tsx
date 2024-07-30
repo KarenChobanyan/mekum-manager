@@ -25,33 +25,6 @@ const CreateStorageIncome: React.FC = () => {
             :
             <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
               <div className={styles.form}>
-                <AuthInput
-                  register={register}
-                  registerName='documentDate'
-                  label={t('Forms.Date')}
-                  style={styles.inputRow}
-                  inputStyle={styles.input}
-                  inputBoxStyles={styles.inputBox}
-                  required={false}
-                  disabled
-                  defaultValue={moment(new Date()).format("DD/MM/YYYY")}
-                  labelStyle={styles.formInputLabel}
-                  showTextError={false}
-                  error={errors.documentDate}
-                />
-                 <AuthInput
-                  register={register}
-                  registerName='warehouseId'
-                  label={t('Forms.Warehouse')}
-                  style={styles.inputRow}
-                  inputStyle={styles.input}
-                  inputBoxStyles={styles.inputBox}
-                  required={false}
-                  disabled
-                  labelStyle={styles.formInputLabel}
-                  showTextError={false}
-                  error={errors.warehouseId}
-                />
                 <Controller
                   control={control}
                   name='partnersId'
@@ -73,7 +46,6 @@ const CreateStorageIncome: React.FC = () => {
                           label={t('Forms.PartnerIn')}
                           placeholder={t('Forms.Select_PartnerIn')}
                           showErrorText={false}
-                          style={styles.inputRow}
                           labelStyle={styles.formInputLabel}
                           error={errors.partnersId}
                         />

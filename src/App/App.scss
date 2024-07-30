@@ -245,11 +245,7 @@
 }
 
 .tableAutocompleteBig .MuiFormLabel-root {
-  font-family: "Montserrat arm";
-  font-size: 14px !important;
-  font-weight: 400;
-  line-height: 15px !important;
-  color: $text_dark !important;
+  @include textStyles("Montserrat arm" !important, 14px !important, 400 !important, 15px !important, $text_dark !important);
 }
 
 .tableAutocompleteBig .MuiFormControl-root .MuiInputBase-root,
@@ -393,6 +389,52 @@
   }
   .tableAutocompleteBig .MuiInputBase-root.MuiOutlinedInput-root {
     width: 300px !important;
+  }
+}
+
+@media screen and (max-width:800px) {
+  .formAutocomplete .MuiInputBase-root.MuiOutlinedInput-root {
+    width: 200px !important;
+    max-width: 200px !important;
+  }
+  .formAutocomplete .MuiFormLabel-root {
+    font-size: 10px !important;
+    line-height: 10px !important;
+  }
+  .formAutocomplete .MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-input {
+    font-size: 10px !important;
+  }
+  .formAutocomplete .MuiAutocomplete-listbox .MuiAutocomplete-option{
+    min-height: fit-content !important;
+    font-size: 12px !important;
+  }
+  .tableAutocomplete .MuiInputBase-root.MuiOutlinedInput-root {
+    min-width: 200px !important;
+  }
+  .tableAutocomplete .MuiFormLabel-root {
+    font-size: 12px !important;
+    line-height: 12px !important;
+  }
+  .tableAutocomplete .MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-input {
+    font-size: 12px !important;
+  }
+  .tableAutocomplete .MuiAutocomplete-listbox .MuiAutocomplete-option{
+    min-height: fit-content !important;
+    font-size: 12px !important;
+  }
+  .tableAutocompleteBig .MuiInputBase-root.MuiOutlinedInput-root {
+    width: 200px !important;
+  }
+  .tableAutocompleteBig .MuiFormLabel-root {
+    font-size: 12px !important;
+    line-height: 12px !important;
+  }
+  .tableAutocompleteBig .MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-input {
+    font-size: 12px !important;
+  }
+  .tableAutocompleteBig .MuiAutocomplete-listbox .MuiAutocomplete-option{
+    min-height: fit-content !important;
+    font-size: 12px !important;
   }
 }
 

@@ -2,14 +2,16 @@ import { useState } from "react";
 import { t } from 'i18next';
 import moment from "moment";
 import { ITableBodyData, ITableHeader, TableCellContentTypes } from "../../../Interfaces/componentTypes";
+import { useGeneralHooks } from "../../../General/Hooks/hooks";
 import { useGetWarehouseReturnsQuery } from "../../../API/actionsApi";
 import { WarehouseReturnsResponse } from "../../../Interfaces/responseTypes";
 import styles from '../formTablestyles.module.scss';
 
 const useStorageReturn = (id: string) => {
+    const {renderDataLimit}= useGeneralHooks();
     const [activePage, setActivePage] = useState<number>(0);
     const [offset, setOffset] = useState<number>(0);
-    const { data: returnsData } = useGetWarehouseReturnsQuery({ id: id, limit: 7, offset: offset });
+    const { data: returnsData } = useGetWarehouseReturnsQuery({ id: id, limit: renderDataLimit, offset: offset });
     const headerData: ITableHeader[] = [
         {
             title: `${t('Forms.Date')}`,

@@ -45,11 +45,11 @@
     flex: 1;
 }
 
-.inputContainer{
+.inputContainer {
     @include flexStyles(flex, column, flex-end !important, normal);
 }
 
-.inputBox{
+.inputBox {
     @include flexStyles(flex, row, flex-end !important, normal);
     width: 280px;
     max-width: 280px;
@@ -76,11 +76,8 @@
     gap: 15px;
     padding: 10px;
     margin-right: 10px;
-    // min-width: 100%;
-    // max-width: max-content;
     overflow-x: scroll;
     overflow-y: hidden;
-    // width: initial;
 }
 
 .formItemInputBox {
@@ -89,7 +86,6 @@
 }
 
 .formItemInputNumBox {
-    // width: 100%;
     background-color: $formInput;
     padding: 16px 5px;
 }
@@ -110,15 +106,15 @@
 .formItemTextBox {
     width: 100%;
     max-width: 100%;
-    //  border: 1px solid #d0d5dd;
-    // border-radius: 10px;
     width: 100%;
     margin-top: 8px;
     @include flexStyles(flex, row, center, center);
     text-wrap: wrap;
     padding: 16px;
     overflow: hidden;
-    // background-color: $formInput;
+    background-color: $formInput;
+    border-radius: 10px;
+    border: 1px solid #d0d5dd
 }
 
 .formItemText {
@@ -131,7 +127,6 @@
 }
 
 .buttonRow {
-    // width: 98vw;
     @include flexStyles(flex, row, center, space-between);
     padding: 10px;
     border-top: 1px solid $dark_grey;
@@ -141,14 +136,12 @@
     left: 1.2vw;
     right: 1.2vw;
     box-shadow: -5px 0 5px -5px $main_color;
-
 }
 
 .buttons {
     width: 400px;
     @include flexStyles(flex, row, center, normal);
     gap: 20px;
-    
 }
 
 .deleteIcon {
@@ -167,7 +160,7 @@
     background-color: $errorColor
 }
 
-.totalBox{
+.totalBox {
     @include flexStyles(flex, row, center, normal);
     gap: 20px;
     margin-right: 150px
@@ -181,7 +174,7 @@
     @include textStyles("Montserrat arm", 20px, 500, 15px, $main_color);
 }
 
-.totalAmmount{
+.totalAmmount {
     @include textStyles("Montserrat arm", 14px, 500, 15px, $main_color);
 }
 
@@ -233,4 +226,85 @@
     .salesPartner {
         max-width: 25vw;
     }
+
+    .totalBox {
+        flex-direction: column;
+        gap: 10px;
+        margin-right: 10px
+    }
+}
+
+@media screen and (max-width:800px) {
+    .formInputLabel {
+        font-size: 12px !important;
+    }
+
+    .formItemTextBox {
+        padding: 12px;
+    }
+
+    .formItemText {
+        font-size: 12px;
+    }
+
+    .formItemBigText {
+        font-size: 10px !important;
+    }
+
+    .itemsBox {
+        padding: 0px;
+    }
+
+    .formItemInputNumBox {
+        padding: 12px;
+    }
+
+    .longTitle {
+        font-size: 12px;
+        line-height: 16px;
+    }
+
+    .totalBox {
+        flex-direction: column;
+        gap: 5px;
+        margin-right: 10px
+    }
+
+    .totalText {
+        font-size: 14px
+    }
+
+    .totalCount {
+        font-size: 14px;
+        line-height: 10px;
+    }
+
+    .totalAmmount {
+        font-size: 12px;
+    }
+
+    .buttons {
+        gap: 10px;
+    }
+
+    .inputBox {
+        width: 180px;
+        padding: 10px;
+    }
+
+    .input {
+        width: 180px;
+        max-width: 200px;
+        background-color: $formInput;
+        font-size: 12px;
+        line-height: 18px;
+        padding: 0px;
+    }
+    .salesPartner{
+        font-size: 10px !important;
+        line-height: 12px;
+        height: fit-content;
+        min-width: fit-content;
+    }
+
 }

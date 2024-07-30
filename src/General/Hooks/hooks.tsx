@@ -31,6 +31,7 @@ export const useGeneralHooks = () => {
   const mobileScreen: boolean = window.innerWidth < 480;
   const mediumScreen: boolean = window.innerWidth < 680;
   const largeScreen: boolean = window.innerWidth > 920;
+  const renderDataLimit = largeScreen ? 7 : 15;
 
   const onLogout = () => {
     localStorage.removeItem("mm_access_token");
@@ -56,6 +57,7 @@ export const useGeneralHooks = () => {
     mobileScreen,
     mediumScreen,
     currentUser,
+    renderDataLimit,
     onLogoClick,
     onLogout,
     dispatch,

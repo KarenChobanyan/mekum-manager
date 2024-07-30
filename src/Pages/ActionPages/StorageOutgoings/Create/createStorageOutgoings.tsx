@@ -26,33 +26,7 @@ const CreateStorageOutgoings: React.FC = () => {
             :
             <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
               <div className={styles.form}>
-                <AuthInput
-                  register={register}
-                  registerName='documentDate'
-                  label={t('Forms.Date')}
-                  style={styles.inputRow}
-                  inputStyle={styles.input}
-                  inputBoxStyles={styles.inputBox}
-                  disabled
-                  required={false}
-                  defaultValue={moment(new Date()).format("DD/MM/YYYY")}
-                  labelStyle={styles.formInputLabel}
-                  showTextError={false}
-                  error={errors.documentDate}
-                />
-                <AuthInput
-                  register={register}
-                  registerName='warehouseId'
-                  label={t('Forms.Warehouse')}
-                  style={styles.inputRow}
-                  inputStyle={styles.input}
-                  inputBoxStyles={styles.inputBox}
-                  required={false}
-                  disabled
-                  labelStyle={styles.formInputLabel}
-                  showTextError={false}
-                  error={errors.warehouseId}
-                />
+              
               </div>
               <div className={styles.itemsBox}>
                 <FormItems

@@ -89,6 +89,16 @@
 
 //media
 
+@media screen and (max-width: 800px) {
+  .label {
+    font-size: 12px;
+  }
+  .input {
+    font-size: 12px;
+    font-weight: 400;
+  }
+}
+
 @media screen and (max-width: 650px) {
   .inputBox {
     padding: 12px;

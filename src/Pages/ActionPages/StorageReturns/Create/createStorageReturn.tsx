@@ -26,33 +26,6 @@ const CreateStorageReturn:React.FC = () => {
               :
               <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
                 <div className={styles.form}>
-                  <AuthInput
-                    register={register}
-                    registerName='documentDate'
-                    label={t('Forms.Date')}
-                    style={styles.inputRow}
-                    inputStyle={styles.input}
-                    inputBoxStyles={styles.inputBox}
-                    disabled
-                    required={false}
-                    defaultValue={moment(new Date()).format("DD/MM/YYYY")}
-                    labelStyle={styles.formInputLabel}
-                    showTextError={false}
-                    error={errors.documentDate}
-                  />
-                  <AuthInput
-                    register={register}
-                    registerName='warehouseId'
-                    label={t('Forms.Warehouse')}
-                    style={styles.inputRow}
-                    inputStyle={styles.input}
-                    inputBoxStyles={styles.input}
-                    disabled
-                    required={false}
-                    labelStyle={styles.formInputLabel}
-                    showTextError={false}
-                    error={errors.documentDate}
-                  />
                   <Controller
                     control={control}
                     name='partnerId'
