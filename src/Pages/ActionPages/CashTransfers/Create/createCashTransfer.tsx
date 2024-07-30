@@ -25,7 +25,7 @@ const CreateCashTransfer: React.FC = () => {
                 <AuthInput
                   register={register}
                   registerName='date'
-                  label='Ամսաթիվ'
+                  label={t('Forms.Date')}
                   style={styles.inputRow}
                   inputStyle={styles.input}
                   inputBoxStyles={styles.inputBox}
@@ -55,8 +55,8 @@ const CreateCashTransfer: React.FC = () => {
                             :
                             cashRegistersData
                           }
-                          label='Ելք․ դրամարկղ'
-                          placeholder="Ընտրեք ելք․ դրամարկղը"
+                          label={t('Forms.Cash_Out')}
+                          placeholder={t('Forms.Select_Cashout')}
                           showErrorText={false}
                           style={styles.inputRow}
                           labelStyle={styles.formInputLabel}
@@ -97,8 +97,8 @@ const CreateCashTransfer: React.FC = () => {
                             :
                             allCashRegistersData
                           }
-                          label='Մուտք դարամարկղ'
-                          placeholder="Ընտրեք դրամարկղը"
+                          label={t('Forms.Cash_Entry')}
+                          placeholder={t('Forms.Select_CashRegister')}
                           showErrorText={false}
                           style={styles.inputRow}
                           labelStyle={styles.formInputLabel}
@@ -111,7 +111,7 @@ const CreateCashTransfer: React.FC = () => {
                 <AuthInput
                   register={register}
                   registerName='money'
-                  label='Գումար'
+                  label={t('Forms.Money')}
                   showTextError={false}
                   type='number'
                   style={styles.inputRow}
@@ -127,13 +127,13 @@ const CreateCashTransfer: React.FC = () => {
                     type='button'
                     onClick={onCencele}
                     buttonType={ButtonTypes.Primery}
-                    title='Չեղարկել'
+                    title={t('Button.Cancel')}
                     buttonStyle={styles.button}
                   />
                   <Button
                     type='submit'
                     buttonType={ButtonTypes.Primery}
-                    title='Հաստատել'
+                    title={t('Button.Submit')}
                     buttonStyle={styles.button}
                   />
                 </div>

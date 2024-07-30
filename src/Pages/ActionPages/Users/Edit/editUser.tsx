@@ -11,7 +11,7 @@ import UserModal from '../Modal/userModal';
 
 const EditUser: React.FC = () => {
     const { id } = useParams();
-    const { control, register, onSubmit, handleSubmit, isLoading, errors, onCencele, roles, currentEmployeeData,onCloseModal,openModal,onOpenModal } = useEditUser(id!);
+    const { control, register, onSubmit, handleSubmit, errors, onCencele, roles, currentEmployeeData,onCloseModal,openModal,onOpenModal } = useEditUser(id!);
     const { employeesData } = useAutocompleteData();
     return (
         <div className={styles.container} >

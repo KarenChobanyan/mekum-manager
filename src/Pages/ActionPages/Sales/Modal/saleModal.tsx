@@ -29,7 +29,6 @@ const SaleModal: React.FC<IProps> = (props) => {
             children={
                 <form onSubmit={handleSubmit(onSubmit)} className={styles.container} >
                     <div className={styles.form}>
-
                         <Controller
                             control={control}
                             name='cashRegisterId'

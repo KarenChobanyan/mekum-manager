@@ -9,7 +9,7 @@ import { ICashoutRequest } from "../../../../Interfaces/requestTypes";
 
 export interface ICashoutFormValues {
     date: string,
-    cashRegisterId: IAutocompleteItem,
+    cashRegisterId: string,
     balance:string,
     partner:IAutocompleteItem,
     money: string,
@@ -29,7 +29,7 @@ const useCreateCashoutHooks = (id: string) => {
       },[id]);
 
     useEffect(() => {
-        setValue('cashRegisterId', cashRegister!)
+        setValue('cashRegisterId', cashRegister?.title!)
     }, [cashRegister]);
 
     useEffect(() => {
@@ -50,7 +50,7 @@ const useCreateCashoutHooks = (id: string) => {
     const onSubmit: SubmitHandler<ICashoutFormValues | FieldValues> = (values) => {
         const payload: ICashoutRequest = {
             date: moment(new Date()).format("YYYY-MM-DD"),
-            cashRegisterId: +(values.cashRegisterId as IAutocompleteItem).id,
+            cashRegisterId: +cashRegister?.id!,
             partnersId:+(values.partner as IAutocompleteItem).id,
             money: +values.money
         }
