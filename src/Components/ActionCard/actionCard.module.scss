@@ -21,7 +21,7 @@
 }
 
 .imageBox {
-    width: 100%;
+    flex: 1;
     @include flexStyles(flex,column,normal,center);
     padding:0 20px ;
 }
@@ -74,6 +74,29 @@
       }
       .title{
         font-size: 18px;
+    }
+
+}
+
+@media screen and (max-width:800px) {
+    .container{
+        max-width: 180px;
+        width: 180px;
+        height: 100px;
+        gap: 10px;
+        border-radius: 35%;
+    }
+    .image{
+        max-width:100px;
+        max-height: 70px;
+      }
+      .title{
+        font-size: 12px;
+    }
+
+    .imageBox {
+       align-items: center;
+       max-width: 100%;
     }
 
 }

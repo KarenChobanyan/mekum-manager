@@ -48,11 +48,6 @@ export const countGoodExits = (data:GetGoodBatchesResponse, count: number) => {
           throw new Error('No bearer token found');
         }
   
-        // const params = {
-        //   param1: 'value1',
-        //   param2: 'value2',
-        // } as { [key: string]: string };
-  
         const queryString = Object.keys(params)
           .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(params[key]))
           .join('&');

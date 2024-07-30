@@ -29,22 +29,54 @@
     letter-spacing: 0.3px;
 }
 
-.title{
+.title {
     flex: 1;
     @include textStyles("Montserrat arm", 26px, 400, normal, $white);
     text-align: center;
 }
 
-.infoBox{
+.infoBox {
     margin-right: 50px;
-    @include flexStyles(flex,row,center,center);
+    @include flexStyles(flex, row, center, center);
     gap: 40px;
 }
 
 //media
 
 @media screen and (max-width:1210px) {
-    .title{
-font-size: 22px;
+    .title {
+        font-size: 22px;
     }
-  }
+}
+
+@media screen and (max-width:800px) {
+    .body {
+        padding: 5px;
+        max-width: 100vw;
+        gap: 5px;
+    }
+
+    .logo {
+        gap: 2px;
+        padding: 2px;
+    }
+
+    .bigText {
+        font-size: 20px;
+    }
+
+    .smallText {
+        font-size: 8px;
+        transform: translateY(-2px);
+    }
+
+    .title {
+        font-size: 15px;
+    }
+
+    .infoBox {
+        margin-right: 20px;
+        @include flexStyles(flex, row, center, center);
+        gap: 20px;
+    }
+}
