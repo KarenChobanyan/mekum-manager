@@ -36,32 +36,18 @@ const CreateCashout: React.FC = () => {
                   showTextError={false}
                   error={errors.date}
                 />
-                <Controller
-                  control={control}
-                  name='cashRegisterId'
-                  rules={{
-                    required: t('Input_Errors.Required'),
-                  }}
-                  render={({ field: { onChange, name, value } }) => {
-                    return (
-                      <div className='formAutocomplete'>
-                        <AutoComplete
-                          value={value}
-                          name={name}
-                          onChange={onChange}
-                          id='cashBoxId'
-                          data={cashRegistersData}
-                          disable
-                          label={t('Forms.CassRegister')}
-                          placeholder={t('Forms.Select_CashRegister')}
-                          showErrorText={false}
-                          style={styles.inputRow}
-                          labelStyle={styles.formInputLabel}
-                          error={errors.cashRegisterId}
-                        />
-                      </div>
-                    );
-                  }}
+              <AuthInput
+                  register={register}
+                  registerName='cashRegisterId'
+                  label={t('Forms.CassRegister')}
+                  style={styles.inputRow}
+                  inputStyle={styles.input}
+                  inputBoxStyles={styles.inputBox}
+                  disabled
+                  required={false}
+                  labelStyle={styles.formInputLabel}
+                  showTextError={false}
+                  error={errors.cashRegisterId}
                 />
                  <AuthInput
                   register={register}

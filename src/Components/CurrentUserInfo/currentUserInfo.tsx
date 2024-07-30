@@ -14,7 +14,8 @@ interface IProps {
 const CurrentUserInfo: React.FC<IProps> = (props) => {
     const { name, surename, image } = props;
     const { t, onLogout, navigate } = useGeneralHooks();
-    const { show, setAnchor, headerProfileRef, anchor, setShow } = useCurrentUserInfoHooks();
+    const { show, setAnchor, headerProfileRef, anchor, setShow,setRenderName } = useCurrentUserInfoHooks();
+    
 
     return (
         <div
@@ -27,8 +28,7 @@ const CurrentUserInfo: React.FC<IProps> = (props) => {
         >
             <Avatar name={name} image={image} />
             <div className={styles.userData}>
-                <span>{name}</span>
-                <span>{surename}</span>
+                <span>{setRenderName(name, surename)}</span>
             </div>
             <BasePopup
                 open={show}

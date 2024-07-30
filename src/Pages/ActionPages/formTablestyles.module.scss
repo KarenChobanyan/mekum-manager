@@ -45,6 +45,10 @@
     flex: 1;
 }
 
+.inputContainer{
+    @include flexStyles(flex, column, flex-end !important, normal);
+}
+
 .inputBox{
     @include flexStyles(flex, row, flex-end !important, normal);
     width: 280px;

@@ -9,7 +9,7 @@ import { IGoodsData, IPostStorageIncomeRequestData } from "../../../../Interface
 
 export interface IStorageIncomeFormValues {
     documentDate: string,
-    warehouseId: IAutocompleteItem,
+    warehouseId: string,
     partnersId: IAutocompleteItem,
     goods: IStorageIncomeItem[]
 }
@@ -48,7 +48,7 @@ const useCreateStorageIncomeHooks = (id: string) => {
     });
 
     useEffect(() => {
-        setValue('warehouseId', warehouse!)
+        setValue('warehouseId', warehouse?.title!)
         setWarehouseName(warehouse?.title!)
     }, [warehouse]);
 
@@ -77,7 +77,7 @@ const useCreateStorageIncomeHooks = (id: string) => {
     const onSubmit: SubmitHandler<IStorageIncomeFormValues | FieldValues> = (values) => {
         const goodsList: IGoodsData[] = values.goods?.map((item: IStorageIncomeItem): IGoodsData => {
             return {
-                warehouseId: +(values.warehouseId as IAutocompleteItem).id,
+                warehouseId: +warehouse?.id!,
                 point: item.point,
                 count: +item.count,
                 price: +item.cost!,

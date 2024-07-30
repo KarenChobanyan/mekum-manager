@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 
 export interface IStorageOutgoingFormValues {
     documentDate: string,
-    warehouseId: IAutocompleteItem,
+    warehouseId: string,
     partnerId: IAutocompleteItem,
     goods: IStorageOutgoingItem[]
 };
@@ -44,7 +44,7 @@ const useCreateStorageOutgoingHooks = (id: string) => {
 
 
     useEffect(() => {
-        setValue('warehouseId', warehouse!)
+        setValue('warehouseId', warehouse?.title!)
     }, [warehouse]);
 
     useEffect(() => {
@@ -70,7 +70,7 @@ const useCreateStorageOutgoingHooks = (id: string) => {
     const onSubmit: SubmitHandler<IStorageOutgoingFormValues | FieldValues> = (values) => {
         const goodsList: IExitGoods[] = values.goods?.map((item: IStorageOutgoingItem): IExitGoods => {
             return {
-                warehouseId: +(values.warehouseId as IAutocompleteItem).id,
+                warehouseId: +warehouse?.id!,
                 point: item.point,
                 count: +item.count,
                 materialValueId: +(item.materialValueId as IAutocompleteItem).id,

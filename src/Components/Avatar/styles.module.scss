@@ -30,3 +30,16 @@
         font-size: 18px;
     }
   }
+
+  @media screen and (max-width:800px) {
+    .imageBox{
+        width: 25px;
+        height: 25px;
+    }
+    .nameBox{
+        width: 25px;
+        height: 25px;
+        font-size: 14px;
+        font-size: 20;
+    }
+}

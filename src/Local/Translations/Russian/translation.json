@@ -71,7 +71,10 @@
     "Warehouse_In":"Входной склад",
     "Warehouse_In—Placeholder":"Выберите входной склад",
     "Select_CashRegister": "Выберите кассу",
-    "Debt":"Долг"
+    "Debt":"Долг",
+    "Cash_Out":"Выход: кассa",
+    "Select_Cashout":"Выбрать выездную кассу",
+    "Cash_Entry":"Входная касса"
   },
   "Employee":{
     "Title":"Сотрудник",

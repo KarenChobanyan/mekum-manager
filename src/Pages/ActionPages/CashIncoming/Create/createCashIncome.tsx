@@ -10,7 +10,7 @@ import styles from '../../formTablestyles.module.scss';
 
 const CreateCashout: React.FC = () => {
   const { id } = useParams();
-  const { register, control, onSubmit, onCencele, handleSubmit, cashRegistersData, partnersData, errors, isLoading,setPartnerDebt,warning } = useCreateCashEntryHooks(id!);
+  const { register, control, onSubmit, onCencele, handleSubmit, partnersData, errors, isLoading, setPartnerDebt, warning } = useCreateCashEntryHooks(id!);
 
   return (
     <div className={styles.container} >
@@ -36,32 +36,18 @@ const CreateCashout: React.FC = () => {
                   showTextError={false}
                   error={errors.date}
                 />
-                <Controller
-                  control={control}
-                  name='cashRegisterId'
-                  rules={{
-                    required: t('Input_Errors.Required'),
-                  }}
-                  render={({ field: { onChange, name, value } }) => {
-                    return (
-                      <div className='formAutocomplete'>
-                        <AutoComplete
-                          value={value}
-                          name={name}
-                          onChange={onChange}
-                          id='cashBoxId'
-                          data={cashRegistersData}
-                          disable
-                          label={t('Forms.CassRegister')}
-                          placeholder={t('Forms.Select_CashRegister')}
-                          showErrorText={false}
-                          style={styles.inputRow}
-                          labelStyle={styles.formInputLabel}
-                          error={errors.cashRegisterId}
-                        />
-                      </div>
-                    );
-                  }}
+                 <AuthInput
+                  register={register}
+                  registerName='cashRegisterId'
+                  label={t('Forms.CassRegister')}
+                  style={styles.inputRow}
+                  inputStyle={styles.input}
+                  inputBoxStyles={styles.inputBox}
+                  disabled
+                  required={false}
+                  labelStyle={styles.formInputLabel}
+                  showTextError={false}
+                  error={errors.cashRegisterId}
                 />
                 <Controller
                   control={control}
@@ -75,7 +61,7 @@ const CreateCashout: React.FC = () => {
                         <AutoComplete
                           value={value}
                           name={name}
-                          onChange={(value)=>{
+                          onChange={(value) => {
                             onChange(value)
                             setPartnerDebt(value?.id!)
                           }
@@ -93,7 +79,7 @@ const CreateCashout: React.FC = () => {
                     );
                   }}
                 />
-                 <AuthInput
+                <AuthInput
                   register={register}
                   registerName='debt'
                   label={t('Forms.Debt')}
@@ -114,6 +100,7 @@ const CreateCashout: React.FC = () => {
                   style={styles.inputRow}
                   inputStyle={styles.input}
                   inputBoxStyles={styles.inputBox}
+                  inputontainerStyle={styles.inputContainer}
                   labelStyle={styles.formInputLabel}
                   error={errors.money}
                   warning={warning}

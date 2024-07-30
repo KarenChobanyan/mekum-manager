@@ -10,6 +10,7 @@ import NoDataImg from './noData.webp';
 import StorageRemove from './storageRemove.webp';
 import ReturnableImage from './returnable.webp';
 import CompaniesImage from './companies.webp';
+import NotFoundImg from './notFound.webp';
 
 export {
     Sales,
@@ -23,5 +24,6 @@ export {
     OutFromStorage,
     BetweenStorages,
     ReturnableImage,
-    CompaniesImage
+    CompaniesImage,
+    NotFoundImg
 }

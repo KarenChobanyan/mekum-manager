@@ -3,13 +3,20 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import moment from "moment";
 import { usePostCashEntryMutation } from "../../../../API/actionsApi";
-import { ICachIncomingFormValues } from "../../CashIncoming/Create/createCashIncoming-hooks";
 import { useAutocompleteData, useDirectoriesHooks, useGeneralHooks } from "../../../../General/Hooks/hooks";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
 import { ICashoutRequest } from "../../../../Interfaces/requestTypes";
 
+interface ISalesCachEntryFormValues {
+        date: string,
+        cashRegisterId: IAutocompleteItem,
+        partner:IAutocompleteItem,
+        debt:string,
+        money: string,
+}
+
 const useSalesModal = (partner: IAutocompleteItem,handleClose:()=>void) => {
-    const { register, handleSubmit, control, reset,watch, setValue, formState: { errors } } = useForm<ICachIncomingFormValues>({ mode: "all" });
+    const { register, handleSubmit, control, reset,watch, setValue, formState: { errors } } = useForm<ISalesCachEntryFormValues>({ mode: "all" });
     const { cashRegistersData } = useAutocompleteData();
     const {partners} = useDirectoriesHooks();
     const { t, navigate } = useGeneralHooks();
@@ -46,7 +53,7 @@ const useSalesModal = (partner: IAutocompleteItem,handleClose:()=>void) => {
         }
     }, [isSuccess, isError]);
 
-    const onSubmit: SubmitHandler<ICachIncomingFormValues | FieldValues> = async(values) => {
+    const onSubmit: SubmitHandler<ISalesCachEntryFormValues | FieldValues> = async(values) => {
         try {
             const payload: ICashoutRequest = {
                 date: moment(new Date()).format("YYYY-MM-DD"),

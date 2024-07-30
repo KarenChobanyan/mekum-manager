@@ -10,7 +10,7 @@ import { IExitGoods, IPostWarehouseExitRequest } from "../../../../Interfaces/re
 
 export interface ISalesFormValues {
     documentDate: string,
-    warehouseId: IAutocompleteItem,
+    warehouseId: string,
     partnerId: IAutocompleteItem,
     goods: ISaleGoods[]
 }
@@ -57,7 +57,7 @@ const useCreateSalesHooks = (id: string) => {
         name: 'goods'
     });
 
-    const countTotalForRender = (goods:any[]) => {
+    const countTotalForRender = (goods: any[]) => {
         const moneys = goods.map((item) => +item.money);
         const total = moneys.reduce((acc, item) => acc + item, 0);
         return total;
@@ -72,10 +72,10 @@ const useCreateSalesHooks = (id: string) => {
     }, [watch]);
 
     useEffect(() => {
-        setValue('warehouseId', warehouse!);
+        setValue('warehouseId', warehouse!.title);
     }, [warehouse]);
 
-   
+
     useEffect(() => {
         if (isSuccess && modal.money === null) {
             toast.success(t('Toast.Success.Register'))
@@ -118,7 +118,7 @@ const useCreateSalesHooks = (id: string) => {
     const onSubmit: SubmitHandler<ISalesFormValues | FieldValues> = async (values) => {
         const goodsList: IExitGoods[] = values.goods?.map((item: ISaleGoods): IExitGoods => {
             return {
-                warehouseId: +(values.warehouseId as IAutocompleteItem).id,
+                warehouseId: +warehouse?.id!,
                 point: item.point,
                 count: +item.count,
                 discount: +item.discount,

@@ -7,3 +7,9 @@
     flex-wrap: wrap;
     padding: 30px 20px;
 }
+
+@media screen and (max-width:800px) {
+    .container{
+        gap: 20px;
+    }
+}

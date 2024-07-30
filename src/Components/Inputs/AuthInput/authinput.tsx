@@ -38,6 +38,7 @@ export interface IInputProps {
   | undefined;
   inputStyle?: string;
   inputBoxStyles?: string;
+  inputontainerStyle?:string;
   style?: string;
   showTextError?: boolean;
   labelStyle?: string,
@@ -68,6 +69,7 @@ const AuthInput: React.FC<IInputProps> = (props) => {
     style,
     inputStyle,
     inputBoxStyles,
+    inputontainerStyle,
     labelStyle,
     showTextError = true,
     step = 0.01,
@@ -90,7 +92,7 @@ const AuthInput: React.FC<IInputProps> = (props) => {
           {error && <span className={styles.labelError}>*</span>}
         </label>
       }
-      <div className={styles.inputContainer}>
+      <div className={`${styles.inputContainer} ${inputontainerStyle}`}>
         <div
           className={`${styles.inputBox} ${border && styles.border} ${inputBoxStyles} ${error && styles.errorBorder} ${warning && styles.warningBorder}`}
           onFocus={renderBorder}

@@ -39,32 +39,18 @@ const CreateStorageIncome: React.FC = () => {
                   showTextError={false}
                   error={errors.documentDate}
                 />
-                <Controller
-                  control={control}
-                  name='warehouseId'
-                  rules={{
-                    required: t('Input_Errors.Required'),
-                  }}
-                  render={({ field: { onChange, name, value } }) => {
-                    return (
-                      <div className='formAutocomplete'>
-                        <AutoComplete
-                          value={value}
-                          name={name}
-                          onChange={onChange}
-                          disable
-                          id='storageId'
-                          data={myWarehousesData}
-                          label={t('Forms.Warehouse')}
-                          placeholder={t('Forms.Select_Warehouse')}
-                          showErrorText={false}
-                          style={styles.inputRow}
-                          labelStyle={styles.formInputLabel}
-                          error={errors.warehouseId}
-                        />
-                      </div>
-                    );
-                  }}
+                 <AuthInput
+                  register={register}
+                  registerName='warehouseId'
+                  label={t('Forms.Warehouse')}
+                  style={styles.inputRow}
+                  inputStyle={styles.input}
+                  inputBoxStyles={styles.inputBox}
+                  required={false}
+                  disabled
+                  labelStyle={styles.formInputLabel}
+                  showTextError={false}
+                  error={errors.warehouseId}
                 />
                 <Controller
                   control={control}
