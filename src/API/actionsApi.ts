@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from './API';
 import { IAcceptCashTransfer, IAcceptWarehouseTransferRequest, ICashoutRequest, IGetStorageEntriesRequestData, IGetWarehouseTransfersRequestData, IPostCashTransfer, IPostStorageIncomeRequestData, IPostWarehouseExitRequest, IPostWarehouseReturnRequest, IWarehouseTransferRequest, PostRetunableRequestData } from '../Interfaces/requestTypes';
-import { AccounInvoiceResponce, CashOutResponse, GetReturnableProductsResponse, GetWarehouseTransferResponse, IWarehouseEntryResponse, WarehouseExitResponse, WarehouseReturnsResponse } from '../Interfaces/responseTypes';
+import { AccounInvoiceResponce, CashOutResponse, GetReturnableProductsResponse, GetWarehouseTransferResponse, ICashRegisterBalanceResponce, IPartnerDebtResponce, IWarehouseEntryResponse, WarehouseExitResponse, WarehouseReturnsResponse } from '../Interfaces/responseTypes';
 import { directoriesApi } from './direcroriesApi';
 import { tagTypes } from './types';
 
@@ -172,6 +172,19 @@ export const actionsApi = createApi({
             }),
             providesTags: ['Returnable']
         }),
+        getCashBalance: builder.query<ICashRegisterBalanceResponce, string>({
+            query: (id) => ({
+                url: `/mekum/cash-register-balance/${id}`,
+                method: 'GET',
+            }),
+        }),
+        getPartnerDebt: builder.query<IPartnerDebtResponce, string>({
+            query: (id) => ({
+                url: `/mekum/partner-debt/${id}`,
+                method: 'GET',
+            }),
+            providesTags: ['CashEntry']
+        }),
     }),
 });
 
@@ -195,5 +208,7 @@ export const {
     usePostReturnableMutation,
     useGetWarehouseTransfersQuery,
     useGetWarehouseReturnsQuery,
-    useGetReturnableProductsQuery
+    useGetReturnableProductsQuery,
+    useGetCashBalanceQuery,
+    useGetPartnerDebtQuery
 } = actionsApi;

@@ -63,7 +63,6 @@ const CreateCashout: React.FC = () => {
                           name={name}
                           onChange={(value) => {
                             onChange(value)
-                            setPartnerDebt(value?.id!)
                           }
                           }
                           id='recipientId'

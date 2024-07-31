@@ -3,7 +3,7 @@
 
 
 .language {
-    padding: 0px 5px
+    padding: 0px 5px;
 }
 
 .popup {
@@ -17,4 +17,10 @@
 
 .languageItem {
     cursor: pointer;
+}
+
+@media screen and (max-width:800px) {
+    .language {
+       transform: translateY(3px);
+    } 
 }

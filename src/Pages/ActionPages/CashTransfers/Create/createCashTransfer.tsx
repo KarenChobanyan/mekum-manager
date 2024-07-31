@@ -1,16 +1,17 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
+
 import moment from 'moment';
 import { t } from 'i18next';
+import { useParams } from 'react-router';
 import useCreateCashTransferHooks from './createCashTransfer-hooks';
 import { ButtonTypes } from '../../../../Interfaces/componentTypes';
 import { AuthInput, AutoComplete, Button, Loading, } from '../../../../Components';
 import styles from '../../formTablestyles.module.scss';
-import { useParams } from 'react-router';
 
 const CreateCashTransfer: React.FC = () => {
-  const {id} = useParams();
-  const { register, control, onSubmit, onCencele, handleSubmit, watch, isLoading, cashRegistersData,allCashRegistersData, errors } = useCreateCashTransferHooks(id!);
+  const { id } = useParams();
+  const { register, control, onSubmit, onCencele, handleSubmit, isLoading, cashRegistersData, exitCashRegister, errors } = useCreateCashTransferHooks(id!);
 
   return (
     <div className={styles.container} >
@@ -36,7 +37,20 @@ const CreateCashTransfer: React.FC = () => {
                   showTextError={false}
                   error={errors.date}
                 />
-                <Controller
+                <AuthInput
+                  register={register}
+                  registerName='exitCashRegisterId'
+                  label={t('Forms.Cash_Out')}
+                  style={styles.inputRow}
+                  inputStyle={styles.input}
+                  inputBoxStyles={styles.inputBox}
+                  disabled
+                  labelStyle={styles.formInputLabel}
+                  required={false}
+                  showTextError={false}
+                  error={errors.exitCashRegisterId}
+                />
+                {/* <Controller
                   control={control}
                   name='exitCashRegisterId'
                   rules={{
@@ -50,6 +64,7 @@ const CreateCashTransfer: React.FC = () => {
                           name={name}
                           onChange={onChange}
                           id='exitCashRegisterId'
+                          disable
                           data={watch(`entryCashRegisterId`) ?
                             cashRegistersData?.filter((item) => item.id !== watch(`entryCashRegisterId`)?.id!)
                             :
@@ -65,14 +80,13 @@ const CreateCashTransfer: React.FC = () => {
                       </div>
                     );
                   }}
-                />
-                 <AuthInput
+                /> */}
+                <AuthInput
                   register={register}
                   registerName='balance'
                   label={t('Forms.Remainder')}
                   showTextError={false}
                   disabled
-                  type='number'
                   style={styles.inputRow}
                   inputStyle={styles.input}
                   labelStyle={styles.formInputLabel}
@@ -92,11 +106,7 @@ const CreateCashTransfer: React.FC = () => {
                           name={name}
                           onChange={onChange}
                           id='entryCashRegisterId'
-                          data={watch(`exitCashRegisterId`) ?
-                            allCashRegistersData?.filter((item) => item.id !== watch(`exitCashRegisterId`)?.id!)
-                            :
-                            allCashRegistersData
-                          }
+                          data={cashRegistersData?.filter((item) => item.id !== exitCashRegister?.id!)}
                           label={t('Forms.Cash_Entry')}
                           placeholder={t('Forms.Select_CashRegister')}
                           showErrorText={false}

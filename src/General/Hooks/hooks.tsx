@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation, useNavigate, useParams } from "react-router";
 import { useTranslation } from "react-i18next";
@@ -10,6 +10,7 @@ import { useGetAllCashRegistersQuery, useGetAllGoodsQuery, useGetAllWarehousesQu
 import { AllGoodsResponse, CashRegistersResponse, GetEmployeesResponseData, GetWarehousesResponseData, GoodsResponseData, IGetPartnersRespData, } from "../../Interfaces/responseTypes";
 import { removeCurrentUser } from "../../Store/Slices/authSlice";
 import { ISIN } from "../../Interfaces/interfaces";
+import { useGetCashBalanceQuery, useGetPartnerDebtQuery } from "../../API/actionsApi";
 
 export const useGeneralHooks = () => {
   const { t, i18n } = useTranslation();
@@ -264,9 +265,12 @@ export const useWarehouseHooks = () => {
   }
 };
 
-export const useCashRegisterHooks = () => {
+export const useCashRegisterHooks = (id:string | undefined) => {
   const { control,register,setValue,reset } = useForm<{ cashRegister: IAutocompleteItem, type: IAutocompleteItem,balance:string }>();
+  const {data:balanceData} = useGetCashBalanceQuery(id!,{skip:id === undefined});
+
   return {
+    balanceData,
     control,
     register,
     setValue,
@@ -274,8 +278,15 @@ export const useCashRegisterHooks = () => {
   }
 };
 
-
 export const useGoodExitsHooks = () => {
 
+};
+
+export const usePartner = (id:string)=>{
+  const {data:debt} = useGetPartnerDebtQuery(id!,{skip:id === undefined});
+  
+    return {
+      debt
+    }
 };
 

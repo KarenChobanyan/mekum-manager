@@ -7,7 +7,7 @@ const useLanguagesHooks = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (containerRef.current && !!containerRef.current.contains(event.target as Node) ) {
+    if (containerRef.current && !containerRef.current.contains(event.target as Node) ) {
       setShow(false);
     }
   };

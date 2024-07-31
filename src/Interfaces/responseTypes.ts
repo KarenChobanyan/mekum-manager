@@ -10,7 +10,7 @@ export interface IGetMeResponse {
 export interface IGetMeResponseData {
   id?: number;
   role_id?: number;
-  company_id?:number;
+  company_id?: number;
   mekum_id?: string | null;
   username?: string;
   name?: string;
@@ -346,15 +346,15 @@ export interface CashRegistersResponse {
 };
 
 export interface ICashoutResponseData {
-  entryCashRegisterId:number,
-  exitCashRegisterId:number,
-  money:number,
+  entryCashRegisterId: number,
+  exitCashRegisterId: number,
+  money: number,
   id: number;
-  exitCashRegister:{
-    name:string
+  exitCashRegister: {
+    name: string
   },
-  entryCashRegister:{
-    name:string
+  entryCashRegister: {
+    name: string
   },
   cashRegisterId: number;
   date: string;
@@ -441,10 +441,10 @@ export interface IWarehouseSignificance {
 export interface IMovementNAProduct {
   id: number;
   name: string;
-  point:string,
-  materialValueId:number,
-  count:number,
-  measurementUnitId:number,
+  point: string,
+  materialValueId: number,
+  count: number,
+  measurementUnitId: number,
   expenseAccountId: number;
   partnerAccountId: number;
   prepaymentAccountId: number;
@@ -469,7 +469,7 @@ export interface IGetWarehouseTransferResponseData {
   warehouseOutId: number,
   warehouseOut: IWarehouse,
   warehouseEnter: IWarehouse,
-  warehouseEnterId:number,
+  warehouseEnterId: number,
   warehouseSignificance: IWarehouseSignificance,
   movementNAProduct: MovementNAProducts,
   draft: number
@@ -497,6 +497,14 @@ export interface IReturnableProductResponseData {
   material_value_id_in: number;
   created_at: string;
   updated_at: string;
+};
+
+export interface ICashRegisterBalanceResponce {
+  data: number
+};
+
+export interface IPartnerDebtResponce {
+  money: number
 };
 
 export type GetReturnableProductsResponse = IReturnableProductResponseData[];
