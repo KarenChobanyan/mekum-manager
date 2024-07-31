@@ -13,7 +13,6 @@ interface IProps {
     onSubmit: SubmitHandler<ISignUpFormValues | FieldValues>,
     handleSubmit: UseFormHandleSubmit<ISignUpFormValues, undefined>,
     errors: FieldErrors<ISignUpFormValues>,
-    //loading
 };
 
 const SignUpForm: React.FC<IProps> = (props) => {
@@ -78,7 +77,6 @@ const SignUpForm: React.FC<IProps> = (props) => {
                     type='submit'
                     buttonType={ButtonTypes.Primery}
                     title={t('Login_Form.Sign_Up')}
-                // isLoading={loginLoading}
                 />
             </form>
         </div>

@@ -25,7 +25,6 @@ const useLoginHooks = () => {
         else if (loginResponse?.token) {
             localStorage.setItem('mm_access_token', loginResponse?.token);
             dispatch(getMe());
-            // window.location.reload();
             navigate('/home');
         }
         else if (isError) {
