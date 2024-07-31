@@ -295,7 +295,6 @@
 }
 
 .modalAutocomplete .MuiAutocomplete-listbox {
-  // width: 100% !important;
   text-wrap: wrap !important;
 }
 
@@ -368,8 +367,6 @@
  border-radius: 10px !important;
 }
 
-
-//media
 
 @media screen and (max-width:1600px) {
   .customized-dialog .MuiPaper-root {

@@ -51,12 +51,12 @@ const axiosBaseQuery =
         },
         async (err) => {
           removeLoaderElement();
-          // if (err.response.status === 403 || err.response.status === 404 || err.response.status === 404 || err.response.status === 400) {
-          //   if (window.location.pathname !== '/login') {
-          //     localStorage.removeItem('mm_access_token')
-          //     window.location.replace('/')
-          //   }
-          // }
+          if (err.response.status === 403 || err.response.status === 404 || err.response.status === 404 || err.response.status === 400) {
+            if (window.location.pathname !== '/login') {
+              localStorage.removeItem('mm_access_token')
+              window.location.replace('/')
+            }
+          }
           return Promise.reject(err);
         }
       );
