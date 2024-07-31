@@ -1,8 +1,8 @@
 @import '../../General/Styles/mixin';
 @import '../../General/Styles/variables';
 
-.container{
-    @include flexStyles(flex,column,normal,center);
+.container {
+    @include flexStyles(flex, column, normal, center);
     gap: 25px;
     max-width: 250px;
     width: 250px;
@@ -16,89 +16,94 @@
     box-shadow: -1px 0px 17px 1px $main_color;
 }
 
-.container:hover{
-    background-color: rgb(24, 55, 79,0.5);
+.container:hover {
+    background-color: rgb(24, 55, 79, 0.5);
 }
 
 .imageBox {
     flex: 1;
-    @include flexStyles(flex,column,normal,center);
-    padding:0 20px ;
+    @include flexStyles(flex, column, normal, center);
+    padding: 0 20px;
 }
 
-.image{
-  max-width:200px;
-  max-height: 170px;
-  border-radius: 10px;
+.image {
+    max-width: 200px;
+    max-height: 170px;
+    border-radius: 10px;
 }
 
-.title{
+.title {
     max-width: 100%;
     text-align: center;
-    @include textStyles("DM Sans",20px,600, 25px,$dark_grey);
+    @include textStyles("DM Sans", 20px, 600, 25px, $dark_grey);
     letter-spacing: 0.2px;
     padding: 0 5px;
     transition: 0.3s;
 }
-.container:hover .title{
+
+.container:hover .title {
     color: $white;
 }
 
 //media
 
 @media screen and (max-width:1220px) {
-    .container{
+    .container {
         gap: 25px;
         max-width: 200px;
         width: 200px;
         height: 220px;
         gap: 10px;
     }
-    .image{
-        max-width:150px;
+
+    .image {
+        max-width: 150px;
         max-height: 120px;
-      }
+    }
 
 }
 
 @media screen and (max-width:1010px) {
-    .container{
+    .container {
         max-width: 180px;
         width: 180px;
         height: 200px;
         gap: 10px;
     }
-    .image{
-        max-width:130px;
+
+    .image {
+        max-width: 130px;
         max-height: 100px;
-      }
-      .title{
+    }
+
+    .title {
         font-size: 18px;
     }
 
 }
 
 @media screen and (max-width:800px) {
-    .container{
+    .container {
         max-width: 180px;
         width: 180px;
         height: 100px;
         gap: 10px;
         border-radius: 25px;
     }
-    .image{
-        max-width:100px;
+
+    .image {
+        max-width: 100px;
         max-height: 70px;
-      }
-      .title{
+    }
+
+    .title {
         font-size: 12px;
         line-height: 15px;
     }
 
     .imageBox {
-       align-items: center;
-       max-width: 100%;
+        align-items: center;
+        max-width: 100%;
     }
 
 }
-

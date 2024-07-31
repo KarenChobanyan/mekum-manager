@@ -41,21 +41,24 @@
 .bigTitle {
   @include textStyles("Montserrat arm", 16px, 700, 16px, $white);
 }
+
 .alignCenter {
   display: flex;
   align-items: center;
 }
+
 .withoutBgButton {
   background-color: transparent;
   border: 2px solid $dark_grey;
   width: 100%;
   padding: 16px 24px;
 }
+
 .withoutBgTitle {
   @include textStyles('Montserrat arm', 16px, 700, 16px, $dark-grey);
 }
 
-.successBtn{
+.successBtn {
   background-color: $success;
   padding: 16px 24px;
 }
@@ -66,9 +69,11 @@
   .primeryButton {
     padding: 12px;
   }
-  .successBtn{
+
+  .successBtn {
     padding: 12px;
   }
+
   .disabledButton {
     padding: 12px;
   }

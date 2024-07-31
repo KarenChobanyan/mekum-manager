@@ -22,31 +22,31 @@
     width: inherit;
 }
 
-.popupRowNav{
+.popupRowNav {
     width: 90%;
     @include flexStyles(flex, row, center, center);
     @include textStyles ("Montserrat arm", 16px, 600, normal, $light_gray);
     padding: 2px 0 10px;
     cursor: pointer;
-    gap:5px;
+    gap: 5px;
     border-bottom: 1px solid $light_gray;
     transition: 0.2s;
 }
 
-.popupRowNav :hover{
-   color: $white;
+.popupRowNav :hover {
+    color: $white;
 }
 
-.logOutNav{
+.logOutNav {
     width: 90%;
     @include flexStyles(flex, row, center, center);
     cursor: pointer;
-    gap:5px;
+    gap: 5px;
     @include textStyles ("Montserrat arm", 16px, 600, 30px, $light_gray);
     transition: 0.2s;
 }
 
-.logOutNav :hover{
+.logOutNav :hover {
     color: $white;
 }
 
@@ -57,21 +57,22 @@
         font-size: 15px;
         gap: 5px;
     }
-  }
+}
 
-  @media screen and (max-width:800px) {
+@media screen and (max-width:800px) {
     .userData {
-     font-size: 12px;
+        font-size: 12px;
         gap: 7px;
     }
-    .popupRowNav{
+
+    .popupRowNav {
         font-size: 12px;
     }
-    .logOutNav{
+
+    .logOutNav {
         font-size: 12px;
         line-height: 12px;
         text-align: center;
     }
-    
-}
 
+}

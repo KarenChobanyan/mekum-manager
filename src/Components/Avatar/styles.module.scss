@@ -1,42 +1,44 @@
 @import '../../General/Styles/mixin';
 @import '../../General/Styles/variables';
 
-.imageBox{
+.imageBox {
     width: 48px;
     height: 48px;
     border-radius: 100%;
 }
 
-.nameBox{
+.nameBox {
     width: 48px;
     height: 48px;
     border-radius: 100%;
     text-align: center;
-    @include textStyles ("Montserrat arm",25px,800,initial,$white);
-    @include flexStyles(flex,column,center,center);
+    @include textStyles ("Montserrat arm", 25px, 800, initial, $white);
+    @include flexStyles(flex, column, center, center);
     background-color: $avatar;
 }
 
 //media
 
 @media screen and (max-width:1210px) {
-    .imageBox{
+    .imageBox {
         width: 35px;
         height: 35px;
     }
-    .nameBox{
+
+    .nameBox {
         width: 35px;
         height: 35px;
         font-size: 18px;
     }
-  }
+}
 
-  @media screen and (max-width:800px) {
-    .imageBox{
+@media screen and (max-width:800px) {
+    .imageBox {
         width: 25px;
         height: 25px;
     }
-    .nameBox{
+
+    .nameBox {
         width: 25px;
         height: 25px;
         font-size: 14px;
