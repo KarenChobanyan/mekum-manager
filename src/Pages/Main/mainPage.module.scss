@@ -1,9 +1,9 @@
 @import '../../General/Styles/mixin';
 @import '../../General/Styles/variables';
 
-.container{
-    width: 100vw;
-    height: 100vh;
-    @include flexStyles(flex,column,center,center);
-  background-color:$page_background;
+.container {
+  width: 100vw;
+  height: 100vh;
+  @include flexStyles(flex, column, center, center);
+  background-color: $page_background;
 }
