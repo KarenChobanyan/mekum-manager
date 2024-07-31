@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import moment from "moment";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
-import { useAutocompleteData, useDirectoriesHooks, useGeneralHooks } from "../../../../General/Hooks/hooks";
+import { useAutocompleteData, useDirectoriesHooks, useGeneralHooks, usePartner } from "../../../../General/Hooks/hooks";
 import { usePostCashEntryMutation } from "../../../../API/actionsApi";
 import { ICashoutRequest } from "../../../../Interfaces/requestTypes";
 
@@ -23,11 +23,16 @@ const useCreateCashEntryHooks = (id:string) => {
     const cashRegister = cashRegistersData?.filter((item) => item.id === id)[0];
     const { register, handleSubmit,watch, control, reset, setValue, formState: { errors } } = useForm<ICachIncomingFormValues>({ mode: "all" });
     const [warning,setWarning] = useState<string | null>(null);
-
+    const {debt} = usePartner(watch('partner')?.id!);
     
     useEffect(() => {
         setValue('cashRegisterId', cashRegister?.title!)
     }, [cashRegister]);
+
+    useEffect(() => {
+        watch('partner') && setValue('debt',String(debt?.money!))
+    }, [watch('partner'),debt]);
+
 
     useEffect(() => {
         if (isSuccess) {

@@ -12,7 +12,7 @@ const CashTransfers: React.FC = () => {
   const { t, navigate } = useGeneralHooks();
   const { cashRegistersData, warehouseDataTypes } = useAutocompleteData();
   const [cashRegisterId, setCashRegisterId] = useState<string | undefined>(cashRegistersData?.[0].id!)
-  const { control } = useCashRegisterHooks();
+  const { control } = useCashRegisterHooks(cashRegisterId!);
   const { transfersData, activePage, setActivePage, setOffset, setIsIn, isIn, headerDataForEntries, headerDataForExits, bodyDataForEntries, checkedItems, bodyDataForExits, onSubmitCheckedEntries } = useCashTransfersHook(cashRegisterId! ?? cashRegistersData?.[0].id!);
 
 

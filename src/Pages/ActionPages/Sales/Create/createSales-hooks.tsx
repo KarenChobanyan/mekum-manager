@@ -72,7 +72,7 @@ const useCreateSalesHooks = (id: string) => {
     }, [watch]);
 
     useEffect(() => {
-        setValue('warehouseId', warehouse!.title);
+        warehouse && setValue('warehouseId', warehouse!.title);
     }, [warehouse]);
 
 

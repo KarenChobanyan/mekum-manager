@@ -3,44 +3,43 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import moment from "moment";
 import { usePostCashEntryMutation } from "../../../../API/actionsApi";
-import { useAutocompleteData, useDirectoriesHooks, useGeneralHooks } from "../../../../General/Hooks/hooks";
+import { useAutocompleteData, useGeneralHooks, usePartner } from "../../../../General/Hooks/hooks";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
 import { ICashoutRequest } from "../../../../Interfaces/requestTypes";
 
 interface ISalesCachEntryFormValues {
-        date: string,
-        cashRegisterId: IAutocompleteItem,
-        partner:IAutocompleteItem,
-        debt:string,
-        money: string,
+    date: string,
+    cashRegisterId: IAutocompleteItem,
+    partner: IAutocompleteItem,
+    debt: string,
+    money: string,
 }
 
-const useSalesModal = (partner: IAutocompleteItem,handleClose:()=>void) => {
-    const { register, handleSubmit, control, reset,watch, setValue, formState: { errors } } = useForm<ISalesCachEntryFormValues>({ mode: "all" });
+const useSalesModal = (partner: IAutocompleteItem, handleClose: () => void) => {
+    const { register, handleSubmit, control, reset, watch, setValue, formState: { errors } } = useForm<ISalesCachEntryFormValues>({ mode: "all" });
     const { cashRegistersData } = useAutocompleteData();
-    const {partners} = useDirectoriesHooks();
     const { t, navigate } = useGeneralHooks();
     const [add, { isLoading, isSuccess, isError }] = usePostCashEntryMutation();
-    const [warning,setWarning] = useState<string | null>(null);
+    const [warning, setWarning] = useState<string | null>(null);
+    const { debt } = usePartner(partner?.id!);
 
-    useEffect(()=>{
-        if(partner){
-            const currentPartner = partners.filter((item)=>item.id === +partner.id!)?.[0];
-            setValue('debt',String(currentPartner.code!))
+    useEffect(() => {
+        if (partner) {
+            setValue('debt', String(debt?.money!))
         }
-    },[partner,partners]);
+    }, [partner]);
 
     useEffect(() => {
         setValue('partner', partner)
     }, [partner, setValue]);
 
-    useEffect(()=>{
-        if(+watch('money') > +watch('debt')){
-           setWarning(t('Input_Errors.Debt'))
-        }else{
-           setWarning(null)
+    useEffect(() => {
+        if (+watch('money') > +watch('debt')) {
+            setWarning(t('Input_Errors.Debt'))
+        } else {
+            setWarning(null)
         }
-       },[watch('debt'),watch('money')])
+    }, [watch('debt'), watch('money')])
 
     useEffect(() => {
         if (isSuccess) {
@@ -53,7 +52,7 @@ const useSalesModal = (partner: IAutocompleteItem,handleClose:()=>void) => {
         }
     }, [isSuccess, isError]);
 
-    const onSubmit: SubmitHandler<ISalesCachEntryFormValues | FieldValues> = async(values) => {
+    const onSubmit: SubmitHandler<ISalesCachEntryFormValues | FieldValues> = async (values) => {
         try {
             const payload: ICashoutRequest = {
                 date: moment(new Date()).format("YYYY-MM-DD"),
@@ -66,7 +65,7 @@ const useSalesModal = (partner: IAutocompleteItem,handleClose:()=>void) => {
         } catch (error) {
             console.log(error)
         }
-        
+
     };
     return {
         register,

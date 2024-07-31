@@ -12,7 +12,6 @@ const useStorageIncome = (id: string) => {
     const [activePage, setActivePage] = useState<number>(1);
     const [offset, setOffset] = useState<number>(0);
     const { data: entryData } = useGetWarehouseEntriesQuery({ id: id!, limit: renderDataLimit, offset: offset });
-
     const headerData: ITableHeader[] = [
         {
             title: `${t('Forms.Date')}`,

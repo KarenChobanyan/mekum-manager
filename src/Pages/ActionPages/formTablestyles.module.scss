@@ -235,6 +235,9 @@
 }
 
 @media screen and (max-width:800px) {
+    .body{
+        border-bottom-left-radius: 15px;
+    }
     .formInputLabel {
         font-size: 12px !important;
     }
@@ -281,6 +284,10 @@
 
     .totalAmmount {
         font-size: 12px;
+    }
+    .buttonRow {
+        left: 0.6vw;
+        right: 0.6vw;
     }
 
     .buttons {

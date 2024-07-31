@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { AuthInput, AutoComplete, Button, CustomPagination, CustomTable, Loading, NoData } from '../../../Components';
-import { useAutocompleteData, useCashRegisterHooks, useDirectoriesHooks, useGeneralHooks } from '../../../General/Hooks/hooks';
+import { useAutocompleteData, useCashRegisterHooks, useGeneralHooks } from '../../../General/Hooks/hooks';
 import useCashOutHooks from './cashOut-hooks';
 import { ButtonTypes } from '../../../Interfaces/componentTypes';
 import styles from '../styles.module.scss';
@@ -9,15 +9,14 @@ import styles from '../styles.module.scss';
 const CashOut: React.FC = () => {
   const { t, navigate,renderDataLimit } = useGeneralHooks();
   const { cashRegistersData } = useAutocompleteData();
-  const {cashRegisters} = useDirectoriesHooks();
   const [cashRegisterId, setCashRegisterIdId] = useState<string | undefined>(cashRegistersData?.[0].id!)
-  const { control, register, setValue } = useCashRegisterHooks();
+  const { control, register, setValue,balanceData } = useCashRegisterHooks(cashRegisterId ?? cashRegistersData?.[0].id!);
   const { cashoutsData, bodyData, headerData, activePage, setActivePage, setOffset } = useCashOutHooks(cashRegisterId! ?? cashRegistersData?.[0].id!);
 
-  useEffect(()=>{
-    const currentCashRegister = cashRegisters?.result.filter((item)=>item.id === +cashRegisterId!)?.[0];
-    setValue('balance',String(currentCashRegister?.code!))
-  },[cashRegisterId]);
+  useEffect(() => {
+    setValue('balance', String(balanceData?.data))
+  }, [balanceData]);
+
 
   return (
     <div className={styles.container}>
@@ -60,7 +59,6 @@ const CashOut: React.FC = () => {
                   label={t('Forms.Remainder')}
                   showTextError={false}
                   disabled
-                  type='number'
                   inputStyle={styles.inputBox}
                   inputBoxStyles={styles.inputBox}
                   labelStyle={styles.formInputLabel}

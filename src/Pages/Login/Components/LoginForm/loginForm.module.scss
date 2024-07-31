@@ -12,7 +12,7 @@
 }
 
 .title {
-    @include textStyles("Inter", 40px, 700, 54px, $text_dark);
+    @include textStyles("Montserrat arm", 40px, 700, 54px, $text_dark);
     letter-spacing: .01em;
 }
 
@@ -34,12 +34,12 @@
 }
 
 .signUpText {
-    @include textStyles("Inter", 16px, 500, 18px, $text_dark);
+    @include textStyles("Montserrat arm", 16px, 500, 18px, $text_dark);
     letter-spacing: .01em;
 }
 
 .signUp{
-    @include textStyles("Inter", 16px, 600, 18px, $buttun_darkBlue);
+    @include textStyles("Montserrat arm", 16px, 600, 18px, $buttun_darkBlue);
     letter-spacing: .01em;
     cursor: pointer;
 }
@@ -51,5 +51,21 @@
 @media screen and (max-height:800px) {
     .container {
         margin-top: 50px;
+    }
+}
+
+@media screen and (max-width:800px) {
+    .container {
+        width: 300px;
+    }
+    .title {
+       font-size: 25px;
+       line-height: 30px;
+    }
+    .signUpText {
+        font-size: 12px;
+    }
+    .signUp{
+       font-size: 12px;
     }
 }
