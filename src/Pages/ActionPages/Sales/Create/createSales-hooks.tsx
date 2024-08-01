@@ -3,10 +3,10 @@ import { toast } from "react-toastify";
 import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import moment from "moment";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
-import { useAutocompleteData, useGeneralHooks } from "../../../../General/Hooks/hooks";
+import { useAutocompleteData, useGeneralHooks, usePartner } from "../../../../General/Hooks/hooks";
 import { IGoodBatch } from "../../../../Interfaces/responseTypes";
 import { usePostSaleMutation } from "../../../../API/actionsApi";
-import { IExitGoods, IPostWarehouseExitRequest } from "../../../../Interfaces/requestTypes";
+import { IExitGoods, ISaleRequest } from "../../../../Interfaces/requestTypes";
 
 export interface ISalesFormValues {
     documentDate: string,
@@ -56,6 +56,7 @@ const useCreateSalesHooks = (id: string) => {
         control,
         name: 'goods'
     });
+    const { debt } = usePartner(watch('partnerId')?.id!);
 
     const countTotalForRender = (goods: any[]) => {
         const moneys = goods.map((item) => +item.money);
@@ -128,9 +129,9 @@ const useCreateSalesHooks = (id: string) => {
                 measurementUnitId: 7
             }
         });
-        const payload: IPostWarehouseExitRequest = {
+        const payload: ISaleRequest = {
             documentDate: moment(new Date()).format("YYYY-MM-DD"),
-            warehouseId: +(values.warehouseId as IAutocompleteItem).id,
+            warehouseId: +warehouse?.id!,
             partnerId: +(values.partnerId as IAutocompleteItem).id,
             goods: goodsList
         };

@@ -183,7 +183,7 @@ export const actionsApi = createApi({
                 url: `/mekum/partner-debt/${id}`,
                 method: 'GET',
             }),
-            providesTags: ['CashEntry']
+            providesTags: ['CashEntry','Sales']
         }),
     }),
 });

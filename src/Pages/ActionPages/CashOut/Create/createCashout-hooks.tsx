@@ -3,30 +3,29 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import moment from "moment";
 import { IAutocompleteItem } from "../../../../Interfaces/componentTypes";
-import { useAutocompleteData, useDirectoriesHooks, useGeneralHooks } from "../../../../General/Hooks/hooks";
+import { useAutocompleteData, useCashRegisterHooks, useGeneralHooks } from "../../../../General/Hooks/hooks";
 import { usePostCashoutMutation } from "../../../../API/actionsApi";
 import { ICashoutRequest } from "../../../../Interfaces/requestTypes";
 
 export interface ICashoutFormValues {
     date: string,
     cashRegisterId: string,
-    balance:string,
-    partner:IAutocompleteItem,
+    balance: string,
+    partner: IAutocompleteItem,
     money: string,
 };
 
 const useCreateCashoutHooks = (id: string) => {
     const [add, { isLoading, isSuccess, isError }] = usePostCashoutMutation();
     const { navigate, t } = useGeneralHooks();
-    const {cashRegisters} = useDirectoriesHooks();
-    const { cashRegistersData,partnersData } = useAutocompleteData();
+    const { cashRegistersData, partnersData } = useAutocompleteData();
+    const { balanceData } = useCashRegisterHooks(id!);
     const cashRegister = cashRegistersData?.filter((item) => item.id === id)[0];
     const { register, handleSubmit, control, reset, setValue, formState: { errors } } = useForm<ICashoutFormValues>({ mode: "all" });
 
-    useEffect(()=>{
-        const currentCashRegister = cashRegisters?.result.filter((item)=>item.id === +id!)?.[0];
-        setValue('balance',String(currentCashRegister?.code!))
-      },[id]);
+    useEffect(() => {
+        setValue('balance', String(balanceData?.data))
+    }, [balanceData,id]);
 
     useEffect(() => {
         setValue('cashRegisterId', cashRegister?.title!)
@@ -51,7 +50,7 @@ const useCreateCashoutHooks = (id: string) => {
         const payload: ICashoutRequest = {
             date: moment(new Date()).format("YYYY-MM-DD"),
             cashRegisterId: +cashRegister?.id!,
-            partnersId:+(values.partner as IAutocompleteItem).id,
+            partnersId: +(values.partner as IAutocompleteItem).id,
             money: +values.money
         }
         add(payload)

@@ -30,7 +30,7 @@
   },
   "Roles": {
     "Admin": "Administrator",
-    "User": "User",
+    "User": "Employee",
     "Role": "Role",
     "Placeholder": "Select the position"
   },

@@ -90,7 +90,7 @@ const useCreateStorageIncomeHooks = (id: string) => {
         });
         const payload: IPostStorageIncomeRequestData = {
             documentDate: moment(new Date()).format("YYYY-MM-DD"),
-            warehouseId: +(values.warehouseId as IAutocompleteItem).id,
+            warehouseId: +warehouse?.id!,
             partnersId: +(values.partnersId as IAutocompleteItem).id,
             goods: goodsList
         };

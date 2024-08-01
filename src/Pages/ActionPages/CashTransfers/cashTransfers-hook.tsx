@@ -86,7 +86,7 @@ const useCashTransfersHook = (id: string) => {
             contentType: TableCellContentTypes.SELECT
         },
         {
-            title: t('Forms.Document_Number'),
+            title: t('Forms.Money'),
             contentType: TableCellContentTypes.SELECT
         }
     ];
@@ -101,7 +101,7 @@ const useCashTransfersHook = (id: string) => {
             contentType: TableCellContentTypes.SELECT
         },
         {
-            title: `${t('Forms.Document_Number')}`,
+            title: `${t('Forms.Money')}`,
             contentType: TableCellContentTypes.SELECT
         }
     ];
@@ -169,7 +169,7 @@ const useCashTransfersHook = (id: string) => {
                         component:
                             <div className={styles.formItemTextBox}>
                                 <div className={styles.formItemText}>
-                                    {item.documentNumber!}
+                                    {item.money!}
                                 </div>
                             </div>,
                         contentType: TableCellContentTypes.SELECT
@@ -212,7 +212,7 @@ const useCashTransfersHook = (id: string) => {
                         component:
                             <div className={styles.formItemTextBox}>
                                 <div className={styles.formItemText}>
-                                    {item.documentNumber!}
+                                    {item?.money!}
                                 </div>
                             </div>,
                         contentType: TableCellContentTypes.SELECT

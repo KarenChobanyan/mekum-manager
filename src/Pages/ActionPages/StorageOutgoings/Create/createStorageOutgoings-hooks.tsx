@@ -81,8 +81,8 @@ const useCreateStorageOutgoingHooks = (id: string) => {
         });
         const payload: IPostWarehouseExitRequest = {
             documentDate: moment(new Date()).format("YYYY-MM-DD"),
-            warehouseId: +(values.warehouseId as IAutocompleteItem).id,
-            partnerId: 7,
+            warehouseId: +warehouse?.id!,
+            // partnerId: values.partnerId,
             goods: goodsList
         };
         add(payload)

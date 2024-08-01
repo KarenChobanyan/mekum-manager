@@ -38,6 +38,11 @@ export interface IGetGoodBatchRequest {
 export interface IPostWarehouseExitRequest {
   documentDate: string,
   warehouseId: number,
+  goods: IExitGoods[]
+};
+export interface ISaleRequest {
+  documentDate: string,
+  warehouseId: number,
   partnerId: number,
   goods: IExitGoods[]
 };
@@ -49,7 +54,7 @@ export interface IExitGoods {
   warehouseId: number;
   money: number;
   exits: IGoodBatch[];
-  discount?:number;
+  discount?: number;
   measurementUnitId: number
 };
 
@@ -57,7 +62,7 @@ export interface ICashoutRequest {
   date: string,
   cashRegisterId: number,
   money: number,
-  partnersId:number,
+  partnersId: number,
 };
 
 export interface IWarehouseTransferRequest {
@@ -67,13 +72,13 @@ export interface IWarehouseTransferRequest {
   goods: IWarehouseTransferGood[]
 };
 export interface IAcceptWarehouseTransferRequest {
-  id:number,
-  data:{
+  id: number,
+  data: {
     documentDate: string,
     warehouseOutId: number,
     warehouseEnterId: number,
     goods: IWarehouseTransferGood[],
-    documentNumber:number
+    documentNumber: number
   }
 };
 
@@ -99,36 +104,36 @@ export interface IWarehouseReturnGood {
   materialValueId: number,
   point: string,
   count: number,
-  warehouseId:number, 
+  warehouseId: number,
   measurementUnitId: number,
 };
 
 export interface IPostReturnable {
-  material_value_id_out:number,
-  material_value_id_in:number
+  material_value_id_out: number,
+  material_value_id_in: number
 };
 
 export type PostRetunableRequestData = IPostReturnable[];
 
 export interface IGetWarehouseTransfersRequestData {
-  id:string,
-  limit:number,
-  offset:number,
-  isIn:string
+  id: string,
+  limit: number,
+  offset: number,
+  isIn: string
 };
 
 export interface IPostCashTransfer {
-  entryCashRegisterId:number,
-  exitCashRegisterId:number,
-  money:number,
+  entryCashRegisterId: number,
+  exitCashRegisterId: number,
+  money: number,
 };
 
 export interface IAcceptCashTransfer {
-  id:number,
-  data:{
-    entryCashRegisterId:number,
-    exitCashRegisterId:number,
-    money:number,
+  id: number,
+  data: {
+    entryCashRegisterId: number,
+    exitCashRegisterId: number,
+    money: number,
     documentNumber: number;
   }
 }

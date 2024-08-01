@@ -55,7 +55,6 @@ const CreateCashout: React.FC = () => {
                   label={t('Forms.Remainder')}
                   showTextError={false}
                   disabled
-                  type='number'
                   style={styles.inputRow}
                   inputStyle={styles.input}
                   labelStyle={styles.formInputLabel}
